@@ -1,0 +1,25 @@
+<!-- Full logo: mark + logotype, locked up horizontally.
+     Use this for the marketing-site nav, App Store listings, social profile pictures, etc.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" aria-labelledby="logo-full-title">
+  <title id="logo-full-title">Real Product Origin</title>
+
+  <!-- Mark -->
+  <g>
+    <circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="12"/>
+    <circle cx="60" cy="60" r="14" fill="currentColor"/>
+  </g>
+
+  <!-- Logotype: "Real Product Origin"
+       Letter forms drawn as text using Inter via webfont (loaded by host page),
+       fallback to system stack. We render here as <text> not paths because
+       editing wordmark text in SVG is fragile; the locked-up version with
+       baked-in paths can be exported separately when needed for true logo work.
+  -->
+  <text x="140" y="78"
+        font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
+        font-size="48"
+        font-weight="800"
+        letter-spacing="-1"
+        fill="currentColor">Real Product Origin</text>
+</svg>

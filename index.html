@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Origin Checker — Know what you're getting, and who you're paying.</title>
+<meta name="description" content="See where every Amazon product is really made, where it ships from, and who's behind the company selling it. A browser extension and mobile app by Real Product Origin.">
+<meta property="og:title" content="Product Origin Checker">
+<meta property="og:description" content="Know what you're getting, and who you're paying.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">From Real Product Origin</p>
+    <h1>Know what you're <em>really</em> buying.</h1>
+    <p class="tagline">Know what you're getting, and who you're paying.</p>
+    <p class="sub">For every Amazon product, we tell you where it's made, where it ships from, and who's behind the seller — with sources for every claim. Honest confidence bands when we're not sure. Manual verification when our users say we got it wrong.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#install">Install the extension</a>
+      <a class="btn btn-secondary" href="#mobile">Get the app</a>
+    </div>
+    <p class="cta-note">Free during early access · Chrome, Edge, Brave · iOS &amp; Android coming soon</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Three answers Amazon won't give you</p>
+    <h2>Three things you can never tell from an Amazon listing</h2>
+    <p class="section-intro">Amazon hides the answers behind opaque seller names, dropshipping arrangements, and warehouse-fulfilled inventory. We surface them with AI, public records, and human review.</p>
+
+    <div class="indicators">
+      <div class="indicator-card">
+        <p class="num">01 — Made in</p>
+        <h3>Where the product was manufactured</h3>
+        <p>Not where the seller is. Not where Amazon ships it from. The actual country the unit was built in.</p>
+      </div>
+      <div class="indicator-card">
+        <p class="num">02 — Ships from</p>
+        <h3>Where the unit originates</h3>
+        <p>Amazon fulfillment center in Ohio? Direct-from-China drop-ship? Different shipping experiences, different delivery times.</p>
+      </div>
+      <div class="indicator-card">
+        <p class="num">03 — Sold by</p>
+        <h3>Who's actually getting paid</h3>
+        <p>The legal seller-of-record's country of headquarters. The corporate entity behind that "Sold by" line.</p>
+      </div>
+    </div>
+
+    <p>Each score includes a confidence band, full methodology, and a list of sources. We deliberately keep our confidence honest — when evidence is thin, you'll see that.</p>
+  </div>
+</section>
+
+<section class="cream">
+  <div class="wrap">
+    <p class="eyebrow">What it looks like</p>
+    <h2>A second opinion, inline.</h2>
+    <p class="section-intro">The badge appears directly on every Amazon product page, right above the buy box. Click the toolbar icon for full methodology and citations.</p>
+
+    <div class="badge-mockup-wrap">
+      <div class="annotation left">A real Country-of-Origin field drives high confidence (95%).</div>
+      <div class="annotation right">When the listing doesn't tell us, we say so — not pretend.</div>
+      <div class="badge-mockup">
+        <div class="badge-header">
+          <div class="logo-dot"></div>
+          <div class="badge-title">Product Origin Checker</div>
+          <div class="badge-source">fresh</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Made in</span>
+            <span class="row-pct" style="color: #c0322b">
+              <span class="row-flag">🇨🇳</span> China · 95%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:95%;background:#c0322b"></div></div>
+          <div class="row-conf">High confidence (95%)</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Ships from</span>
+            <span class="row-pct" style="color: #111827">
+              <span class="row-flag">🇺🇸</span> United States · 88%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:88%;background:#111827"></div></div>
+          <div class="row-conf">Moderate confidence (72%)</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Sold by</span>
+            <span class="row-pct" style="color: #c0322b">
+              <span class="row-flag">🇨🇳</span> China · 93%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:93%;background:#c0322b"></div></div>
+          <div class="row-conf">High confidence (88%)</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size: 14px; color: var(--muted); text-align: center; margin-top: 32px;"><em>Color cues at a glance: red signals a high-confidence China score, amber means we're uncertain, neutral dark means another country (or we couldn't tell). The UI only "lights up" when there's a real signal — non-China origins don't read as alarms.</em></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>Three steps, mostly invisible.</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>You land on a product</h3>
+        <p>Browse Amazon as you normally would. The extension wakes up when you hit a product detail page.</p>
+      </div>
+      <div class="step">
+        <h3>We read the page</h3>
+        <p>We extract every available signal — Country of Origin field, ships-from text, seller storefront, reviews, Q&amp;A — and pass it to our scoring engine.</p>
+      </div>
+      <div class="step">
+        <h3>You see the result</h3>
+        <p>Three flag-and-percent indicators inline, with confidence bands and a "How we got this" panel listing every source.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cream">
+  <div class="wrap">
+    <p class="eyebrow">Methodology</p>
+    <h2>Plain-English methodology, in 90 seconds.</h2>
+
+    <h3>What we read from the product page</h3>
+    <ul>
+      <li><strong>Country of Origin field</strong> from Amazon's structured product details — when present, this is our strongest signal.</li>
+      <li><strong>Ships-from / Sold-by buybox</strong> text.</li>
+      <li><strong>Seller name and storefront</strong>, brand, manufacturer.</li>
+      <li><strong>Customer reviews and Q&amp;A</strong>, scanned for "Made in X" claims, customs mentions, and shipping comments.</li>
+      <li><strong>Date first available, best-sellers rank, ratings histogram</strong> — pattern detection for drop-shipper signals.</li>
+    </ul>
+
+    <h3>What our AI does with it</h3>
+    <p>We send the assembled evidence to Anthropic's Claude, which combines it with its training-data knowledge of brands and companies. For products where signals are thin or contradictory, Claude can perform web searches against business registries, news, and LinkedIn — citing the URLs it found.</p>
+
+    <h3>When we don't know, we say so</h3>
+    <p>Confidence isn't fluff. A 50% / 20% confidence score means <em>we genuinely cannot tell</em>. We'd rather be honest than wrong-but-confident.</p>
+
+    <p style="margin-top: 24px;"><a href="/methodology.html">Read the full methodology →</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">When we're wrong</p>
+    <h2>Tell us. We'll fix the score for everyone.</h2>
+    <p>Every score has a <strong>Contest this finding</strong> button. Tell us what you know — your name, your relationship to the product, what you've seen. We verify your email and your report enters our review queue.</p>
+    <p>When our team validates a correction, the AI score is replaced with a manually-verified one — visible to all future users with a <span style="color: var(--green); font-weight: 700;">✓ Verified</span> mark.</p>
+    <p>It's not a complaint box. It's a correction mechanism. The whole point is to <em>improve</em> the dataset over time.</p>
+  </div>
+</section>
+
+<div class="pullquote">
+  "Most of the trillion dollars Americans spend on Amazon each year goes through products whose origin is deliberately obscured. We think you should know."
+  <span class="cite">— Real Product Origin</span>
+</div>
+
+<section class="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>Common questions.</h2>
+
+    <details>
+      <summary>Is this only about Chinese products?</summary>
+      <p>No — the engine identifies any country. China detection is the primary calibrated use case (most opaque Amazon supply chains route through China), but the scores work the same way for products made in Vietnam, Mexico, Germany, Korea, or anywhere else. The UI only "lights up" red when there's a high-confidence China score; everything else reads as neutral.</p>
+    </details>
+
+    <details>
+      <summary>How accurate are the scores?</summary>
+      <p>It varies by signal strength. When Amazon's listing has a structured "Country of Origin" field, we're typically 90–95% confident and well-calibrated. When the field is missing and we're relying on brand recognition or web search, confidence drops appropriately. The confidence band is the most important number on the screen — pay attention to it.</p>
+    </details>
+
+    <details>
+      <summary>How does Hong Kong / Taiwan get handled?</summary>
+      <p>Hong Kong (HK), Macau (MO), and Taiwan (TW) are scored as their own countries. Never folded into mainland China (CN). This is a hard rule in our system prompt.</p>
+    </details>
+
+    <details>
+      <summary>Do you collect my browsing history?</summary>
+      <p>No. The extension only activates on Amazon product pages, and the only data sent to our backend is the product's ASIN plus what's visible on that page. We do not collect your Amazon account info, your order history, or anything from non-Amazon sites. Full details in our <a href="/privacy.html">Privacy Policy</a>.</p>
+    </details>
+
+    <details>
+      <summary>Is this free?</summary>
+      <p>Yes, free during early access. We may introduce a paid tier later for features like unlimited bulk scoring or API access — but the core "score this Amazon product" functionality will always be free.</p>
+    </details>
+
+    <details>
+      <summary>How do I contest a score?</summary>
+      <p>Click the toolbar icon → scroll to <strong>Contest this finding</strong> → fill in the form. You'll need to provide your name, email, and stated affiliation or credentials. We email you a verification link before the report enters our queue. Verified reports are typically reviewed within a few business days.</p>
+    </details>
+
+    <details>
+      <summary>I represent a brand — how do I correct a score about my product?</summary>
+      <p>Same path: <strong>Contest this finding</strong>. We treat first-party brand corrections with high priority. Be sure to identify yourself as someone associated with the brand in the "affiliation" field, and provide a corporate email so we can verify the connection.</p>
+    </details>
+  </div>
+</section>
+
+<section id="install" class="soft">
+  <div class="wrap">
+    <p class="eyebrow">Install</p>
+    <h2>Get the browser extension.</h2>
+    <p>Works on Chrome, Edge, Brave, and Firefox. Free during early access.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" aria-disabled="true">Chrome Web Store — coming soon</a>
+      <a class="btn btn-secondary" href="#" aria-disabled="true">Edge Add-ons — coming soon</a>
+    </div>
+    <p class="cta-note">Early-access users: we'll email install links the moment we go live. <a href="/contact.html">Tell us to add you to the list</a>.</p>
+  </div>
+</section>
+
+<section id="mobile">
+  <div class="wrap">
+    <p class="eyebrow">Mobile</p>
+    <h2>For shopping in the Amazon app.</h2>
+    <p>Tap Share in the Amazon app → Product Origin Checker, and we score the product in seconds — with the same three indicators and full methodology.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" aria-disabled="true">App Store — coming soon</a>
+      <a class="btn btn-secondary" href="#" aria-disabled="true">Google Play — coming soon</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're buying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="#install">Browser extension</a>
+      <a href="#mobile">Mobile app</a>
+      <a href="/methodology.html">How it works</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!-- Real Product Origin — official logo mark (composition A, refined).
+     Tilted map fragment + dashed shipping route + origin dot at one end +
+     pin pressed in at the destination. Three story-elements composed into a
+     single mark.
+
+     Color strategy: dark "ink" elements use currentColor so the mark adapts
+     to its container. The supporting "paper" layer uses a cream fill so the
+     pin's white interior shows through on any background.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" aria-labelledby="rpo-logo-title">
+  <title id="rpo-logo-title">Real Product Origin logo mark</title>
+
+  <!-- Map fragment (parallelogram in light cream) -->
+  <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z"
+        fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Faint internal map line, for texture -->
+  <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+
+  <!-- Shipping route: dashed curve across the map -->
+  <path d="M 38 124 Q 78 100 130 116"
+        fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+
+  <!-- Origin dot at the start of the route -->
+  <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+
+  <!-- Pin pressed into the map at the destination -->
+  <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z"
+        fill="currentColor"/>
+  <!-- Pin head highlight (cream center) -->
+  <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+</svg>

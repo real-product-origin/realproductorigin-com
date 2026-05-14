@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology — Product Origin Checker</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<article class="wrap">
+  <h1>How we figure out where a product is really from</h1>
+  <p class="updated">A plain-English guide to how Product Origin Checker scores products.</p>
+
+  <p>Every score we publish answers three questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, and where the company <strong>selling it</strong> is headquartered. This page explains how we arrive at the numbers — and how honest we try to be about uncertainty.</p>
+
+  <h2>The signals we read from the product page</h2>
+
+  <p>Our browser extension reads (only) the publicly visible information on the Amazon product page:</p>
+  <ul>
+    <li>The product title, brand, and description bullets.</li>
+    <li>The "Country of Origin" field, when Amazon lists one in the product details table. <em>This is the strongest single signal we have.</em></li>
+    <li>The "Ships from" and "Sold by" lines in the buybox.</li>
+    <li>The seller's name and storefront link.</li>
+    <li>Up to 15 customer reviews and 5 Q&amp;A entries, scanned for "Made in X" claims, customs mentions, and shipping comments.</li>
+    <li>Manufacturer, Date First Available, and Best Sellers Rank.</li>
+    <li>The ratings distribution (a lopsided 5-star pattern is a known correlate of opaque drop-shippers).</li>
+  </ul>
+
+  <h2>The pattern cues we extract before any AI</h2>
+
+  <p>Before we involve an AI model, we extract a handful of cheap pattern signals — designed especially for China detection, which is our primary calibrated use case:</p>
+  <ul>
+    <li>Whether the seller name contains a known Chinese city (Shenzhen, Hangzhou, Yiwu, Guangzhou, …).</li>
+    <li>Whether the seller name ends with "Co., Ltd." — a common PRC business-registration suffix.</li>
+    <li>Whether the brand name is a random alphanumeric string of the kind common among drop-shippers.</li>
+    <li>Whether the listing was created within the last twelve months.</li>
+    <li>Whether free text on the page literally says "Made in X" or "Manufactured in X" for any X.</li>
+  </ul>
+
+  <h2>The AI step</h2>
+
+  <p>The assembled evidence — every field above, plus the pattern cues — is sent to Anthropic's Claude AI. Claude combines this with its training-data knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score: top country, ISO code, percent, confidence, and a probability distribution of alternative countries.</p>
+
+  <p>For products where signals are thin or contradictory, Claude can perform live web searches against business registries, brand websites, LinkedIn, and news archives — citing the URLs it found. Every score includes the methodology and citations Claude returned.</p>
+
+  <h2>How confidence works</h2>
+
+  <p>Each indicator has a <strong>percent</strong> (our certainty for the top country) and a separate <strong>confidence</strong> (our overall confidence in the estimate). These are not the same number — and the distinction matters.</p>
+
+  <ul>
+    <li>Percent close to 100, confidence close to 100 → we have strong, multiple corroborating sources. You can trust this.</li>
+    <li>Percent 80, confidence 50 → we have a reasonable lean, but the evidence is sparse. Treat it as a working hypothesis, not a fact.</li>
+    <li>Percent 50, confidence 20 → we genuinely cannot tell. The number is a placeholder; the meaningful signal is the low confidence.</li>
+  </ul>
+
+  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle.</p>
+
+  <h2>Hong Kong, Macau, and Taiwan</h2>
+
+  <p>For all three indicators, we score <strong>Hong Kong (HK)</strong>, <strong>Macau (MO)</strong>, and <strong>Taiwan (TW)</strong> as their own countries — never folded into mainland China. This is a hard rule in our system.</p>
+
+  <h2>Manual verification (when humans override the AI)</h2>
+
+  <p>Every score has a <strong>Contest this finding</strong> button. Reporters fill in a form telling us what they think is wrong, optionally proposing the correct value, and explaining their evidence and credentials. We verify the reporter's email and review the claim.</p>
+
+  <p>When our review team validates a correction, we install a <em>manual override</em> for that product. Future users see the verified value with a <span style="color: var(--green); font-weight: 700;">✓ Verified</span> mark — and the citations list includes the override as the top entry. Manual overrides can be retired or replaced as new information comes in; the full history is preserved for audit.</p>
+
+  <h2>What we don't currently use</h2>
+
+  <p>For transparency, here's what's NOT yet in our pipeline:</p>
+  <ul>
+    <li><strong>US Customs import records.</strong> Panjiva, ImportGenius, and similar services have shipment-level data for who imports what from where. This is the gold-standard evidence layer; we plan to integrate it after launch.</li>
+    <li><strong>OCR on customer-uploaded product photos.</strong> "Made in X" is often printed on packaging visible in review photos; computer vision could read it.</li>
+    <li><strong>USPTO and WIPO trademark databases.</strong> Brand registrations + registrant addresses are strong public signals.</li>
+    <li><strong>OpenCorporates.</strong> Cross-jurisdiction company registry data.</li>
+  </ul>
+
+  <h2>Bottom line</h2>
+
+  <p>Our scores are <strong>well-supported probabilistic estimates</strong>, not factual claims. When evidence is strong, we're confident. When evidence is thin, we say so loudly. When someone with first-hand knowledge tells us we're wrong, we listen — and the dataset gets better.</p>
+
+  <p>If you want to dig deeper, the full technical specification of every data source we consult is published at <a href="https://github.com/real-product-origin/origin-app/blob/main/docs/DATA_SOURCES.md">DATA_SOURCES.md</a> in our repository.</p>
+
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're buying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/">Home</a>
+      <a href="/methodology.html">How it works</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+</footer>
+
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
