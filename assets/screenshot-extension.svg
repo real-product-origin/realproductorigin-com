@@ -1,0 +1,211 @@
+<!--
+  Marketing screenshot — the Product Origin Checker badge in context on a
+  realistic-looking Amazon product detail page. SVG (not PNG) so it stays
+  pixel-sharp at any display density and remains editable as the badge UI
+  evolves.
+
+  Layout mirrors a real Amazon /dp/{asin} page (browser chrome + product
+  image + title + buybox column). The badge ("Product Origin Checker — by
+  Real Product Origin") sits exactly where the extension injects it on a
+  live page: between the title and the price/Add-to-Cart block.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760"
+     font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif"
+     aria-labelledby="screenshot-title">
+  <title id="screenshot-title">Product Origin Checker browser extension shown in context on an Amazon product page</title>
+
+  <!-- Outer drop shadow so the screenshot reads as a floating window. -->
+  <defs>
+    <filter id="window-shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.18"/>
+    </filter>
+    <linearGradient id="img-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ══ Browser window ══════════════════════════════════════════════════ -->
+
+  <g filter="url(#window-shadow)">
+    <!-- Window body -->
+    <rect x="20" y="20" width="1160" height="720" rx="14" fill="#ffffff"/>
+
+    <!-- Title bar with traffic-light controls -->
+    <rect x="20" y="20" width="1160" height="44" rx="14" fill="#f1f5f9"/>
+    <rect x="20" y="44" width="1160" height="20" fill="#f1f5f9"/>
+    <circle cx="48"  cy="42" r="6" fill="#f87171"/>
+    <circle cx="68"  cy="42" r="6" fill="#fbbf24"/>
+    <circle cx="88"  cy="42" r="6" fill="#34d399"/>
+
+    <!-- URL bar -->
+    <rect x="120" y="30" width="900" height="24" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+    <text x="138" y="46" font-size="12" fill="#475569">amazon.com/dp/B0F3KE789X</text>
+    <text x="1004" y="46" font-size="13" fill="#94a3b8" text-anchor="end">🔒</text>
+
+    <!-- Extension toolbar icon (the canonical pin) -->
+    <g transform="translate(1040, 30)">
+      <rect width="36" height="24" rx="6" fill="#e2e8f0" opacity="0.5"/>
+      <g transform="translate(11, 3)">
+        <path d="M 7 0 C 2.8 0, 0 3.3, 0 6.5 C 0 12.1, 7 18.7, 7 18.7 C 7 18.7, 14 12.1, 14 6.5 C 14 3.3, 11.2 0, 7 0 Z"
+              fill="#111827"/>
+        <circle cx="7" cy="6.5" r="2.1" fill="#ffffff"/>
+      </g>
+    </g>
+
+    <!-- ══ Amazon page content ══════════════════════════════════════════ -->
+
+    <!-- Sub-nav strip -->
+    <rect x="20" y="64" width="1160" height="32" fill="#232f3e"/>
+    <text x="44"  y="84" font-size="12" fill="#ffffff">Today's Deals</text>
+    <text x="148" y="84" font-size="12" fill="#ffffff">Customer Service</text>
+    <text x="280" y="84" font-size="12" fill="#ffffff">Registry</text>
+    <text x="360" y="84" font-size="12" fill="#ffffff">Gift Cards</text>
+    <text x="450" y="84" font-size="12" fill="#ffffff">Sell</text>
+
+    <!-- Breadcrumb -->
+    <text x="44" y="120" font-size="11" fill="#475569">
+      Electronics › Headphones › Earbud Headphones › Wireless Earbuds
+    </text>
+
+    <!-- ── LEFT COLUMN: product image ───────────────────────────────── -->
+    <rect x="44" y="140" width="380" height="380" rx="6" fill="url(#img-bg)" stroke="#e2e8f0"/>
+    <!-- Stylised earbud-case silhouette so the screenshot doesn't look empty -->
+    <g transform="translate(234, 320)">
+      <ellipse cx="0" cy="20" rx="120" ry="60" fill="#ffffff" opacity="0.85"/>
+      <circle cx="-50" cy="0"  r="34" fill="#ffffff" stroke="#fde68a" stroke-width="3"/>
+      <circle cx="-50" cy="0"  r="10" fill="#92400e"/>
+      <circle cx="50"  cy="0"  r="34" fill="#ffffff" stroke="#fde68a" stroke-width="3"/>
+      <circle cx="50"  cy="0"  r="10" fill="#92400e"/>
+    </g>
+    <text x="234" y="500" font-size="11" fill="#92400e" text-anchor="middle" opacity="0.7">
+      product image
+    </text>
+
+    <!-- Image thumbnail strip -->
+    <g transform="translate(44, 540)">
+      <rect width="56" height="56" rx="4" fill="url(#img-bg)" stroke="#e2e8f0"/>
+      <rect x="64"  width="56" height="56" rx="4" fill="#fef3c7" stroke="#e2e8f0"/>
+      <rect x="128" width="56" height="56" rx="4" fill="#fef3c7" stroke="#e2e8f0"/>
+      <rect x="192" width="56" height="56" rx="4" fill="#fef3c7" stroke="#e2e8f0"/>
+      <rect x="256" width="56" height="56" rx="4" fill="#fef3c7" stroke="#e2e8f0"/>
+    </g>
+
+    <!-- ── CENTER COLUMN: title + extension badge + meta ─────────────── -->
+    <g transform="translate(460, 140)">
+      <!-- Brand byline -->
+      <text x="0" y="12" font-size="12" fill="#0066c0">Visit the TOZO Store</text>
+      <text x="0" y="28" font-size="12" fill="#94a3b8">|</text>
+      <text x="14" y="28" font-size="11" fill="#94a3b8">4.4 ★★★★☆ · 28,541 ratings</text>
+
+      <!-- Product title -->
+      <text x="0" y="60" font-size="22" font-weight="600" fill="#0f172a">
+        TOZO T6 Wireless Earbuds Bluetooth Headphones,
+      </text>
+      <text x="0" y="90" font-size="22" font-weight="600" fill="#0f172a">
+        Touch Control with Charging Case
+      </text>
+
+      <!-- Bestseller / New badges (Amazon-y orange) -->
+      <g transform="translate(0, 110)">
+        <rect width="72" height="20" rx="2" fill="#cc6600"/>
+        <text x="36" y="14" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">#1 Best Seller</text>
+        <text x="84" y="14" font-size="10" fill="#0066c0">in Earbud Headphones</text>
+      </g>
+
+      <!-- ══════ THE BADGE — this is where the extension injects ══════ -->
+      <g transform="translate(0, 148)">
+        <!-- Card frame (matches extension/badge.css styling) -->
+        <rect width="540" height="244" rx="12"
+              fill="#ffffff" stroke="#d1d5db" stroke-width="1"/>
+
+        <!-- Header: pin + brand wordmark + product label + fresh tag -->
+        <g transform="translate(20, 20)">
+          <!-- Pin mark (canonical) -->
+          <g transform="translate(0, 0)">
+            <path d="M 7 0 C 2.8 0, 0 3.3, 0 6.5 C 0 12.1, 7 18.7, 7 18.7 C 7 18.7, 14 12.1, 14 6.5 C 14 3.3, 11.2 0, 7 0 Z"
+                  fill="#111827"/>
+            <circle cx="7" cy="6.5" r="2.1" fill="#ffffff"/>
+          </g>
+          <!-- "Real Product Origin." wordmark + red period -->
+          <text x="22" y="14" font-size="14" font-weight="800" fill="#111827"
+                font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+                letter-spacing="-0.3">Real Product Origin<tspan fill="#ef4444">.</tspan></text>
+          <!-- Product subtitle -->
+          <text x="170" y="14" font-size="11" font-weight="500" fill="#6b7280">Product Origin Checker</text>
+          <!-- "fresh" status tag -->
+          <text x="500" y="14" font-size="10" font-weight="700" fill="#6b7280" text-anchor="end"
+                letter-spacing="0.06em">FRESH</text>
+        </g>
+
+        <!-- Indicator row: Made in -->
+        <g transform="translate(20, 64)">
+          <text x="0" y="12" font-size="13" font-weight="500" fill="#1f2937">Made in</text>
+          <text x="500" y="12" font-size="14" font-weight="700" fill="#c0322b" text-anchor="end">
+            🇨🇳 China · 95%
+          </text>
+          <rect x="0" y="22" width="500" height="6" rx="3" fill="#e5e7eb"/>
+          <rect x="0" y="22" width="475" height="6" rx="3" fill="#c0322b"/>
+          <text x="0" y="44" font-size="11" fill="#6b7280">High confidence (95%)</text>
+        </g>
+
+        <!-- Indicator row: Ships from -->
+        <g transform="translate(20, 124)">
+          <text x="0" y="12" font-size="13" font-weight="500" fill="#1f2937">Ships from</text>
+          <text x="500" y="12" font-size="14" font-weight="700" fill="#111827" text-anchor="end">
+            🇺🇸 United States · 88%
+          </text>
+          <rect x="0" y="22" width="500" height="6" rx="3" fill="#e5e7eb"/>
+          <rect x="0" y="22" width="440" height="6" rx="3" fill="#111827"/>
+          <text x="0" y="44" font-size="11" fill="#6b7280">Moderate confidence (72%)</text>
+        </g>
+
+        <!-- Indicator row: Sold by -->
+        <g transform="translate(20, 184)">
+          <text x="0" y="12" font-size="13" font-weight="500" fill="#1f2937">Sold by</text>
+          <text x="500" y="12" font-size="14" font-weight="700" fill="#c0322b" text-anchor="end">
+            🇨🇳 China · 93%
+          </text>
+          <rect x="0" y="22" width="500" height="6" rx="3" fill="#e5e7eb"/>
+          <rect x="0" y="22" width="465" height="6" rx="3" fill="#c0322b"/>
+          <text x="0" y="44" font-size="11" fill="#6b7280">High confidence (88%)</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- ── RIGHT COLUMN: buybox ─────────────────────────────────────── -->
+    <g transform="translate(1024, 140)">
+      <rect width="132" height="380" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
+      <text x="14" y="34" font-size="22" font-weight="700" fill="#b71c1c">$24.99</text>
+      <text x="14" y="60" font-size="11" fill="#0f172a">FREE delivery</text>
+      <text x="14" y="76" font-size="11" font-weight="700" fill="#0f172a">Wed, May 18</text>
+      <text x="14" y="100" font-size="11" fill="#0f172a">In Stock.</text>
+      <text x="14" y="116" font-size="11" fill="#475569">Ships from Amazon</text>
+      <text x="14" y="132" font-size="11" fill="#475569">Sold by TOZO Direct</text>
+      <!-- Add-to-Cart button -->
+      <rect x="10" y="156" width="112" height="32" rx="16" fill="#ffd814" stroke="#fcd200"/>
+      <text x="66" y="176" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Add to Cart</text>
+      <!-- Buy Now button -->
+      <rect x="10" y="196" width="112" height="32" rx="16" fill="#ffa41c" stroke="#ff8f00"/>
+      <text x="66" y="216" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">Buy Now</text>
+    </g>
+  </g>
+
+  <!-- ══ Annotation arrow + caption pointing at the badge ════════════════ -->
+
+  <g>
+    <path d="M 110 660 Q 280 700, 480 480"
+          fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"
+          stroke-dasharray="6 5"/>
+    <polygon points="480,480 472,488 484,492" fill="#ef4444"/>
+    <text x="44" y="688" font-size="14" font-weight="700" fill="#0f172a">
+      Three transparency scores, injected inline.
+    </text>
+    <text x="44" y="708" font-size="12" fill="#475569">
+      Made in · Ships from · Sold by — with a confidence band on each
+    </text>
+    <text x="44" y="726" font-size="12" fill="#475569">
+      and a click-through to the methodology and full citation list.
+    </text>
+  </g>
+</svg>

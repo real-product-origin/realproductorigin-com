@@ -348,6 +348,34 @@ section.soft { background: var(--bg-soft); }
   color: var(--muted);
 }
 
+/* ── Marketing screenshot ────────────────────────────────────────────────── */
+/* Used in the "What it looks like" section to show the extension in context
+   on a real Amazon product page. Source: assets/screenshot-extension.svg
+   (SVG so it stays sharp at any density and is easy to keep in sync as the
+   badge UI evolves). */
+
+.screenshot {
+  margin: 40px auto 0;
+  max-width: 1100px;
+  padding: 0 4px;
+}
+.screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  /* The SVG already has its own drop shadow on the inner browser window,
+     so we only add a subtle outer halo to lift it off the cream section. */
+  box-shadow: 0 30px 60px -28px rgba(15, 23, 42, 0.18);
+}
+.screenshot figcaption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+}
+
 /* ── Score-badge mockup (inline visual on landing) ────────────────────────── */
 
 .badge-mockup-wrap {
