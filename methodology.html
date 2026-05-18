@@ -40,37 +40,55 @@
   <h1>How we figure out where a product is really from</h1>
   <p class="updated">A plain-English guide to how Product Origin Checker scores products.</p>
 
-  <p>Every score we publish answers three questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, and where the company <strong>selling it</strong> is headquartered. This page explains how we arrive at the numbers — and how honest we try to be about uncertainty.</p>
+  <p>Every score we publish answers three questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, and where the company <strong>selling it</strong> is headquartered. This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
 
-  <h2>The signals we read from the product page</h2>
+  <p>The short version: <strong>we don't just read the Amazon listing.</strong> We pull signals from several independent places — the product page, the seller's own business records, the brand's website, a global domain registry, and our own growing database of verified corrections. No single source decides a score. The more independent sources that point to the same answer, the more confident we are.</p>
 
-  <p>Our browser extension reads (only) the publicly visible information on the Amazon product page:</p>
+  <h2>Everything we check</h2>
+
+  <h3>1. The Amazon product page</h3>
+  <p>Our browser extension reads the publicly visible information on the listing itself:</p>
   <ul>
     <li>The product title, brand, and description bullets.</li>
-    <li>The "Country of Origin" field, when Amazon lists one in the product details table. <em>This is the strongest single signal we have.</em></li>
-    <li>The "Ships from" and "Sold by" lines in the buybox.</li>
-    <li>The seller's name and storefront link.</li>
-    <li>Up to 15 customer reviews and 5 Q&amp;A entries, scanned for "Made in X" claims, customs mentions, and shipping comments.</li>
-    <li>Manufacturer, Date First Available, and Best Sellers Rank.</li>
-    <li>The ratings distribution (a lopsided 5-star pattern is a known correlate of opaque drop-shippers).</li>
+    <li>The <strong>"Country of Origin"</strong> field, when Amazon lists one in the product-details table. <em>This is the strongest single signal we have.</em></li>
+    <li>The <strong>"Ships from"</strong> and <strong>"Sold by"</strong> lines in the buy box.</li>
+    <li>The seller's name and a link to their storefront.</li>
+    <li>The manufacturer, the date the listing first appeared, and its Best Sellers Rank.</li>
+    <li>Up to 15 customer reviews and 5 Q&amp;A entries, scanned for "Made in…" claims, customs mentions, and shipping comments.</li>
+    <li>The star-rating distribution — a lopsided wall of 5-star reviews is a known fingerprint of opaque drop-shippers.</li>
   </ul>
 
-  <h2>The pattern cues we extract before any AI</h2>
+  <h3>2. The seller's business details page</h3>
+  <p>Amazon keeps a separate <strong>"Detailed Seller Information"</strong> page for each third-party seller — and it's where the legally meaningful facts live. We fetch that page directly and read the seller's <strong>registered legal entity name</strong>, <strong>business address</strong>, and <strong>country of registration</strong>. A shell company is often only identifiable here, not on the product page.</p>
 
-  <p>Before we involve an AI model, we extract a handful of cheap pattern signals — designed especially for China detection, which is our primary calibrated use case:</p>
+  <h3>3. The brand's storefront and website</h3>
+  <p>We also fetch the brand's Amazon storefront page, reading any "About the brand" information and discovering links to the brand's own website. That website is the bridge to source #4.</p>
+
+  <h3>4. A global domain registry — a third-party check</h3>
+  <p>When we discover the brand's own website, we look that web address up in <strong>RDAP</strong> — the public, official registry that records who registered every website domain in the world. From the registry we read the <strong>country and organisation listed for the domain's registrant</strong>. This is an entirely independent, third-party confirmation: it doesn't come from Amazon or from the seller, so it's a valuable cross-check. A company registering its domain through a Chinese registrar with a Chinese registrant address is a meaningful clue that a US-sounding brand name alone would hide.</p>
+
+  <h3>5. Our own database of verified corrections</h3>
+  <p>Every time our review team confirms a correction (see "When a person overrides the AI", below), that becomes ground truth. If a seller or brand has a track record of confirmed origins in our database, the next new product from them starts with that knowledge built in. We also look across <em>other products by the same seller</em> we've already scored, so a consistent pattern carries over. Every complaint we resolve quietly makes future scoring more accurate.</p>
+
+  <h3>6. Quick pattern checks</h3>
+  <p>Before involving the AI, we run a handful of fast, cheap checks — calibrated especially for detecting Chinese-origin products, which is where seller obfuscation is most common:</p>
   <ul>
-    <li>Whether the seller name contains a known Chinese city (Shenzhen, Hangzhou, Yiwu, Guangzhou, …).</li>
-    <li>Whether the seller name ends with "Co., Ltd." — a common PRC business-registration suffix.</li>
-    <li>Whether the brand name is a random alphanumeric string of the kind common among drop-shippers.</li>
+    <li>Whether the seller name contains a known Chinese manufacturing city (Shenzhen, Hangzhou, Yiwu, Guangzhou, …).</li>
+    <li>Whether the seller name ends with "Co., Ltd." — a common Chinese business-registration suffix.</li>
+    <li>Whether the brand name is the kind of random letter-string drop-shippers tend to use.</li>
     <li>Whether the listing was created within the last twelve months.</li>
-    <li>Whether free text on the page literally says "Made in X" or "Manufactured in X" for any X.</li>
+    <li>Whether any text on the page literally says "Made in…" or "Manufactured in…".</li>
   </ul>
 
-  <h2>The AI step</h2>
+  <h2>Putting it together — the AI step</h2>
 
-  <p>The assembled evidence — every field above, plus the pattern cues — is sent to Anthropic's Claude AI. Claude combines this with its training-data knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score: top country, ISO code, percent, confidence, and a probability distribution of alternative countries.</p>
+  <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the three indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
 
-  <p>For products where signals are thin or contradictory, Claude can perform live web searches against business registries, brand websites, LinkedIn, and news archives — citing the URLs it found. Every score includes the methodology and citations Claude returned.</p>
+  <p>Crucially, the strongest evidence wins. A literal "Country of Origin" field outranks a guess from the brand name; an independent registry record outranks a hunch. We also have a strict rule that a company's <em>headquarters</em> can never, by itself, be used to claim where a product is <em>manufactured</em> — a common and misleading conflation.</p>
+
+  <h2>When the evidence is thin — live web search</h2>
+
+  <p>If the assembled evidence still leaves us uncertain, Claude performs live web searches — against business registries, brand websites, LinkedIn, and news archives — to fill the gap. Every URL it relies on is recorded, and every score we show you lists the sources behind it. This step only runs when it's needed, so easy cases stay fast.</p>
 
   <h2>How confidence works</h2>
 
