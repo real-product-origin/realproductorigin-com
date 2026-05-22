@@ -92,15 +92,23 @@
 
   <h2>How confidence works</h2>
 
-  <p>Each indicator has a <strong>percent</strong> (our certainty for the top country) and a separate <strong>confidence</strong> (our overall confidence in the estimate). These are not the same number — and the distinction matters.</p>
+  <p>Every indicator carries <em>two</em> numbers — a <strong>percent</strong> and a separate <strong>confidence</strong> — and they aren't measuring the same thing. The distinction is the most important honesty signal on the whole score.</p>
 
   <ul>
-    <li>Percent close to 100, confidence close to 100 → we have strong, multiple corroborating sources. You can trust this.</li>
-    <li>Percent 80, confidence 50 → we have a reasonable lean, but the evidence is sparse. Treat it as a working hypothesis, not a fact.</li>
-    <li>Percent 50, confidence 20 → we genuinely cannot tell. The number is a placeholder; the meaningful signal is the low confidence.</li>
+    <li>The <strong>percent</strong> answers: <em>which country is most likely, and how dominant is it?</em> If we say "Made in China 75%", the remaining 25% is split among the alternative countries we list.</li>
+    <li>The <strong>confidence</strong> answers: <em>how reliable was the evidence behind that picture?</em> A score built from a direct Amazon "Country of Origin" field plus a confirming domain registry is sturdy. A score built from a category pattern alone — because the seller hid everything — is fragile, even if the percent looks high.</li>
   </ul>
 
-  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle.</p>
+  <p>One way to think about it is a political poll. "Candidate A: 55%" is the headline number, but you also want to know the margin of error — two polls both reading 55%, one with ±2% and one with ±15%, describe wildly different situations. Our percent is the headline; our confidence is roughly the inverse of the margin.</p>
+
+  <p>So two scores with the <em>same</em> percent can mean very different things:</p>
+  <ul>
+    <li><strong>China 75%, confidence 90%</strong> → Definitely mostly China; the small chance it's elsewhere is real but stable. Trust it.</li>
+    <li><strong>China 75%, confidence 30%</strong> → Our best guess is China, but the evidence is thin. Treat as a working hypothesis, not a fact.</li>
+    <li><strong>Any country, confidence 20%</strong> → We genuinely cannot tell. The country named is a placeholder; the meaningful signal is the low confidence.</li>
+  </ul>
+
+  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle: when we don't know, you should know we don't know.</p>
 
   <h2>Hong Kong, Macau, and Taiwan</h2>
 
