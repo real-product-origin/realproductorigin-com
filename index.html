@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Product Origin Checker — Know what you're getting, and who you're paying.</title>
-<meta name="description" content="See where every Amazon product is really made, where it ships from, and who's behind the company selling it. A browser extension and mobile app by Real Product Origin.">
+<meta name="description" content="Every Amazon product answers four questions before you buy it. Where it's made. Where it ships from. Who the retailer is. And where the money ultimately goes. Sources cited. Confidence bands honest.">
 <meta property="og:title" content="Product Origin Checker">
 <meta property="og:description" content="Know what you're getting, and who you're paying.">
 <meta property="og:type" content="website">
@@ -37,163 +37,457 @@
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
       <a href="/contact.html">Contact</a>
+      <a class="nav-cta" href="#install">Install</a>
     </nav>
   </div>
 </header>
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HERO — split layout
+     ═════════════════════════════════════════════════════════════════════ -->
+
 <section class="hero">
-  <div class="wrap">
-    <p class="kicker">From Real Product Origin</p>
-    <h1>Know what you're <em>really</em> buying.</h1>
-    <p class="tagline">Know what you're getting, and who you're paying.</p>
-    <p class="sub">For every Amazon product, we tell you where it's made, where it ships from, and who's behind the seller — with sources for every claim. Honest confidence bands when we're not sure. Manual verification when our users say we got it wrong.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#install">Install the extension</a>
-      <a class="btn btn-secondary" href="#mobile">Get the app</a>
+  <div class="wrap-wide">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <p class="kicker">Real Product Origin — the transparency layer for Amazon</p>
+        <h1>Know what you're <em>really</em> buying.</h1>
+        <p class="tagline">And who you're really paying.</p>
+        <p class="sub">Every Amazon listing quietly dodges four questions. We answer all four — where it's made, where it ships from, who the retailer is, and where the money ultimately goes — with sources for every claim, and honest confidence bands when the evidence is thin.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#install">Get the browser extension</a>
+          <a class="btn btn-secondary" href="/methodology.html">How it works</a>
+        </div>
+        <p class="cta-note">Free during early access. Chrome, Edge, Brave. iOS &amp; Android on the way.</p>
+      </div>
+
+      <div class="hero-mock" aria-hidden="true">
+        <span class="mock-caption">Live on every Amazon product page</span>
+
+        <div class="browser-mock">
+          <div class="browser-chrome">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url"><span class="lock">🔒</span> amazon.com/dp/…</div>
+          </div>
+
+          <div class="browser-viewport">
+            <div class="mock-stack">
+
+              <!-- ─── Slide 1: Seiko (mostly ink — international brand) ─── -->
+              <div class="mock-slide active" data-slide="0">
+                <div class="mock-slide-grid">
+                  <div class="mock-listing">
+                    <div class="mock-image">
+                      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="32" cy="32" r="15"/>
+                        <path d="M32 32 L32 23 M32 32 L39 32"/>
+                        <path d="M25 17 L26 12 L38 12 L39 17"/>
+                        <path d="M25 47 L26 52 L38 52 L39 47"/>
+                        <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
+                      </svg>
+                    </div>
+                    <div class="mock-brand">SEIKO</div>
+                    <div class="mock-title">Men's Solar Chronograph Watch, Silver Bracelet</div>
+                    <div class="mock-stars"><span class="stars">★★★★★</span> 4.6 · 2,847</div>
+                    <div class="mock-price">$189<small>.00</small></div>
+                    <div class="mock-btn">Add to Cart</div>
+                  </div>
+                  <div class="mock-badge">
+                    <div class="mock-badge-header">
+                      <span class="logo">
+                        <svg viewBox="0 0 160 160" aria-hidden="true">
+                          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#c0322b"/>
+                          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+                        </svg>
+                      </span>
+                      <span class="title">Product Origin</span>
+                      <span class="tag">Verified</span>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Made in</span>
+                        <span class="row-pct"><span class="row-flag">🇯🇵</span> Japan · 95%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:95%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Ships from</span>
+                        <span class="row-pct"><span class="row-flag">🇺🇸</span> US · 88%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:88%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Retailer</span>
+                        <span class="row-pct"><span class="row-flag">🇺🇸</span> US · 96%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:96%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Money goes to</span>
+                        <span class="row-pct"><span class="row-flag">🇯🇵</span> Japan · 96%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:96%"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ─── Slide 2: Sampeel (opaque drop-shipper — all red) ─── -->
+              <div class="mock-slide" data-slide="1">
+                <div class="mock-slide-grid">
+                  <div class="mock-listing">
+                    <div class="mock-image">
+                      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
+                      </svg>
+                    </div>
+                    <div class="mock-brand">SAMPEEL</div>
+                    <div class="mock-title">Women's Casual Loose T-Shirt Dress, Long Sleeve</div>
+                    <div class="mock-stars"><span class="stars">★★★★★</span> 4.4 · 18,203</div>
+                    <div class="mock-price">$28<small>.99</small></div>
+                    <div class="mock-btn">Add to Cart</div>
+                  </div>
+                  <div class="mock-badge">
+                    <div class="mock-badge-header">
+                      <span class="logo">
+                        <svg viewBox="0 0 160 160" aria-hidden="true">
+                          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#c0322b"/>
+                          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+                        </svg>
+                      </span>
+                      <span class="title">Product Origin</span>
+                      <span class="tag">Fresh</span>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Made in</span>
+                        <span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 88%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill is-cn" style="width:88%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Ships from</span>
+                        <span class="row-pct"><span class="row-flag">🇺🇸</span> US · 62%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:62%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Retailer</span>
+                        <span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 93%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Money goes to</span>
+                        <span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 91%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ─── Slide 3: Fjällräven (multi-country, well-scored) ─── -->
+              <div class="mock-slide" data-slide="2">
+                <div class="mock-slide-grid">
+                  <div class="mock-listing">
+                    <div class="mock-image">
+                      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M23 18 L23 15 A6 6 0 0 1 29 9 L35 9 A6 6 0 0 1 41 15 L41 18"/>
+                        <rect x="14" y="18" width="36" height="37" rx="5"/>
+                        <rect x="22" y="30" width="20" height="16" rx="3"/>
+                        <line x1="22" y1="38" x2="42" y2="38"/>
+                      </svg>
+                    </div>
+                    <div class="mock-brand">FJÄLLRÄVEN</div>
+                    <div class="mock-title">Kånken Classic Backpack, Ox Red, 16 L</div>
+                    <div class="mock-stars"><span class="stars">★★★★★</span> 4.7 · 9,412</div>
+                    <div class="mock-price">$80<small>.00</small></div>
+                    <div class="mock-btn">Add to Cart</div>
+                  </div>
+                  <div class="mock-badge">
+                    <div class="mock-badge-header">
+                      <span class="logo">
+                        <svg viewBox="0 0 160 160" aria-hidden="true">
+                          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#c0322b"/>
+                          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+                        </svg>
+                      </span>
+                      <span class="title">Product Origin</span>
+                      <span class="tag">Fresh</span>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Made in</span>
+                        <span class="row-pct"><span class="row-flag">🇻🇳</span> Vietnam · 82%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:82%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Ships from</span>
+                        <span class="row-pct"><span class="row-flag">🇺🇸</span> US · 90%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:90%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Retailer</span>
+                        <span class="row-pct"><span class="row-flag">🇺🇸</span> US · 88%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:88%"></div></div>
+                    </div>
+                    <div class="row">
+                      <div class="row-top">
+                        <span class="row-label">Money goes to</span>
+                        <span class="row-pct"><span class="row-flag">🇸🇪</span> Sweden · 94%</span>
+                      </div>
+                      <div class="row-track"><div class="row-fill" style="width:94%"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="mock-indicators" role="tablist" aria-label="Cycle example products">
+          <button type="button" class="active" aria-label="Seiko example"></button>
+          <button type="button" aria-label="Sampeel example"></button>
+          <button type="button" aria-label="Fjällräven example"></button>
+        </div>
+      </div>
+
     </div>
-    <p class="cta-note">Free during early access · Chrome, Edge, Brave · iOS &amp; Android coming soon</p>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TRUST STRIP
+     ═════════════════════════════════════════════════════════════════════ -->
+
+<section class="trust-strip">
+  <div class="wrap-wide">
+    <span class="trust-item">Sources cited on every score</span>
+    <span class="trust-item">Honest confidence bands</span>
+    <span class="trust-item">No tracking, no ads</span>
+    <span class="trust-item">Not affiliated with Amazon</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FOUR INDICATORS
+     ═════════════════════════════════════════════════════════════════════ -->
+
 <section>
-  <div class="wrap">
-    <p class="eyebrow">Three answers Amazon won't give you</p>
-    <h2>Three things you can never tell from an Amazon listing</h2>
-    <p class="section-intro">Amazon hides the answers behind opaque seller names, dropshipping arrangements, and warehouse-fulfilled inventory. We surface them with AI, public records, and human review.</p>
+  <div class="wrap-wide">
+    <p class="eyebrow">The four questions</p>
+    <h2>Four things you can never tell from an Amazon listing.</h2>
+    <p class="section-intro">Every score answers four separate questions about the product. Together they tell a story that no single label — <em>Sold by</em>, <em>Ships from</em>, <em>Manufacturer</em> — can ever tell on its own.</p>
 
     <div class="indicators">
       <div class="indicator-card">
-        <p class="num">01 — Made in</p>
+        <p class="num"><span class="num-icon">01</span> Made in</p>
         <h3>Where the product was manufactured</h3>
-        <p>Not where the seller is. Not where Amazon ships it from. The actual country the unit was built in.</p>
+        <p>Not where the seller is. Not where Amazon ships it from. The actual country the unit was built in — the fact most listings hide.</p>
       </div>
       <div class="indicator-card">
-        <p class="num">02 — Ships from</p>
+        <p class="num"><span class="num-icon">02</span> Ships from</p>
         <h3>Where the unit originates</h3>
-        <p>Amazon fulfillment center in Ohio? Direct-from-China drop-ship? Different shipping experiences, different delivery times.</p>
+        <p>Amazon fulfillment center in Ohio? Direct-from-China drop-ship? Different shipping experiences, different delivery times, different accountability.</p>
       </div>
       <div class="indicator-card">
-        <p class="num">03 — Retailer</p>
+        <p class="num"><span class="num-icon">03</span> Retailer</p>
         <h3>Who's transacting with you</h3>
-        <p>The legal seller-of-record on Amazon — Amazon.com, an authorized distributor, or a third-party marketplace seller. Affects return policy, consumer protection, and counterfeit risk.</p>
+        <p>The legal seller-of-record — Amazon.com, an authorized distributor, or a third-party marketplace seller. Affects returns, consumer protection, and counterfeit risk.</p>
       </div>
       <div class="indicator-card">
-        <p class="num">04 — Money goes to</p>
+        <p class="num"><span class="num-icon">04</span> Money goes to</p>
         <h3>Where the profit ultimately lands</h3>
-        <p>The brand parent's country — the entity that captures the wholesale margin from every sale. For a Seiko watch sold by Amazon.com: Retailer is US, Money goes to is Japan.</p>
+        <p>The brand parent's country — the entity that captures the wholesale margin from every sale. A Seiko watch on Amazon: retailer is US, but the money flows to Japan.</p>
       </div>
     </div>
-
-    <p>Each score includes a confidence band, full methodology, and a list of sources. We deliberately keep our confidence honest — when evidence is thin, you'll see that.</p>
   </div>
 </section>
 
-<section class="cream">
-  <div class="wrap">
-    <p class="eyebrow">What it looks like</p>
-    <h2>A second opinion, inline.</h2>
-    <p class="section-intro">The badge appears directly on every Amazon product page, right above the buy box. Click the toolbar icon for full methodology and citations.</p>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     DARK SECTION — SHOWCASE + STATS
+     ═════════════════════════════════════════════════════════════════════ -->
 
-    <div class="badge-mockup-wrap">
-      <div class="annotation left">A real Country-of-Origin field drives high confidence (95%).</div>
-      <div class="annotation right">When the listing doesn't tell us, we say so — not pretend.</div>
-      <div class="badge-mockup">
-        <div class="badge-header">
-          <div class="logo-dot"></div>
-          <div class="badge-title">Product Origin Checker</div>
-          <div class="badge-source">fresh</div>
-        </div>
-        <div class="row">
-          <div class="row-top">
-            <span class="row-label">Made in</span>
-            <span class="row-pct" style="color: #c0322b">
-              <span class="row-flag">🇨🇳</span> China · 95%
-            </span>
+<section class="dark">
+  <div class="wrap-wide">
+    <p class="eyebrow">Seeing is understanding</p>
+    <h2>Three products. Three completely different stories.</h2>
+    <p class="section-intro">A watch. A dress. A backpack. Each looks like a normal Amazon listing on the surface — and each unfolds very differently once we run all four checks. This is what the badge shows you at a glance.</p>
+
+    <div class="showcase-grid">
+
+      <!-- Card A: Seiko -->
+      <div class="showcase-card">
+        <div class="sc-listing">
+          <div class="sc-image">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="32" cy="32" r="15"/>
+              <path d="M32 32 L32 23 M32 32 L39 32"/>
+              <path d="M25 17 L26 12 L38 12 L39 17"/>
+              <path d="M25 47 L26 52 L38 52 L39 47"/>
+              <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
+            </svg>
           </div>
-          <div class="row-track"><div class="row-fill" style="width:95%;background:#c0322b"></div></div>
-          <div class="row-conf">High confidence (95%)</div>
-        </div>
-        <div class="row">
-          <div class="row-top">
-            <span class="row-label">Ships from</span>
-            <span class="row-pct" style="color: #111827">
-              <span class="row-flag">🇺🇸</span> United States · 88%
-            </span>
+          <div class="sc-meta">
+            <p class="sc-brand">Seiko</p>
+            <p class="sc-title">Men's Solar Chronograph Watch</p>
+            <p class="sc-price">$189.00</p>
           </div>
-          <div class="row-track"><div class="row-fill" style="width:88%;background:#111827"></div></div>
-          <div class="row-conf">Moderate confidence (72%)</div>
         </div>
-        <div class="row">
-          <div class="row-top">
-            <span class="row-label">Retailer</span>
-            <span class="row-pct" style="color: #c0322b">
-              <span class="row-flag">🇨🇳</span> China · 93%
-            </span>
-          </div>
-          <div class="row-track"><div class="row-fill" style="width:93%;background:#c0322b"></div></div>
-          <div class="row-conf">High confidence (88%)</div>
+        <div class="mock-badge">
+          <div class="row"><div class="row-top"><span class="row-label">Made in</span><span class="row-pct"><span class="row-flag">🇯🇵</span> Japan · 95%</span></div><div class="row-track"><div class="row-fill" style="width:95%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Ships from</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 88%</span></div><div class="row-track"><div class="row-fill" style="width:88%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct"><span class="row-flag">🇯🇵</span> Japan · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
         </div>
-        <div class="row">
-          <div class="row-top">
-            <span class="row-label">Money goes to</span>
-            <span class="row-pct" style="color: #c0322b">
-              <span class="row-flag">🇨🇳</span> China · 91%
-            </span>
-          </div>
-          <div class="row-track"><div class="row-fill" style="width:91%;background:#c0322b"></div></div>
-          <div class="row-conf">High confidence (85%)</div>
-        </div>
+        <p class="sc-takeaway">A recognisable Japanese brand. Retailer is Amazon US, but every dollar of the wholesale margin lands with Seiko Group in Tokyo.</p>
       </div>
+
+      <!-- Card B: Sampeel -->
+      <div class="showcase-card">
+        <div class="sc-listing">
+          <div class="sc-image">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
+            </svg>
+          </div>
+          <div class="sc-meta">
+            <p class="sc-brand">Sampeel</p>
+            <p class="sc-title">Casual Loose T-Shirt Dress</p>
+            <p class="sc-price">$28.99</p>
+          </div>
+        </div>
+        <div class="mock-badge">
+          <div class="row"><div class="row-top"><span class="row-label">Made in</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 88%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:88%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Ships from</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 62%</span></div><div class="row-track"><div class="row-fill" style="width:62%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 93%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 91%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div></div>
+        </div>
+        <p class="sc-takeaway">The kind of brand no listing labels: a Chinese-registered trademark, drop-shipped through a US warehouse. Every red row is a signal.</p>
+      </div>
+
+      <!-- Card C: Fjällräven -->
+      <div class="showcase-card">
+        <div class="sc-listing">
+          <div class="sc-image">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M23 18 L23 15 A6 6 0 0 1 29 9 L35 9 A6 6 0 0 1 41 15 L41 18"/>
+              <rect x="14" y="18" width="36" height="37" rx="5"/>
+              <rect x="22" y="30" width="20" height="16" rx="3"/>
+              <line x1="22" y1="38" x2="42" y2="38"/>
+            </svg>
+          </div>
+          <div class="sc-meta">
+            <p class="sc-brand">Fjällräven</p>
+            <p class="sc-title">Kånken Classic Backpack</p>
+            <p class="sc-price">$80.00</p>
+          </div>
+        </div>
+        <div class="mock-badge">
+          <div class="row"><div class="row-top"><span class="row-label">Made in</span><span class="row-pct"><span class="row-flag">🇻🇳</span> Vietnam · 82%</span></div><div class="row-track"><div class="row-fill" style="width:82%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Ships from</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 90%</span></div><div class="row-track"><div class="row-fill" style="width:90%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 88%</span></div><div class="row-track"><div class="row-fill" style="width:88%"></div></div></div>
+          <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct"><span class="row-flag">🇸🇪</span> Sweden · 94%</span></div><div class="row-track"><div class="row-fill" style="width:94%"></div></div></div>
+        </div>
+        <p class="sc-takeaway">A Swedish brand, manufactured in Vietnam, sold by Amazon US. Three separate countries — and the badge tells you which is which.</p>
+      </div>
+
     </div>
 
-    <p style="font-size: 14px; color: var(--muted); text-align: center; margin-top: 32px;"><em>Color cues at a glance: red signals a high-confidence China score, amber means we're uncertain, neutral dark means another country (or we couldn't tell). The UI only "lights up" when there's a real signal — non-China origins don't read as alarms.</em></p>
+    <div class="stat-strip">
+      <div class="stat">
+        <div class="stat-num">3.8M+</div>
+        <div class="stat-label">Trademark filings indexed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Independent signals per score</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Of claims cited</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Trackers or ads</div>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HOW IT WORKS
+     ═════════════════════════════════════════════════════════════════════ -->
 
 <section>
-  <div class="wrap">
+  <div class="wrap-wide">
     <p class="eyebrow">How it works</p>
     <h2>Three steps, mostly invisible.</h2>
+    <p class="section-intro">You shop on Amazon the way you already do. Everything else happens quietly in the background — and you see the answer inline, right where you were already looking.</p>
+
     <div class="steps">
       <div class="step">
         <h3>You land on a product</h3>
-        <p>Browse Amazon as you normally would. The extension wakes up when you hit a product detail page.</p>
+        <p>Browse Amazon as usual. The extension wakes up the moment you hit a product-detail page — nothing else. No history tracking, no other sites.</p>
       </div>
       <div class="step">
         <h3>We read the page</h3>
-        <p>We extract every available signal — Country of Origin field, ships-from text, seller storefront, reviews, Q&amp;A — and pass it to our scoring engine.</p>
+        <p>We extract every visible signal — Country of Origin, ships-from text, seller storefront, brand website, reviews, trademark filings — and cross-reference them against independent sources.</p>
       </div>
       <div class="step">
-        <h3>You see the result</h3>
-        <p>Three flag-and-percent indicators inline, with confidence bands and a "How we got this" panel listing every source.</p>
+        <h3>You see the answer</h3>
+        <p>Four flag-and-percent indicators appear inline. Every one has a confidence band, a colour cue, and a "How we got this" panel with every URL we relied on.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     METHODOLOGY (cream)
+     ═════════════════════════════════════════════════════════════════════ -->
 
 <section class="cream">
   <div class="wrap">
     <p class="eyebrow">Methodology</p>
     <h2>Plain-English methodology, in 90 seconds.</h2>
 
-    <h3>What we read from the product page</h3>
+    <h3>What we read from the page</h3>
     <ul>
       <li><strong>Country of Origin field</strong> from Amazon's structured product details — when present, this is our strongest signal.</li>
-      <li><strong>Ships-from / Sold-by buybox</strong> text.</li>
-      <li><strong>Seller name and storefront</strong>, brand, manufacturer.</li>
-      <li><strong>Customer reviews and Q&amp;A</strong>, scanned for "Made in X" claims, customs mentions, and shipping comments.</li>
-      <li><strong>Date first available, best-sellers rank, ratings histogram</strong> — pattern detection for drop-shipper signals.</li>
+      <li><strong>Ships-from and Sold-by</strong> lines from the buy box.</li>
+      <li><strong>Seller storefront</strong> — the "Detailed Seller Information" page where the legal entity name and registered country actually live.</li>
+      <li><strong>Brand storefront and website</strong> — cross-checked against RDAP, the global domain registry.</li>
+      <li><strong>Trademark filings</strong> from our own USPTO index of 3.8M+ records.</li>
+      <li><strong>Customer reviews and Q&amp;A</strong>, scanned for "Made in X" claims and shipping mentions.</li>
     </ul>
 
     <h3>What our AI does with it</h3>
-    <p>We send the assembled evidence to Anthropic's Claude, which combines it with its training-data knowledge of brands and companies. For products where signals are thin or contradictory, Claude can perform web searches against business registries, news, and LinkedIn — citing the URLs it found.</p>
+    <p>We send the assembled evidence to Anthropic's Claude, which combines it with trained knowledge of brands and companies. When signals are thin, Claude runs live web searches against business registries, brand websites, LinkedIn, and news — and every URL is cited on the badge.</p>
 
     <h3>When we don't know, we say so</h3>
     <p>Confidence isn't fluff. A 50% / 20% confidence score means <em>we genuinely cannot tell</em>. We'd rather be honest than wrong-but-confident.</p>
 
-    <p style="margin-top: 24px;"><a href="/methodology.html">Read the full methodology →</a></p>
+    <p style="margin-top: 32px;"><a href="/methodology.html">Read the full methodology →</a></p>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     WHEN WE'RE WRONG
+     ═════════════════════════════════════════════════════════════════════ -->
 
 <section>
   <div class="wrap">
@@ -201,23 +495,99 @@
     <h2>Tell us. We'll fix the score for everyone.</h2>
     <p>Every score has a <strong>Contest this finding</strong> button. Tell us what you know — your name, your relationship to the product, what you've seen. We verify your email and your report enters our review queue.</p>
     <p>When our team validates a correction, the AI score is replaced with a manually-verified one — visible to all future users with a <span style="color: var(--green); font-weight: 700;">✓ Verified</span> mark.</p>
-    <p>It's not a complaint box. It's a correction mechanism. The whole point is to <em>improve</em> the dataset over time.</p>
+    <p>It isn't a complaint box. It's a correction mechanism. The whole point is to <em>improve</em> the dataset over time.</p>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PULL QUOTE
+     ═════════════════════════════════════════════════════════════════════ -->
+
 <div class="pullquote">
-  "Most of the trillion dollars Americans spend on Amazon each year goes through products whose origin is deliberately obscured. We think you should know."
-  <span class="cite">— Real Product Origin</span>
+  <div class="pullquote-inner">
+    Most of the trillion dollars Americans spend on Amazon each year flows through products whose origin is deliberately obscured. We think you should know.
+    <div class="cite">Real Product Origin</div>
+  </div>
 </div>
 
-<section class="faq">
+<!-- ═══════════════════════════════════════════════════════════════════════
+     MOBILE — with phone mockup
+     ═════════════════════════════════════════════════════════════════════ -->
+
+<section id="mobile">
+  <div class="wrap-wide">
+    <div class="mobile-grid">
+
+      <div class="mobile-copy">
+        <p class="eyebrow">Mobile</p>
+        <h2>For shopping in the Amazon app.</h2>
+        <p class="section-intro">Tap Share in the Amazon app → Product Origin Checker, and we score the product in seconds — with the same four indicators, the same honest confidence, the same full source list.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#" aria-disabled="true">App Store — soon</a>
+          <a class="btn btn-secondary" href="#" aria-disabled="true">Google Play — soon</a>
+        </div>
+        <p class="cta-note" style="margin-top: 12px;">Coming to iPhone and Android alongside the extension launch.</p>
+      </div>
+
+      <div class="phone-mock" aria-hidden="true">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-topbar">
+              <span>9:41</span>
+              <span>••• 5G</span>
+            </div>
+            <div class="phone-app">
+              <div class="phone-app-header">
+                <span class="logo">
+                  <svg viewBox="0 0 160 160" aria-hidden="true">
+                    <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#c0322b"/>
+                    <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+                  </svg>
+                </span>
+                <span class="title">Product Origin</span>
+              </div>
+              <div class="phone-product">
+                <div class="img">
+                  <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="32" cy="32" r="15"/>
+                    <path d="M32 32 L32 23 M32 32 L39 32"/>
+                    <path d="M25 17 L26 12 L38 12 L39 17"/>
+                    <path d="M25 47 L26 52 L38 52 L39 47"/>
+                    <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="meta">
+                  <div class="brand">Seiko</div>
+                  <div class="name">Men's Solar Chronograph Watch</div>
+                </div>
+              </div>
+              <div class="phone-badge">
+                <div class="row"><div class="row-top"><span class="row-label">Made in</span><span class="row-pct"><span class="row-flag">🇯🇵</span> JP · 95%</span></div><div class="row-track"><div class="row-fill" style="width:95%"></div></div></div>
+                <div class="row"><div class="row-top"><span class="row-label">Ships from</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 88%</span></div><div class="row-track"><div class="row-fill" style="width:88%"></div></div></div>
+                <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
+                <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct"><span class="row-flag">🇯🇵</span> JP · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FAQ
+     ═════════════════════════════════════════════════════════════════════ -->
+
+<section class="faq cream">
   <div class="wrap">
     <p class="eyebrow">FAQ</p>
     <h2>Common questions.</h2>
 
     <details>
       <summary>Is this only about Chinese products?</summary>
-      <p>No — the engine identifies any country. China detection is the primary calibrated use case (most opaque Amazon supply chains route through China), but the scores work the same way for products made in Vietnam, Mexico, Germany, Korea, or anywhere else. The UI only "lights up" red when there's a high-confidence China score; everything else reads as neutral.</p>
+      <p>No — the engine identifies any country. China detection is the primary calibrated use case, since that's where seller obfuscation is most common on Amazon, but the scores work the same way for products made in Vietnam, Mexico, Germany, Korea, or anywhere else. The UI only "lights up" red when there's a high-confidence China score; everything else reads as neutral.</p>
     </details>
 
     <details>
@@ -227,7 +597,7 @@
 
     <details>
       <summary>How does Hong Kong / Taiwan get handled?</summary>
-      <p>Hong Kong (HK), Macau (MO), and Taiwan (TW) are scored as their own countries. Never folded into mainland China (CN). This is a hard rule in our system prompt.</p>
+      <p>Hong Kong (HK), Macau (MO), and Taiwan (TW) are scored as their own countries. Never folded into mainland China (CN). This is a hard rule in our system.</p>
     </details>
 
     <details>
@@ -247,35 +617,33 @@
 
     <details>
       <summary>I represent a brand — how do I correct a score about my product?</summary>
-      <p>Same path: <strong>Contest this finding</strong>. We treat first-party brand corrections with high priority. Be sure to identify yourself as someone associated with the brand in the "affiliation" field, and provide a corporate email so we can verify the connection.</p>
+      <p>Same path: <strong>Contest this finding</strong>. We treat first-party brand corrections with high priority. Identify yourself as someone associated with the brand in the "affiliation" field, and provide a corporate email so we can verify the connection.</p>
     </details>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     INSTALL CTA
+     ═════════════════════════════════════════════════════════════════════ -->
+
 <section id="install" class="soft">
-  <div class="wrap">
-    <p class="eyebrow">Install</p>
-    <h2>Get the browser extension.</h2>
-    <p>Works on Chrome, Edge, Brave, and Firefox. Free during early access.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#" aria-disabled="true">Chrome Web Store — coming soon</a>
-      <a class="btn btn-secondary" href="#" aria-disabled="true">Edge Add-ons — coming soon</a>
+  <div class="wrap-wide">
+    <div class="cta-section-inner">
+      <p class="eyebrow">Install</p>
+      <h2 style="margin-bottom: 12px;">Get the browser extension.</h2>
+      <p style="font-size: 17px; color: var(--ink-3); max-width: 560px; margin: 0 0 24px;">Works on Chrome, Edge, Brave, and Firefox. Free during early access. Zero tracking, zero ads, sources cited on every claim.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#" aria-disabled="true">Chrome Web Store — in review</a>
+        <a class="btn btn-secondary" href="#" aria-disabled="true">Edge Add-ons — soon</a>
+      </div>
+      <p class="cta-note" style="margin-top: 16px;">Early-access users: we'll email install links the moment we go live. <a href="/contact.html">Tell us to add you to the list</a>.</p>
     </div>
-    <p class="cta-note">Early-access users: we'll email install links the moment we go live. <a href="/contact.html">Tell us to add you to the list</a>.</p>
   </div>
 </section>
 
-<section id="mobile">
-  <div class="wrap">
-    <p class="eyebrow">Mobile</p>
-    <h2>For shopping in the Amazon app.</h2>
-    <p>Tap Share in the Amazon app → Product Origin Checker, and we score the product in seconds — with the same four indicators and full methodology.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="#" aria-disabled="true">App Store — coming soon</a>
-      <a class="btn btn-secondary" href="#" aria-disabled="true">Google Play — coming soon</a>
-    </div>
-  </div>
-</section>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ═════════════════════════════════════════════════════════════════════ -->
 
 <footer>
   <div class="footer-inner">
@@ -293,7 +661,7 @@
       </span>
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
-      <p class="brand-tagline">Know what you're buying.</p>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
     </div>
     <div class="col">
       <h4>Product</h4>
@@ -315,6 +683,33 @@
   <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
 </footer>
 
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Cycle the hero mockup through its three example slides.
+(function() {
+  var slides = document.querySelectorAll('.mock-slide');
+  var dots = document.querySelectorAll('.mock-indicators button');
+  if (!slides.length) return;
+  var idx = 0, timer = null;
+  function show(i) {
+    slides.forEach(function(s, j) { s.classList.toggle('active', i === j); });
+    dots.forEach(function(d, j) { d.classList.toggle('active', i === j); });
+    idx = i;
+  }
+  function next() { show((idx + 1) % slides.length); }
+  function start() { timer = setInterval(next, 4200); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  dots.forEach(function(d, j) {
+    d.addEventListener('click', function() { stop(); show(j); start(); });
+  });
+  var mock = document.querySelector('.hero-mock');
+  if (mock) {
+    mock.addEventListener('mouseenter', stop);
+    mock.addEventListener('mouseleave', start);
+  }
+  start();
+})();
+</script>
 </body>
 </html>
