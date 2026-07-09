@@ -73,9 +73,14 @@
         <p>Amazon fulfillment center in Ohio? Direct-from-China drop-ship? Different shipping experiences, different delivery times.</p>
       </div>
       <div class="indicator-card">
-        <p class="num">03 — Sold by</p>
-        <h3>Who's actually getting paid</h3>
-        <p>The legal seller-of-record's country of headquarters. The corporate entity behind that "Sold by" line.</p>
+        <p class="num">03 — Retailer</p>
+        <h3>Who's transacting with you</h3>
+        <p>The legal seller-of-record on Amazon — Amazon.com, an authorized distributor, or a third-party marketplace seller. Affects return policy, consumer protection, and counterfeit risk.</p>
+      </div>
+      <div class="indicator-card">
+        <p class="num">04 — Money goes to</p>
+        <h3>Where the profit ultimately lands</h3>
+        <p>The brand parent's country — the entity that captures the wholesale margin from every sale. For a Seiko watch sold by Amazon.com: Retailer is US, Money goes to is Japan.</p>
       </div>
     </div>
 
@@ -89,12 +94,57 @@
     <h2>A second opinion, inline.</h2>
     <p class="section-intro">The badge appears directly on every Amazon product page, right above the buy box. Click the toolbar icon for full methodology and citations.</p>
 
-    <figure class="screenshot">
-      <img src="/assets/screenshot-extension.svg"
-           alt="Screenshot of the Product Origin Checker browser extension. The badge appears inline on an Amazon product page, between the title and the buy box, showing three transparency scores: Made in China (95% confidence), Ships from United States (72% confidence), Sold by China (88% confidence)."
-           width="1200" height="760" loading="lazy" />
-      <figcaption>The Product Origin Checker badge, injected inline on every Amazon product page.</figcaption>
-    </figure>
+    <div class="badge-mockup-wrap">
+      <div class="annotation left">A real Country-of-Origin field drives high confidence (95%).</div>
+      <div class="annotation right">When the listing doesn't tell us, we say so — not pretend.</div>
+      <div class="badge-mockup">
+        <div class="badge-header">
+          <div class="logo-dot"></div>
+          <div class="badge-title">Product Origin Checker</div>
+          <div class="badge-source">fresh</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Made in</span>
+            <span class="row-pct" style="color: #c0322b">
+              <span class="row-flag">🇨🇳</span> China · 95%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:95%;background:#c0322b"></div></div>
+          <div class="row-conf">High confidence (95%)</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Ships from</span>
+            <span class="row-pct" style="color: #111827">
+              <span class="row-flag">🇺🇸</span> United States · 88%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:88%;background:#111827"></div></div>
+          <div class="row-conf">Moderate confidence (72%)</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Retailer</span>
+            <span class="row-pct" style="color: #c0322b">
+              <span class="row-flag">🇨🇳</span> China · 93%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:93%;background:#c0322b"></div></div>
+          <div class="row-conf">High confidence (88%)</div>
+        </div>
+        <div class="row">
+          <div class="row-top">
+            <span class="row-label">Money goes to</span>
+            <span class="row-pct" style="color: #c0322b">
+              <span class="row-flag">🇨🇳</span> China · 91%
+            </span>
+          </div>
+          <div class="row-track"><div class="row-fill" style="width:91%;background:#c0322b"></div></div>
+          <div class="row-conf">High confidence (85%)</div>
+        </div>
+      </div>
+    </div>
 
     <p style="font-size: 14px; color: var(--muted); text-align: center; margin-top: 32px;"><em>Color cues at a glance: red signals a high-confidence China score, amber means we're uncertain, neutral dark means another country (or we couldn't tell). The UI only "lights up" when there's a real signal — non-China origins don't read as alarms.</em></p>
   </div>
@@ -219,7 +269,7 @@
   <div class="wrap">
     <p class="eyebrow">Mobile</p>
     <h2>For shopping in the Amazon app.</h2>
-    <p>Tap Share in the Amazon app → Product Origin Checker, and we score the product in seconds — with the same three indicators and full methodology.</p>
+    <p>Tap Share in the Amazon app → Product Origin Checker, and we score the product in seconds — with the same four indicators and full methodology.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#" aria-disabled="true">App Store — coming soon</a>
       <a class="btn btn-secondary" href="#" aria-disabled="true">Google Play — coming soon</a>

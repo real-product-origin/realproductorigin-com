@@ -40,7 +40,9 @@
   <h1>How we figure out where a product is really from</h1>
   <p class="updated">A plain-English guide to how Product Origin Checker scores products.</p>
 
-  <p>Every score we publish answers three questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, and where the company <strong>selling it</strong> is headquartered. This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
+  <p>Every score we publish answers four questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, who's actually <strong>selling</strong> it (the retailer transacting with you), and where the <strong>money ultimately goes</strong> (the brand parent that captures the profit). This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
+
+  <p><em>Why four, not three?</em> Two very different questions used to live under one label. For a Seiko watch sold on Amazon: the <strong>retailer</strong> is Amazon.com (US), but the <strong>money</strong> ultimately flows to Seiko Group in Japan. Both facts matter. So we split them.</p>
 
   <p>The short version: <strong>we don't just read the Amazon listing.</strong> We pull signals from several independent places — the product page, the seller's own business records, the brand's website, a global domain registry, and our own growing database of verified corrections. No single source decides a score. The more independent sources that point to the same answer, the more confident we are.</p>
 
@@ -82,7 +84,7 @@
 
   <h2>Putting it together — the AI step</h2>
 
-  <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the three indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
+  <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the four indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
 
   <p>Crucially, the strongest evidence wins. A literal "Country of Origin" field outranks a guess from the brand name; an independent registry record outranks a hunch. We also have a strict rule that a company's <em>headquarters</em> can never, by itself, be used to claim where a product is <em>manufactured</em> — a common and misleading conflation.</p>
 
@@ -92,27 +94,19 @@
 
   <h2>How confidence works</h2>
 
-  <p>Every indicator carries <em>two</em> numbers — a <strong>percent</strong> and a separate <strong>confidence</strong> — and they aren't measuring the same thing. The distinction is the most important honesty signal on the whole score.</p>
+  <p>Each indicator has a <strong>percent</strong> (our certainty for the top country) and a separate <strong>confidence</strong> (our overall confidence in the estimate). These are not the same number — and the distinction matters.</p>
 
   <ul>
-    <li>The <strong>percent</strong> answers: <em>which country is most likely, and how dominant is it?</em> If we say "Made in China 75%", the remaining 25% is split among the alternative countries we list.</li>
-    <li>The <strong>confidence</strong> answers: <em>how reliable was the evidence behind that picture?</em> A score built from a direct Amazon "Country of Origin" field plus a confirming domain registry is sturdy. A score built from a category pattern alone — because the seller hid everything — is fragile, even if the percent looks high.</li>
+    <li>Percent close to 100, confidence close to 100 → we have strong, multiple corroborating sources. You can trust this.</li>
+    <li>Percent 80, confidence 50 → we have a reasonable lean, but the evidence is sparse. Treat it as a working hypothesis, not a fact.</li>
+    <li>Percent 50, confidence 20 → we genuinely cannot tell. The number is a placeholder; the meaningful signal is the low confidence.</li>
   </ul>
 
-  <p>One way to think about it is a political poll. "Candidate A: 55%" is the headline number, but you also want to know the margin of error — two polls both reading 55%, one with ±2% and one with ±15%, describe wildly different situations. Our percent is the headline; our confidence is roughly the inverse of the margin.</p>
-
-  <p>So two scores with the <em>same</em> percent can mean very different things:</p>
-  <ul>
-    <li><strong>China 75%, confidence 90%</strong> → Definitely mostly China; the small chance it's elsewhere is real but stable. Trust it.</li>
-    <li><strong>China 75%, confidence 30%</strong> → Our best guess is China, but the evidence is thin. Treat as a working hypothesis, not a fact.</li>
-    <li><strong>Any country, confidence 20%</strong> → We genuinely cannot tell. The country named is a placeholder; the meaningful signal is the low confidence.</li>
-  </ul>
-
-  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle: when we don't know, you should know we don't know.</p>
+  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle.</p>
 
   <h2>Hong Kong, Macau, and Taiwan</h2>
 
-  <p>For all three indicators, we score <strong>Hong Kong (HK)</strong>, <strong>Macau (MO)</strong>, and <strong>Taiwan (TW)</strong> as their own countries — never folded into mainland China. This is a hard rule in our system.</p>
+  <p>For all four indicators, we score <strong>Hong Kong (HK)</strong>, <strong>Macau (MO)</strong>, and <strong>Taiwan (TW)</strong> as their own countries — never folded into mainland China. This is a hard rule in our system.</p>
 
   <h2>Manual verification (when humans override the AI)</h2>
 
