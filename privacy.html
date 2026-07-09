@@ -74,7 +74,7 @@
 
   <h2>2. How we use what we collect</h2>
   <ul>
-    <li><strong>Scoring products:</strong> Product ASINs are sent to our backend, which queries the Anthropic Claude API to compute the four transparency indicators (Made in, Ships from, Retailer, Money goes to). The product ASIN, scraped page fields (title, brand, seller, etc.), and the resulting score are cached for up to 30 days to speed up repeat lookups.</li>
+    <li><strong>Scoring products:</strong> Product ASINs are sent to our backend, which queries the Anthropic Claude API to compute the four transparency indicators (Made in, Ships from, Retailer, Money goes to). The product ASIN, scraped page fields (title, brand, seller, etc.), and the resulting score are cached to speed up repeat lookups — up to 180 days for immutable indicators (Made in, Money goes to) and up to 30 days for volatile ones (Retailer, Ships from). A cached score is invalidated immediately if we detect that the product's brand or seller has changed since we last scored it.</li>
     <li><strong>Reviewing complaints:</strong> Your complaint submissions are reviewed by our team. We may contact you at the email or phone number you provided to follow up.</li>
     <li><strong>Service improvement:</strong> We use aggregate patterns from cached scores and complaint outcomes to refine our scoring engine.</li>
     <li><strong>Aggregate usage measurement:</strong> The anonymous install UUID and coarse country code described in section 1.2 are used only to power an internal usage dashboard — totals such as "how many installs are active this week," "how often each install scores a product," "which countries our users are in." We do not sell, share, or otherwise disclose this data to third parties.</li>
