@@ -38,7 +38,7 @@
 
 <article class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="updated">Effective date: 2026-05-14 · Last updated: 2026-05-14</p>
+  <p class="updated">Effective date: 2026-05-14 · Last updated: 2026-07-09</p>
 
   <p>Real Product Origin ("we", "us") operates the Product Origin Checker browser extension, mobile app, and supporting backend services (collectively, the "Service"). This Privacy Policy explains what data we collect, how we use it, and your rights.</p>
 
@@ -53,6 +53,8 @@
   <h3>1.2 Information collected automatically</h3>
   <ul>
     <li><strong>Product identifiers (ASINs):</strong> The Amazon Standard Identification Numbers of products you ask us to score. We cache scores by ASIN.</li>
+    <li><strong>Anonymous install identifier:</strong> When you install the browser extension or mobile app, we generate a random UUID and store it in your browser's local extension storage (or the app's local sandbox on mobile). This UUID is sent as an HTTP header (<code>X-Install-Id</code>) with every request to our backend so we can measure aggregate usage — how many distinct installs are active, how often each install requests a score, and cache-hit patterns. It is <em>not</em> linked to your name, email address, Amazon account, IP address in our aggregates, or any other identifier. Uninstalling the extension or app permanently erases it, and reinstalling generates a new one.</li>
+    <li><strong>Coarse country from browser timezone:</strong> We derive a two-letter country code (e.g. <code>US</code>, <code>DE</code>, <code>JP</code>) from your browser's IANA timezone (e.g. <code>America/New_York</code>) and send it as an HTTP header (<code>X-Client-Country</code>). This is <em>not</em> GPS-precise location: it never reveals a city, street, or coordinates, and we never ask your browser for its geolocation. The country is used only to plot aggregate usage on a world map so we can see roughly where our users are.</li>
     <li><strong>Submission metadata:</strong> For each complaint, we record the IP address it was submitted from and the User-Agent of the browser/device. This helps us detect abuse and is retained only for audit purposes.</li>
     <li><strong>Cloudflare Turnstile CAPTCHA token verification:</strong> Cloudflare may collect data per their privacy policy when verifying that you are a human. We receive only a pass/fail result.</li>
     <li><strong>Server logs:</strong> Standard request logs from our hosting provider (Render) recording request paths, timestamps, response codes. These do not include personal data beyond IP addresses and are retained for 7–30 days for operational monitoring.</li>
@@ -64,16 +66,18 @@
     <li>We do not collect your Amazon account information, login, or order history.</li>
     <li>We do not collect your browsing history outside of Amazon product pages.</li>
     <li>We do not collect payment information.</li>
-    <li>We do not collect device identifiers, advertising IDs, location data, contacts, or microphone/camera data.</li>
+    <li>We do not collect precise location: no GPS coordinates, no city, no street. The only geographic signal we collect is the coarse country code described in section 1.2, which is derived from your browser's timezone and never reveals more than a country.</li>
+    <li>We do not collect advertising IDs, contacts, or microphone/camera data. The anonymous install UUID described in section 1.2 is not an advertising identifier — it is never shared with third parties for advertising and it does not survive an uninstall.</li>
     <li>The browser extension does not have permission to read or write any non-Amazon pages.</li>
     <li>The mobile app does not request permission to read your contacts, photos, location, or clipboard contents outside of the explicit "Check the link you copied?" prompt.</li>
   </ul>
 
   <h2>2. How we use what we collect</h2>
   <ul>
-    <li><strong>Scoring products:</strong> Product ASINs are sent to our backend, which queries the Anthropic Claude API to compute the three transparency indicators. The product ASIN, scraped page fields (title, brand, seller, etc.), and the resulting score are cached for up to 14 days to speed up repeat lookups.</li>
+    <li><strong>Scoring products:</strong> Product ASINs are sent to our backend, which queries the Anthropic Claude API to compute the four transparency indicators (Made in, Ships from, Retailer, Money goes to). The product ASIN, scraped page fields (title, brand, seller, etc.), and the resulting score are cached for up to 30 days to speed up repeat lookups.</li>
     <li><strong>Reviewing complaints:</strong> Your complaint submissions are reviewed by our team. We may contact you at the email or phone number you provided to follow up.</li>
     <li><strong>Service improvement:</strong> We use aggregate patterns from cached scores and complaint outcomes to refine our scoring engine.</li>
+    <li><strong>Aggregate usage measurement:</strong> The anonymous install UUID and coarse country code described in section 1.2 are used only to power an internal usage dashboard — totals such as "how many installs are active this week," "how often each install scores a product," "which countries our users are in." We do not sell, share, or otherwise disclose this data to third parties.</li>
     <li><strong>Abuse prevention:</strong> IP addresses and User-Agents from complaint submissions are used to detect spam, bots, and coordinated abuse.</li>
   </ul>
 
