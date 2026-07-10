@@ -71,9 +71,12 @@
 
 <script>
 const params = new URLSearchParams(location.search);
-const tier = params.get("tier") || "";
-const returnUrl = tier
-  ? location.origin + "/pricing.html?autobuy=" + encodeURIComponent(tier)
+// New-style: ?plan=basic&billing_period=monthly. Legacy: ?tier=monthly (→ basic monthly).
+const plan = params.get("plan") || (params.get("tier") ? "basic" : "");
+const billingPeriod = params.get("billing_period") || params.get("tier") || "";
+const returnUrl = (plan && billingPeriod)
+  ? location.origin + "/pricing.html?autobuy_plan=" +
+    encodeURIComponent(plan) + "&autobuy_period=" + encodeURIComponent(billingPeriod)
   : location.origin + "/";
 
 document.getElementById("signin-form").addEventListener("submit", async (e) => {
