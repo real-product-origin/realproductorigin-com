@@ -39,7 +39,7 @@
 
 <article class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="updated">Effective date: 2026-05-14 · Last updated: 2026-07-09</p>
+  <p class="updated">Effective date: 2026-05-14 · Last updated: 2026-07-10</p>
 
   <p>Real Product Origin ("we", "us") operates the Product Origin Checker browser extension, mobile app, and supporting backend services (collectively, the "Service"). This Privacy Policy explains what data we collect, how we use it, and your rights.</p>
 
@@ -49,6 +49,8 @@
   <ul>
     <li><strong>Complaint submissions:</strong> When you use "Contest this finding", we collect the information you fill into the form — your name, email address, optional phone number, your stated affiliation or credentials, the indicators you're contesting, any proposed corrections, and your free-text reasoning.</li>
     <li><strong>Email-verification interactions:</strong> Whether and when you clicked the verification link we sent. We use this to confirm you own the email address you provided.</li>
+    <li><strong>Sign-in and account:</strong> When you sign in to use the mobile app or to subscribe, we collect your email address. We do NOT collect a password — sign-in uses a one-time link sent to your email (magic link). We store the email, the timestamp you first verified it, the timestamp of your most recent sign-in, and the anonymous install identifier(s) of the browsers/devices you have signed in from.</li>
+    <li><strong>Subscription details:</strong> If you subscribe, Stripe collects your billing information directly (see section 3). We receive back and store: your Stripe customer identifier, your subscription plan (monthly or annual), your current billing-period start and end dates, whether you have set your subscription to cancel at period end, and — if you cancel and choose a reason from the Stripe survey — that cancellation-reason category and any free-text comment you provided.</li>
   </ul>
 
   <h3>1.2 Information collected automatically</h3>
@@ -60,13 +62,15 @@
     <li><strong>Cloudflare Turnstile CAPTCHA token verification:</strong> Cloudflare may collect data per their privacy policy when verifying that you are a human. We receive only a pass/fail result.</li>
     <li><strong>Server logs:</strong> Standard request logs from our hosting provider (Render) recording request paths, timestamps, response codes. These do not include personal data beyond IP addresses and are retained for 7–30 days for operational monitoring.</li>
     <li><strong>Error tracking (if enabled):</strong> If we have Sentry enabled, application errors are sent to Sentry for diagnosis. Sentry data is automatically scrubbed of personal data we control.</li>
+    <li><strong>Session token:</strong> When you sign in, we create a session token — a random string with no personal information in it — and store it in your browser's local extension storage (or the app's local sandbox on mobile). The token is sent as an <code>Authorization: Bearer</code> header on subsequent requests so we know it's still you. Sessions last 30 days from your most recent activity; signing out or 30 days of inactivity invalidates the token.</li>
+    <li><strong>Free-tier usage counter:</strong> If you have not subscribed, we count how many product checks you have used in the current calendar month, keyed on your account (if signed in) or the anonymous install identifier (if not signed in). The counter resets on the first day of the next month.</li>
   </ul>
 
   <h3>1.3 What we DO NOT collect</h3>
   <ul>
     <li>We do not collect your Amazon account information, login, or order history.</li>
     <li>We do not collect your browsing history outside of Amazon product pages.</li>
-    <li>We do not collect payment information.</li>
+    <li>We do not collect or store your full payment-card number, CVC, or expiry date. If you subscribe, Stripe collects those directly through their hosted checkout — see section 3. We only receive back a Stripe customer identifier and subscription metadata (plan, dates, status), as described in section 1.1.</li>
     <li>We do not collect precise location: no GPS coordinates, no city, no street. The only geographic signal we collect is the coarse country code described in section 1.2, which is derived from your browser's timezone and never reveals more than a country.</li>
     <li>We do not collect advertising IDs, contacts, or microphone/camera data. The anonymous install UUID described in section 1.2 is not an advertising identifier — it is never shared with third parties for advertising and it does not survive an uninstall.</li>
     <li>The browser extension does not have permission to read or write any non-Amazon pages.</li>
@@ -90,6 +94,11 @@
         <td><strong>Anthropic, PBC</strong></td>
         <td>Scraped product metadata (title, brand, seller, reviews snippets) to score. Per Anthropic's policy, this is processed for inference and is not used to train their models without explicit opt-in.</td>
         <td>Country-of-origin scoring requires AI inference.</td>
+      </tr>
+      <tr>
+        <td><strong>Stripe, Inc.</strong></td>
+        <td>If you subscribe: your email address, billing address, and payment-card information — collected directly by Stripe in their hosted checkout and customer-portal pages. We do NOT receive or store your full card number, CVC, or expiry date. We only receive back a Stripe customer identifier (<code>cus_…</code>), a subscription identifier, plan tier, current-period timestamps, subscription status, and (if you cancel) the cancellation-reason category you selected.</td>
+        <td>Subscription billing, recurring charges, hosted customer portal for cancel / update card / switch plans.</td>
       </tr>
       <tr>
         <td><strong>Render, Inc.</strong></td>
@@ -123,8 +132,11 @@
 
   <h2>4. Data retention</h2>
   <ul>
-    <li><strong>Cached product scores:</strong> retained indefinitely. Scores expire after 14 days and are re-computed on the next request, but the historical record remains in our database for audit and quality-control purposes.</li>
+    <li><strong>Cached product scores:</strong> retained indefinitely. Individual indicators expire on their own cadence — up to 180 days for immutable indicators (Made in, Money goes to) and up to 30 days for volatile ones (Retailer, Ships from) — and are re-computed on the next request, but the historical record remains in our database for audit and quality-control purposes.</li>
     <li><strong>Complaint submissions and personal data therein:</strong> retained until the complaint is resolved + 24 months for audit, or until you request deletion (whichever is later).</li>
+    <li><strong>Account records (email, sign-in metadata):</strong> retained for the life of the account plus 24 months after account deletion (for accounting and abuse-history purposes). Deleting your account via <a href="mailto:privacy@realproductorigin.com">privacy@realproductorigin.com</a> clears your email and links the account to an anonymous placeholder within 30 days.</li>
+    <li><strong>Subscription records:</strong> retained for the life of the subscription plus 7 years after final cancellation, to satisfy tax and accounting record-keeping requirements. Payment-card information is never stored by us — only by Stripe.</li>
+    <li><strong>Session tokens:</strong> automatically deleted 30 days after their last use, or immediately when you sign out.</li>
     <li><strong>Server logs:</strong> 7–30 days.</li>
     <li><strong>Manually-verified score overrides:</strong> retained indefinitely. Even when "retired", the record persists for audit. The data does not contain personal information.</li>
   </ul>

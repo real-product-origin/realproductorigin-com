@@ -85,9 +85,11 @@
 
   <h2>Putting it together — the AI step</h2>
 
-  <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the four indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
+  <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our USPTO trademark index, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the four indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
 
-  <p>Crucially, the strongest evidence wins. A literal "Country of Origin" field outranks a guess from the brand name; an independent registry record outranks a hunch. We also have a strict rule that a company's <em>headquarters</em> can never, by itself, be used to claim where a product is <em>manufactured</em> — a common and misleading conflation.</p>
+  <p><strong>World knowledge first.</strong> Before Claude looks at any structured evidence, we require it to write down what it already knows about the brand from its training — the parent company's country, whether it's a well-known international brand, whether it fits the pattern of a Chinese Amazon marketplace seller using a US shell company for its trademark filing. This step exists because our structured pipeline can otherwise be fooled by paper trails: a Chinese seller can register "BRAND INC" in Delaware and file a US trademark, and our USPTO lookup would then report "United States" as the owner country — technically true for the shell, wildly misleading for the beneficial owner. When Claude's world knowledge places a brand confidently in a specific country, that knowledge takes precedence over the structural US signals from shell entities.</p>
+
+  <p><strong>The strongest evidence wins.</strong> A literal "Country of Origin" field outranks a guess from the brand name; an independent registry record outranks a hunch. We also have a strict rule that a company's <em>headquarters</em> can never, by itself, be used to claim where a product is <em>manufactured</em> — a common and misleading conflation.</p>
 
   <h2>When the evidence is thin — live web search</h2>
 
@@ -119,9 +121,9 @@
 
   <p>For transparency, here's what's NOT yet in our pipeline:</p>
   <ul>
-    <li><strong>US Customs import records.</strong> Panjiva, ImportGenius, and similar services have shipment-level data for who imports what from where. This is the gold-standard evidence layer; we plan to integrate it after launch.</li>
+    <li><strong>US Customs import records.</strong> Panjiva, ImportGenius, and similar services have shipment-level data for who imports what from where. This is the gold-standard evidence layer; the plumbing is in place and it will activate once the subscription cost is justified by paying users.</li>
     <li><strong>OCR on customer-uploaded product photos.</strong> "Made in X" is often printed on packaging visible in review photos; computer vision could read it.</li>
-    <li><strong>USPTO and WIPO trademark databases.</strong> Brand registrations + registrant addresses are strong public signals.</li>
+    <li><strong>WIPO international trademark database.</strong> Adds non-US filings — useful for European brands specifically. The US trademark registry (USPTO) is already in our pipeline.</li>
     <li><strong>OpenCorporates.</strong> Cross-jurisdiction company registry data.</li>
   </ul>
 

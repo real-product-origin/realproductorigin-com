@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Post-checkout landing pages don't need to be indexed — they're only useful
+# reached from the checkout flow itself.
+Disallow: /subscribe/success.html
+Disallow: /subscribe/cancel.html
+Disallow: /subscribe/signin.html
+
+Sitemap: https://realproductorigin.com/sitemap.xml
