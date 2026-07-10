@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Product Origin Checker</title>
+<meta name="description" content="Simple pricing for the browser extension and mobile app. A free tier with 20 checks per month, plus paid tiers for unlimited access.">
+<meta property="og:title" content="Pricing — Product Origin Checker">
+<meta property="og:description" content="Free tier plus $4.99/month or $49.99/year.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .price-hero { padding: 96px 0 40px; background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%); text-align: center; }
+  .price-hero h1 { font-family: var(--serif); font-size: clamp(38px, 5vw, 60px); font-weight: 600; margin: 0 0 14px; letter-spacing: -0.025em; color: var(--ink-deep); font-variation-settings: "opsz" 96; }
+  .price-hero .subtitle { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2vw, 22px); color: var(--ink-3); margin: 0 auto; max-width: 620px; }
+  .price-hero .kicker { display: inline-flex; align-items: center; gap: 10px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+  .price-hero .kicker::before { content: ""; width: 28px; height: 1.5px; background: var(--accent); display: inline-block; }
+  .price-hero .kicker::after  { content: ""; width: 28px; height: 1.5px; background: var(--accent); display: inline-block; }
+
+  .price-cards { padding: 40px 0 80px; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  @media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; max-width: 480px; } }
+
+  .price-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 20px;
+    padding: 36px 30px 32px; position: relative;
+    display: flex; flex-direction: column;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .price-card:hover { transform: translateY(-2px); box-shadow: 0 24px 48px -24px rgba(15, 23, 42, 0.16); }
+  .price-card.featured { border: 2px solid var(--ink-deep); box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.28); }
+  .price-card .badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--ink-deep); color: #fff; padding: 4px 14px; border-radius: 99px;
+    font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .price-card .plan-name { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .price-card .price {
+    font-family: var(--serif); font-size: 48px; font-weight: 700; letter-spacing: -0.02em;
+    color: var(--ink-deep); line-height: 1; font-variation-settings: "opsz" 96;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-card .price small { font-size: 14px; font-weight: 500; font-family: var(--sans); color: var(--muted); margin-left: 6px; }
+  .price-card .price-note { color: var(--muted); font-size: 13px; margin-top: 6px; min-height: 20px; }
+  .price-card ul.features { list-style: none; padding: 0; margin: 24px 0 28px; }
+  .price-card ul.features li {
+    padding: 8px 0 8px 26px; position: relative; font-size: 14px; color: var(--ink-2); line-height: 1.5;
+  }
+  .price-card ul.features li::before {
+    content: "✓"; color: var(--green); position: absolute; left: 0; top: 6px;
+    font-weight: 700; font-size: 14px;
+  }
+  .price-card ul.features li.crossed::before { content: "×"; color: var(--muted-2); }
+  .price-card ul.features li.crossed { color: var(--muted); }
+
+  .price-cta { margin-top: auto; padding-top: 4px; }
+  .price-cta .btn { width: 100%; }
+  .price-cta .btn.disabled { cursor: not-allowed; opacity: 0.55; }
+  .price-cta .btn-secondary { background: #fff; }
+  .price-cta .note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
+
+  .waitlist {
+    max-width: 460px; margin: 32px auto 0; padding: 20px; background: var(--bg-cream); border: 1px dashed var(--border-strong); border-radius: 14px;
+    text-align: center;
+  }
+  .waitlist h3 { font-family: var(--serif); font-size: 20px; margin: 0 0 8px; }
+  .waitlist p { color: var(--ink-3); font-size: 13px; margin: 0 0 14px; }
+  .waitlist form { display: flex; gap: 8px; }
+  .waitlist input[type=email] {
+    flex: 1; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px;
+    font-family: inherit; font-size: 14px; background: #fff;
+  }
+  .waitlist input[type=email]:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 2px rgba(17,24,39,0.08); }
+
+  .faq-lite { max-width: 780px; margin: 0 auto; padding: 60px 24px 40px; }
+  .faq-lite h2 { font-family: var(--serif); font-size: clamp(26px, 3vw, 34px); font-weight: 600; letter-spacing: -0.02em; text-align: center; margin: 0 0 32px; color: var(--ink-deep); }
+  .faq-lite details { border-top: 1px solid var(--border); padding: 20px 0; }
+  .faq-lite details:last-of-type { border-bottom: 1px solid var(--border); }
+  .faq-lite summary { cursor: pointer; font-size: 17px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; letter-spacing: -0.012em; color: var(--ink-deep); }
+  .faq-lite summary::-webkit-details-marker { display: none; }
+  .faq-lite summary::after { content: "+"; font-size: 22px; font-weight: 300; color: var(--muted); }
+  .faq-lite details[open] summary::after { content: "−"; color: var(--accent); }
+  .faq-lite details[open] summary { color: var(--accent); }
+  .faq-lite details p { margin: 12px 0 4px; color: var(--ink-3); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="price-hero">
+  <div class="wrap-wide">
+    <p class="kicker">Simple pricing</p>
+    <h1>Free to try. Unlimited when you're ready.</h1>
+    <p class="subtitle">Twenty free product checks every month. No credit card. When you want more, one flat price.</p>
+  </div>
+</section>
+
+<section class="price-cards">
+  <div class="price-grid">
+
+    <!-- Free -->
+    <div class="price-card">
+      <div class="plan-name">Free</div>
+      <div class="price">$0<small>/mo</small></div>
+      <div class="price-note">No credit card required.</div>
+      <ul class="features">
+        <li id="free-quota-line">20 checks per month</li>
+        <li>All four indicators on every score</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest scores you disagree with</li>
+        <li class="crossed">Unlimited scoring</li>
+        <li class="crossed">Priority support</li>
+      </ul>
+      <div class="price-cta">
+        <a class="btn btn-secondary" href="#install">Install the extension</a>
+        <div class="note">Free forever, no sign-up required for your first 20 checks.</div>
+      </div>
+    </div>
+
+    <!-- Monthly -->
+    <div class="price-card featured">
+      <span class="badge">Most flexible</span>
+      <div class="plan-name">Monthly</div>
+      <div class="price" id="monthly-price">$4.99<small>/mo</small></div>
+      <div class="price-note">Cancel anytime.</div>
+      <ul class="features">
+        <li><strong>Unlimited</strong> checks — no monthly cap</li>
+        <li>All four indicators on every score</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest scores you disagree with</li>
+        <li>Access on browser + mobile with one account</li>
+        <li>Priority email support</li>
+      </ul>
+      <div class="price-cta">
+        <button class="btn btn-primary" id="subscribe-monthly" data-tier="monthly">Subscribe</button>
+        <div class="note" id="monthly-note">One click to Stripe checkout. Secure, cancel anytime.</div>
+      </div>
+    </div>
+
+    <!-- Yearly -->
+    <div class="price-card">
+      <div class="plan-name">Annual</div>
+      <div class="price" id="yearly-price">$49.99<small>/yr</small></div>
+      <div class="price-note" id="yearly-note">Just <strong>$4.17/month</strong> — 17% off.</div>
+      <ul class="features">
+        <li><strong>Unlimited</strong> checks — no monthly cap</li>
+        <li>All four indicators on every score</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest scores you disagree with</li>
+        <li>Access on browser + mobile with one account</li>
+        <li>Priority email support</li>
+      </ul>
+      <div class="price-cta">
+        <button class="btn btn-primary" id="subscribe-yearly" data-tier="yearly">Subscribe</button>
+        <div class="note">One-time yearly payment. Cancel anytime — remaining time still covered.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Waitlist / coming-soon fallback -->
+  <div class="waitlist" id="waitlist" style="display:none;">
+    <h3>Subscriptions launching soon</h3>
+    <p>Payment isn't quite ready yet. Drop your email and we'll be in touch the moment it goes live — <em>early users get a discount</em>.</p>
+    <form onsubmit="event.preventDefault();alert('Thanks — we&apos;ll let you know when subscriptions open.');">
+      <input type="email" placeholder="you@example.com" required>
+      <button type="submit" class="btn btn-primary" style="padding: 10px 18px;">Notify me</button>
+    </form>
+  </div>
+</section>
+
+<section class="faq-lite">
+  <h2>Common questions.</h2>
+
+  <details>
+    <summary>Do I need to create an account to use the free tier?</summary>
+    <p>No. Install the extension and your first 20 checks per month work anonymously. You only sign in when you want to subscribe or use the mobile app.</p>
+  </details>
+  <details>
+    <summary>What counts as a "check"?</summary>
+    <p>One Amazon product page you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do <em>not</em> count against your monthly quota.</p>
+  </details>
+  <details>
+    <summary>How do I cancel?</summary>
+    <p>Through Stripe's Customer Portal, linked directly from the extension popup and mobile app. Cancel any time; you keep access until the end of the period you already paid for.</p>
+  </details>
+  <details>
+    <summary>Do you offer refunds?</summary>
+    <p>Yes — full refund within 14 days of your first charge, no questions asked. After that, cancel any time; we don't refund partial periods.</p>
+  </details>
+  <details>
+    <summary>What payment methods do you accept?</summary>
+    <p>All major credit and debit cards via Stripe. Apple Pay and Google Pay also work in the Stripe checkout flow.</p>
+  </details>
+  <details>
+    <summary>Family or team pricing?</summary>
+    <p>Not yet. If enough people ask, we'll build it — <a href="/contact.html">get in touch</a> and let us know your use case.</p>
+  </details>
+  <details>
+    <summary>What if I need to switch between monthly and annual?</summary>
+    <p>Switch any time from the Customer Portal. We prorate the credit automatically.</p>
+  </details>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+        <span class="mark">
+          <svg viewBox="0 0 160 160" aria-hidden="true">
+            <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+            <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+            <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+            <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+          </svg>
+        </span>
+        <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+      </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/">Home</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/methodology.html">How it works</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Fetch live pricing from the API and replace the hardcoded values.
+(async () => {
+  try {
+    const r = await fetch("https://api.realproductorigin.com/pricing", { cache: "no-cache" });
+    if (!r.ok) return;
+    const p = await r.json();
+    document.getElementById("free-quota-line").textContent = p.free_tier.checks_per_month + " checks per month";
+    document.getElementById("monthly-price").innerHTML =
+      p.monthly.cost_per_month_display + "<small>/mo</small>";
+    document.getElementById("yearly-price").innerHTML =
+      p.yearly.cost_display + "<small></small>";
+    document.getElementById("yearly-note").innerHTML =
+      "Just <strong>" + p.yearly.cost_per_month_display + "/month</strong> — " + p.yearly.discount_vs_monthly_pct + "% off.";
+
+    if (!p.subscriptions_live) {
+      // Stripe isn't wired yet — show the waitlist card instead of active buttons.
+      document.querySelectorAll("#subscribe-monthly, #subscribe-yearly").forEach(b => {
+        b.classList.add("disabled"); b.disabled = true;
+        b.textContent = "Coming soon";
+      });
+      document.getElementById("monthly-note").textContent = "Payment integration launching soon.";
+      document.getElementById("waitlist").style.display = "block";
+    }
+  } catch (e) { /* keep the hardcoded fallbacks */ }
+})();
+
+// Subscribe click → go to a small "you need to sign in first" flow.
+// The extension deep-links here after the user signs in via magic link.
+async function subscribe(tier) {
+  const params = new URLSearchParams(location.search);
+  const token = params.get("session_token") || localStorage.getItem("rpo_session_token");
+  if (!token) {
+    // Not signed in yet — redirect to a sign-in prompt.
+    location.href = "/subscribe/signin.html?tier=" + encodeURIComponent(tier);
+    return;
+  }
+  try {
+    const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ tier }),
+    });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    location.href = data.checkout_url;
+  } catch (e) {
+    alert("Couldn't start checkout: " + e.message);
+  }
+}
+document.getElementById("subscribe-monthly").addEventListener("click", () => subscribe("monthly"));
+document.getElementById("subscribe-yearly").addEventListener("click", () => subscribe("yearly"));
+</script>
+</body>
+</html>
