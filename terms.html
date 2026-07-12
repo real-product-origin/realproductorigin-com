@@ -33,6 +33,7 @@
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
       <a href="/contact.html">Contact</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
     </nav>
   </div>
 </header>
@@ -187,6 +188,18 @@
   <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
 </footer>
 
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function() {
+  var link = document.getElementById("nav-account-link");
+  if (!link) return;
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      link.textContent = "My account";
+      link.href = "/subscribe/account.html";
+    }
+  } catch (_) {}
+})();
+</script>
 </body>
 </html>

@@ -127,6 +127,7 @@
       <a href="/pricing.html">Pricing</a>
       <a href="/privacy.html">Privacy</a>
       <a href="/contact.html">Contact</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
     </nav>
   </div>
 </header>
@@ -315,6 +316,18 @@
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Nav account link — flip to "My account" when a session token is present.
+(function() {
+  var link = document.getElementById("nav-account-link");
+  if (!link) return;
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      link.textContent = "My account";
+      link.href = "/subscribe/account.html";
+    }
+  } catch (_) {}
+})();
 
 const PLANS = ["basic", "pro", "premium"];
 let billingPeriod = "monthly";

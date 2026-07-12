@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your account — Product Origin Checker</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  main { max-width: 640px; margin: 64px auto 96px; padding: 0 24px; }
+
+  .account-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+  .account-header h1 { font-family: var(--serif); font-size: clamp(24px, 3vw, 30px); font-weight: 600; letter-spacing: -0.02em; margin: 0; color: var(--ink-deep); }
+  .account-header .email { color: var(--ink-3); font-size: 14px; margin-top: 4px; word-break: break-all; }
+  .account-header .signout-mini {
+    background: transparent; border: 1px solid var(--border-strong);
+    color: var(--ink-3); font-family: inherit; font-size: 12px; font-weight: 600;
+    padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
+  }
+  .account-header .signout-mini:hover { color: var(--ink); border-color: var(--ink); background: #fff; }
+
+  .card {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px; margin-bottom: 20px;
+    box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.14);
+  }
+  .card h2 {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 12px;
+  }
+  .card .plan-name {
+    font-family: var(--serif); font-size: 24px; font-weight: 600;
+    color: var(--ink-deep); letter-spacing: -0.01em; margin: 0 0 6px;
+  }
+  .card .plan-meta { color: var(--ink-3); font-size: 14px; line-height: 1.5; margin: 0 0 16px; }
+  .card .plan-meta strong { color: var(--ink-deep); font-weight: 600; }
+  .card .plan-cta { margin-top: 8px; }
+  .card .plan-cta .btn { padding: 10px 18px; font-size: 14px; }
+
+  .access-code-line { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 15px; color: var(--ink-deep); }
+
+  .redeem-row { display: flex; gap: 8px; align-items: stretch; }
+  .redeem-row input[type=text] {
+    flex: 1; min-width: 0;
+    padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: 8px;
+    font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 14px;
+    background: #fff; color: var(--ink); letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .redeem-row input[type=text]:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(17,24,39,0.08); }
+  .redeem-row .btn { padding: 10px 18px; font-size: 14px; white-space: nowrap; }
+
+  .redeem-help { font-size: 12px; color: var(--muted); margin: 10px 0 0; line-height: 1.5; }
+  .redeem-msg { font-size: 13px; margin: 12px 0 0; line-height: 1.5; display: none; }
+  .redeem-msg.error { color: var(--accent); }
+  .redeem-msg.success { color: var(--green); }
+
+  .signout-full { margin-top: 32px; text-align: center; }
+  .signout-full button {
+    background: transparent; border: 0; color: var(--muted); font-family: inherit;
+    font-size: 13px; cursor: pointer; padding: 8px 12px; text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .signout-full button:hover { color: var(--accent); }
+
+  .state-hint { text-align: center; padding: 96px 0; color: var(--muted); font-size: 14px; }
+  .state-error { text-align: center; padding: 48px 0; color: var(--accent); font-size: 14px; }
+  .state-error a { color: var(--ink-3); }
+
+  @media (max-width: 480px) {
+    .redeem-row { flex-direction: column; }
+    .redeem-row .btn { width: 100%; }
+    .account-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+  </div>
+</header>
+
+<main>
+  <div id="loading" class="state-hint">Loading your account…</div>
+
+  <div id="error" class="state-error" style="display:none;">
+    Something went wrong loading your account.<br>
+    <a href="/subscribe/signin.html?return_to=/subscribe/account.html">Try signing in again</a>.
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <div class="account-header">
+      <div>
+        <h1>Your account</h1>
+        <div class="email">Signed in as <strong id="acct-email"></strong></div>
+      </div>
+      <button class="signout-mini" id="signout-top">Sign out</button>
+    </div>
+
+    <div class="card">
+      <h2>Current plan</h2>
+      <div class="plan-name" id="plan-name">—</div>
+      <div class="plan-meta" id="plan-meta"></div>
+      <div class="plan-cta" id="plan-cta"></div>
+    </div>
+
+    <div class="card" id="access-grant-card" style="display:none;">
+      <h2>Access code</h2>
+      <div class="plan-name access-code-line" id="access-code-value">—</div>
+      <div class="plan-meta" id="access-grant-meta"></div>
+    </div>
+
+    <div class="card">
+      <h2>Redeem an access code</h2>
+      <div class="redeem-row">
+        <input type="text" id="redeem-input" placeholder="RPO-XXXX-XXXX" autocomplete="off" spellcheck="false">
+        <button class="btn btn-primary" id="redeem-btn">Redeem</button>
+      </div>
+      <p class="redeem-help">Got a code from a gift, promo, or team allocation? Enter it here to activate the associated plan.</p>
+      <p class="redeem-msg" id="redeem-msg"></p>
+    </div>
+
+    <div class="signout-full">
+      <button id="signout-bottom">Sign out of Real Product Origin</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const API = "https://api.realproductorigin.com";
+const PLAN_LABELS = { free: "Free tier", basic: "Basic", pro: "Pro", premium: "Premium" };
+
+function getToken() {
+  const p = new URLSearchParams(location.search);
+  const fromUrl = p.get("session_token");
+  if (fromUrl) {
+    // Persist a token that arrived via URL so subsequent visits work without the query string.
+    try { localStorage.setItem("rpo_session_token", fromUrl); } catch (_) {}
+    // Strip it from the URL so it doesn't linger in history / referers.
+    const clean = location.origin + location.pathname + location.hash;
+    history.replaceState({}, "", clean);
+    return fromUrl;
+  }
+  try { return localStorage.getItem("rpo_session_token"); } catch (_) { return null; }
+}
+
+function clearToken() {
+  try { localStorage.removeItem("rpo_session_token"); } catch (_) {}
+}
+
+function goSignIn() {
+  location.href = "/subscribe/signin.html?return_to=" + encodeURIComponent("/subscribe/account.html");
+}
+
+function fmtDate(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  } catch (_) { return ""; }
+}
+
+function planLabel(status) {
+  const sub = status.subscription;
+  if (sub && sub.plan) {
+    const name = PLAN_LABELS[sub.plan] || (sub.plan.charAt(0).toUpperCase() + sub.plan.slice(1));
+    const period = sub.billing_period ? " · " + sub.billing_period : "";
+    return name + period;
+  }
+  return PLAN_LABELS[status.plan] || "Free tier";
+}
+
+function renderDashboard(status) {
+  document.getElementById("acct-email").textContent = status.email || "(unknown)";
+  document.getElementById("plan-name").textContent = planLabel(status);
+
+  const meta = document.getElementById("plan-meta");
+  const cta = document.getElementById("plan-cta");
+  meta.innerHTML = "";
+  cta.innerHTML = "";
+
+  const sub = status.subscription;
+  if (sub) {
+    if (sub.cancel_at_period_end) {
+      meta.innerHTML = "Cancels at end of period" +
+        (sub.current_period_end ? " (" + fmtDate(sub.current_period_end) + ")." : ".");
+    } else if (sub.current_period_end) {
+      meta.innerHTML = "Renews " + fmtDate(sub.current_period_end) + ".";
+    } else {
+      meta.textContent = "Active subscription.";
+    }
+    const btn = document.createElement("button");
+    btn.className = "btn btn-primary";
+    btn.textContent = "Manage subscription";
+    btn.addEventListener("click", openPortal);
+    cta.appendChild(btn);
+  } else if (status.plan === "free") {
+    const used = Number(status.checks_used || 0);
+    const quota = Number(status.quota_per_month || 20);
+    const remaining = Math.max(0, quota - used);
+    meta.innerHTML = "<strong>" + quota + " checks per month</strong> · " + remaining + " remaining this month.";
+    const link = document.createElement("a");
+    link.className = "btn btn-primary";
+    link.href = "/pricing.html";
+    link.textContent = "Compare plans";
+    cta.appendChild(link);
+  } else {
+    meta.textContent = "Plan active.";
+  }
+
+  const grant = status.access_grant;
+  if (grant) {
+    document.getElementById("access-grant-card").style.display = "";
+    document.getElementById("access-code-value").textContent = grant.code || "(hidden)";
+    const parts = [];
+    if (grant.plan) {
+      const label = PLAN_LABELS[grant.plan] || grant.plan;
+      parts.push("Grants " + label + " access");
+    }
+    if (grant.expires_at) {
+      parts.push("until " + fmtDate(grant.expires_at));
+    } else {
+      parts.push("with no expiration");
+    }
+    document.getElementById("access-grant-meta").textContent = parts.join(" ") + ".";
+  }
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("error").style.display = "none";
+  document.getElementById("dashboard").style.display = "";
+}
+
+async function loadStatus(token) {
+  const r = await fetch(API + "/subscription/status", {
+    headers: { "Authorization": "Bearer " + token },
+  });
+  if (r.status === 401) {
+    clearToken();
+    goSignIn();
+    return null;
+  }
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+
+async function openPortal() {
+  const token = getToken();
+  if (!token) { goSignIn(); return; }
+  const btn = document.querySelector("#plan-cta .btn");
+  if (btn) { btn.disabled = true; btn.textContent = "Opening portal…"; }
+  try {
+    const r = await fetch(API + "/subscription/portal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+    });
+    if (r.status === 401) { clearToken(); goSignIn(); return; }
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    if (!data.portal_url) throw new Error("No portal URL in response");
+    location.href = data.portal_url;
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.textContent = "Manage subscription"; }
+    alert("Couldn't open subscription portal: " + e.message);
+  }
+}
+
+async function redeemCode() {
+  const token = getToken();
+  if (!token) { goSignIn(); return; }
+  const input = document.getElementById("redeem-input");
+  const btn = document.getElementById("redeem-btn");
+  const msg = document.getElementById("redeem-msg");
+  const code = (input.value || "").trim().toUpperCase();
+  msg.style.display = "none";
+  msg.className = "redeem-msg";
+  if (!code) {
+    msg.textContent = "Enter an access code to redeem.";
+    msg.classList.add("error");
+    msg.style.display = "block";
+    return;
+  }
+  btn.disabled = true;
+  const prevText = btn.textContent;
+  btn.textContent = "Redeeming…";
+  try {
+    const r = await fetch(API + "/access-codes/redeem", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      body: JSON.stringify({ code }),
+    });
+    if (r.status === 401) { clearToken(); goSignIn(); return; }
+    if (r.status === 429) {
+      msg.textContent = "Too many attempts, wait a minute.";
+      msg.classList.add("error");
+      msg.style.display = "block";
+      return;
+    }
+    let body = null;
+    try { body = await r.json(); } catch (_) {}
+    if (r.status === 400) {
+      msg.textContent = (body && body.detail) ? body.detail : "That code couldn't be redeemed.";
+      msg.classList.add("error");
+      msg.style.display = "block";
+      return;
+    }
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    msg.textContent = "Code redeemed. Refreshing your account…";
+    msg.classList.add("success");
+    msg.style.display = "block";
+    setTimeout(() => location.reload(), 900);
+  } catch (e) {
+    msg.textContent = "Something went wrong: " + e.message;
+    msg.classList.add("error");
+    msg.style.display = "block";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prevText;
+  }
+}
+
+async function signOut() {
+  const token = getToken();
+  if (token) {
+    try {
+      await fetch(API + "/auth/logout", {
+        method: "POST",
+        headers: { "Authorization": "Bearer " + token },
+      });
+    } catch (_) { /* still clear locally even if the call fails */ }
+  }
+  clearToken();
+  location.href = "/";
+}
+
+(async function init() {
+  const token = getToken();
+  if (!token) { goSignIn(); return; }
+  try {
+    const status = await loadStatus(token);
+    if (!status) return; // redirect already fired
+    renderDashboard(status);
+    document.getElementById("signout-top").addEventListener("click", signOut);
+    document.getElementById("signout-bottom").addEventListener("click", signOut);
+    document.getElementById("redeem-btn").addEventListener("click", redeemCode);
+    document.getElementById("redeem-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); redeemCode(); }
+    });
+  } catch (e) {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("error").style.display = "";
+  }
+})();
+</script>
+
+</body>
+</html>

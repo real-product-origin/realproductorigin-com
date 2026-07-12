@@ -74,10 +74,34 @@ const params = new URLSearchParams(location.search);
 // New-style: ?plan=basic&billing_period=monthly. Legacy: ?tier=monthly (→ basic monthly).
 const plan = params.get("plan") || (params.get("tier") ? "basic" : "");
 const billingPeriod = params.get("billing_period") || params.get("tier") || "";
-const returnUrl = (plan && billingPeriod)
-  ? location.origin + "/pricing.html?autobuy_plan=" +
-    encodeURIComponent(plan) + "&autobuy_period=" + encodeURIComponent(billingPeriod)
-  : location.origin + "/";
+// Explicit ?return_to= wins over everything. Restricted to same-origin paths so
+// signin links can't be weaponized as open redirects.
+const rawReturnTo = params.get("return_to") || "";
+const safeReturnTo = (rawReturnTo && rawReturnTo.startsWith("/") && !rawReturnTo.startsWith("//"))
+  ? rawReturnTo : "";
+const returnUrl = safeReturnTo
+  ? location.origin + safeReturnTo
+  : ((plan && billingPeriod)
+      ? location.origin + "/pricing.html?autobuy_plan=" +
+        encodeURIComponent(plan) + "&autobuy_period=" + encodeURIComponent(billingPeriod)
+      : location.origin + "/subscribe/account.html");
+
+// Already signed in? Verify the token still works, then jump straight to returnUrl.
+(async function checkExistingSession() {
+  let token = null;
+  try { token = localStorage.getItem("rpo_session_token"); } catch (_) {}
+  if (!token) return;
+  try {
+    const r = await fetch("https://api.realproductorigin.com/subscription/status", {
+      headers: { "Authorization": "Bearer " + token },
+    });
+    if (r.ok) {
+      location.replace(returnUrl);
+    } else if (r.status === 401) {
+      try { localStorage.removeItem("rpo_session_token"); } catch (_) {}
+    }
+  } catch (_) { /* offline — just show the form */ }
+})();
 
 document.getElementById("signin-form").addEventListener("submit", async (e) => {
   e.preventDefault();
