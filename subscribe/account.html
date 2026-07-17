@@ -7,39 +7,95 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-  main { max-width: 640px; margin: 64px auto 96px; padding: 0 24px; }
+  /* ── Layout ─────────────────────────────────────────────────────────────── */
+  main { padding: 0 0 96px; }
+  .acct-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
-  .account-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
-  .account-header h1 { font-family: var(--serif); font-size: clamp(24px, 3vw, 30px); font-weight: 600; letter-spacing: -0.02em; margin: 0; color: var(--ink-deep); }
-  .account-header .email { color: var(--ink-3); font-size: 14px; margin-top: 4px; word-break: break-all; }
-  .account-header .signout-mini {
-    background: transparent; border: 1px solid var(--border-strong);
+  /* ── Hero — cream, serif, plan name in display type ─────────────────────── */
+  .acct-hero {
+    background:
+      linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0 44px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .acct-hero::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border-strong) 50%, transparent 100%);
+    opacity: 0.6;
+  }
+  .acct-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 0 0 14px;
+  }
+  .acct-hero h1 {
+    font-family: var(--serif); font-size: clamp(30px, 4.4vw, 44px);
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.1;
+    margin: 0 0 8px; color: var(--ink-deep);
+  }
+  .acct-hero .email {
+    color: var(--ink-3); font-size: 15px; margin: 0; word-break: break-all;
+  }
+  .acct-hero .email strong { color: var(--ink-deep); font-weight: 600; }
+  .acct-hero .signout-mini {
+    position: absolute; top: 28px; right: 24px;
+    background: rgba(255,255,255,0.7); border: 1px solid var(--border-strong);
     color: var(--ink-3); font-family: inherit; font-size: 12px; font-weight: 600;
-    padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    padding: 7px 13px; border-radius: 8px; cursor: pointer;
+    backdrop-filter: blur(6px);
     transition: background 100ms ease, color 100ms ease, border-color 100ms ease;
   }
-  .account-header .signout-mini:hover { color: var(--ink); border-color: var(--ink); background: #fff; }
+  .acct-hero .signout-mini:hover { color: var(--ink); border-color: var(--ink); background: #fff; }
 
+  /* ── Section eyebrow above each card group ──────────────────────────────── */
+  .section-eyebrow {
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 0 0 10px; padding-left: 4px;
+  }
+  .section-eyebrow.gold { color: var(--gold); }
+  .section-eyebrow.muted { color: var(--muted); }
+
+  /* ── Cards ──────────────────────────────────────────────────────────────── */
   .card {
     background: #fff; border: 1px solid var(--border); border-radius: 14px;
-    padding: 24px; margin-bottom: 20px;
+    padding: 26px; margin: 0 0 28px;
     box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.14);
+    transition: box-shadow 150ms ease, transform 150ms ease;
   }
   .card h2 {
     font-family: var(--sans); font-size: 12px; font-weight: 700;
     letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent);
-    margin: 0 0 12px;
+    margin: 0 0 14px;
   }
   .card .plan-name {
-    font-family: var(--serif); font-size: 24px; font-weight: 600;
-    color: var(--ink-deep); letter-spacing: -0.01em; margin: 0 0 6px;
+    font-family: var(--serif); font-size: 28px; font-weight: 600;
+    color: var(--ink-deep); letter-spacing: -0.015em; margin: 0 0 6px; line-height: 1.15;
   }
-  .card .plan-meta { color: var(--ink-3); font-size: 14px; line-height: 1.5; margin: 0 0 16px; }
+  .card .plan-meta { color: var(--ink-3); font-size: 14px; line-height: 1.55; margin: 0 0 16px; }
   .card .plan-meta strong { color: var(--ink-deep); font-weight: 600; }
-  .card .plan-cta { margin-top: 8px; }
+  .card .plan-cta { margin-top: 10px; }
   .card .plan-cta .btn { padding: 10px 18px; font-size: 14px; }
 
-  .access-code-line { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 15px; color: var(--ink-deep); }
+  /* Highlight the current-plan card with a subtle cream backing */
+  .card.plan-card {
+    background:
+      linear-gradient(180deg, #ffffff 0%, var(--bg-cream) 100%);
+    border-color: var(--border-strong);
+  }
+
+  /* Access-code grant card gets a warm gold accent */
+  .card.grant-card {
+    background: var(--gold-soft);
+    border-color: rgba(165, 132, 74, 0.25);
+  }
+  .card.grant-card h2 { color: var(--gold); }
+
+  .access-code-line { font-family: "SF Mono", "Menlo", "Consolas", monospace; font-size: 16px; color: var(--ink-deep); font-weight: 600; letter-spacing: 0.02em; }
 
   .redeem-row { display: flex; gap: 8px; align-items: stretch; }
   .redeem-row input[type=text] {
@@ -51,27 +107,47 @@
   .redeem-row input[type=text]:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(17,24,39,0.08); }
   .redeem-row .btn { padding: 10px 18px; font-size: 14px; white-space: nowrap; }
 
-  .redeem-help { font-size: 12px; color: var(--muted); margin: 10px 0 0; line-height: 1.5; }
+  .redeem-help { font-size: 12px; color: var(--muted); margin: 12px 0 0; line-height: 1.5; }
   .redeem-msg { font-size: 13px; margin: 12px 0 0; line-height: 1.5; display: none; }
   .redeem-msg.error { color: var(--accent); }
   .redeem-msg.success { color: var(--green); }
 
-  .signout-full { margin-top: 32px; text-align: center; }
-  .signout-full button {
-    background: transparent; border: 0; color: var(--muted); font-family: inherit;
-    font-size: 13px; cursor: pointer; padding: 8px 12px; text-decoration: underline;
-    text-underline-offset: 3px;
+  /* ── Danger zone ────────────────────────────────────────────────────────── */
+  .danger-zone {
+    margin-top: 24px;
+    padding: 22px 26px 20px;
+    background: #fff;
+    border: 1px dashed var(--border-strong);
+    border-radius: 14px;
   }
-  .signout-full button:hover { color: var(--accent); }
+  .danger-zone h3 {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  .danger-zone p {
+    color: var(--muted); font-size: 13px; line-height: 1.55; margin: 0 0 12px;
+  }
+  .danger-zone button {
+    background: transparent; border: 1px solid var(--border-strong); color: var(--ink-3);
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    transition: color 100ms ease, border-color 100ms ease, background 100ms ease;
+  }
+  .danger-zone button:hover { color: var(--accent); border-color: var(--accent); background: #fff; }
 
-  .state-hint { text-align: center; padding: 96px 0; color: var(--muted); font-size: 14px; }
-  .state-error { text-align: center; padding: 48px 0; color: var(--accent); font-size: 14px; }
+  /* ── Loading / error states ─────────────────────────────────────────────── */
+  .state-hint { text-align: center; padding: 96px 24px; color: var(--muted); font-size: 14px; }
+  .state-error { text-align: center; padding: 48px 24px; color: var(--accent); font-size: 14px; }
   .state-error a { color: var(--ink-3); }
 
+  @media (max-width: 640px) {
+    .acct-hero { padding: 44px 0 36px; }
+    .acct-hero .signout-mini { position: static; margin-top: 18px; display: inline-block; }
+  }
   @media (max-width: 480px) {
     .redeem-row { flex-direction: column; }
     .redeem-row .btn { width: 100%; }
-    .account-header { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -92,6 +168,13 @@
       </span>
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
+    <nav>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
   </div>
 </header>
 
@@ -104,39 +187,58 @@
   </div>
 
   <div id="dashboard" style="display:none;">
-    <div class="account-header">
-      <div>
-        <h1>Your account</h1>
-        <div class="email">Signed in as <strong id="acct-email"></strong></div>
+
+    <!-- ── Hero: welcome + current plan headline ─────────────────────────── -->
+    <section class="acct-hero">
+      <div class="acct-wrap">
+        <button class="signout-mini" id="signout-top">Sign out</button>
+        <p class="eyebrow">Your account</p>
+        <h1 id="hero-plan-title">—</h1>
+        <p class="email">Signed in as <strong id="acct-email"></strong></p>
       </div>
-      <button class="signout-mini" id="signout-top">Sign out</button>
-    </div>
+    </section>
 
-    <div class="card">
-      <h2>Current plan</h2>
-      <div class="plan-name" id="plan-name">—</div>
-      <div class="plan-meta" id="plan-meta"></div>
-      <div class="plan-cta" id="plan-cta"></div>
-    </div>
+    <div class="acct-wrap">
 
-    <div class="card" id="access-grant-card" style="display:none;">
-      <h2>Access code</h2>
-      <div class="plan-name access-code-line" id="access-code-value">—</div>
-      <div class="plan-meta" id="access-grant-meta"></div>
-    </div>
-
-    <div class="card">
-      <h2>Redeem an access code</h2>
-      <div class="redeem-row">
-        <input type="text" id="redeem-input" placeholder="RPO-XXXX-XXXX" autocomplete="off" spellcheck="false">
-        <button class="btn btn-primary" id="redeem-btn">Redeem</button>
+      <!-- ── Subscription status ────────────────────────────────────────── -->
+      <p class="section-eyebrow">Subscription</p>
+      <div class="card plan-card">
+        <h2>Current plan</h2>
+        <div class="plan-name" id="plan-name">—</div>
+        <div class="plan-meta" id="plan-meta"></div>
+        <div class="plan-cta" id="plan-cta"></div>
       </div>
-      <p class="redeem-help">Got a code from a gift, promo, or team allocation? Enter it here to activate the associated plan.</p>
-      <p class="redeem-msg" id="redeem-msg"></p>
-    </div>
 
-    <div class="signout-full">
-      <button id="signout-bottom">Sign out of Real Product Origin</button>
+      <!-- ── Active access-code grant (shown only if present) ───────────── -->
+      <div id="access-grant-wrap" style="display:none;">
+        <p class="section-eyebrow gold">Active access code</p>
+        <div class="card grant-card" id="access-grant-card">
+          <h2>Access code</h2>
+          <div class="plan-name access-code-line" id="access-code-value">—</div>
+          <div class="plan-meta" id="access-grant-meta"></div>
+        </div>
+      </div>
+
+      <!-- ── Redeem section ─────────────────────────────────────────────── -->
+      <p class="section-eyebrow">Redeem</p>
+      <div class="card">
+        <h2>Redeem an access code</h2>
+        <div class="redeem-row">
+          <input type="text" id="redeem-input" placeholder="RPO-XXXX-XXXX" autocomplete="off" spellcheck="false">
+          <button class="btn btn-primary" id="redeem-btn">Redeem</button>
+        </div>
+        <p class="redeem-help">Got a code from a gift, promo, or team allocation? Enter it here to activate the associated plan.</p>
+        <p class="redeem-msg" id="redeem-msg"></p>
+      </div>
+
+      <!-- ── Danger zone / sign out ─────────────────────────────────────── -->
+      <p class="section-eyebrow muted">Account</p>
+      <div class="danger-zone">
+        <h3>Sign out</h3>
+        <p>Signs you out of Real Product Origin in this browser. Your subscription and data are unaffected.</p>
+        <button id="signout-bottom">Sign out of Real Product Origin</button>
+      </div>
+
     </div>
   </div>
 </main>
@@ -188,7 +290,13 @@ function planLabel(status) {
 
 function renderDashboard(status) {
   document.getElementById("acct-email").textContent = status.email || "(unknown)";
-  document.getElementById("plan-name").textContent = planLabel(status);
+  var planText = planLabel(status);
+  document.getElementById("plan-name").textContent = planText;
+  var hero = document.getElementById("hero-plan-title");
+  if (hero) {
+    // On the free tier the hero reads as a welcome; on paid plans it names the plan itself.
+    hero.textContent = (status.plan === "free" && !status.subscription) ? "Welcome back." : planText;
+  }
 
   const meta = document.getElementById("plan-meta");
   const cta = document.getElementById("plan-cta");
@@ -226,7 +334,7 @@ function renderDashboard(status) {
 
   const grant = status.access_grant;
   if (grant) {
-    document.getElementById("access-grant-card").style.display = "";
+    document.getElementById("access-grant-wrap").style.display = "";
     document.getElementById("access-code-value").textContent = grant.code || "(hidden)";
     const parts = [];
     if (grant.plan) {
@@ -348,6 +456,18 @@ async function signOut() {
   location.href = "/";
 }
 
+// Nav account link — flip to "My account" when a session token is present.
+(function() {
+  var link = document.getElementById("nav-account-link");
+  if (!link) return;
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      link.textContent = "My account";
+      link.href = "/subscribe/account.html";
+    }
+  } catch (_) {}
+})();
+
 (async function init() {
   const token = getToken();
   if (!token) { goSignIn(); return; }
@@ -366,6 +486,48 @@ async function signOut() {
     document.getElementById("error").style.display = "";
   }
 })();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+        <span class="mark">
+          <svg viewBox="0 0 160 160" aria-hidden="true">
+            <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+            <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+            <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+            <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+            <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+          </svg>
+        </span>
+        <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+      </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/">Home</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/methodology.html">How it works</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>

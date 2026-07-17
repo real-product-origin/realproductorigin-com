@@ -18,11 +18,37 @@
 <link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
-  /* Local touches for this long-read only. Kept intentionally minimal. */
+  /* Page-scoped polish — long-read editorial styling to match home / pricing. */
+
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .w-hero {
+    background:
+      linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 72px 0 60px;
+  }
+  .w-hero-inner { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  .w-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 0 0 16px;
+  }
+  .w-hero h1 {
+    font-family: var(--serif); font-size: clamp(34px, 5vw, 52px);
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.08;
+    margin: 0 0 18px; color: var(--ink-deep);
+  }
+  .w-hero .updated {
+    color: var(--muted); font-size: 13px; margin: 0 0 4px;
+  }
+
+  /* ── Article typographic system ────────────────────────────────────────── */
+  article.w-body { padding: 48px 0 0; }
   article .standfirst {
     font-family: var(--serif);
     font-size: clamp(20px, 2.2vw, 24px);
-    line-height: 1.45;
+    line-height: 1.5;
     color: var(--ink-2);
     font-weight: 500;
     letter-spacing: -0.012em;
@@ -35,22 +61,76 @@
     padding: 0 1px;
   }
   article sup a:hover { text-decoration: underline; }
-  article .sources { font-size: 14px; color: var(--ink-3); }
-  article .sources li { margin: 10px 0; }
-  article .sources li p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
   article .rule {
     border: 0;
     border-top: 1px solid var(--border);
-    margin: 48px 0 32px;
+    margin: 56px 0 40px;
   }
+
+  /* Section eyebrow before each H2 — small colored kicker ("Part 1 / 2 / 3 / 4") */
+  .w-part-eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--accent); margin: 0 0 10px;
+  }
+  .w-part-eyebrow.gold { color: var(--gold); }
+  article h2 {
+    font-family: var(--serif); font-size: clamp(26px, 3.4vw, 34px);
+    font-weight: 600; letter-spacing: -0.02em; color: var(--ink-deep);
+    margin: 0 0 22px; line-height: 1.15;
+  }
+
+  /* ── Alternating cream block for section 3 (the big structural argument) — */
+  .w-emphasis {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 36px 30px;
+    margin: 40px 0;
+  }
+  .w-emphasis h2 { color: var(--ink-deep); margin-top: 0; }
+  .w-emphasis .w-part-eyebrow { margin-top: 0; }
+  @media (max-width: 640px) {
+    .w-emphasis { padding: 28px 24px 24px; }
+  }
+
+  /* ── End CTA ──────────────────────────────────────────────────────────── */
   article .end-cta {
     margin: 48px 0 0;
-    padding: 28px 28px 30px;
-    background: var(--bg-cream);
+    padding: 32px 32px 32px;
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border: 1px solid var(--border);
     border-radius: 14px;
   }
-  article .end-cta h3 { margin-top: 4px; }
+  article .end-cta h3 {
+    font-family: var(--serif); font-size: 24px; font-weight: 600;
+    letter-spacing: -0.015em; color: var(--ink-deep);
+    margin: 4px 0 10px;
+  }
   article .end-cta .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+
+  /* ── Sources panel — clearly typeset, distinct from body ──────────────── */
+  .w-sources-panel {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 32px 28px;
+    margin: 24px 0 40px;
+  }
+  .w-sources-panel > .eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--gold); margin: 0 0 8px;
+  }
+  .w-sources-panel h2 {
+    font-size: clamp(22px, 2.6vw, 28px); margin: 0 0 20px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--border);
+  }
+  article .sources { font-size: 14px; color: var(--ink-3); padding-left: 20px; }
+  article .sources li { margin: 14px 0; }
+  article .sources li p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 </style>
 </head>
 <body>
@@ -74,18 +154,21 @@
       <a href="/methodology.html">Methodology</a>
       <a href="/why.html">Why it matters</a>
       <a href="/pricing.html">Pricing</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/contact.html">Contact</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
     </nav>
   </div>
 </header>
 
-<article class="wrap">
+<section class="w-hero">
+  <div class="w-hero-inner">
+    <p class="eyebrow">Why it matters</p>
+    <h1>Why product-origin transparency matters</h1>
+    <p class="updated">A grounded case, in four parts. Sources listed at the bottom.</p>
+  </div>
+</section>
 
-  <h1>Why product-origin transparency matters</h1>
-  <p class="updated">A grounded case, in four parts. Sources listed at the bottom.</p>
+<article class="wrap w-body">
 
   <p class="standfirst">Every purchase you make on Amazon is, quietly, a vote — for a product, a supply chain, and the polity behind it. Right now the ballot is written in invisible ink. This page is our attempt to explain why the ink should be legible, without hyperbole and with the receipts.</p>
 
@@ -93,6 +176,7 @@
 
   <hr class="rule">
 
+  <p class="w-part-eyebrow">Part 1 · Quality</p>
   <h2>1. Avoid unknowingly buying things that fall apart</h2>
 
   <p>A generation ago, "Made in&nbsp;X" was information you could see on the box before you paid. Online, most of that context evaporates. On a typical Amazon listing you see a brand name, a photo, star ratings, and a price. The <em>Country of Origin</em> field is present maybe half the time; the seller's actual country of registration is buried in a separate page most shoppers never open.</p>
@@ -105,6 +189,7 @@
 
   <hr class="rule">
 
+  <p class="w-part-eyebrow">Part 2 · Authenticity</p>
   <h2>2. Avoid unknowingly buying things that aren't what they say</h2>
 
   <p>The counterfeit problem online is not a rounding error and it is not shrinking. The OECD and the EU Intellectual Property Office estimated the global trade in counterfeit and pirated goods at <strong>USD&nbsp;464&nbsp;billion</strong> in 2019, rising to <strong>USD&nbsp;467&nbsp;billion</strong> in their 2021 dataset — roughly 2.3% of world imports.<sup><a href="#fn-2">2</a></sup> A 2016 report commissioned by the International Trademark Association projected the global counterfeit-and-piracy total could reach USD&nbsp;2.8&nbsp;trillion by 2022 once the digital and services share is included.<sup><a href="#fn-3">3</a></sup> Those are macro numbers; the micro version is a listing on your screen right now that describes itself as something it isn't.</p>
@@ -115,6 +200,8 @@
 
   <hr class="rule">
 
+  <div class="w-emphasis">
+  <p class="w-part-eyebrow">Part 3 · Structural</p>
   <h2>3. The structural problem: why any of this matters at scale</h2>
 
   <p>This is the longest section on the page because the case takes real evidence to make. We want to make it carefully.</p>
@@ -128,9 +215,11 @@
   <p>Robert Spalding, a retired U.S. Air Force brigadier general and former senior defence official at the U.S. embassy in Beijing, made a related argument in book form in <em>Stealth War</em> (2019) and <em>War Without Rules</em> (2022). His thesis, in brief, is that China's economic expansion is best understood not as ordinary market competition but as a coordinated national strategy that treats economics, technology, education, and information as continuous with strategic power.<sup><a href="#fn-11">11</a></sup> A reader can accept the empirical premises of that argument without endorsing every prescription that follows from it.</p>
 
   <p><strong>How we frame this.</strong> The Chinese people are not the subject of this critique. Neither is Chinese manufacturing skill, which is often excellent. The subject is a policy — a specific, documented, state-directed industrial strategy that uses subsidised exports as an instrument. Ordinary workers in Chinese factories are, on any honest reading, closer to the tool than to the beneficiary. The people this strategy needs to keep working are unwitting foreign consumers who cannot see, at the moment of purchase, whose supply chain they are underwriting. Making that visible is not hostility. It is symmetry.</p>
+  </div>
 
   <hr class="rule">
 
+  <p class="w-part-eyebrow">Part 4 · Choice</p>
   <h2>4. Every purchase is a vote you didn't know you were casting</h2>
 
   <p>The fourth reason is the simplest and, we suspect, the one most shoppers already feel without articulating.</p>
@@ -165,6 +254,7 @@
 
   <hr class="rule">
 
+  <div class="w-sources-panel">
   <h2>Sources</h2>
 
   <ol class="sources">
@@ -219,6 +309,7 @@
   </ol>
 
   <p style="margin-top: 36px; font-size: 14px; color: var(--muted);">If you spot a factual error on this page, please <a href="/contact.html">tell us</a>. We correct in public.</p>
+  </div>
 
 </article>
 

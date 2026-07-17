@@ -9,6 +9,85 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* Page-scoped polish — matches the editorial rhythm on home + pricing. */
+
+  /* ── Hero ──────────────────────────────────────────────────────────────── */
+  .m-hero {
+    background:
+      linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 72px 0 60px;
+    position: relative;
+  }
+  .m-hero-inner { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+  .m-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 0 0 16px;
+  }
+  .m-hero h1 {
+    font-family: var(--serif); font-size: clamp(34px, 5vw, 52px);
+    font-weight: 600; letter-spacing: -0.02em; line-height: 1.08;
+    margin: 0 0 18px; color: var(--ink-deep);
+  }
+  .m-hero .standfirst {
+    font-family: var(--serif); font-size: clamp(19px, 2vw, 22px);
+    line-height: 1.5; color: var(--ink-2);
+    font-weight: 500; letter-spacing: -0.008em;
+    margin: 0;
+  }
+
+  /* ── Article — keep existing wrap width, adjust spacing ────────────────── */
+  article.m-body { padding: 56px 0 40px; }
+  article.m-body .updated { display: none; } /* Moved into hero as standfirst */
+
+  /* ── The three "signature" methodology sections styled as panels ───────── */
+  .m-panel {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px 24px;
+    margin: 32px 0;
+    position: relative;
+  }
+  .m-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 24px; right: 24px;
+    height: 2px; background: var(--accent);
+    opacity: 0.2; border-radius: 2px;
+  }
+  .m-panel > .m-eyebrow {
+    display: inline-block;
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 6px 0 8px;
+  }
+  .m-panel > h3 {
+    font-family: var(--serif); font-size: 24px; font-weight: 600;
+    letter-spacing: -0.015em; color: var(--ink-deep);
+    margin: 0 0 14px !important;
+  }
+  .m-panel > p { color: var(--ink-2); }
+  .m-panel > ul { margin: 8px 0 4px; }
+
+  /* Section H2 rhythm — display serif with gold rule underneath */
+  article.m-body h2 {
+    font-family: var(--serif); font-size: clamp(24px, 3vw, 30px);
+    font-weight: 600; letter-spacing: -0.02em; color: var(--ink-deep);
+    margin: 48px 0 12px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+
+  /* Numbered subsections read as list items — tint the number */
+  article.m-body h3 {
+    font-family: var(--serif); font-size: 22px; font-weight: 600;
+    letter-spacing: -0.015em; color: var(--ink-deep);
+    margin: 28px 0 10px;
+  }
+</style>
 </head>
 <body>
 
@@ -31,17 +110,21 @@
       <a href="/methodology.html">Methodology</a>
       <a href="/why.html">Why it matters</a>
       <a href="/pricing.html">Pricing</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/contact.html">Contact</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
     </nav>
   </div>
 </header>
 
-<article class="wrap">
-  <h1>How we figure out where a product is really from</h1>
-  <p class="updated">A plain-English guide to how Product Origin Checker scores products.</p>
+<section class="m-hero">
+  <div class="m-hero-inner">
+    <p class="eyebrow">Methodology</p>
+    <h1>How we figure out where a product is really from.</h1>
+    <p class="standfirst">A plain-English guide to how Product Origin Checker scores products.</p>
+  </div>
+</section>
+
+<article class="wrap m-body">
 
   <p>Every score we publish answers four questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, who's actually <strong>selling</strong> it (the retailer transacting with you), and where the <strong>money ultimately goes</strong> (the brand parent that captures the profit). This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
 
