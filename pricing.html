@@ -407,19 +407,25 @@ document.getElementById("btn-yearly").addEventListener("click", () => renderPric
   } catch (e) { /* keep the hardcoded fallbacks */ }
 })();
 
-// Subscribe click → sign-in flow if needed, then Stripe checkout.
+// Subscribe click → straight to Stripe Checkout, no sign-in gate.
+//
+// If the visitor already has a session token (extension user, or someone
+// who signed in earlier), we pass Bearer so the sub is pre-associated
+// with their user + Stripe customer. Otherwise the request is anonymous —
+// Stripe Checkout collects the email itself and our webhook + the
+// /session-status polling on the success page provision the account.
+// Rationale: pay-first has the lowest checkout-abandonment risk (Baymard
+// research + Stripe's own guidance), and magic-link auth means returning
+// users don't need a password to reclaim the account.
 async function subscribe(plan) {
   const params = new URLSearchParams(location.search);
   const token = params.get("session_token") || localStorage.getItem("rpo_session_token");
-  if (!token) {
-    const q = new URLSearchParams({ plan, billing_period: billingPeriod });
-    location.href = "/subscribe/signin.html?" + q.toString();
-    return;
-  }
+  const headers = { "Content-Type": "application/json" };
+  if (token) headers["Authorization"] = "Bearer " + token;
   try {
     const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+      headers,
       body: JSON.stringify({ plan, billing_period: billingPeriod }),
     });
     if (!r.ok) throw new Error("HTTP " + r.status);

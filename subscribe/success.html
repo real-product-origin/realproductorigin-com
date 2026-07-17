@@ -7,14 +7,39 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/styles.css">
 <style>
-  main { max-width: 560px; margin: 96px auto; padding: 0 24px; text-align: center; }
-  .ok { font-family: var(--serif); font-size: 72px; color: var(--green); line-height: 1; margin: 0 0 16px; font-variation-settings: "opsz" 96; }
-  h1 { font-family: var(--serif); font-size: clamp(28px, 3.4vw, 40px); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep); }
-  p { color: var(--ink-3); font-size: 16px; line-height: 1.55; margin: 0 0 16px; }
-  .next-steps { background: var(--bg-cream); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 32px auto 0; text-align: left; max-width: 460px; }
-  .next-steps h3 { font-family: var(--serif); font-size: 18px; margin: 0 0 12px; }
-  .next-steps ol { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 14px; line-height: 1.65; }
-  .cta-row { margin-top: 28px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  main { max-width: 640px; margin: 64px auto; padding: 0 24px; }
+  .status-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; text-align: center; box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.15); }
+  .status-card.active { border-color: #86efac; background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 60%); }
+  .status-card.error { border-color: #fecaca; background: #fef2f2; }
+  .ok { font-family: var(--serif); font-size: 64px; color: var(--green); line-height: 1; margin: 0 0 8px; }
+  .spinner { display: inline-block; width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: var(--ink-3); border-radius: 50%; animation: spin 0.9s linear infinite; margin: 8px 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 { font-family: var(--serif); font-size: clamp(24px, 3vw, 32px); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep); }
+  .lead { color: var(--ink-3); font-size: 15px; line-height: 1.55; margin: 0 0 12px; }
+
+  .handoff-section { margin: 32px 0 0; text-align: left; display: none; }
+  .handoff-section.shown { display: block; }
+  .handoff-section h3 { font-family: var(--serif); font-size: 16px; margin: 24px 0 6px; color: var(--ink-deep); }
+  .handoff-section p { color: var(--ink-3); font-size: 13px; line-height: 1.55; margin: 0 0 8px; }
+  .ext-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+  .ext-status.detected { background: #dcfce7; color: #14532d; }
+  .ext-status.not-detected { background: #fef3c7; color: #78350f; }
+
+  .token-block-wrap { position: relative; background: #f9fafb; border: 1px solid var(--border-strong); border-radius: 8px; padding: 12px 12px 12px 12px; margin-top: 8px; }
+  .token-block { font-family: ui-monospace, Menlo, monospace; font-size: 11px; word-break: break-all; user-select: all; -webkit-user-select: all; color: var(--ink); padding-right: 88px; line-height: 1.5; }
+  .copy-btn { position: absolute; top: 8px; right: 8px; padding: 6px 12px; background: var(--ink); color: #fff; border: 0; border-radius: 6px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .copy-btn:hover { opacity: 0.9; }
+  .copy-btn.copied { background: var(--green); }
+
+  .cta-row { margin-top: 32px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .install-cta { margin-top: 20px; padding: 14px 16px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 10px; color: #0c4a6e; font-size: 13px; line-height: 1.5; }
+  .install-cta strong { color: #0c4a6e; }
+  .install-cta a { color: #0369a1; font-weight: 600; }
+
+  .subscription-details { background: #fafaf9; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-top: 24px; text-align: left; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+  .subscription-details b { color: var(--ink-deep); }
+
+  .fallback-timer { color: var(--muted); font-size: 12px; margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -38,34 +63,260 @@
 </header>
 
 <main>
-  <div class="ok">✓</div>
-  <h1>You're subscribed. Thank you.</h1>
-  <p>Your Product Origin Checker subscription is active. You'll receive a receipt at the email you used at checkout.</p>
-
-  <div class="next-steps">
-    <h3>What happens now</h3>
-    <ol>
-      <li><strong>Extension</strong>: your next Amazon product page will show a real score with no free-tier counter — no reload needed.</li>
-      <li><strong>Mobile app</strong>: sign in with the same email to unlock unlimited scoring across your phone.</li>
-      <li><strong>Manage your subscription</strong>: cancel, update your card, or switch monthly ↔ annual from the extension popup at any time.</li>
-    </ol>
+  <!-- Processing state (default) -->
+  <div class="status-card" id="state-processing">
+    <div class="spinner" role="status" aria-label="Loading"></div>
+    <h1>Payment received. Setting up your subscription…</h1>
+    <p class="lead">This usually takes a couple of seconds. Please don't close the tab.</p>
+    <p class="fallback-timer" id="timer-note"></p>
   </div>
 
-  <div class="cta-row">
-    <a class="btn btn-secondary" href="/">Back to home</a>
-    <a class="btn btn-primary" href="/methodology.html">Read the methodology</a>
+  <!-- Active state (revealed once /session-status returns active) -->
+  <div class="status-card active" id="state-active" style="display: none;">
+    <div class="ok">✓</div>
+    <h1>You're subscribed. Welcome.</h1>
+    <p class="lead"><strong id="active-email"></strong> — <span id="active-plan"></span></p>
+
+    <div class="subscription-details" id="active-details">
+      <div><b>Plan:</b> <span id="detail-plan"></span></div>
+      <div><b>Billing:</b> <span id="detail-billing"></span></div>
+      <div><b>Next renewal:</b> <span id="detail-renewal"></span></div>
+    </div>
+
+    <div class="handoff-section shown" id="handoff-section">
+      <h3>Extension activation</h3>
+      <p>Status: <span id="ext-status" class="ext-status not-detected">⏳ Checking…</span></p>
+      <p id="ext-detected-msg" style="display: none; color: var(--green);">
+        ✓ Extension detected and signed in. You're all set — head over to any Amazon product page.
+      </p>
+      <p id="ext-not-detected-msg" style="display: none;">
+        We haven't detected the extension in this browser. Two ways to activate:
+      </p>
+
+      <div id="fallback-token-block" style="display: none;">
+        <h3>1. Paste session token in Extension Settings</h3>
+        <p>Open the Real Product Origin extension → click the ⚙ Settings icon → click <em>Paste session token</em> → paste this value:</p>
+        <div class="token-block-wrap">
+          <div class="token-block" id="token-block"></div>
+          <button type="button" class="copy-btn" id="copy-btn">Copy</button>
+        </div>
+
+        <h3>2. Or click the sign-in link in your email</h3>
+        <p>We also sent a one-click sign-in link to <b id="email-repeat"></b>. If you're using the extension in a different browser, click the link there.</p>
+
+        <div class="install-cta">
+          <strong>Haven't installed the extension yet?</strong><br>
+          <a href="https://chromewebstore.google.com/detail/real-product-origin" target="_blank" rel="noopener">Install Real Product Origin from the Chrome Web Store →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-secondary" href="/subscribe/account.html">Manage subscription</a>
+      <a class="btn btn-primary" href="/">Done</a>
+    </div>
+  </div>
+
+  <!-- Error state (shown if polling times out or session_id is bad) -->
+  <div class="status-card error" id="state-error" style="display: none;">
+    <div style="font-size: 48px; margin-bottom: 8px;">⚠</div>
+    <h1>Setup is taking longer than expected.</h1>
+    <p class="lead" id="error-message">
+      Your payment succeeded, but we're still finishing the account setup. Check your email — we'll send a sign-in link within a couple of minutes.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-secondary" href="/subscribe/account.html">Go to my account</a>
+      <a class="btn btn-primary" href="mailto:support@realproductorigin.com">Contact support</a>
+    </div>
   </div>
 </main>
 
 <script>
-// If the extension opened this tab, notify it that checkout completed
-// so it can refresh subscription status without a manual page reload.
-try {
-  const payload = { type: "rpo:subscribe:success" };
-  if (window.opener) window.opener.postMessage(payload, "*");
-} catch (_) {}
-// Auto-close after a short delay if this looks like a companion tab.
-setTimeout(() => { try { if (window.opener) window.close(); } catch (_) {} }, 4000);
+const API_BASE = "https://api.realproductorigin.com";
+const CWS_URL = "https://chromewebstore.google.com/detail/real-product-origin";
+
+const params = new URLSearchParams(location.search);
+const sessionId = params.get("session_id") || "";
+
+// Elements we mutate on state transitions.
+const el = {
+  processing: document.getElementById("state-processing"),
+  active: document.getElementById("state-active"),
+  error: document.getElementById("state-error"),
+  errorMsg: document.getElementById("error-message"),
+  timerNote: document.getElementById("timer-note"),
+  activeEmail: document.getElementById("active-email"),
+  activePlan: document.getElementById("active-plan"),
+  detailPlan: document.getElementById("detail-plan"),
+  detailBilling: document.getElementById("detail-billing"),
+  detailRenewal: document.getElementById("detail-renewal"),
+  extStatus: document.getElementById("ext-status"),
+  extDetectedMsg: document.getElementById("ext-detected-msg"),
+  extNotDetectedMsg: document.getElementById("ext-not-detected-msg"),
+  fallbackBlock: document.getElementById("fallback-token-block"),
+  tokenBlock: document.getElementById("token-block"),
+  emailRepeat: document.getElementById("email-repeat"),
+  copyBtn: document.getElementById("copy-btn"),
+};
+
+function showState(name) {
+  el.processing.style.display = name === "processing" ? "" : "none";
+  el.active.style.display = name === "active" ? "" : "none";
+  el.error.style.display = name === "error" ? "" : "none";
+}
+
+// If someone hit success.html without a session_id, fall through to
+// the error card (probably a stale bookmark or manual URL entry).
+if (!sessionId) {
+  showState("error");
+  el.errorMsg.textContent = (
+    "We couldn't find a Stripe session in the URL. If you just completed " +
+    "payment, check your email for the sign-in link — that's the reliable path."
+  );
+}
+
+// Poll /subscription/session-status every 2s. Give up after 30s and
+// route the user to the "check your email" fallback.
+const MAX_TICKS = 15;
+let ticks = 0;
+let pollTimer = null;
+
+async function poll() {
+  ticks += 1;
+  try {
+    const r = await fetch(
+      API_BASE + "/subscription/session-status?session_id=" + encodeURIComponent(sessionId),
+    );
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    if (data.status === "active") {
+      clearInterval(pollTimer);
+      handleActive(data);
+      return;
+    }
+    if (data.status === "not_found") {
+      clearInterval(pollTimer);
+      showState("error");
+      el.errorMsg.textContent = (
+        "This checkout session couldn't be found. If you just completed " +
+        "payment, check your email — the sign-in link works even if this page doesn't."
+      );
+      return;
+    }
+    // "processing" — keep polling
+    el.timerNote.textContent = "Still setting up… (" + ticks + "s)";
+  } catch (e) {
+    console.warn("session-status poll failed:", e);
+    el.timerNote.textContent = "Retrying…";
+  }
+  if (ticks >= MAX_TICKS) {
+    clearInterval(pollTimer);
+    showState("error");
+  }
+}
+
+function handleActive(data) {
+  // 1. Stash the session token in localStorage under BOTH keys so that:
+  //    - Marketing pages (rpo_session_token, raw string) find it
+  //    - Extension's auth_sync.js content script (rpo_session, JSON) picks it up
+  try {
+    localStorage.setItem("rpo_session_token", data.session_token);
+    if (data.session_expires) {
+      localStorage.setItem("rpo_session_expires", data.session_expires);
+    }
+    const authSyncPayload = {
+      type: "rpo:auth:success",
+      session_token: data.session_token,
+      expires_at: data.session_expires,
+      email: data.email,
+    };
+    localStorage.setItem("rpo_session", JSON.stringify(authSyncPayload));
+  } catch (_) {}
+
+  // 2. Populate the visible UI.
+  el.activeEmail.textContent = data.email || "";
+  const planLabel = ({basic: "Basic", pro: "Pro", premium: "Premium"})[data.plan] || data.plan || "";
+  const periodLabel = data.billing_period === "yearly" ? "yearly" : "monthly";
+  el.activePlan.textContent = planLabel + " · " + periodLabel;
+  el.detailPlan.textContent = planLabel;
+  el.detailBilling.textContent = periodLabel;
+  el.detailRenewal.textContent = data.current_period_end
+    ? new Date(data.current_period_end).toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric"})
+    : "—";
+  el.tokenBlock.textContent = data.session_token;
+  el.emailRepeat.textContent = data.email || "";
+
+  showState("active");
+
+  // 3. Watch for the extension's auth_sync.js pickup. When it consumes
+  //    rpo_session, it removes the key — so if we started with the key
+  //    present and see it disappear within ~5s, the extension is
+  //    installed and has picked up the sign-in.
+  detectExtensionPickup();
+
+  // 4. Notify any opener (e.g. extension checkout tab) so it can refresh.
+  try {
+    if (window.opener) {
+      window.opener.postMessage({type: "rpo:subscribe:success",
+                                 session_token: data.session_token,
+                                 email: data.email}, "*");
+    }
+  } catch (_) {}
+}
+
+function detectExtensionPickup() {
+  let elapsedMs = 0;
+  const iv = setInterval(function () {
+    elapsedMs += 250;
+    const still = localStorage.getItem("rpo_session");
+    if (!still) {
+      // Extension's auth_sync consumed it → we're paired.
+      clearInterval(iv);
+      el.extStatus.className = "ext-status detected";
+      el.extStatus.textContent = "✓ Detected & signed in";
+      el.extDetectedMsg.style.display = "block";
+      el.extNotDetectedMsg.style.display = "none";
+      el.fallbackBlock.style.display = "none";
+      return;
+    }
+    if (elapsedMs >= 5000) {
+      // Extension didn't pick it up. Show the fallback path.
+      clearInterval(iv);
+      el.extStatus.className = "ext-status not-detected";
+      el.extStatus.textContent = "Not detected in this browser";
+      el.extDetectedMsg.style.display = "none";
+      el.extNotDetectedMsg.style.display = "block";
+      el.fallbackBlock.style.display = "block";
+    }
+  }, 250);
+}
+
+// Copy-token button.
+el.copyBtn.addEventListener("click", function () {
+  const t = el.tokenBlock.textContent.trim();
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject())
+    .then(function () {
+      el.copyBtn.textContent = "Copied ✓";
+      el.copyBtn.classList.add("copied");
+      setTimeout(function () {
+        el.copyBtn.textContent = "Copy";
+        el.copyBtn.classList.remove("copied");
+      }, 2000);
+    })
+    .catch(function () {
+      const range = document.createRange();
+      range.selectNodeContents(el.tokenBlock);
+      const s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(range);
+    });
+});
+
+// Kick off polling immediately + every 2 seconds thereafter.
+if (sessionId) {
+  poll();
+  pollTimer = setInterval(poll, 2000);
+}
 </script>
 </body>
 </html>
