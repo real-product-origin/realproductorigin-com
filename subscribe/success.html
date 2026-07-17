@@ -84,30 +84,50 @@
     </div>
 
     <div class="handoff-section shown" id="handoff-section">
-      <h3>Extension activation</h3>
-      <p>Status: <span id="ext-status" class="ext-status not-detected">⏳ Checking…</span></p>
-      <p id="ext-detected-msg" style="display: none; color: var(--green);">
-        ✓ Extension detected and signed in. You're all set — head over to any Amazon product page.
-      </p>
-      <p id="ext-not-detected-msg" style="display: none;">
-        We haven't detected the extension in this browser. Two ways to activate:
-      </p>
+      <!-- Extension is installed here and picked up the sign-in — big green tick, nothing else needed. -->
+      <div id="ext-detected-block" style="display: none;">
+        <div style="background: #f0fdf4; border: 1px solid #86efac; color: #14532d; padding: 14px 18px; border-radius: 10px; margin-top: 24px; text-align: center; font-size: 14px;">
+          <strong>✓ Extension activated in this browser.</strong><br>
+          <span style="font-size: 13px; color: #166534;">You're all set — head to any Amazon product page to see origin scores.</span>
+        </div>
+      </div>
 
-      <div id="fallback-token-block" style="display: none;">
-        <h3>1. Paste session token in Extension Settings</h3>
-        <p>Open the Real Product Origin extension → click the ⚙ Settings icon → click <em>Paste session token</em> → paste this value:</p>
-        <div class="token-block-wrap">
-          <div class="token-block" id="token-block"></div>
-          <button type="button" class="copy-btn" id="copy-btn">Copy</button>
+      <!-- Extension not detected — friendly install CTA is the primary path. -->
+      <div id="ext-not-detected-block" style="display: none;">
+        <div class="install-cta" style="text-align: center; padding: 20px 24px; margin-top: 24px;">
+          <p style="margin: 0 0 4px; font-size: 15px; color: #0c4a6e;"><strong>One more step: install the extension.</strong></p>
+          <p style="margin: 0 0 14px; font-size: 13px; color: #075985;">Your subscription is active — you just need the Chrome extension to see origin scores on Amazon.</p>
+          <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/real-product-origin" target="_blank" rel="noopener" style="text-decoration: none;">Install from Chrome Web Store →</a>
+          <p style="margin: 12px 0 0; font-size: 12px; color: #075985;">
+            Once installed, open the extension and click <b>Sign in</b>. Or check your inbox for our sign-in link.
+          </p>
         </div>
 
-        <h3>2. Or click the sign-in link in your email</h3>
-        <p>We also sent a one-click sign-in link to <b id="email-repeat"></b>. If you're using the extension in a different browser, click the link there.</p>
+        <!-- Advanced fallback tucked into an expandable. Most buyers never need this. -->
+        <details style="margin-top: 20px;">
+          <summary style="cursor: pointer; font-size: 13px; color: var(--ink-3); user-select: none;">
+            Already have the extension in another browser? Sign in there instead.
+          </summary>
+          <div style="margin-top: 12px; padding: 14px 16px; background: #fafaf9; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; line-height: 1.55; color: var(--ink-2);">
+            <p style="margin: 0 0 8px;">Two options:</p>
+            <p style="margin: 0 0 8px;">
+              <b>Option A:</b> Open the sign-in email we sent to <b id="email-repeat"></b> — clicking the link there will sign you into whichever browser you open it in.
+            </p>
+            <p style="margin: 0 0 8px;">
+              <b>Option B:</b> Copy the session token below, open the extension → ⚙ Settings → paste it in.
+            </p>
+            <div class="token-block-wrap" style="margin-top: 10px;">
+              <div class="token-block" id="token-block"></div>
+              <button type="button" class="copy-btn" id="copy-btn">Copy</button>
+            </div>
+            <p style="margin: 8px 0 0; font-size: 11px; color: var(--muted);">Treat the token like a password. Valid for 30 days.</p>
+          </div>
+        </details>
+      </div>
 
-        <div class="install-cta">
-          <strong>Haven't installed the extension yet?</strong><br>
-          <a href="https://chromewebstore.google.com/detail/real-product-origin" target="_blank" rel="noopener">Install Real Product Origin from the Chrome Web Store →</a>
-        </div>
+      <!-- Loading state — briefly shown while we check for extension pickup. -->
+      <div id="ext-checking-block" style="text-align: center; margin-top: 24px; color: var(--muted); font-size: 13px;">
+        Checking for the extension…
       </div>
     </div>
 
@@ -150,10 +170,9 @@ const el = {
   detailPlan: document.getElementById("detail-plan"),
   detailBilling: document.getElementById("detail-billing"),
   detailRenewal: document.getElementById("detail-renewal"),
-  extStatus: document.getElementById("ext-status"),
-  extDetectedMsg: document.getElementById("ext-detected-msg"),
-  extNotDetectedMsg: document.getElementById("ext-not-detected-msg"),
-  fallbackBlock: document.getElementById("fallback-token-block"),
+  extCheckingBlock: document.getElementById("ext-checking-block"),
+  extDetectedBlock: document.getElementById("ext-detected-block"),
+  extNotDetectedBlock: document.getElementById("ext-not-detected-block"),
   tokenBlock: document.getElementById("token-block"),
   emailRepeat: document.getElementById("email-repeat"),
   copyBtn: document.getElementById("copy-btn"),
@@ -272,21 +291,17 @@ function detectExtensionPickup() {
     if (!still) {
       // Extension's auth_sync consumed it → we're paired.
       clearInterval(iv);
-      el.extStatus.className = "ext-status detected";
-      el.extStatus.textContent = "✓ Detected & signed in";
-      el.extDetectedMsg.style.display = "block";
-      el.extNotDetectedMsg.style.display = "none";
-      el.fallbackBlock.style.display = "none";
+      el.extCheckingBlock.style.display = "none";
+      el.extDetectedBlock.style.display = "block";
+      el.extNotDetectedBlock.style.display = "none";
       return;
     }
     if (elapsedMs >= 5000) {
-      // Extension didn't pick it up. Show the fallback path.
+      // Extension didn't pick it up. Show the install CTA + fallback.
       clearInterval(iv);
-      el.extStatus.className = "ext-status not-detected";
-      el.extStatus.textContent = "Not detected in this browser";
-      el.extDetectedMsg.style.display = "none";
-      el.extNotDetectedMsg.style.display = "block";
-      el.fallbackBlock.style.display = "block";
+      el.extCheckingBlock.style.display = "none";
+      el.extDetectedBlock.style.display = "none";
+      el.extNotDetectedBlock.style.display = "block";
     }
   }, 250);
 }
