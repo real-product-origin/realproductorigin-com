@@ -433,6 +433,31 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
   btn.addEventListener("click", () => subscribe(btn.dataset.plan));
 });
 
+// If we arrived with ?session_token=... in the URL — e.g. bounced here
+// straight after clicking a magic-link email, or handed off by the
+// extension — stash it in localStorage so subscribe() (and future
+// visits) find it. Then scrub the token from the URL so it doesn't
+// linger in the address bar / browser history / referer headers.
+(function stashSessionTokenFromUrl() {
+  const p = new URLSearchParams(location.search);
+  const t = p.get("session_token");
+  const exp = p.get("session_expires");
+  if (t) {
+    try {
+      localStorage.setItem("rpo_session_token", t);
+      if (exp) localStorage.setItem("rpo_session_expires", exp);
+    } catch (_) {}
+    // Scrub session_token + session_expires from the URL.
+    p.delete("session_token");
+    p.delete("session_expires");
+    const remaining = p.toString();
+    history.replaceState(
+      null, "",
+      location.pathname + (remaining ? "?" + remaining : "") + location.hash,
+    );
+  }
+})();
+
 // Autobuy — arriving from signin.html with a valid session, kick off checkout.
 (function handleAutobuy() {
   const p = new URLSearchParams(location.search);
