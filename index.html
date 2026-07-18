@@ -291,7 +291,10 @@
   <div class="wrap-wide" style="text-align: center;">
     <p class="eyebrow">See it in action</p>
     <h2 style="margin-bottom: 24px;">Sixty seconds is all it takes.</h2>
-    <div style="
+
+    <!-- Desktop / tablet: 16:9 explainer. Hidden on mobile so we don't
+         pay the iframe-load cost when the mobile Short is what shows. -->
+    <div class="rpo-video rpo-video-desktop" style="
       position: relative;
       max-width: 900px;
       margin: 0 auto;
@@ -311,6 +314,39 @@
         style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
       ></iframe>
     </div>
+
+    <!-- Mobile only: vertical YouTube Short (9:16). Hidden on desktop
+         so we don't load a second iframe on wide viewports. -->
+    <div class="rpo-video rpo-video-mobile" style="
+      position: relative;
+      max-width: 340px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.35);
+      background: #000;
+      display: none;
+    ">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/duT8tPRa5f8?rel=0"
+        title="Real Product Origin — mobile overview"
+        loading="lazy"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+      ></iframe>
+    </div>
+
+    <style>
+      /* Swap desktop 16:9 for the vertical Short on narrow viewports.
+         720px matches the existing site's mobile breakpoint. */
+      @media (max-width: 720px) {
+        .rpo-video-desktop { display: none !important; }
+        .rpo-video-mobile  { display: block !important; }
+      }
+    </style>
   </div>
 </section>
 
