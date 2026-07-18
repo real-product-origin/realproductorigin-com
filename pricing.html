@@ -30,7 +30,7 @@
     {
       "@type": "Product",
       "name": "Real Product Origin — Basic subscription",
-      "description": "Unlimited monthly product-origin checks on Amazon. No sources or contest access.",
+      "description": "Unlimited monthly product-origin checks on the online retailers we support (currently Amazon; more coming). No sources or contest access.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
@@ -118,7 +118,7 @@
           "name": "What counts as a \"check\"?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "One Amazon product page you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do not count against your monthly quota."
+            "text": "One product page on a supported retailer (currently Amazon) you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do not count against your monthly quota."
           }
         },
         {
@@ -134,7 +134,15 @@
           "name": "What's included in the mobile app on Premium?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on Amazon. The mobile app requires a Premium subscription."
+            "text": "Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The mobile app requires a Premium subscription."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which online retailers do you support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Currently Amazon — Amazon.com, Amazon.co.uk, Amazon.de, and other regional Amazon sites. Walmart, Target, eBay, and Etsy are on the roadmap. Tell us which one you want us to build next: https://realproductorigin.com/contact?topic=retailer-request"
           }
         },
         {
@@ -412,6 +420,28 @@
       <button type="submit" class="btn btn-primary" style="padding: 10px 18px;">Notify me</button>
     </form>
   </div>
+
+  <p style="max-width: 720px; margin: 24px auto 0; padding: 0 24px; text-align: center; font-size: 13px; color: var(--muted); line-height: 1.6;">
+    A portion of every subscription goes to human-rights work in China and around the world.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RETAILERS CALLOUT
+     ═════════════════════════════════════════════════════════════════════ -->
+
+<section aria-labelledby="retailers-heading-p" style="padding: 20px 0 40px;">
+  <div class="wrap-wide">
+    <div style="max-width: 780px; margin: 0 auto; padding: 28px 24px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-cream); text-align: center;">
+      <p class="eyebrow" id="retailers-heading-p" style="display:inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.13em; color: var(--accent); margin: 0 0 10px;">Which retailers?</p>
+      <p style="font-size: 16px; line-height: 1.6; color: var(--ink-2); margin: 0 0 8px;">
+        Today the extension scores product pages on <strong>Amazon</strong> — Amazon.com, Amazon.co.uk, Amazon.de, and other regional Amazon sites. <strong>Walmart, Target, eBay, and Etsy</strong> are on the roadmap.
+      </p>
+      <p style="font-size: 15px; color: var(--ink-3); margin: 0;">
+        <a href="/contact.html?topic=retailer-request">Tell us which one you want us to build next.</a>
+      </p>
+    </div>
+  </div>
 </section>
 
 <section class="faq-lite">
@@ -423,7 +453,11 @@
   </details>
   <details>
     <summary>What counts as a "check"?</summary>
-    <p>One Amazon product page you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do <em>not</em> count against your monthly quota.</p>
+    <p>One product page on a supported retailer (currently Amazon) that you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do <em>not</em> count against your monthly quota.</p>
+  </details>
+  <details id="retailers">
+    <summary>Which online retailers do you support?</summary>
+    <p>Today the extension scores product pages on <strong>Amazon</strong> — Amazon.com, Amazon.co.uk, Amazon.de, and other regional Amazon sites. <strong>Walmart, Target, eBay, and Etsy</strong> are on the roadmap. <a href="/contact.html?topic=retailer-request">Tell us which one you want us to build next.</a></p>
   </details>
   <details>
     <summary>Why hide sources and methodology on the lower tiers?</summary>
@@ -431,7 +465,7 @@
   </details>
   <details>
     <summary>What's included in the mobile app on Premium?</summary>
-    <p>Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on Amazon. The mobile app requires a Premium subscription.</p>
+    <p>Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The mobile app requires a Premium subscription.</p>
   </details>
   <details>
     <summary>How do I upgrade or downgrade?</summary>
@@ -479,6 +513,7 @@
       <a href="/#mobile">Mobile app</a>
       <a href="/methodology.html">How it works</a>
       <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
       <h4>Company</h4>
@@ -493,7 +528,7 @@
       <a href="/refunds.html">Refunds</a>
     </div>
   </div>
-  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.<br><span style="font-size:12px; color: var(--muted); display:inline-block; margin-top:6px;">A portion of proceeds donated to human-rights work in China and around the world.</span></div>
 </footer>
 
 <script>

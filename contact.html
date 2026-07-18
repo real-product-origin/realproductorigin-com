@@ -84,13 +84,48 @@
   <h1>Contact us</h1>
   <p class="updated">We try to respond within two business days.</p>
 
-  <h2>For different needs</h2>
+  <h2>Send us a message</h2>
+
+  <form id="contact-form" method="post" action="mailto:hello@realproductorigin.com" enctype="text/plain" style="max-width: 640px; margin: 0 0 40px; display: grid; gap: 14px;">
+    <label style="display: block;">
+      <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Topic</span>
+      <select id="topic" name="topic" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: #fff; font-family: inherit; font-size: 15px;">
+        <option value="general">General inquiry</option>
+        <option value="retailer-request">I'd like you to add a retailer (Walmart, Target, eBay, Etsy, other)</option>
+        <option value="dispute">Disputing a score</option>
+        <option value="billing">Billing question or refund request</option>
+        <option value="privacy">Privacy question or data request</option>
+        <option value="press">Press</option>
+        <option value="complaint">Complaint</option>
+        <option value="bug">Bug report / technical issue</option>
+        <option value="other">Other</option>
+      </select>
+    </label>
+    <label style="display: block;">
+      <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Your email</span>
+      <input type="email" name="email" required placeholder="you@example.com" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px;">
+    </label>
+    <label style="display: block;">
+      <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Message</span>
+      <textarea id="contact-message" name="message" rows="6" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px; resize: vertical;"></textarea>
+    </label>
+    <div>
+      <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Send</button>
+      <span style="font-size: 13px; color: var(--muted); margin-left: 10px;">Opens your mail app pre-filled to <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a>.</span>
+    </div>
+  </form>
+
+  <h2>Or email us directly</h2>
   <table>
     <thead><tr><th>Topic</th><th>Email</th></tr></thead>
     <tbody>
       <tr>
         <td><strong>Disputing a score</strong></td>
         <td>Use the <em>Contest this finding</em> button in the extension or mobile app — that's the fastest path because the form captures the structured information our review team needs.</td>
+      </tr>
+      <tr>
+        <td><strong>Retailer requests</strong></td>
+        <td><a href="mailto:hello@realproductorigin.com?subject=Retailer%20request">hello@realproductorigin.com</a> — tell us which retailer you'd like us to support next (Walmart, Target, eBay, Etsy, or other).</td>
       </tr>
       <tr>
         <td><strong>General inquiries</strong></td>
@@ -123,11 +158,30 @@
   <p><em>(To be filled in once the company has a registered address.)</em></p>
 
   <h2>About Real Product Origin</h2>
-  <p>Real Product Origin is the company behind Product Origin Checker. We build tools that bring transparency to consumer purchasing decisions — starting with the country-of-origin question, which Amazon makes deliberately hard to answer.</p>
+  <p>Real Product Origin is the company behind Product Origin Checker. We build tools that bring transparency to consumer purchasing decisions — starting with the country-of-origin question, which is often unavailable on product pages across large online retailers. We currently support Amazon, with Walmart, Target, eBay, and Etsy on the roadmap.</p>
 
   <p>We're an early-stage project. If you're a journalist covering supply chains, an industry insider with knowledge we should be hearing, or a developer who wants to help — we'd love to hear from you.</p>
 
 </article>
+
+<script>
+  // Preselect the topic dropdown from ?topic=... in the URL.
+  (function() {
+    var p = new URLSearchParams(location.search);
+    var t = p.get("topic");
+    var sel = document.getElementById("topic");
+    var msg = document.getElementById("contact-message");
+    if (t && sel) {
+      var found = false;
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === t) { sel.selectedIndex = i; found = true; break; }
+      }
+      if (found && t === "retailer-request" && msg && !msg.value) {
+        msg.placeholder = "Which retailer would you like us to add next? (Walmart, Target, eBay, Etsy, or another site)";
+      }
+    }
+  })();
+</script>
 
 <footer>
   <div class="footer-inner">
@@ -153,6 +207,7 @@
       <a href="/#mobile">Mobile app</a>
       <a href="/methodology.html">How it works</a>
       <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
       <h4>Company</h4>
@@ -167,7 +222,7 @@
       <a href="/refunds.html">Refunds</a>
     </div>
   </div>
-  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.<br><span style="font-size:12px; color: var(--muted); display:inline-block; margin-top:6px;">A portion of proceeds donated to human-rights work in China and around the world.</span></div>
 </footer>
 
 <script>

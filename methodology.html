@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Methodology — Product Origin Checker</title>
-<meta name="description" content="Plain-English walkthrough of how Real Product Origin scores an Amazon product. What we read from the page, how our AI weighs it, and how we handle uncertainty.">
+<meta name="description" content="Plain-English walkthrough of how Real Product Origin scores an online product listing. What we read from the page, how our AI weighs it, and how we handle uncertainty.">
 <meta property="og:title" content="Methodology — Real Product Origin">
-<meta property="og:description" content="How we figure out where an Amazon product is really from — every source we consult, and how we handle uncertainty.">
+<meta property="og:description" content="How we figure out where an online product is really from — every source we consult, and how we handle uncertainty.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://realproductorigin.com/methodology">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Methodology — Real Product Origin">
-<meta name="twitter:description" content="How we figure out where an Amazon product is really from — every source we consult, and how we handle uncertainty.">
+<meta name="twitter:description" content="How we figure out where an online product is really from — every source we consult, and how we handle uncertainty.">
 <link rel="canonical" href="https://realproductorigin.com/methodology">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
@@ -31,13 +31,13 @@
     },
     {
       "@type": "HowTo",
-      "name": "How Real Product Origin scores an Amazon product",
-      "description": "A plain-English guide to how the Product Origin Checker extension figures out where an Amazon product is made, where it ships from, who the retailer is, and where the money ultimately goes.",
+      "name": "How Real Product Origin scores a product on a large online retailer",
+      "description": "A plain-English guide to how the Product Origin Checker extension figures out where an online product is made, where it ships from, who the retailer is, and where the money ultimately goes. Currently supports Amazon; more retailers on the roadmap.",
       "author": {"@id": "https://realproductorigin.com/#organization"},
       "publisher": {"@id": "https://realproductorigin.com/#organization"},
       "url": "https://realproductorigin.com/methodology",
       "supply": [
-        {"@type": "HowToSupply", "name": "Amazon product page URL"}
+        {"@type": "HowToSupply", "name": "Product page URL on a supported retailer (currently Amazon)"}
       ],
       "tool": [
         {"@type": "HowToTool", "name": "Chrome, Edge, Brave, or Firefox browser"},
@@ -48,7 +48,7 @@
           "@type": "HowToStep",
           "position": 1,
           "name": "What we read from the page",
-          "text": "We extract every visible signal on the Amazon listing — the Country of Origin field when present, the Ships-from and Sold-by lines, the seller's storefront and its legally registered entity details, the brand storefront and website, our 3.8M-entry USPTO trademark index, and up to 15 customer reviews scanned for Made-in claims and shipping mentions."
+          "text": "We extract every visible signal on the product listing — the Country of Origin field when present, the Ships-from and Sold-by lines, the seller's storefront and its legally registered entity details, the brand storefront and website, our 3.8M-entry USPTO trademark index, and up to 15 customer reviews scanned for Made-in claims and shipping mentions. Field names below reflect Amazon, which is the retailer we currently support."
         },
         {
           "@type": "HowToStep",
@@ -191,19 +191,21 @@
 
 <article class="wrap m-body">
 
-  <p>Every score we publish answers four questions about an Amazon product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, who's actually <strong>selling</strong> it (the retailer transacting with you), and where the <strong>money ultimately goes</strong> (the brand parent that captures the profit). This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
+  <p>Every score we publish answers four questions about an online product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, who's actually <strong>selling</strong> it (the retailer transacting with you), and where the <strong>money ultimately goes</strong> (the brand parent that captures the profit). This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
 
-  <p><em>Why four, not three?</em> Two very different questions used to live under one label. For a Seiko watch sold on Amazon: the <strong>retailer</strong> is Amazon.com (US), but the <strong>money</strong> ultimately flows to Seiko Group in Japan. Both facts matter. So we split them.</p>
+  <p style="background: var(--bg-cream); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 15px; color: var(--ink-2); margin: 20px 0;"><strong>Current scope.</strong> The extension supports <strong>Amazon</strong> today — Amazon.com, Amazon.co.uk, Amazon.de, and other regional Amazon sites. The technical descriptions below use Amazon's field names because Amazon is what's live. Walmart, Target, eBay, and Etsy are on the roadmap, and the same signal categories will apply. <a href="/contact.html?topic=retailer-request">Tell us which one you want next.</a></p>
 
-  <p>The short version: <strong>we don't just read the Amazon listing.</strong> We pull signals from several independent places — the product page, the seller's own business records, the brand's website, a global domain registry, and our own growing database of verified corrections. No single source decides a score. The more independent sources that point to the same answer, the more confident we are.</p>
+  <p><em>Why four, not three?</em> Two very different questions used to live under one label. For a Seiko watch sold on a US storefront: the <strong>retailer</strong> is a US entity, but the <strong>money</strong> ultimately flows to Seiko Group in Japan. Both facts matter. So we split them.</p>
+
+  <p>The short version: <strong>we don't just read the retailer's product page.</strong> We pull signals from several independent places — the product page, the seller's own business records, the brand's website, a global domain registry, and our own growing database of verified corrections. No single source decides a score. The more independent sources that point to the same answer, the more confident we are.</p>
 
   <h2>Everything we check</h2>
 
-  <h3>1. The Amazon product page</h3>
+  <h3>1. The retailer's product page (Amazon, in the current scope)</h3>
   <p>Our browser extension reads the publicly visible information on the listing itself:</p>
   <ul>
     <li>The product title, brand, and description bullets.</li>
-    <li>The <strong>"Country of Origin"</strong> field, when Amazon lists one in the product-details table. <em>This is the strongest single signal we have.</em></li>
+    <li>The <strong>"Country of Origin"</strong> field, when the retailer lists one in the product-details table. <em>This is the strongest single signal we have.</em></li>
     <li>The <strong>"Ships from"</strong> and <strong>"Sold by"</strong> lines in the buy box.</li>
     <li>The seller's name and a link to their storefront.</li>
     <li>The manufacturer, the date the listing first appeared, and its Best Sellers Rank.</li>
@@ -212,19 +214,19 @@
   </ul>
 
   <h3>2. The seller's business details page</h3>
-  <p>Amazon keeps a separate <strong>"Detailed Seller Information"</strong> page for each third-party seller — and it's where the legally meaningful facts live. We fetch that page directly and read the seller's <strong>registered legal entity name</strong>, <strong>business address</strong>, and <strong>country of registration</strong>. A shell company is often only identifiable here, not on the product page.</p>
+  <p>Amazon keeps a separate <strong>"Detailed Seller Information"</strong> page for each third-party seller — and it's where the legally meaningful facts live. We fetch that page directly and read the seller's <strong>registered legal entity name</strong>, <strong>business address</strong>, and <strong>country of registration</strong>. A shell company is often only identifiable here, not on the product page. Other retailers we add will have equivalent seller-information surfaces.</p>
 
   <h3>3. The brand's storefront and website</h3>
-  <p>We also fetch the brand's Amazon storefront page, reading any "About the brand" information and discovering links to the brand's own website. That website is the bridge to source #4.</p>
+  <p>We also fetch the brand's storefront page on the retailer, reading any "About the brand" information and discovering links to the brand's own website. That website is the bridge to source #4.</p>
 
   <h3>4. A global domain registry — a third-party check</h3>
-  <p>When we discover the brand's own website, we look that web address up in <strong>RDAP</strong> — the public, official registry that records who registered every website domain in the world. From the registry we read the <strong>country and organisation listed for the domain's registrant</strong>. This is an entirely independent, third-party confirmation: it doesn't come from Amazon or from the seller, so it's a valuable cross-check. A company registering its domain through a Chinese registrar with a Chinese registrant address is a meaningful clue that a US-sounding brand name alone would hide.</p>
+  <p>When we discover the brand's own website, we look that web address up in <strong>RDAP</strong> — the public, official registry that records who registered every website domain in the world. From the registry we read the <strong>country and organisation listed for the domain's registrant</strong>. This is an entirely independent, third-party confirmation: it doesn't come from the retailer or from the seller, so it's a valuable cross-check. A company registering its domain through a Chinese registrar with a Chinese registrant address is a meaningful clue that a US-sounding brand name alone would not surface.</p>
 
   <h3>5. Our own database of verified corrections</h3>
   <p>Every time our review team confirms a correction (see "When a person overrides the AI", below), that becomes ground truth. If a seller or brand has a track record of confirmed origins in our database, the next new product from them starts with that knowledge built in. We also look across <em>other products by the same seller</em> we've already scored, so a consistent pattern carries over. Every complaint we resolve quietly makes future scoring more accurate.</p>
 
   <h3>6. Quick pattern checks</h3>
-  <p>Before involving the AI, we run a handful of fast, cheap checks — calibrated especially for detecting Chinese-origin products, which is where seller obfuscation is most common:</p>
+  <p>Before involving the AI, we run a handful of fast, cheap checks — calibrated especially for detecting Chinese-origin products, which is where seller-country ambiguity is most common on large online marketplaces:</p>
   <ul>
     <li>Whether the seller name contains a known Chinese manufacturing city (Shenzhen, Hangzhou, Yiwu, Guangzhou, …).</li>
     <li>Whether the seller name ends with "Co., Ltd." — a common Chinese business-registration suffix.</li>
@@ -237,7 +239,7 @@
 
   <p>All of the evidence above — the product page, the seller's business records, the brand website and its domain-registry record, our USPTO trademark index, our database of priors, and the pattern checks — is assembled and sent to Anthropic's Claude AI. Claude weighs it alongside its own trained knowledge of brands and companies (it knows TCL is Chinese, that Hydro Flask is American, that Bosch is German), and returns a structured score for each of the four indicators: a top country, its ISO code, a percentage, a confidence level, and a short list of plausible alternative countries.</p>
 
-  <p><strong>World knowledge first.</strong> Before Claude looks at any structured evidence, we require it to write down what it already knows about the brand from its training — the parent company's country, whether it's a well-known international brand, whether it fits the pattern of a Chinese Amazon marketplace seller using a US shell company for its trademark filing. This step exists because our structured pipeline can otherwise be fooled by paper trails: a Chinese seller can register "BRAND INC" in Delaware and file a US trademark, and our USPTO lookup would then report "United States" as the owner country — technically true for the shell, wildly misleading for the beneficial owner. When Claude's world knowledge places a brand confidently in a specific country, that knowledge takes precedence over the structural US signals from shell entities.</p>
+  <p><strong>World knowledge first.</strong> Before Claude looks at any structured evidence, we require it to write down what it already knows about the brand from its training — the parent company's country, whether it's a well-known international brand, whether it fits the pattern of a Chinese marketplace seller using a US shell company for its trademark filing. This step exists because our structured pipeline can otherwise be fooled by paper trails: a Chinese seller can register "BRAND INC" in Delaware and file a US trademark, and our USPTO lookup would then report "United States" as the owner country — technically true for the shell, wildly misleading for the beneficial owner. When Claude's world knowledge places a brand confidently in a specific country, that knowledge takes precedence over the structural US signals from shell entities.</p>
 
   <p><strong>The strongest evidence wins.</strong> A literal "Country of Origin" field outranks a guess from the brand name; an independent registry record outranks a hunch. We also have a strict rule that a company's <em>headquarters</em> can never, by itself, be used to claim where a product is <em>manufactured</em> — a common and misleading conflation.</p>
 
@@ -255,7 +257,7 @@
     <li>Percent 50, confidence 20 → we genuinely cannot tell. The number is a placeholder; the meaningful signal is the low confidence.</li>
   </ul>
 
-  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal Amazon-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle.</p>
+  <p>We will <em>not</em> raise confidence above 85 unless we have either a literal retailer-supplied origin field <em>or</em> multiple independent web sources confirming the same answer. Confidence honesty is the design principle.</p>
 
   <h2>Hong Kong, Macau, and Taiwan</h2>
 
@@ -309,6 +311,7 @@
       <a href="/#mobile">Mobile app</a>
       <a href="/methodology.html">How it works</a>
       <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
       <h4>Company</h4>
@@ -323,7 +326,7 @@
       <a href="/refunds.html">Refunds</a>
     </div>
   </div>
-  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.<br><span style="font-size:12px; color: var(--muted); display:inline-block; margin-top:6px;">A portion of proceeds donated to human-rights work in China and around the world.</span></div>
 </footer>
 
 <script>
