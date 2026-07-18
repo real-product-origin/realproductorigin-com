@@ -8,9 +8,187 @@
 <meta property="og:title" content="Pricing — Product Origin Checker">
 <meta property="og:description" content="Free tier plus Basic $4.99, Pro $9.99, Premium $19.99 per month. Annual pricing available.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/pricing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pricing — Product Origin Checker">
+<meta name="twitter:description" content="Free tier plus Basic $4.99, Pro $9.99, Premium $19.99 per month. Annual pricing available.">
+<link rel="canonical" href="https://realproductorigin.com/pricing">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "Product",
+      "name": "Real Product Origin — Basic subscription",
+      "description": "Unlimited monthly product-origin checks on Amazon. No sources or contest access.",
+      "brand": {"@id": "https://realproductorigin.com/#organization"},
+      "category": "Software subscription",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Basic monthly",
+          "price": "4.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Basic annual",
+          "price": "49.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Real Product Origin — Pro subscription",
+      "description": "Unlimited monthly checks, sources cited on every claim, the ability to contest scores, and priority email support.",
+      "brand": {"@id": "https://realproductorigin.com/#organization"},
+      "category": "Software subscription",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Pro monthly",
+          "price": "9.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro annual",
+          "price": "99.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "Real Product Origin — Premium subscription",
+      "description": "Everything in Pro, plus the mobile app with in-store barcode scanning on iOS and Android.",
+      "brand": {"@id": "https://realproductorigin.com/#organization"},
+      "category": "Software subscription",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Premium monthly",
+          "price": "19.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Premium annual",
+          "price": "199.99",
+          "priceCurrency": "USD",
+          "url": "https://realproductorigin.com/pricing",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need to create an account to use the free tier?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Install the extension and your first 20 checks per month work anonymously. You only sign in when you want to subscribe or use the mobile app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What counts as a \"check\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "One Amazon product page you view with the extension enabled. Cached hits — repeat visits to the same product within 90 days — do not count against your monthly quota."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why hide sources and methodology on the lower tiers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sourcing every claim is expensive on our side — every check calls out to multiple public databases and pays for LLM tokens. Pro and Premium subscribers fund that work; Basic and Free get the score itself, which is the answer most people are looking for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's included in the mobile app on Premium?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on Amazon. The mobile app requires a Premium subscription."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I upgrade or downgrade?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any time from the Stripe Customer Portal, linked from the extension popup. Upgrades are prorated instantly; downgrades take effect at the next renewal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I cancel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Through Stripe's Customer Portal, linked directly from the extension popup and mobile app. Cancel any time; you keep access until the end of the period you already paid for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer refunds?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — full refund within 14 days of your first charge, no questions asked. After that, cancel any time; we don't refund partial periods."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods do you accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All major credit and debit cards via Stripe. Apple Pay and Google Pay also work in the Stripe checkout flow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Family or team pricing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not yet. If enough people ask, we'll build it — get in touch and let us know your use case."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://realproductorigin.com/pricing"}
+      ]
+    }
+  ]
+}
+</script>
 <style>
   .price-hero { padding: 96px 0 32px; background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%); text-align: center; }
   .price-hero h1 { font-family: var(--serif); font-size: clamp(38px, 5vw, 60px); font-weight: 600; margin: 0 0 14px; letter-spacing: -0.025em; color: var(--ink-deep); font-variation-settings: "opsz" 96; }

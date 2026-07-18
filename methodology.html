@@ -4,11 +4,76 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Methodology — Product Origin Checker</title>
+<meta name="description" content="Plain-English walkthrough of how Real Product Origin scores an Amazon product. What we read from the page, how our AI weighs it, and how we handle uncertainty.">
+<meta property="og:title" content="Methodology — Real Product Origin">
+<meta property="og:description" content="How we figure out where an Amazon product is really from — every source we consult, and how we handle uncertainty.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://realproductorigin.com/methodology">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Methodology — Real Product Origin">
+<meta name="twitter:description" content="How we figure out where an Amazon product is really from — every source we consult, and how we handle uncertainty.">
+<link rel="canonical" href="https://realproductorigin.com/methodology">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
 <link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How Real Product Origin scores an Amazon product",
+      "description": "A plain-English guide to how the Product Origin Checker extension figures out where an Amazon product is made, where it ships from, who the retailer is, and where the money ultimately goes.",
+      "author": {"@id": "https://realproductorigin.com/#organization"},
+      "publisher": {"@id": "https://realproductorigin.com/#organization"},
+      "url": "https://realproductorigin.com/methodology",
+      "supply": [
+        {"@type": "HowToSupply", "name": "Amazon product page URL"}
+      ],
+      "tool": [
+        {"@type": "HowToTool", "name": "Chrome, Edge, Brave, or Firefox browser"},
+        {"@type": "HowToTool", "name": "Real Product Origin browser extension"}
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "What we read from the page",
+          "text": "We extract every visible signal on the Amazon listing — the Country of Origin field when present, the Ships-from and Sold-by lines, the seller's storefront and its legally registered entity details, the brand storefront and website, our 3.8M-entry USPTO trademark index, and up to 15 customer reviews scanned for Made-in claims and shipping mentions."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "What our AI does with it",
+          "text": "The assembled evidence is sent to Anthropic's Claude, which combines it with trained knowledge of brands and companies. When structured signals are thin, Claude runs live web searches against business registries, brand websites, LinkedIn, and news — and every URL is cited on the badge."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "When we don't know, we say so",
+          "text": "Every indicator ships with a separate confidence band. Percent close to 100 with confidence close to 100 means multiple corroborating sources. A low confidence figure means we genuinely cannot tell — the meaningful signal is the honesty, not the number."
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Methodology", "item": "https://realproductorigin.com/methodology"}
+      ]
+    }
+  ]
+}
+</script>
 <style>
   /* Page-scoped polish — matches the editorial rhythm on home + pricing. */
 
