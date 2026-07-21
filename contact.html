@@ -91,6 +91,7 @@
       <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Topic</span>
       <select id="topic" name="topic" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: #fff; font-family: inherit; font-size: 15px;">
         <option value="general">General inquiry</option>
+        <option value="beta-access">Chrome private-beta access</option>
         <option value="retailer-request">I'd like you to add a retailer (Walmart, eBay, Etsy, other)</option>
         <option value="dispute">Disputing a score</option>
         <option value="billing">Billing question or refund request</option>
@@ -178,6 +179,9 @@
       }
       if (found && t === "retailer-request" && msg && !msg.value) {
         msg.placeholder = "Target support is launching soon — which retailer would you like us to add after that? (Walmart, eBay, Etsy, or another site)";
+      }
+      if (found && t === "beta-access" && msg && !msg.value) {
+        msg.placeholder = "Which browser are you using (Chrome / Edge / Brave)? We'll email you the unlisted Chrome Web Store link.";
       }
     }
   })();
