@@ -32,12 +32,12 @@
     {
       "@type": "HowTo",
       "name": "How Real Product Origin scores a product on a large online retailer",
-      "description": "A plain-English guide to how the Product Origin Checker extension figures out where an online product is made, where it ships from, who the retailer is, and where the money ultimately goes. Supports Amazon today; Target launching soon; Walmart, eBay, and Etsy on the roadmap.",
+      "description": "A plain-English guide to how the Product Origin Checker extension figures out where an online product is made, where it ships from, who the retailer is, and where the money ultimately goes. Supports Amazon and Target today; Walmart, eBay, and Etsy on the roadmap.",
       "author": {"@id": "https://realproductorigin.com/#organization"},
       "publisher": {"@id": "https://realproductorigin.com/#organization"},
       "url": "https://realproductorigin.com/methodology",
       "supply": [
-        {"@type": "HowToSupply", "name": "Product page URL on a supported retailer (Amazon today; Target launching soon)"}
+        {"@type": "HowToSupply", "name": "Product page URL on a supported retailer (Amazon or Target)"}
       ],
       "tool": [
         {"@type": "HowToTool", "name": "Chrome, Edge, Brave, or Firefox browser"},
@@ -48,7 +48,7 @@
           "@type": "HowToStep",
           "position": 1,
           "name": "What we read from the page",
-          "text": "We extract every visible signal on the product listing — the Country of Origin field when present, the Ships-from and Sold-by lines, the seller's storefront and its legally registered entity details, the brand storefront and website, our 3.8M-entry USPTO trademark index, and up to 15 customer reviews scanned for Made-in claims and shipping mentions. Field names below reflect Amazon, which is the retailer we currently support; Target support is launching soon, and the same signal categories will apply."
+          "text": "We extract every visible signal on the product listing — the Country of Origin field when present, the Ships-from and Sold-by lines, the seller's storefront and its legally registered entity details, the brand storefront and website, our 3.8M-entry USPTO trademark index, and up to 15 customer reviews scanned for Made-in claims and shipping mentions. Field names below reflect Amazon; Target is also supported today, and the same signal categories apply."
         },
         {
           "@type": "HowToStep",
@@ -193,7 +193,7 @@
 
   <p>Every score we publish answers four questions about an online product: where it was <strong>made</strong>, where the unit you'll receive <strong>ships from</strong>, who's actually <strong>selling</strong> it (the retailer transacting with you), and where the <strong>money ultimately goes</strong> (the brand parent that captures the profit). This page explains, in plain terms, every place we look — and how honest we try to be about uncertainty.</p>
 
-  <p style="background: var(--bg-cream); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 15px; color: var(--ink-2); margin: 20px 0;"><strong>Current scope.</strong> The extension supports <strong>Amazon</strong> today — Amazon.com, Amazon.co.uk, Amazon.de, and other regional Amazon sites. The technical descriptions below use Amazon's field names because Amazon is what's live. <strong>Target</strong> is launching soon, with <strong>Walmart, eBay, and Etsy</strong> on the roadmap after that, and the same signal categories will apply. <a href="/contact.html?topic=retailer-request">Tell us which one you want next.</a></p>
+  <p style="background: var(--bg-cream); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; font-size: 15px; color: var(--ink-2); margin: 20px 0;"><strong>Current scope.</strong> The extension supports <strong>Amazon</strong> (amazon.com, amazon.co.uk, amazon.de, and other regional Amazon sites) and <strong>Target</strong> today. The technical descriptions below use Amazon's field names. <strong>Walmart, eBay, and Etsy</strong> are on the roadmap after that, and the same signal categories will apply. <a href="/contact.html?topic=retailer-request">Tell us which one you want next.</a></p>
 
   <p><em>Why four, not three?</em> Two very different questions used to live under one label. For a Seiko watch sold on a US storefront: the <strong>retailer</strong> is a US entity, but the <strong>money</strong> ultimately flows to Seiko Group in Japan. Both facts matter. So we split them.</p>
 
@@ -201,7 +201,7 @@
 
   <h2>Everything we check</h2>
 
-  <h3>1. The retailer's product page (Amazon, in the current scope)</h3>
+  <h3>1. The retailer's product page (Amazon and Target, in the current scope)</h3>
   <p>Our browser extension reads the publicly visible information on the listing itself:</p>
   <ul>
     <li>The product title, brand, and description bullets.</li>
