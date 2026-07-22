@@ -86,7 +86,11 @@
 
   <h2>Send us a message</h2>
 
-  <form id="contact-form" method="post" action="mailto:hello@realproductorigin.com" enctype="text/plain" style="max-width: 640px; margin: 0 0 40px; display: grid; gap: 14px;">
+  <form id="contact-form" novalidate style="max-width: 640px; margin: 0 0 40px; display: grid; gap: 14px;">
+    <label style="display: block;">
+      <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Your name</span>
+      <input type="text" id="contact-name" name="name" required maxlength="100" autocomplete="name" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px;">
+    </label>
     <label style="display: block;">
       <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Topic</span>
       <select id="topic" name="topic" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: #fff; font-family: inherit; font-size: 15px;">
@@ -104,17 +108,32 @@
     </label>
     <label style="display: block;">
       <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Your email</span>
-      <input type="email" name="email" required placeholder="you@example.com" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px;">
+      <input type="email" id="contact-email" name="email" required autocomplete="email" placeholder="you@example.com" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px;">
     </label>
     <label style="display: block;">
       <span style="display: block; font-family: var(--sans); font-size: 13px; font-weight: 600; margin-bottom: 4px;">Message</span>
-      <textarea id="contact-message" name="message" rows="6" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px; resize: vertical;"></textarea>
+      <textarea id="contact-message" name="message" rows="6" required minlength="10" maxlength="5000" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-family: inherit; font-size: 15px; resize: vertical;"></textarea>
     </label>
-    <div>
-      <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Send</button>
-      <span style="font-size: 13px; color: var(--muted); margin-left: 10px;">Opens your mail app pre-filled to <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a>.</span>
+
+    <!-- Cloudflare Turnstile widget. Site key is fetched from /api/config at
+         page load so we don't hardcode it in HTML. The widget renders itself
+         and populates a hidden input named "cf-turnstile-response". -->
+    <div id="turnstile-container" style="margin-top: 4px; min-height: 65px;"></div>
+
+    <div style="margin-top: 4px;">
+      <button type="submit" id="contact-submit" class="btn btn-primary" style="padding: 10px 20px;">Send</button>
     </div>
+    <div id="contact-error" role="alert" aria-live="polite" style="display: none; font-size: 14px; color: #b91c1c; margin-top: 2px;"></div>
   </form>
+
+  <!-- Success state (revealed on 200 OK response). -->
+  <div id="contact-success" style="display: none; max-width: 640px; margin: 0 0 40px; padding: 16px 20px; border-radius: 10px; background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;">
+    <p style="margin: 0; font-size: 15px;"><strong>Thanks — we'll reply within two business days.</strong></p>
+  </div>
+
+  <!-- Turnstile client library. `render=explicit` lets us wait until we've
+       fetched the site key from /api/config before rendering. -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 
   <h2>Or email us directly</h2>
   <table>
@@ -171,7 +190,7 @@
 </article>
 
 <script>
-  // Preselect the topic dropdown from ?topic=... in the URL.
+  // ── Preselect the topic dropdown from ?topic=... in the URL. ─────────
   (function() {
     var p = new URLSearchParams(location.search);
     var t = p.get("topic");
@@ -189,6 +208,106 @@
         msg.placeholder = "Which browser are you using (Chrome / Edge / Brave)? We'll email you the unlisted Chrome Web Store link.";
       }
     }
+  })();
+
+  // ── Load Turnstile site key from /api/config, then render widget. ────
+  // Using explicit-render so we can defer widget creation until we've
+  // fetched the site key. If the fetch fails or the key isn't set, we
+  // fall back to a helpful disabled state rather than a broken form.
+  var _turnstileWidgetId = null;
+
+  function _renderTurnstileWhenReady(siteKey) {
+    var container = document.getElementById("turnstile-container");
+    if (!container) return;
+    if (!siteKey) {
+      container.innerHTML = "<p style=\"font-size:13px;color:#b91c1c;margin:0;\">Contact form is temporarily unavailable — please email <a href=\"mailto:hello@realproductorigin.com\">hello@realproductorigin.com</a> instead.</p>";
+      var submitBtn = document.getElementById("contact-submit");
+      if (submitBtn) submitBtn.disabled = true;
+      return;
+    }
+    function tryRender() {
+      if (window.turnstile && typeof window.turnstile.render === "function") {
+        _turnstileWidgetId = window.turnstile.render(container, { sitekey: siteKey });
+      } else {
+        setTimeout(tryRender, 100); // Turnstile script still loading
+      }
+    }
+    tryRender();
+  }
+
+  fetch("/api/config").then(function(r) { return r.json(); })
+    .then(function(cfg) { _renderTurnstileWhenReady(cfg && cfg.turnstileSiteKey); })
+    .catch(function() { _renderTurnstileWhenReady(null); });
+
+  // ── Form submission via fetch → /api/contact. ─────────────────────────
+  (function() {
+    var form = document.getElementById("contact-form");
+    var errorEl = document.getElementById("contact-error");
+    var successEl = document.getElementById("contact-success");
+    if (!form) return;
+
+    function showError(text) {
+      errorEl.textContent = text;
+      errorEl.style.display = "block";
+    }
+    function hideError() {
+      errorEl.textContent = "";
+      errorEl.style.display = "none";
+    }
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      hideError();
+
+      var submitBtn = document.getElementById("contact-submit");
+      var originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+
+      // Turnstile injects a hidden input named "cf-turnstile-response" into
+      // the widget container after the user solves the challenge (usually
+      // invisible / auto-solved). Grab it here.
+      var tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+      var turnstileToken = tokenInput ? tokenInput.value : "";
+
+      var payload = {
+        name: (form.name && form.name.value) || "",
+        email: (form.email && form.email.value) || "",
+        topic: (form.topic && form.topic.value) || "",
+        message: (form.message && form.message.value) || "",
+        turnstileToken: turnstileToken,
+      };
+
+      try {
+        var resp = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        var data = null;
+        try { data = await resp.json(); } catch (_) {}
+
+        if (resp.ok && data && data.ok) {
+          form.style.display = "none";
+          successEl.style.display = "block";
+          successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        var msg = (data && data.error) || ("Send failed (HTTP " + resp.status + ").");
+        showError(msg);
+        // Reset the Turnstile challenge so the user can try again with a
+        // fresh token — server rejects duplicate token submissions.
+        if (window.turnstile && _turnstileWidgetId != null) {
+          try { window.turnstile.reset(_turnstileWidgetId); } catch (_) {}
+        }
+      } catch (err) {
+        showError("Network error. Please check your connection and try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
   })();
 </script>
 
