@@ -1,0 +1,13 @@
+# Cloudflare Pages _redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Any specific rewrites or redirects go ABOVE the catch-all so they run first.
+# Cloudflare processes rules top-to-bottom and stops at the first match.
+#
+# (No explicit rewrites at present.)
+#
+# Catch-all 404 for anything not matching a real static file. Without this
+# Cloudflare Pages was serving index.html with a 200 status for unknown
+# URLs — a soft-404 that confused users and hurt SEO. The `404` status
+# code at the end tells CF Pages to serve /404.html with an actual HTTP
+# 404 status, which is the correct semantic response.
+/*    /404.html    404
