@@ -169,8 +169,8 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
       <a class="nav-cta" href="/#install">Install</a>
@@ -456,13 +456,13 @@ async function signOut() {
   location.href = "/";
 }
 
-// Nav account link — flip to "My account" when a session token is present.
+// Nav account link — flip to "My Account" when a session token is present.
 (function() {
   var link = document.getElementById("nav-account-link");
   if (!link) return;
   try {
     if (localStorage.getItem("rpo_session_token")) {
-      link.textContent = "My account";
+      link.textContent = "My Account";
       link.href = "/subscribe/account.html";
     }
   } catch (_) {}
@@ -510,8 +510,8 @@ async function signOut() {
       <h4>Product</h4>
       <a href="/#install">Browser extension</a>
       <a href="/#mobile">Mobile app</a>
-      <a href="/methodology.html">How it works</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">

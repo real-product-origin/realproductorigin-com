@@ -539,8 +539,8 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a href="/support.html">Support</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
@@ -859,18 +859,18 @@
 
     <div class="callout">
       <span class="icon">→</span>
-      <div>The full breakdown of sources, weights, and edge cases lives in our <a href="/methodology.html">methodology</a>. If a score looks wrong, checking there first often explains it — and if it doesn't, we want to hear from you.</div>
+      <div>The full breakdown of sources, weights, and edge cases lives in our <a href="/products.html#methodology">methodology</a>. If a score looks wrong, checking there first often explains it — and if it doesn't, we want to hear from you.</div>
     </div>
   </div>
 </section>
 
 <!-- ── §4 REPORT AN ISSUE ─────────────────────────────────────────────── -->
 <section class="s-section" id="report">
-  <div class="wrap">
+  <div class="wrap-wide" style="max-width: 1080px; padding: 0 24px;">
     <h2>Report an issue</h2>
     <p class="section-lede">Wrong scores, missing features, weird bugs, privacy concerns — every one of these matters and every one has a direct path in. Pick the one that fits and skip the guessing game.</p>
 
-    <div class="s-grid-2">
+    <div class="s-grid-2" style="grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 24px;">
 
       <div class="s-card">
         <h3 style="margin-top: 0;">A score is wrong</h3>
@@ -1133,8 +1133,8 @@
       <h4>Product</h4>
       <a href="/#install">Browser extension</a>
       <a href="/#mobile">Mobile app</a>
-      <a href="/methodology.html">How it works</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
     </div>
     <div class="col">
@@ -1160,7 +1160,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   try {
     if (localStorage.getItem("rpo_session_token")) {
       const a = document.getElementById("nav-account-link");
-      if (a) { a.textContent = "My account"; a.href = "/subscribe/account.html"; }
+      if (a) { a.textContent = "My Account"; a.href = "/subscribe/account.html"; }
     }
   } catch (_) {}
 })();

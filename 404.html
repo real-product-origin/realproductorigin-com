@@ -37,8 +37,8 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a href="/support.html">Support</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
@@ -56,7 +56,7 @@
     <a class="btn btn-primary" href="/">Home</a>
     <a class="btn btn-primary" href="/#install">Install</a>
     <a class="btn btn-primary" href="/support.html">Support</a>
-    <a class="btn btn-primary" href="/methodology.html">Methodology</a>
+    <a class="btn btn-primary" href="/products.html">Products</a>
   </div>
 
   <p style="font-size: 14px; color: var(--muted); margin-top: 24px;">Looking for a how-to or troubleshooting tip? Start on the <a href="/support.html">Support page</a>. If a link on our site brought you here, please let us know at <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a>.</p>
@@ -84,8 +84,8 @@
       <h4>Product</h4>
       <a href="/#install">Browser extension</a>
       <a href="/#mobile">Mobile app</a>
-      <a href="/methodology.html">How it works</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
@@ -112,7 +112,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   if (!link) return;
   try {
     if (localStorage.getItem("rpo_session_token")) {
-      link.textContent = "My account";
+      link.textContent = "My Account";
       link.href = "/subscribe/account.html";
     }
   } catch (_) {}

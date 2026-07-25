@@ -3,7 +3,10 @@
 # Any specific rewrites or redirects go ABOVE the catch-all so they run first.
 # Cloudflare processes rules top-to-bottom and stops at the first match.
 #
-# (No explicit rewrites at present.)
+# Methodology content moved into /products bottom section. Preserve old
+# links (external bookmarks, search-index results, other-site references).
+/methodology         /products#methodology  301
+/methodology.html    /products.html#methodology  301
 #
 # Catch-all 404 for anything not matching a real static file. Without this
 # Cloudflare Pages was serving index.html with a 200 status for unknown

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why it matters — Real Product Origin</title>
+<title>Why It Matters — Real Product Origin</title>
 <meta name="description" content="Four grounded reasons product-origin transparency matters on large online retailers: quality, authenticity, structural competition, and consumer choice. Short summaries with expandable long-form arguments and cited sources.">
 <meta property="og:title" content="Why product-origin transparency matters">
 <meta property="og:description" content="A grounded case for why shoppers should be able to see where a product is really made, who really sells it, and where the money ultimately goes.">
@@ -110,7 +110,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
-        {"@type": "ListItem", "position": 2, "name": "Why it matters", "item": "https://realproductorigin.com/why"}
+        {"@type": "ListItem", "position": 2, "name": "Why It Matters", "item": "https://realproductorigin.com/why"}
       ]
     }
   ]
@@ -163,7 +163,40 @@
   article .rule {
     border: 0;
     border-top: 1px solid var(--border);
-    margin: 56px 0 40px;
+    margin: 32px 0 28px;
+  }
+
+  /* Big statistic callout that anchors each Part — the number does the talking. */
+  .w-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin: 8px 0 22px;
+    padding: 4px 0 0;
+    flex-wrap: wrap;
+  }
+  .w-headline .num {
+    font-family: var(--serif);
+    font-size: clamp(56px, 8.5vw, 96px);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .w-emphasis .w-headline .num { color: var(--accent-2); }
+  .w-headline .caption {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-3);
+    max-width: 360px;
+    padding-bottom: 6px;
+  }
+  .w-headline .caption strong { color: var(--ink-deep); }
+  @media (max-width: 640px) {
+    .w-headline { gap: 12px; }
+    .w-headline .caption { font-size: 13px; padding-bottom: 2px; }
   }
 
   /* Section eyebrow before each H2 — small colored kicker ("Part 1 / 2 / 3 / 4") */
@@ -232,7 +265,10 @@
   article .sources li p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 
   /* ── Part sections (collapsible summary + full case) ──────────────────── */
-  .w-part { margin: 0 0 48px; }
+  .w-part {
+    margin: 0 0 20px;
+    padding: 0;   /* override base section padding — parts already have their own spacing */
+  }
   .w-part > h2 { margin-bottom: 14px; }
 
   .w-summary {
@@ -341,8 +377,8 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a href="/support.html">Support</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
@@ -353,7 +389,7 @@
 
 <section class="w-hero">
   <div class="w-hero-inner">
-    <p class="eyebrow">Why it matters</p>
+    <p class="eyebrow">Why It Matters</p>
     <h1>Why product-origin transparency matters</h1>
     <p class="updated">A grounded case, in four parts. Sources listed at the bottom.</p>
   </div>
@@ -369,6 +405,10 @@
 
   <section class="w-part">
   <p class="w-part-eyebrow">Part 1 · Quality</p>
+  <div class="w-headline">
+    <span class="num">20×</span>
+    <span class="caption"><strong>Unilateral CPSC warnings, 2020 → 2024.</strong> The kind U.S. safety regulators publish when a manufacturer won't cooperate with a recall. Over 95% were sold online.</span>
+  </div>
   <h2>1. Avoid unknowingly buying things that fall apart</h2>
 
   <p class="w-summary">A generation ago, "Made in X" was information printed on the box. Online, most of that context disappears. U.S. regulators went from three unilateral CPSC safety warnings in 2020 to sixty-four in 2024 — and over 95% were on goods sold online. Opacity, not any single country, is the risk factor we want to make visible.</p>
@@ -407,10 +447,12 @@
   </details>
   </section>
 
-  <hr class="rule">
-
   <section class="w-part">
   <p class="w-part-eyebrow">Part 2 · Authenticity</p>
+  <div class="w-headline">
+    <span class="num">$467B</span>
+    <span class="caption"><strong>Global counterfeit trade, 2021.</strong> Roughly 2.3% of world imports (OECD / EUIPO). Counterfeits are only the sharp edge of a wider misrepresentation problem.</span>
+  </div>
   <h2>2. Avoid unknowingly buying things that aren't what they say</h2>
 
   <p class="w-summary">Global counterfeit trade totalled roughly USD 464-467 billion in 2019-2021 — about 2.3% of world imports. Counterfeits are only the sharp edge of a wider problem: shell-brand names, false heritage stories, and paper US trademarks stapled to entirely overseas production. It all hinges on shoppers not being able to see who is really behind a brand.</p>
@@ -448,11 +490,13 @@
   </details>
   </section>
 
-  <hr class="rule">
-
   <section class="w-part">
   <div class="w-emphasis">
   <p class="w-part-eyebrow">Part 3 · Structural</p>
+  <div class="w-headline">
+    <span class="num">~25%</span>
+    <span class="caption"><strong>Of the U.S. manufacturing-employment decline, 1990–2007</strong> attributable to Chinese import competition (Autor–Dorn–Hanson). Effects persist two decades on.</span>
+  </div>
   <h2>3. The structural problem: why any of this matters at scale</h2>
 
   <p class="w-summary">The Autor–Dorn–Hanson "China Shock" research found rising Chinese import competition explained roughly a quarter of the U.S. manufacturing-employment decline from 1990 to 2007, with the effects still measurable two decades on. Layered on top is Made in China 2025 — a documented, state-directed industrial strategy that treats subsidised exports as a policy instrument. This is a critique of a policy, not of a people.</p>
@@ -502,10 +546,12 @@
   </div>
   </section>
 
-  <hr class="rule">
-
   <section class="w-part">
   <p class="w-part-eyebrow">Part 4 · Choice</p>
+  <div class="w-headline">
+    <span class="num">80,000+</span>
+    <span class="caption"><strong>Uyghurs documented transferred to 83 global brands' supply chains</strong>, 2017–2019 (ASPI, 2020). One documented pattern among many that shoppers can't see at the moment of purchase.</span>
+  </div>
   <h2>4. Every purchase is a vote you didn't know you were casting</h2>
 
   <p class="w-summary">You have preferences about the world. Perhaps you'd rather not fund a supply chain with documented forced-labour risk; perhaps you'd rather buy from a small domestic manufacturer; perhaps on any given day you just want a cheap dress. All those choices are legitimate — but only if you can see what you're choosing between. Country-of-origin transparency is not radical; it's a normal shelf label extended to the online store.</p>
@@ -555,25 +601,13 @@
   </details>
   </section>
 
-  <hr class="rule">
-
-  <h2>What you can actually do</h2>
-
-  <p>Three concrete steps, in order of effort:</p>
-
-  <ol>
-    <li><strong>Install the extension.</strong> It runs quietly on product pages of the retailers we support (Amazon, Target, and Walmart), adds a four-line badge, cites its sources, and stays out of the way. Free for the first twenty checks a month.</li>
-    <li><strong>Open the "How we got this" panel</strong> on any score you're unsure about. Every listed source is a real URL you can click. If the badge is thin, that is itself the signal.</li>
-    <li><strong>Contest anything that's wrong.</strong> Every score has a <em>Contest this finding</em> button. Verified corrections become the new answer for every future shopper. The dataset gets better because you tell us when it isn't.</li>
-  </ol>
-
   <div class="end-cta">
     <p class="eyebrow">Install</p>
     <h3>Try the four-indicator badge on your next product page.</h3>
     <p>Chrome, Edge, Brave, and Firefox. Free for the first twenty product checks each month; unlimited from <a href="/pricing.html">$4.99/mo</a>. No tracking, no ads, sources cited on every claim. A portion of every subscription supports human-rights work in China and around the world.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="/#install">Get the extension</a>
-      <a class="btn btn-secondary" href="/methodology.html">Read the methodology</a>
+      <a class="btn btn-secondary" href="/products.html#methodology">Read the methodology</a>
     </div>
   </div>
 
@@ -660,8 +694,8 @@
       <h4>Product</h4>
       <a href="/#install">Browser extension</a>
       <a href="/#mobile">Mobile app</a>
-      <a href="/methodology.html">How it works</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
@@ -688,7 +722,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   if (!link) return;
   try {
     if (localStorage.getItem("rpo_session_token")) {
-      link.textContent = "My account";
+      link.textContent = "My Account";
       link.href = "/subscribe/account.html";
     }
   } catch (_) {}

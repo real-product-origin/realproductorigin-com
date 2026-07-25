@@ -109,8 +109,8 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/methodology.html">Methodology</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a href="/support.html">Support</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
@@ -134,7 +134,7 @@
         <p class="sub">Product listings on major online retailers quietly leave four questions unanswered. We answer all four — where it's made, where it ships from, who the retailer is, and where the money ultimately goes — with sources for every claim, and honest confidence bands when the evidence is thin.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#install">Get the browser extension</a>
-          <a class="btn btn-secondary" href="/methodology.html">How it works</a>
+          <a class="btn btn-secondary" href="/products.html#methodology">How it works</a>
         </div>
         <p class="cta-note">Free for the first 20 checks each month. Unlimited from <a href="/pricing.html">$4.99/mo</a>. Chrome, Edge, Brave, and Firefox. iOS &amp; Android on the way. <span style="display:block; margin-top:6px;">A portion of every subscription supports human-rights work in China and around the world.</span></p>
       </div>
@@ -644,7 +644,7 @@
     <h3>When we don't know, we say so</h3>
     <p>Confidence isn't fluff. A 50% / 20% confidence score means <em>we genuinely cannot tell</em>. We'd rather be honest than wrong-but-confident.</p>
 
-    <p style="margin-top: 32px;"><a href="/methodology.html">Read the full methodology →</a></p>
+    <p style="margin-top: 32px;"><a href="/products.html#methodology">Read the full methodology →</a></p>
   </div>
 </section>
 
@@ -837,8 +837,8 @@
       <h4>Product</h4>
       <a href="/#install">Browser extension</a>
       <a href="/#mobile">Mobile app</a>
-      <a href="/methodology.html">How it works</a>
-      <a href="/why.html">Why it matters</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
     </div>
         <div class="col">
@@ -861,13 +861,13 @@
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Nav account link — flip to "My account" when a session token is present.
+// Nav account link — flip to "My Account" when a session token is present.
 (function() {
   var link = document.getElementById("nav-account-link");
   if (!link) return;
   try {
     if (localStorage.getItem("rpo_session_token")) {
-      link.textContent = "My account";
+      link.textContent = "My Account";
       link.href = "/subscribe/account.html";
     }
   } catch (_) {}
