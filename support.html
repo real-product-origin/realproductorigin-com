@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Real Product Origin</title>
+<meta name="description" content="How to install the Real Product Origin browser extension and mobile app, how to score a product, what the numbers mean, and how to reach us with questions, wrong scores, or bug reports.">
+<meta property="og:title" content="Support — Real Product Origin">
+<meta property="og:description" content="Install, score, understand, and report — everything you need to get useful answers from Real Product Origin.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/support">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Support — Real Product Origin">
+<meta name="twitter:description" content="Install, score, understand, and report — everything you need to get useful answers from Real Product Origin.">
+<link rel="canonical" href="https://realproductorigin.com/support">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://realproductorigin.com/support",
+      "url": "https://realproductorigin.com/support",
+      "name": "Support — Real Product Origin",
+      "description": "How to install, score products, understand results, and report issues.",
+      "isPartOf": {"@id": "https://realproductorigin.com/#organization"},
+      "dateModified": "2026-07-25"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Support", "item": "https://realproductorigin.com/support"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I install the browser extension?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Open the Chrome Web Store listing, click Add to Chrome (or Add to Edge / Add to Brave in those browsers), then pin the extension so its badge appears in your toolbar. The extension works automatically on Amazon, Target, and Walmart product pages."}
+        },
+        {
+          "@type": "Question",
+          "name": "How does scoring work?",
+          "acceptedAnswer": {"@type": "Answer", "text": "For every product we surface four indicators — Made in, Ships from, Retailer, and Money goes to — with a country and a confidence percentage. The percentage reflects how much evidence we found from public sources; higher means we are more sure."}
+        },
+        {
+          "@type": "Question",
+          "name": "The score seems wrong. What do I do?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Click the Contest button inside the extension popup (Pro tier), or email hello@realproductorigin.com with the product URL and what you think is wrong. We review every contested score."}
+        },
+        {
+          "@type": "Question",
+          "name": "How do I report a bug?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Use the contact form at /contact and choose the Bug report category. Include the product URL, the browser or app, and a screenshot if you can. We reply within two business days."}
+        },
+        {
+          "@type": "Question",
+          "name": "Why is a score showing Not specified?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Not specified means none of our sources — product page, seller history, brand knowledge, trademark records, customs data — surfaced a confident answer for that indicator. It is an honest gap, not a guess."}
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .s-hero {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .s-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .s-hero h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+  .s-hero .lede {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55;
+    color: var(--ink-3);
+    max-width: 640px;
+    margin: 0;
+  }
+
+  /* ── Quick links (TOC) ────────────────────────────────────────────────── */
+  .s-toc {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .s-toc-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .s-toc a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-soft);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+  }
+  .s-toc a:hover {
+    border-color: var(--gold);
+    background: var(--gold-soft);
+    color: var(--ink);
+    transform: translateY(-1px);
+  }
+  .s-toc .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .s-toc small {
+    display: block;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  /* ── Section shell ────────────────────────────────────────────────────── */
+  .s-section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  .s-section:nth-of-type(even) { background: var(--bg-soft); }
+  .s-section h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+    scroll-margin-top: 24px;
+  }
+  .s-section .section-lede {
+    font-size: 17px;
+    color: var(--ink-3);
+    max-width: 640px;
+    margin: 0 0 40px;
+  }
+  .s-section h3 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.005em;
+    margin: 40px 0 12px;
+  }
+  .s-section h3:first-of-type { margin-top: 0; }
+  .s-section h4 {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 15px;
+    margin: 24px 0 8px;
+    letter-spacing: -0.005em;
+  }
+  .s-section p, .s-section li { font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  .s-section ol, .s-section ul { padding-left: 22px; margin: 0 0 20px; }
+  .s-section li { margin-bottom: 6px; }
+  .s-section li::marker { color: var(--gold); }
+
+  /* ── Cards & layout ───────────────────────────────────────────────────── */
+  .s-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 26px;
+    margin: 0 0 24px;
+  }
+  .s-section:nth-of-type(even) .s-card { background: var(--bg); }
+  .s-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    margin: 0 0 32px;
+  }
+
+  /* Install buttons — vertical stack of colored per-browser CTAs */
+  .install-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 20px; }
+  .install-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none !important;
+    transition: background 120ms ease, transform 120ms ease;
+  }
+  .install-btn:hover { background: var(--accent-2); color: #fff !important; transform: translateY(-1px); }
+  .install-btn.disabled {
+    background: var(--bg-soft);
+    color: var(--muted) !important;
+    border: 1px solid var(--border);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .install-btn .arrow { font-size: 16px; line-height: 1; }
+
+  /* ── Video cards ──────────────────────────────────────────────────────── */
+  /* Vertical (9:16) is default — natural for mobile-app how-tos.
+     Horizontal cards get .video-card--wide (16:9) — natural for desktop
+     extension how-tos. Placeholder state shows the recording brief until a
+     real video file lives at the referenced /assets/videos/ path.
+  */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 24px 0 32px;
+    max-width: 100%;
+  }
+  .video-grid.wide {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  .video-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(160deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-card--wide .video-frame { aspect-ratio: 16 / 9; }
+  .video-card--square .video-frame { aspect-ratio: 1 / 1; }
+  .video-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 18px;
+    color: var(--ink-3);
+  }
+  .video-placeholder .play {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .video-placeholder .play::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 12px solid var(--gold);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    margin-left: 3px;
+  }
+  .video-placeholder .soon {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .video-placeholder .caption {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+  .video-card .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    padding: 0 4px 4px;
+  }
+  .video-card .duration {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 0 4px;
+  }
+
+  /* ── Numbered steps ───────────────────────────────────────────────────── */
+  .steps { list-style: none; padding: 0; margin: 20px 0 24px; counter-reset: step; }
+  .steps > li {
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: 18px;
+    counter-increment: step;
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps li strong { color: var(--ink); }
+
+  /* ── Callout ──────────────────────────────────────────────────────────── */
+  .callout {
+    display: flex;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+  .callout.tip { background: #eef7ee; border-left-color: var(--green); }
+  .callout.warn { background: var(--accent-soft); border-left-color: var(--accent); }
+  .callout .icon { flex-shrink: 0; font-weight: 700; }
+
+  /* ── Definition list (four indicators) ────────────────────────────────── */
+  .defs { margin: 20px 0 8px; }
+  .defs dt {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    margin: 18px 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .defs dt .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--gold-soft);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .defs dd { margin: 0 0 10px 0; color: var(--ink-3); font-size: 15px; line-height: 1.6; }
+
+  /* ── Accordion (troubleshooting) ──────────────────────────────────────── */
+  details.trouble {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  details.trouble[open] { border-color: var(--gold); }
+  details.trouble summary {
+    padding: 16px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+    user-select: none;
+  }
+  details.trouble summary::-webkit-details-marker { display: none; }
+  details.trouble summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+  details.trouble[open] summary::after { content: "−"; }
+  details.trouble .trouble-body {
+    padding: 4px 20px 20px 20px;
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+  details.trouble .trouble-body p:first-child { margin-top: 0; }
+  details.trouble .trouble-body ol, details.trouble .trouble-body ul {
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+
+  /* ── Compact retailer / browser table ─────────────────────────────────── */
+  .supt {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 8px;
+    font-size: 15px;
+  }
+  .supt th, .supt td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .supt th {
+    background: var(--bg-soft);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .supt td .yes { color: var(--green); font-weight: 700; }
+  .supt td .no { color: var(--muted); }
+  .supt td .soon {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--gold-soft);
+    color: var(--gold);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Contact block ────────────────────────────────────────────────────── */
+  .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 20px 0; }
+  .contact-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .contact-card h4 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .contact-card a {
+    font-family: var(--sans);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .contact-card a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-card p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────── -->
+<section class="s-hero">
+  <div class="wrap">
+    <span class="eyebrow">Support</span>
+    <h1>How can we help?</h1>
+    <p class="lede">Everything you need to install Real Product Origin, score products confidently, understand what the numbers mean, and tell us when something isn't right. Real people read every message.</p>
+  </div>
+</section>
+
+<!-- ── Quick links / TOC ───────────────────────────────────────────────── -->
+<section class="s-toc">
+  <div class="wrap">
+    <div class="s-toc-inner">
+      <a href="#install">
+        <span class="icon">↓</span>
+        <span>Install<small>Extension + mobile app</small></span>
+      </a>
+      <a href="#score">
+        <span class="icon">✓</span>
+        <span>Score a product<small>Every way to look one up</small></span>
+      </a>
+      <a href="#understand">
+        <span class="icon">?</span>
+        <span>Understand the score<small>What the numbers mean</small></span>
+      </a>
+      <a href="#report">
+        <span class="icon">!</span>
+        <span>Report an issue<small>Wrong score or bug</small></span>
+      </a>
+      <a href="#troubleshoot">
+        <span class="icon">⚙</span>
+        <span>Troubleshooting<small>Common fixes</small></span>
+      </a>
+      <a href="#contact">
+        <span class="icon">✉</span>
+        <span>Get in touch<small>Direct email addresses</small></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── §1 INSTALL ──────────────────────────────────────────────────────── -->
+<section class="s-section" id="install">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="section-lede">Real Product Origin lives in two places — a free browser extension that runs on product pages as you shop, and a mobile app that scores anything you share, scan, or search. You can use either or both.</p>
+
+    <h3>Browser extension</h3>
+    <p>Works on Chrome, Microsoft Edge, and Brave today. Firefox is submitted and pending review. Same extension code, same score, same account.</p>
+
+    <div class="install-buttons">
+      <a class="install-btn" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Chrome <span class="arrow">→</span></a>
+      <a class="install-btn" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Edge <span class="arrow">→</span></a>
+      <a class="install-btn" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Brave <span class="arrow">→</span></a>
+      <span class="install-btn disabled">Firefox — pending review</span>
+    </div>
+
+    <ol class="steps">
+      <li><strong>Click the install button</strong> for your browser above. You'll land on the Chrome Web Store listing (Edge and Brave both install from there too).</li>
+      <li><strong>Click Add to Chrome</strong> (or "Add to Brave" / "Get" on Edge). Approve the permissions prompt — the extension only reads pages on supported retailer domains.</li>
+      <li><strong>Pin the extension</strong> so its badge always shows in the toolbar. Click the puzzle-piece icon in the top right, find Real Product Origin, click the pin.</li>
+      <li><strong>Open any product page</strong> on Amazon, Target, or Walmart. The score appears automatically in the top-right corner within a couple of seconds.</li>
+    </ol>
+
+    <div class="video-grid wide">
+      <!-- VIDEO SLOT: install-chrome.mp4 (16:9, ~25s) — screencast: land on CWS listing, click Add, approve permissions, pin extension, open Amazon product, badge appears. -->
+      <div class="video-card video-card--wide">
+        <div class="video-frame">
+          <div class="video-placeholder">
+            <span class="play" aria-hidden="true"></span>
+            <span class="soon">Video · coming soon</span>
+            <p class="caption">Installing the extension on Chrome</p>
+          </div>
+        </div>
+        <div class="label">Install on Chrome</div>
+        <div class="duration">~25 seconds · desktop screencast</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <span class="icon">✓</span>
+      <div><strong>Nothing to sign up for.</strong> Free tier gives you 20 scores per month with no account needed. Sign in only if you upgrade to Pro or Premium, or if you want to sync across devices.</div>
+    </div>
+
+    <h3>Mobile app</h3>
+    <p>Scan a barcode, snap a photo, share from the Amazon app, or paste a link — the mobile app scores products anywhere you shop, online or in person. Currently in final review with Apple and Google; public launch is imminent.</p>
+
+    <div class="install-buttons">
+      <span class="install-btn disabled">iOS — App Store review</span>
+      <span class="install-btn disabled">Android — Play Store review</span>
+    </div>
+    <p style="font-size: 14px; color: var(--muted);">Want to know the moment it goes live? <a href="/contact.html">Drop us a note</a> and we'll email you when it ships.</p>
+
+    <div class="video-grid">
+      <!-- VIDEO SLOT: install-ios.mp4 (9:16, ~15s) — phone-native: search App Store, install, open, one-line "you're in". -->
+      <div class="video-card">
+        <div class="video-frame">
+          <div class="video-placeholder">
+            <span class="play" aria-hidden="true"></span>
+            <span class="soon">Video · coming soon</span>
+            <p class="caption">Installing on iPhone</p>
+          </div>
+        </div>
+        <div class="label">Install on iOS</div>
+        <div class="duration">~15 seconds · phone</div>
+      </div>
+      <!-- VIDEO SLOT: install-android.mp4 (9:16, ~15s) — phone-native: search Play Store, install, open. -->
+      <div class="video-card">
+        <div class="video-frame">
+          <div class="video-placeholder">
+            <span class="play" aria-hidden="true"></span>
+            <span class="soon">Video · coming soon</span>
+            <p class="caption">Installing on Android</p>
+          </div>
+        </div>
+        <div class="label">Install on Android</div>
+        <div class="duration">~15 seconds · phone</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §2 SCORE A PRODUCT ──────────────────────────────────────────────── -->
+<section class="s-section" id="score">
+  <div class="wrap">
+    <h2>Score a product</h2>
+    <p class="section-lede">On desktop the extension does the work for you — just browse. On mobile you have five ways to score, depending on where you are and what you're holding.</p>
+
+    <!-- Extension flow -->
+    <div class="s-card">
+      <h3 style="margin-top: 0;">On the extension — it's automatic</h3>
+      <p>The extension runs quietly on every Amazon, Target, and Walmart product page. When it recognizes a product, it displays a badge in the top-right of the page with:</p>
+      <ul>
+        <li><strong>An overall trust label</strong> — colored ring around the score summarizing how much of the value chain avoids concerning jurisdictions.</li>
+        <li><strong>Four rows</strong> — Made in / Ships from / Retailer / Money goes to, each with a country flag and a confidence percentage.</li>
+        <li><strong>Ultimate parent</strong> — if the seller is owned by a larger company, who that is (e.g. many brands roll up to a handful of holding companies).</li>
+      </ul>
+      <p>Click the badge to expand it. Click "How was this scored?" inside to see every source we used.</p>
+
+      <div class="video-grid wide">
+        <!-- VIDEO SLOT: extension-in-action.mp4 (16:9, ~25s) — desktop: navigate to Amazon product, badge fades in, hover to expand, show 4 rows + Ultimate. -->
+        <div class="video-card video-card--wide">
+          <div class="video-frame">
+            <div class="video-placeholder">
+              <span class="play" aria-hidden="true"></span>
+              <span class="soon">Video · coming soon</span>
+              <p class="caption">The badge in action on Amazon</p>
+            </div>
+          </div>
+          <div class="label">Extension on a product page</div>
+          <div class="duration">~25 seconds · desktop</div>
+        </div>
+        <!-- VIDEO SLOT: extension-popup.mp4 (16:9, ~30s) — desktop: click toolbar icon, walk through popup, methodology, contest, recent history. -->
+        <div class="video-card video-card--wide">
+          <div class="video-frame">
+            <div class="video-placeholder">
+              <span class="play" aria-hidden="true"></span>
+              <span class="soon">Video · coming soon</span>
+              <p class="caption">Popup deep-dive</p>
+            </div>
+          </div>
+          <div class="label">Using the popup menu</div>
+          <div class="duration">~30 seconds · desktop</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile flows -->
+    <h3>On mobile — five ways in</h3>
+    <p>Same scoring engine, different starting points. Pick whichever matches where you are.</p>
+
+    <div class="s-grid-2">
+
+      <div class="s-card">
+        <h4 style="margin-top: 0;">1. Share from the Amazon app (or any browser)</h4>
+        <p>In the Amazon app, tap Share on a product → pick <strong>Product Origin Checker</strong>. The app opens with the score already loading. Works with Amazon's short a.co links, full Amazon URLs, Target /p/ URLs, and Walmart /ip/ URLs.</p>
+        <div class="video-grid" style="margin: 12px 0 4px;">
+          <!-- VIDEO SLOT: mobile-share.mp4 (9:16, ~20s) — phone: Amazon app product page, tap Share, tap our icon, app opens showing the score. -->
+          <div class="video-card">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Share from Amazon</p>
+              </div>
+            </div>
+            <div class="label">Share sheet flow</div>
+            <div class="duration">~20 seconds · phone</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-card">
+        <h4 style="margin-top: 0;">2. Scan a barcode in store</h4>
+        <p>Tap <strong>Scan barcode</strong>, point at any UPC or EAN. Works on grocery, hardware, and household products — anything with a standard retail barcode.</p>
+        <div class="video-grid" style="margin: 12px 0 4px;">
+          <!-- VIDEO SLOT: mobile-barcode.mp4 (9:16, ~20s) — phone: home → Scan barcode → point at product barcode → result appears with country flags. -->
+          <div class="video-card">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Barcode scan at the shelf</p>
+              </div>
+            </div>
+            <div class="label">In-store barcode</div>
+            <div class="duration">~20 seconds · phone</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-card">
+        <h4 style="margin-top: 0;">3. Snap a photo of the product</h4>
+        <p>For anything without a scannable barcode (packaging, restaurant menus, appliances) tap <strong>Snap product</strong>. The photo is sent for identification and scored just like a barcode.</p>
+        <div class="video-grid" style="margin: 12px 0 4px;">
+          <!-- VIDEO SLOT: mobile-photo.mp4 (9:16, ~20s) — phone: home → Snap product → framed shot → identified → scored. -->
+          <div class="video-card">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Photo identification</p>
+              </div>
+            </div>
+            <div class="label">Photo lookup</div>
+            <div class="duration">~20 seconds · phone</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-card">
+        <h4 style="margin-top: 0;">4. Paste a URL</h4>
+        <p>Copy any Amazon, Target, or Walmart product URL. Open the app, paste in the top field, hit Enter. Great for links people text you.</p>
+        <div class="video-grid" style="margin: 12px 0 4px;">
+          <!-- VIDEO SLOT: mobile-paste.mp4 (9:16, ~15s) — phone: copy URL from Messages, open app, paste, score. -->
+          <div class="video-card">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Paste any product link</p>
+              </div>
+            </div>
+            <div class="label">Paste URL</div>
+            <div class="duration">~15 seconds · phone</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-card">
+        <h4 style="margin-top: 0;">5. Search + bookmarks</h4>
+        <p>Search anything you've scored before by title or brand. Long-press any past scan to save it as a bookmark — tap the star chip to see only your saved products.</p>
+        <div class="video-grid" style="margin: 12px 0 4px;">
+          <!-- VIDEO SLOT: mobile-search-bookmarks.mp4 (9:16, ~20s) — phone: type in search, results filter, long-press to bookmark, star chip on. -->
+          <div class="video-card">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Search and bookmarking</p>
+              </div>
+            </div>
+            <div class="label">Search + bookmarks</div>
+            <div class="duration">~20 seconds · phone</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="callout tip">
+      <span class="icon">✓</span>
+      <div><strong>Every result works the same way.</strong> Whether you shared, scanned, photographed, pasted, or searched — you land on the same result screen with the same four rows, the same confidence, and the same "How was this scored?" breakdown.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §3 UNDERSTAND THE SCORE ────────────────────────────────────────── -->
+<section class="s-section" id="understand">
+  <div class="wrap">
+    <h2>Understand the score</h2>
+    <p class="section-lede">The most common support question isn't "how do I install" — it's "why did you say that?" Here's what every number and flag on the score card means.</p>
+
+    <h3>The four indicators</h3>
+    <p>Every product is scored across four questions. They can each point at a different country, and often do.</p>
+    <dl class="defs">
+      <dt><span class="badge">1</span> Made in</dt>
+      <dd>Where the physical product was manufactured. Comes from labels, brand disclosures, customs records, trademark filings, and brand-family knowledge. Not the same as where it's assembled or shipped from.</dd>
+
+      <dt><span class="badge">2</span> Ships from</dt>
+      <dd>Where the actual inventory sits before you buy it. On Amazon this is often a US fulfillment center regardless of manufacture. Useful for supply-chain and shipping-emissions context, not for who profits.</dd>
+
+      <dt><span class="badge">3</span> Retailer</dt>
+      <dd>The company that takes your payment. Amazon.com, Target, Walmart, or a third-party seller. If a third-party marketplace seller — where they're based.</dd>
+
+      <dt><span class="badge">4</span> Money goes to</dt>
+      <dd>The <em>beneficial</em> owner — the parent company or brand family that ultimately receives the profit. Many household brand names roll up to a small number of multinational holding groups. We surface the ultimate parent, not just the label on the box.</dd>
+    </dl>
+
+    <h3>What confidence means</h3>
+    <p>Each indicator gets a percentage. Higher means we found more corroborating evidence from independent sources; lower means we found some evidence but not enough to be sure. A confidence below 40% is shown but flagged as tentative — treat it as a lead, not a conclusion.</p>
+
+    <h3>What "Not specified" means</h3>
+    <p>Sometimes a row shows "Not specified" instead of a country. This means <strong>none</strong> of our sources — product page, seller history, brand records, trademark filings, customs data, category priors — surfaced a confident answer for that indicator. It's an honest gap, not a guess. We'd rather show nothing than invent an answer.</p>
+
+    <h3>What "Ultimately: [company]" means</h3>
+    <p>The retailer or brand name you see on a listing is often part of a larger corporate family. "Ultimately: [company]" tells you the top-of-chain parent. This matters for the <strong>Money goes to</strong> indicator, because who profits from a purchase isn't always the name on the label.</p>
+
+    <div class="callout">
+      <span class="icon">→</span>
+      <div>The full breakdown of sources, weights, and edge cases lives in our <a href="/methodology.html">methodology</a>. If a score looks wrong, checking there first often explains it — and if it doesn't, we want to hear from you.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── §4 REPORT AN ISSUE ─────────────────────────────────────────────── -->
+<section class="s-section" id="report">
+  <div class="wrap">
+    <h2>Report an issue</h2>
+    <p class="section-lede">Wrong scores, missing features, weird bugs, privacy concerns — every one of these matters and every one has a direct path in. Pick the one that fits and skip the guessing game.</p>
+
+    <div class="s-grid-2">
+
+      <div class="s-card">
+        <h3 style="margin-top: 0;">A score is wrong</h3>
+        <p>Most common. If a product's country or confidence looks off, this is the fastest way to get it corrected.</p>
+        <ol class="steps">
+          <li><strong>Click the Contest button</strong> in the extension popup (available on Pro; see <a href="/pricing.html">pricing</a>).</li>
+          <li>Tell us <em>which indicator</em> is wrong (Made in, Ships from, Retailer, or Money goes to) and what you believe the right answer is.</li>
+          <li>If you have a source, paste it in — a product-page screenshot, a manufacturer's website, an official disclosure. We use these directly.</li>
+          <li>We review contested scores manually and update the brand-family record when we agree. Corrections propagate to every future scan of that product or brand.</li>
+        </ol>
+        <p style="margin-top: 8px;">On Free tier or want to send us a longer note? Email <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a> with the product URL and the correction.</p>
+
+        <div class="video-grid" style="margin-top: 12px;">
+          <!-- VIDEO SLOT: contest-a-score.mp4 (9:16 or 16:9, ~25s) — screencast: click badge, click Contest, fill form, submit. -->
+          <div class="video-card video-card--square">
+            <div class="video-frame">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true"></span>
+                <span class="soon">Video · coming soon</span>
+                <p class="caption">Contesting a score</p>
+              </div>
+            </div>
+            <div class="label">How to contest</div>
+            <div class="duration">~25 seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-card">
+        <h3 style="margin-top: 0;">Something is broken</h3>
+        <p>Extension won't load, badge stuck spinning, mobile app crashes, a button doesn't do anything — those are bugs, and we squash them fast.</p>
+        <ol class="steps">
+          <li>Open the <a href="/contact.html">contact form</a>.</li>
+          <li>Pick <strong>"Bug report"</strong> as the topic.</li>
+          <li>Include: the URL where it happened, your browser or OS, and — if you can — a screenshot or a description of what you were trying to do.</li>
+          <li>We reply within two business days. Serious bugs get a same-day acknowledgement.</li>
+        </ol>
+      </div>
+
+      <div class="s-card">
+        <h3 style="margin-top: 0;">A retailer or brand isn't supported</h3>
+        <p>We currently score Amazon, Target, and Walmart. Want us to add another? Or noticed a brand we've never seen? Tell us — every request feeds the backlog.</p>
+        <ul>
+          <li>Use the <a href="/contact.html">contact form</a>, pick <strong>"Feature request"</strong>.</li>
+          <li>Name the retailer or brand and, if it's a retailer, share the country you shop from. Country availability matters — some sites have per-country stock, pricing, and origin data.</li>
+        </ul>
+      </div>
+
+      <div class="s-card">
+        <h3 style="margin-top: 0;">Privacy or data concern</h3>
+        <p>Anything about what we store, how we use it, deletion requests, or GDPR/CCPA rights.</p>
+        <p>Email <a href="mailto:privacy@realproductorigin.com">privacy@realproductorigin.com</a> directly — this reaches a person, not a ticket queue. See our <a href="/privacy.html">privacy policy</a> for the full picture of what we collect and don't.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── §5 TROUBLESHOOTING ─────────────────────────────────────────────── -->
+<section class="s-section" id="troubleshoot">
+  <div class="wrap">
+    <h2>Troubleshooting</h2>
+    <p class="section-lede">The specific problems people run into most often. Click any question to expand.</p>
+
+    <details class="trouble">
+      <summary>The extension badge doesn't appear on a product page</summary>
+      <div class="trouble-body">
+        <p>Try in this order:</p>
+        <ol>
+          <li><strong>Reload the page.</strong> Amazon in particular does a lot of client-side navigation, and the extension sometimes needs a fresh page load to attach.</li>
+          <li><strong>Check the URL.</strong> The extension only runs on individual product pages (URLs containing <code>/dp/</code>, <code>/gp/product/</code>, <code>/p/</code>, or <code>/ip/</code>). Category pages, search results, and cart pages are skipped intentionally.</li>
+          <li><strong>Check the category.</strong> We skip a set of categories where country-of-origin scoring doesn't apply — books, digital content, Prime Video, Kindle, apps, gift cards. That's deliberate, not a bug.</li>
+          <li><strong>Confirm the extension is enabled.</strong> Right-click the toolbar icon → Manage extension → make sure the switch is on.</li>
+          <li>Still nothing? <a href="/contact.html">Send us the URL</a> and we'll investigate.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>Every product I check shows "Unknown"</summary>
+      <div class="trouble-body">
+        <p>This usually means the extension can't reach our backend. Possible causes:</p>
+        <ul>
+          <li>Corporate or school network blocking <code>api.realproductorigin.com</code> — check with your IT team.</li>
+          <li>Ad-blocker or privacy extension over-blocking — try disabling it on the retailer page temporarily.</li>
+          <li>Backend outage on our side (rare) — check our <a href="/#status">status</a> or ask us.</li>
+        </ul>
+        <p>If the same product later scores correctly for other users, it's almost certainly a network-side block.</p>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>I can't sign in — it just loops back to the sign-in page</summary>
+      <div class="trouble-body">
+        <p>The magic link should sign you in automatically when you click it in your email. If it doesn't:</p>
+        <ol>
+          <li><strong>Check which browser you clicked the link in</strong> — the link only signs you in in the browser where you requested it. If it opened in a different default browser, use the "paste token" option on the sign-in page to complete manually.</li>
+          <li><strong>Check the extension is unlocked</strong> — after signing in on the marketing site, the extension picks up the session on next popup open. Close and reopen the popup.</li>
+          <li><strong>Try incognito</strong> — if a strict tracking-protection setting is blocking the handoff, incognito bypasses it long enough to identify the culprit.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>I hit "quota exceeded" on the Free tier</summary>
+      <div class="trouble-body">
+        <p>Free tier includes 20 scans per rolling 30-day window. The counter resets on the anniversary of each scan, not on the first of the month. Options:</p>
+        <ul>
+          <li>Wait for older scans to age out (each individual scan re-frees itself 30 days after it was made).</li>
+          <li>Upgrade to Basic ($3/mo) for 200 scans, Pro ($9/mo) for unlimited scans plus contests and priority support, or Premium for team features. See <a href="/pricing.html">pricing</a>.</li>
+          <li>Redeem an <strong>RPO-XXXX-XXXX access code</strong> if you have one. Codes stack on top of any paid plan.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>Sharing from the Amazon app on mobile shows an error</summary>
+      <div class="trouble-body">
+        <p>You want the latest app version installed — earlier builds only supported full Amazon URLs, but the Amazon app usually shares a shortened <code>a.co</code> link. Recent builds resolve any shortener (a.co, amzn.to, t.co, bit.ly, and more) automatically.</p>
+        <p>If you're on the latest version and still see an error, please <a href="/contact.html">send us</a> the exact URL that failed and the error text. We add shorteners as we spot them.</p>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>A score in the extension doesn't match a score in the mobile app for the same product</summary>
+      <div class="trouble-body">
+        <p>This is possible if the mobile flow provided less information than the extension did. The extension scrapes the entire product page — title, seller, breadcrumbs, brand blurb, technical details. A mobile share (or barcode / photo lookup) starts from just an identifier and asks our backend to figure out the rest.</p>
+        <p>When mobile has fewer inputs, the score is honest about being less certain — you'll see lower confidence numbers, more "Not specified" rows, or a straight "Unknown product" for obscure items we don't recognize. If a mobile score comes back suspiciously wrong, the extension will typically get closer. Cross-check by opening the same product on desktop.</p>
+        <p>We don't cache mobile-only scores — every mobile lookup runs fresh — precisely so a less-complete guess never poisons the shared cache used by extension users.</p>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>The mobile app camera won't open for barcode or photo</summary>
+      <div class="trouble-body">
+        <p>You'll need to grant camera permission the first time you tap Scan or Snap. If you accidentally denied it:</p>
+        <ul>
+          <li><strong>iOS</strong> — Settings → Product Origin Checker → Camera → toggle on.</li>
+          <li><strong>Android</strong> — long-press the app icon → App info → Permissions → Camera → Allow.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="trouble">
+      <summary>I purchased a plan but it isn't reflected</summary>
+      <div class="trouble-body">
+        <p>Stripe usually posts the upgrade to your account within a few seconds. If after a couple of minutes your account still shows Free or the old tier:</p>
+        <ol>
+          <li>Refresh your <a href="/subscribe/account.html">account page</a>.</li>
+          <li>Sign out and back in on the extension popup — the extension caches your plan for the current popup session.</li>
+          <li>If it still hasn't updated, email <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a> with the email you used at checkout and we'll trace it manually.</li>
+        </ol>
+        <p>For refund requests see the <a href="/refunds.html">refund policy</a>.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ── §6 RETAILER + BROWSER SUPPORT ──────────────────────────────────── -->
+<section class="s-section">
+  <div class="wrap">
+    <h2>What's supported right now</h2>
+    <p class="section-lede">Snapshot of which retailers work on which surface today. Everything marked <em>coming</em> is on the roadmap; <a href="/contact.html">tell us</a> which one you'd use most and we prioritize accordingly.</p>
+
+    <h3>Retailers</h3>
+    <table class="supt">
+      <thead>
+        <tr>
+          <th>Retailer</th>
+          <th>Extension</th>
+          <th>Mobile app</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Amazon (US)</td><td><span class="yes">✓ Live</span></td><td><span class="yes">✓ Live</span></td></tr>
+        <tr><td>Target</td><td><span class="yes">✓ Live</span></td><td><span class="yes">✓ Live</span></td></tr>
+        <tr><td>Walmart</td><td><span class="yes">✓ Live</span></td><td><span class="yes">✓ Live</span></td></tr>
+        <tr><td>Best Buy</td><td><span class="soon">Coming</span></td><td><span class="soon">Coming</span></td></tr>
+        <tr><td>Home Depot / Lowe's</td><td><span class="soon">Coming</span></td><td><span class="soon">Coming</span></td></tr>
+        <tr><td>Barcode scan (any brand)</td><td><span class="no">—</span></td><td><span class="yes">✓ Live</span></td></tr>
+        <tr><td>Photo lookup (any product)</td><td><span class="no">—</span></td><td><span class="yes">✓ Live</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Browsers</h3>
+    <table class="supt">
+      <thead>
+        <tr>
+          <th>Browser</th>
+          <th>Status</th>
+          <th>Where to get it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Chrome</td><td><span class="yes">✓ Live</span></td><td><a href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Chrome Web Store</a></td></tr>
+        <tr><td>Microsoft Edge</td><td><span class="yes">✓ Live</span></td><td><a href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Chrome Web Store</a></td></tr>
+        <tr><td>Brave</td><td><span class="yes">✓ Live</span></td><td><a href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Chrome Web Store</a></td></tr>
+        <tr><td>Firefox</td><td><span class="soon">In review</span></td><td>Awaiting Mozilla approval</td></tr>
+        <tr><td>Safari</td><td><span class="soon">Planned</span></td><td>Timing depends on Safari extension port</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── §7 CONTACT ─────────────────────────────────────────────────────── -->
+<section class="s-section" id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p class="section-lede">Real people, real inboxes. Pick the right one and skip the routing delay.</p>
+
+    <div class="contacts">
+      <div class="contact-card">
+        <h4>General questions</h4>
+        <a href="mailto:hello@realproductorigin.com">hello@realproductorigin.com</a>
+        <p>Anything that doesn't fit the other boxes. We reply within 2 business days.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Privacy &amp; data</h4>
+        <a href="mailto:privacy@realproductorigin.com">privacy@realproductorigin.com</a>
+        <p>Deletion, access, or any question about our data practices.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Legal</h4>
+        <a href="mailto:legal@realproductorigin.com">legal@realproductorigin.com</a>
+        <p>Notices, disputes, and formal legal correspondence.</p>
+      </div>
+      <div class="contact-card">
+        <h4>Press &amp; media</h4>
+        <a href="mailto:press@realproductorigin.com">press@realproductorigin.com</a>
+        <p>Interviews, quotes, and factual queries about our methodology.</p>
+      </div>
+    </div>
+
+    <div class="callout tip" style="margin-top: 28px;">
+      <span class="icon">✓</span>
+      <div>Prefer a form? The <a href="/contact.html">contact page</a> has categorized topics (Bug, Feature request, Feedback, etc.) that route the same messages to the right person.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/#install">Browser extension</a>
+      <a href="/#mobile">Mobile app</a>
+      <a href="/methodology.html">How it works</a>
+      <a href="/why.html">Why it matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.<br><span style="font-size:12px; color: var(--muted); display:inline-block; margin-top:6px;">A portion of proceeds donated to human-rights work in China and around the world.</span></div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "My account"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+</script>
+
+</body>
+</html>
