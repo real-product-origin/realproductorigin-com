@@ -200,6 +200,14 @@
   .s-section ol, .s-section ul { padding-left: 22px; margin: 0 0 20px; }
   .s-section li { margin-bottom: 6px; }
   .s-section li::marker { color: var(--gold); }
+  /* Cap paragraph + list reading width even when the parent container
+     is a wide .wrap-wide (1180px). Cards, grids, tables ignore this. */
+  .s-section > .wrap-wide > p,
+  .s-section > .wrap-wide > ol,
+  .s-section > .wrap-wide > ul,
+  .s-section > .wrap-wide > h3,
+  .s-section > .wrap-wide > .defs,
+  .s-section > .wrap-wide > .callout { max-width: 780px; }
 
   /* ── Cards & layout ───────────────────────────────────────────────────── */
   .s-card {
@@ -592,7 +600,7 @@
 
 <!-- ── §1 INSTALL ──────────────────────────────────────────────────────── -->
 <section class="s-section" id="install">
-  <div class="wrap-wide" style="max-width: 900px; padding: 0 24px;">
+  <div class="wrap-wide">
     <h2>Install</h2>
     <p class="section-lede">Real Product Origin lives in two places — a free browser extension that runs on product pages as you shop, and a mobile app that scores anything you share, scan, or search. You can use either or both.</p>
 
@@ -673,7 +681,7 @@
 
 <!-- ── §2 SCORE A PRODUCT ──────────────────────────────────────────────── -->
 <section class="s-section" id="score">
-  <div class="wrap">
+  <div class="wrap-wide">
     <h2>Score a product</h2>
     <p class="section-lede">On desktop the extension does the work for you — just browse. On mobile you have five ways to score, depending on where you are and what you're holding.</p>
 
@@ -866,11 +874,11 @@
 
 <!-- ── §4 REPORT AN ISSUE ─────────────────────────────────────────────── -->
 <section class="s-section" id="report">
-  <div class="wrap-wide" style="max-width: 900px; padding: 0 24px;">
+  <div class="wrap-wide">
     <h2>Report an issue</h2>
     <p class="section-lede">Wrong scores, missing features, weird bugs, privacy concerns — every one of these matters and every one has a direct path in. Pick the one that fits and skip the guessing game.</p>
 
-    <div class="s-grid-2" style="grid-template-columns: 1fr; gap: 24px;">
+    <div class="s-grid-2">
 
       <div class="s-card">
         <h3 style="margin-top: 0;">A score is wrong</h3>
@@ -931,7 +939,7 @@
 
 <!-- ── §5 TROUBLESHOOTING ─────────────────────────────────────────────── -->
 <section class="s-section" id="troubleshoot">
-  <div class="wrap">
+  <div class="wrap-wide">
     <h2>Troubleshooting</h2>
     <p class="section-lede">The specific problems people run into most often. Click any question to expand.</p>
 
@@ -1031,7 +1039,7 @@
 
 <!-- ── §6 RETAILER + BROWSER SUPPORT ──────────────────────────────────── -->
 <section class="s-section">
-  <div class="wrap">
+  <div class="wrap-wide">
     <h2>What's supported right now</h2>
     <p class="section-lede">Snapshot of which retailers work on which surface today. Everything marked <em>coming</em> is on the roadmap; <a href="/contact.html">tell us</a> which one you'd use most and we prioritize accordingly.</p>
 
