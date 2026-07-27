@@ -268,6 +268,45 @@
   }
   .l-cta-below a:hover { background: #d9b25f; }
 
+  /* ── Unknown-product state ───────────────────────────────────────────── */
+  .l-unknown-icon {
+    font-size: 42px; line-height: 1;
+    margin-bottom: 16px;
+  }
+  .l-unknown-title {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 24px; line-height: 1.2;
+    color: var(--ink-deep);
+    margin: 0 0 14px;
+  }
+  .l-unknown-body {
+    font-size: 15px; line-height: 1.6; color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+  .l-unknown-body code {
+    background: var(--bg-cream-deep);
+    padding: 1px 6px; border-radius: 4px;
+    font-size: 13px;
+    word-break: break-all;
+  }
+  .l-unknown-cta-row {
+    margin-top: 20px;
+    display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  }
+  .l-unknown-btn {
+    padding: 12px 22px;
+    background: var(--ink-deep); color: #fff;
+    font-family: var(--sans); font-weight: 700; font-size: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .l-unknown-btn:hover { background: var(--accent); }
+  .l-unknown-link {
+    color: var(--accent); font-size: 14px;
+    text-decoration: none;
+  }
+  .l-unknown-link:hover { text-decoration: underline; }
+
   .hidden { display: none !important; }
 </style>
 </head>
@@ -320,6 +359,20 @@
       <span class="spinner"></span> Looking up this product — first-time scores take 10–20 seconds while we gather evidence from public sources.
     </div>
     <div id="lookup-error" class="l-status err hidden"></div>
+    <div id="lookup-unknown" class="l-card hidden">
+      <div class="l-unknown-icon">🔍</div>
+      <h2 class="l-unknown-title">We couldn't identify this product</h2>
+      <p class="l-unknown-body">
+        Our web lookup works best for products we've already scored or well-known brands (iPhone, Nike, KitchenAid). We couldn't find enough about <code id="lookup-unknown-id"></code> from the URL alone to give you a real answer — and we'd rather tell you that than guess.
+      </p>
+      <p class="l-unknown-body">
+        <strong>For any product on the page you're viewing, install the browser extension</strong> — it reads the real page content (title, brand, seller, specs) and gives you a full score with cited sources in a few seconds.
+      </p>
+      <div class="l-unknown-cta-row">
+        <a href="/#install" class="l-unknown-btn">Install the extension</a>
+        <a href="/support.html" class="l-unknown-link">Report a product we should score →</a>
+      </div>
+    </div>
     <div id="lookup-card" class="l-card hidden">
       <div class="l-card-head">
         <div id="l-image" class="l-card-image blank" aria-hidden="true">📦</div>
@@ -434,7 +487,25 @@ function showState(state) {
   loadingEl.classList.toggle("hidden", state !== "loading");
   errorEl.classList.toggle("hidden",   state !== "error");
   cardEl.classList.toggle("hidden",    state !== "ok");
-  ctaEl.classList.toggle("hidden",     state !== "ok");
+  ctaEl.classList.toggle("hidden",     state !== "ok" && state !== "unknown");
+  const unknownEl = document.getElementById("lookup-unknown");
+  if (unknownEl) unknownEl.classList.toggle("hidden", state !== "unknown");
+}
+
+function isUnknownProduct(r) {
+  // Server returns "Unknown product <ID>" as title + all indicators as
+  // country_code "??" with 0 confidence when it couldn't identify the
+  // product at all (no scrape, and Claude has no training-data knowledge
+  // of this specific ID). Treating this as a valid "score with 4x Not
+  // specified" is misleading — surface a targeted "can't identify"
+  // message + install CTA instead.
+  if (!r) return true;
+  const titleUnknown = (r.title || "").startsWith("Unknown product ");
+  const allBlank = ["made_in", "ships_from", "sold_by", "payment_goes_to"].every(k => {
+    const s = r[k];
+    return !s || !s.country_code || s.country_code === "??" || (s.confidence || 0) < 1;
+  });
+  return titleUnknown && allBlank;
 }
 
 function renderResult(r) {
@@ -547,9 +618,17 @@ async function lookup(rawUrl) {
     }
 
     const data = await resp.json();
+    if (isUnknownProduct(data)) {
+      // Populate the unknown card with the URL/ASIN they tried
+      const displayId = data.asin || url;
+      const idEl = document.getElementById("lookup-unknown-id");
+      if (idEl) idEl.textContent = displayId;
+      showState("unknown");
+      setTimeout(() => document.getElementById("lookup-unknown").scrollIntoView({behavior: "smooth", block: "start"}), 60);
+      return;
+    }
     renderResult(data);
     showState("ok");
-    // Scroll the result into view on mobile.
     setTimeout(() => cardEl.scrollIntoView({behavior: "smooth", block: "start"}), 60);
   } catch (e) {
     showError("Network error — couldn't reach the scoring service. Check your connection and try again.");
