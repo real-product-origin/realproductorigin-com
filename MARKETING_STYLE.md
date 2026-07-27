@@ -111,6 +111,29 @@ writing. Key rules:
 - **Numbers are more honest than adjectives.** Prefer "12 retailers"
   over "many retailers"; "$4.99/mo" over "affordable".
 
+## Voice — AI messaging
+
+The tool is Claude AI + cited public sources. Both matter equally.
+When naming AI:
+
+- **"AI-powered" is OK in kickers, headlines, and category signals.**
+  It's the phrase shoppers actually recognize and search for. Fine to
+  use where the audience needs to know at a glance that this is an
+  AI-based tool (hero kicker, ad copy, meta descriptions).
+- **In prose, prefer specific verbs.** Say what the AI does — "reads
+  the product page", "cross-checks trademark filings", "weighs
+  evidence" — rather than "AI-powered scoring" as a stand-alone
+  phrase. Specific verbs earn trust; the label alone sounds like
+  marketing.
+- **Name the model by name.** Say "Claude" or "Claude (Anthropic's
+  frontier model)". Not "our proprietary AI", not just "AI" when
+  space allows the specific name.
+- **Always pair AI mention with sources.** AI alone = magic. Sources
+  alone = tedious. Both together = "we did the work." Rule of thumb:
+  if a paragraph mentions the AI, it should also mention at least one
+  concrete source category (trademark filings, customs records,
+  corporate registries, seller storefronts, etc.).
+
 ## Retailer list — say it in full, in this order
 
 Whenever you list the supported retailers, say all 12 in this exact
