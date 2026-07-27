@@ -105,7 +105,7 @@
     <p class="hint">Good for 20 minutes.</p>
     <div>
       <label for="code" style="text-align: center; display: block; margin-bottom: 6px;">Sign-in code</label>
-      <input type="text" id="code" name="code" class="code-input" inputmode="numeric" autocomplete="one-time-code" pattern="\d{6}" maxlength="6" placeholder="123456" required>
+      <input type="text" id="code" name="code" class="code-input" inputmode="numeric" autocomplete="one-time-code" pattern="\d{6}" maxlength="20" placeholder="123456" required>
     </div>
     <button class="btn btn-primary" type="submit" id="code-submit-btn">Sign in</button>
     <div class="error" id="code-error" style="display:none;"></div>
@@ -316,7 +316,10 @@ document.getElementById("code-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const btn = document.getElementById("code-submit-btn");
   const err = document.getElementById("code-error");
-  const code = codeInput.value.trim();
+  // Belt-and-suspenders: strip anything non-digit (spaces from email
+  // copy-paste, dashes, brackets, unicode whitespace, etc.) then take
+  // the first 6 digits.
+  const code = codeInput.value.replace(/\D/g, "").slice(0, 6);
   if (!/^\d{6}$/.test(code)) return;  // wait for 6 digits
   btn.disabled = true; btn.textContent = "Signing in...";
   err.style.display = "none";
