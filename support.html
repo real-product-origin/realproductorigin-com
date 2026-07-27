@@ -201,9 +201,11 @@
   .s-section li { margin-bottom: 6px; }
   .s-section li::marker { color: var(--gold); }
   /* Cap paragraph + list reading width even when the parent container
-     is a wide .wrap-wide (1180px). Cards, grids, tables ignore this. */
+     is a wide .wrap-wide (1180px). Cards, grids, tables ignore this.
+     Numbered steps ARE exempt — each step is a boxed card with its
+     own visual chunking, so capping them leaves empty right-side space. */
   .s-section > .wrap-wide > p,
-  .s-section > .wrap-wide > ol,
+  .s-section > .wrap-wide > ol:not(.steps),
   .s-section > .wrap-wide > ul,
   .s-section > .wrap-wide > h3,
   .s-section > .wrap-wide > .defs,
@@ -878,7 +880,10 @@
     <h2>Report an issue</h2>
     <p class="section-lede">Wrong scores, missing features, weird bugs, privacy concerns — every one of these matters and every one has a direct path in. Pick the one that fits and skip the guessing game.</p>
 
-    <div class="s-grid-2">
+    <!-- Full-width cards (single column) — each subsection has numbered
+         steps and copy that reads better across the full width than in
+         a 2-3 column grid. -->
+    <div class="s-grid-2" style="grid-template-columns: 1fr;">
 
       <div class="s-card">
         <h3 style="margin-top: 0;">A score is wrong</h3>
