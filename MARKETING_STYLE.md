@@ -1,0 +1,182 @@
+# Marketing site — style + editing brief
+
+This doc is the self-contained brief for anyone editing the
+`realproductorigin-com` repo (Bro thread, human collaborators, future
+Claude sessions). Read this before making changes.
+
+The site is a static HTML site deployed via Cloudflare Pages. No build
+step, no framework. Every page is a self-contained `.html` file that
+links to `assets/styles.css` and inlines any page-specific CSS in a
+`<style>` block. Cloudflare Pages auto-deploys on push to `main`.
+
+## Design system (CSS variables)
+
+All defined at the top of `assets/styles.css`. Use these — never
+hardcode a color or font:
+
+| Variable            | Role                                                | Value       |
+|---------------------|-----------------------------------------------------|-------------|
+| `--serif`           | Hero + section headings                             | Playfair Display, Georgia, serif |
+| `--sans`            | Body copy, nav, buttons                             | Inter, system-ui, sans-serif |
+| `--ink-deep`        | Darkest text — headings, dark backgrounds           | Deep near-black |
+| `--ink-2`           | Body text (default paragraph color)                 | Dark gray |
+| `--ink-3`           | Softer body — subheads, lede paragraphs             | Medium gray |
+| `--muted`           | Metadata, captions, faint labels                    | Light gray |
+| `--gold`            | Eyebrow labels, subtle accents                      | Warm gold |
+| `--accent`          | Primary CTA color — buttons, key links              | Brand red |
+| `--bg-cream`        | Section backgrounds (light cream)                   | Cream |
+| `--bg-cream-deep`   | Gradient bottom of hero sections                    | Deeper cream |
+| `--bg-soft`         | Alternating section background                      | Off-white |
+| `--border`          | Card borders, hairline separators                   | Neutral gray |
+| `--green`           | Success indicator (list checkmarks, positive stats) | Muted green |
+
+## Nav (top)
+
+Every page must have this exact header block, unchanged:
+
+```html
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <!-- The 160x160 logo SVG — see any existing page for the full markup -->
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+```
+
+**Do NOT reorder nav links.** The mobile CSS media query hides
+`nav a:nth-child(3)` and `nav a:nth-child(4)` at ≤ 720px viewport;
+those slots are load-bearing.
+
+## Footer
+
+Every page must have this exact footer block, unchanged. Update via a
+find-and-replace across all pages if a link needs changing. See any
+existing page (e.g. `products.html`) for the full markup — it's a
+4-column grid: brand-block / Product / Company / Legal.
+
+## Section patterns
+
+- **`.p-hero`** — first section of the page, cream gradient background,
+  contains eyebrow + h1 + lede paragraph. Copy this pattern from any
+  existing page (e.g. `products.html`) rather than reinventing.
+- **`.p-section`** — subsequent content sections. Even-numbered
+  sections get `--bg-soft` automatically via `:nth-of-type(even)`.
+- **`.wrap`** — content-width container (max ~960px)
+- **`.wrap-wide`** — wider content (max ~1160px), for grids and cards
+
+## Typography rules
+
+- **Serif** (`--serif`) for h1 and h2 hero headings, always with
+  `letter-spacing: -0.02em` and `font-weight: 700`. Use `clamp()` for
+  responsive sizing:
+  ```css
+  font-size: clamp(30px, 4vw, 44px);
+  ```
+- **Sans-serif** (`--sans`) for everything else — body, buttons, nav,
+  captions, form controls.
+- **Eyebrow labels** — small ALL-CAPS gold text above hero h1:
+  ```css
+  font-family: var(--sans);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold);
+  ```
+
+## Voice
+
+The site's tone is deliberate. Read a few existing pages before
+writing. Key rules:
+
+- **Dry, factual, no marketing hype.** Never "unlock", "boost",
+  "supercharge", "delight", "seamless", "empower", "revolutionize".
+- **No exclamation points.** Anywhere. Ever.
+- **No trailing rhetorical questions** ("Why not try it today?", etc.)
+- **Say the boring true thing.** Not "instant scoring" — "answers in
+  a few seconds". Not "100% accurate" — "confidence bands that admit
+  what we don't know".
+- **Contractions are OK** ("you're", "we're", "don't"). Casual but not
+  cutesy.
+- **Numbers are more honest than adjectives.** Prefer "12 retailers"
+  over "many retailers"; "$4.99/mo" over "affordable".
+
+## Retailer list — say it in full, in this order
+
+Whenever you list the supported retailers, say all 12 in this exact
+order (matches what's in the extension manifest + backend):
+
+> Amazon, Target, Walmart, Home Depot, Lowe's, Wayfair, Best Buy,
+> Costco, Nordstrom, Macy's, Sephora, and RockAuto
+
+Do not abbreviate to "Amazon, Target, Walmart, and 9 more" or similar.
+The list feels shorter than 12 in the abstract; spelled-out feels
+substantial.
+
+## Pages that already exist
+
+Don't duplicate content. If your topic overlaps with an existing page,
+extend that page rather than creating a new one.
+
+- `index.html` — landing page (hero + install CTA + 5 short sections)
+- `products.html` — the 2 products (extension + mobile), what they
+  answer, retailer support grid, methodology
+- `why.html` — long-form essay: why product origin matters, cited
+- `pricing.html` — 4 tiers, feature matrix, supported retailers callout
+- `support.html` — install / usage / troubleshooting / contact
+- `about.html` — team + provenance
+- `contact.html` — contact form
+- `lookup.html` — paste-a-URL scoring for extension-less users
+- `refunds.html`, `privacy.html`, `terms.html` — legal (edit only when
+  legal counsel signs off)
+- `404.html` — the 404 page
+- `subscribe/*.html` — auth-related pages (see next section)
+- `MARKETING_STYLE.md` — this file
+- `README.md`
+
+## What NOT to touch
+
+These files are load-bearing. Ask before editing:
+
+- `subscribe/signin.html`, `subscribe/success.html`,
+  `subscribe/account.html` — auth flow, wired to backend + extension.
+  Touching them can break sign-in for real users.
+- `_redirects` — Cloudflare Pages redirect + 404 rules. Wrong syntax
+  here silently breaks SEO.
+- `sitemap.xml`, `robots.txt` — search-engine facing. Add new pages
+  when they ship; don't remove.
+- `assets/styles.css` — shared across all pages. A stray edit here
+  can cascade site-wide. If you need a page-specific style, inline it
+  in the page's `<style>` block, not here.
+
+## When you make a change
+
+- Test in a real browser at 375px, 720px, and 1200px viewport widths.
+  Use `python3 -m http.server` to serve locally (`.claude/launch.json`
+  sets this up).
+- Update `sitemap.xml` when you add a new page.
+- Update the nav link order in every page's `<header>` if adding a
+  new nav entry (all 12 pages need to match; positional CSS depends on
+  order).
+- Commit + push to `main`. Cloudflare Pages will deploy in ~1 minute.
+
+## Coordinating with other threads
+
+If a Claude Code session or Bro thread is also editing the marketing
+repo:
+
+- Announce which page you're working on in the shared thread before
+  starting.
+- Pull latest before starting a session (`git pull`).
+- Small commits are cheap. Push often. Merge conflicts on static HTML
+  are almost always trivial to resolve.
