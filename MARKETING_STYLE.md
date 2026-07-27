@@ -134,17 +134,37 @@ When naming AI:
   concrete source category (trademark filings, customs records,
   corporate registries, seller storefronts, etc.).
 
-## Retailer list — say it in full, in this order
+## Retailer list — short-form in prose, categorized grid on landing pages
 
-Whenever you list the supported retailers, say all 12 in this exact
-order (matches what's in the extension manifest + backend):
+**As of the 25-retailer batch (2026-07-27), we've moved away from
+listing every retailer inline.** With 25 supported sites, spelled-out
+prose lists became unreadable. Two rules now:
 
-> Amazon, Target, Walmart, Home Depot, Lowe's, Wayfair, Best Buy,
-> Costco, Nordstrom, Macy's, Sephora, and RockAuto
+**In prose / running text / SEO descriptions:**
+Use the short form: **"Amazon, Target, Walmart, and 22 other major
+retailers"** — headline the three biggest names, then acknowledge the
+count. If the audience needs specificity (privacy policy, terms), link
+to the products page's categorized grid instead of listing all 25.
 
-Do not abbreviate to "Amazon, Target, Walmart, and 9 more" or similar.
-The list feels shorter than 12 in the abstract; spelled-out feels
-substantial.
+**On landing pages (home, products, support, pricing):**
+Use the categorized grid — 6 groups:
+1. **General merchants** — Amazon, Target, Walmart, Costco, Best Buy
+2. **Home & Garden** — Home Depot, Lowe's, Wayfair, Crate & Barrel,
+   Williams-Sonoma, Pottery Barn, West Elm, Ace Hardware, Build.com
+3. **Apparel & Style** — Macy's, Nordstrom, Anthropologie, Free People
+4. **Beauty** — Sephora, Ulta Beauty
+5. **Outdoor & Sports** — REI, Patagonia, Backcountry, Sierra,
+   Bass Pro Shops, Cabela's
+6. **Auto & Rural** — Tractor Supply, AutoZone, RockAuto
+
+25 scrapers covering 29 domains total. Sister-brand groups
+(Williams-Sonoma trio, Bass Pro pair, URBN pair) share code
+under the hood.
+
+**The exact-order rule (kept for consistency in the short form):**
+When mentioning the three biggest names, always order **Amazon,
+Target, Walmart** — matches what shoppers recognize by market share
+and matches the manifest.json declaration order.
 
 ## Pages that already exist
 
