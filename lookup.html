@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Look up a product — Real Product Origin</title>
+<meta name="description" content="Paste a product link from Amazon, Target, Walmart, Home Depot, Lowe's, Wayfair, Best Buy, Costco, Nordstrom, Macy's, Sephora, or RockAuto — see where it's really made, who's selling it, and where your money goes. No install required.">
+<meta property="og:title" content="Look up a product — Real Product Origin">
+<meta property="og:description" content="Paste any product link and see its true country of origin — no browser extension needed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/lookup">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Look up a product — Real Product Origin">
+<meta name="twitter:description" content="Paste any product link and see its true country of origin — no browser extension needed.">
+<link rel="canonical" href="https://realproductorigin.com/lookup">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://realproductorigin.com/lookup",
+      "url": "https://realproductorigin.com/lookup",
+      "name": "Look up a product — Real Product Origin",
+      "description": "Paste a product link and see its true country of origin. No browser extension needed.",
+      "isPartOf": {"@id": "https://realproductorigin.com/#organization"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Look up", "item": "https://realproductorigin.com/lookup"}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .l-hero {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    padding: 80px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .l-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .l-hero h1 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0 0 16px; color: var(--ink-deep);
+  }
+  .l-hero .lede {
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.55; color: var(--ink-3);
+    max-width: 640px; margin: 0 0 32px;
+  }
+
+  /* ── Lookup form ─────────────────────────────────────────────────────── */
+  .l-form {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    max-width: 720px;
+  }
+  .l-form input[type="url"], .l-form input[type="text"] {
+    flex: 1 1 320px;
+    padding: 14px 16px;
+    font-family: var(--sans); font-size: 16px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: #fff; color: var(--ink-deep);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .l-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(198, 158, 82, 0.16);
+  }
+  .l-form button {
+    padding: 14px 28px;
+    font-family: var(--sans); font-size: 15px; font-weight: 700;
+    background: var(--ink-deep); color: #fff;
+    border: 0; border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .l-form button:hover:not(:disabled) { background: var(--accent); }
+  .l-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .l-hint {
+    margin-top: 12px;
+    font-size: 13px; color: var(--muted);
+    max-width: 720px;
+  }
+  .l-hint code {
+    background: var(--bg-cream-deep);
+    padding: 1px 6px; border-radius: 4px;
+    font-size: 12px;
+  }
+
+  /* ── Result area ─────────────────────────────────────────────────────── */
+  .l-result-section { padding: 48px 0; }
+  .l-status {
+    padding: 20px 24px;
+    border-radius: 12px;
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    color: var(--ink-2);
+    max-width: 720px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .l-status.err {
+    background: #fff5f5;
+    border-color: #fca5a5;
+    color: #7f1d1d;
+  }
+  .l-status .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid var(--muted);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: -3px;
+    animation: lspin 0.9s linear infinite;
+  }
+  @keyframes lspin { to { transform: rotate(360deg); } }
+
+  /* ── Product card ────────────────────────────────────────────────────── */
+  .l-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 720px;
+    box-shadow: 0 2px 12px rgba(15, 21, 33, 0.04);
+  }
+  .l-card-head {
+    display: flex; gap: 20px; align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .l-card-image {
+    flex-shrink: 0;
+    width: 100px; height: 100px;
+    border-radius: 8px;
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .l-card-image img { max-width: 100%; max-height: 100%; }
+  .l-card-image.blank { color: var(--muted); font-size: 24px; }
+  .l-card-title-wrap { flex: 1; min-width: 0; }
+  .l-card-title {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 20px; line-height: 1.3;
+    color: var(--ink-deep);
+    margin: 0 0 6px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .l-card-meta {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.5;
+  }
+  .l-card-meta strong { color: var(--ink-2); font-weight: 600; }
+
+  .l-rows { display: grid; gap: 14px; }
+  .l-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--bg-cream);
+    border-radius: 10px;
+  }
+  @media (max-width: 560px) {
+    .l-row { grid-template-columns: 1fr; gap: 6px; }
+    .l-row .l-row-conf { justify-self: start; }
+  }
+  .l-row-label {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .l-row-value {
+    font-size: 17px; color: var(--ink-deep);
+    display: flex; align-items: center; gap: 8px;
+    min-width: 0;
+  }
+  .l-row-value .flag { font-size: 22px; line-height: 1; }
+  .l-row-value.not-specified { color: var(--muted); font-style: italic; font-size: 15px; }
+  .l-row-conf {
+    font-size: 13px; color: var(--muted);
+    white-space: nowrap;
+  }
+  .l-row-ultimate {
+    grid-column: 1 / -1;
+    padding-top: 8px;
+    font-size: 13px; color: var(--ink-3);
+    border-top: 1px dashed var(--border);
+    margin-top: 4px;
+  }
+  .l-row-ultimate .flag { font-size: 15px; margin-right: 4px; }
+
+  .l-method {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 14px; line-height: 1.6; color: var(--ink-3);
+  }
+  .l-method h4 {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .l-cites { list-style: none; padding: 0; margin: 12px 0 0; font-size: 13px; }
+  .l-cites li { padding: 4px 0; }
+  .l-cites a { color: var(--accent); text-decoration: none; }
+  .l-cites a:hover { text-decoration: underline; }
+
+  .l-stamp {
+    margin-top: 20px;
+    font-size: 12px; color: var(--muted);
+  }
+
+  /* ── Install CTA below result ────────────────────────────────────────── */
+  .l-cta-below {
+    max-width: 720px;
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: var(--ink-deep); color: #fff;
+    border-radius: 14px;
+    display: flex; gap: 20px; align-items: center; justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .l-cta-below p { margin: 0; font-size: 15px; line-height: 1.5; max-width: 460px; }
+  .l-cta-below strong { color: var(--gold); }
+  .l-cta-below a {
+    padding: 12px 22px;
+    background: var(--gold); color: var(--ink-deep);
+    font-family: var(--sans); font-weight: 700; font-size: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .l-cta-below a:hover { background: #d9b25f; }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<section class="l-hero">
+  <div class="wrap">
+    <span class="eyebrow">Look up a product</span>
+    <h1>Paste a link. See the truth.</h1>
+    <p class="lede">Skip the install. Paste any product URL from one of our 12 supported retailers — Amazon, Target, Walmart, Home Depot, Lowe's, Wayfair, Best Buy, Costco, Nordstrom, Macy's, Sephora, or RockAuto — and see where it's really made, who's selling it, and where your money goes.</p>
+
+    <form id="lookup-form" class="l-form" novalidate>
+      <input id="lookup-url" type="url" required autocomplete="off" spellcheck="false"
+        placeholder="https://www.amazon.com/dp/B0…" aria-label="Product URL or Amazon ASIN">
+      <button id="lookup-submit" type="submit">Look up</button>
+    </form>
+    <div class="l-hint">Also accepts bare Amazon ASINs (e.g. <code>B08N5WRWNW</code>) and shortened links (<code>a.co/…</code>, <code>amzn.to/…</code>).</div>
+  </div>
+</section>
+
+<section class="l-result-section">
+  <div class="wrap">
+    <div id="lookup-loading" class="l-status hidden">
+      <span class="spinner"></span> Looking up this product — first-time scores take 10–20 seconds while we gather evidence from public sources.
+    </div>
+    <div id="lookup-error" class="l-status err hidden"></div>
+    <div id="lookup-card" class="l-card hidden">
+      <div class="l-card-head">
+        <div id="l-image" class="l-card-image blank" aria-hidden="true">📦</div>
+        <div class="l-card-title-wrap">
+          <h2 id="l-title" class="l-card-title"></h2>
+          <div id="l-meta" class="l-card-meta"></div>
+        </div>
+      </div>
+      <div id="l-rows" class="l-rows"></div>
+      <div class="l-method">
+        <h4>How we know</h4>
+        <p id="l-method-text"></p>
+        <ul id="l-cites" class="l-cites"></ul>
+      </div>
+      <div id="l-stamp" class="l-stamp"></div>
+    </div>
+
+    <div id="lookup-cta" class="l-cta-below hidden">
+      <p>For <strong>instant scoring</strong> on every product page — no copy-paste needed — install the free browser extension.</p>
+      <a href="/#install">Install extension</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="currentColor"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="currentColor"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/products.html">Products</a>
+      <a href="/lookup.html">Look up a product</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.<br><span style="font-size:12px; color: var(--muted); display:inline-block; margin-top:6px;">A portion of proceeds donated to human-rights work in China and around the world.</span></div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "My Account"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+
+/* ────────────────────────────────────────────────────────────────────── */
+/* Lookup logic                                                            */
+/* ────────────────────────────────────────────────────────────────────── */
+
+const API_BASE = "https://api.realproductorigin.com";
+const form = document.getElementById("lookup-form");
+const urlInput = document.getElementById("lookup-url");
+const submitBtn = document.getElementById("lookup-submit");
+const loadingEl = document.getElementById("lookup-loading");
+const errorEl = document.getElementById("lookup-error");
+const cardEl = document.getElementById("lookup-card");
+const ctaEl = document.getElementById("lookup-cta");
+
+const INDICATORS = [
+  {key: "made_in",         label: "Made in"},
+  {key: "ships_from",      label: "Ships from"},
+  {key: "sold_by",         label: "Retailer"},
+  {key: "payment_goes_to", label: "Money goes to"},
+];
+
+function flag(code) {
+  if (!code || code === "??" || code.length !== 2) return "🌐";
+  const A = 0x1f1e6;
+  const upper = code.toUpperCase();
+  return String.fromCodePoint(A + upper.charCodeAt(0) - 65, A + upper.charCodeAt(1) - 65);
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function showState(state) {
+  loadingEl.classList.toggle("hidden", state !== "loading");
+  errorEl.classList.toggle("hidden",   state !== "error");
+  cardEl.classList.toggle("hidden",    state !== "ok");
+  ctaEl.classList.toggle("hidden",     state !== "ok");
+}
+
+function renderResult(r) {
+  // Header
+  document.getElementById("l-title").textContent = r.title || "Untitled product";
+  const imgEl = document.getElementById("l-image");
+  if (r.image_url) {
+    imgEl.innerHTML = `<img src="${esc(r.image_url)}" alt="">`;
+    imgEl.classList.remove("blank");
+  } else {
+    imgEl.innerHTML = "📦";
+    imgEl.classList.add("blank");
+  }
+  const metaParts = [];
+  if (r.brand)  metaParts.push(`<strong>${esc(r.brand)}</strong>`);
+  if (r.seller) metaParts.push(`Sold on: ${esc(r.seller)}`);
+  if (r.price)  metaParts.push(esc(r.price));
+  if (r.asin)   metaParts.push(`ASIN ${esc(r.asin)}`);
+  document.getElementById("l-meta").innerHTML = metaParts.join(" · ");
+
+  // Rows
+  const rowsHtml = INDICATORS.map(ind => {
+    const s = r[ind.key];
+    if (!s) return "";
+    const notSpec = !s.country_code || s.country_code === "??";
+    const valueHtml = notSpec
+      ? `<span class="l-row-value not-specified">Not specified</span>`
+      : `<span class="l-row-value"><span class="flag">${flag(s.country_code)}</span>${esc(s.country)}</span>`;
+    const confHtml = notSpec
+      ? `<span class="l-row-conf">—</span>`
+      : `<span class="l-row-conf">${Math.round(s.confidence)}% confident</span>`;
+
+    // Ultimate parent shows only for payment_goes_to
+    let ultimateHtml = "";
+    if (ind.key === "payment_goes_to" && r.payment_ultimate_parent) {
+      const up = r.payment_ultimate_parent;
+      const upCompany = up.company ? ` (${esc(up.company)})` : "";
+      ultimateHtml =
+        `<div class="l-row-ultimate">Ultimately: <span class="flag">${flag(up.country_code)}</span>${esc(up.country)}${upCompany}</div>`;
+    }
+
+    return `
+      <div class="l-row">
+        <div class="l-row-label">${esc(ind.label)}</div>
+        ${valueHtml}
+        ${confHtml}
+        ${ultimateHtml}
+      </div>
+    `;
+  }).join("");
+  document.getElementById("l-rows").innerHTML = rowsHtml;
+
+  // Methodology + citations
+  document.getElementById("l-method-text").textContent = r.methodology || "";
+  const cites = (r.citations || []).filter(c => c && c.label);
+  const citesEl = document.getElementById("l-cites");
+  if (cites.length) {
+    citesEl.innerHTML = cites.map(c =>
+      c.url ? `<li>• <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.label)}</a></li>`
+            : `<li>• ${esc(c.label)}</li>`
+    ).join("");
+  } else {
+    citesEl.innerHTML = "";
+  }
+
+  // Stamp: cached-vs-fresh + rescore-in-progress
+  const parts = [];
+  if (r.cached) parts.push("From cache");
+  else parts.push("Freshly scored");
+  if (r.deep_rescore_pending) parts.push("Deep re-scoring in progress — re-check in ~20s for the enriched answer");
+  document.getElementById("l-stamp").textContent = parts.join(" · ");
+}
+
+function showError(msg) {
+  errorEl.textContent = msg;
+  showState("error");
+}
+
+async function lookup(rawUrl) {
+  const url = rawUrl.trim();
+  if (!url) return;
+
+  showState("loading");
+  submitBtn.disabled = true;
+
+  try {
+    const resp = await fetch(API_BASE + "/products/score", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({url}),
+    });
+
+    if (resp.status === 429) {
+      showError("You've hit the shared free rate limit. Please wait a minute or install the browser extension for uninterrupted use.");
+      return;
+    }
+    if (resp.status === 400) {
+      const body = await resp.json().catch(() => ({}));
+      showError(body.detail || "Couldn't parse that URL. Paste a product page URL from one of the supported retailers.");
+      return;
+    }
+    if (resp.status === 503) {
+      const body = await resp.json().catch(() => ({}));
+      showError(body.detail || "This retailer is temporarily paused. Try a different retailer or check back soon.");
+      return;
+    }
+    if (!resp.ok) {
+      showError("Something went wrong on our end (HTTP " + resp.status + "). Please try again in a moment.");
+      return;
+    }
+
+    const data = await resp.json();
+    renderResult(data);
+    showState("ok");
+    // Scroll the result into view on mobile.
+    setTimeout(() => cardEl.scrollIntoView({behavior: "smooth", block: "start"}), 60);
+  } catch (e) {
+    showError("Network error — couldn't reach the scoring service. Check your connection and try again.");
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  lookup(urlInput.value);
+});
+
+// If the URL includes ?q=<url> or ?url=<url>, prefill and auto-submit.
+// Lets us build "check on realproductorigin.com" share buttons later.
+(function autoLookup() {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get("q") || params.get("url");
+  if (q) {
+    urlInput.value = q;
+    lookup(q);
+  }
+})();
+</script>
+</body>
+</html>
