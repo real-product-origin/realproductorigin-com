@@ -225,6 +225,49 @@
   }
   .p-ind p { margin: 0; font-size: 14px; color: var(--ink-3); line-height: 1.55; }
 
+  /* ── Where it works — retailer grid ──────────────────────────────────── */
+  .p-retailers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 32px 0 0;
+  }
+  .p-retailer {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    transition: border-color 120ms ease, transform 120ms ease;
+  }
+  .p-retailer:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .p-retailer-name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    color: var(--ink-deep);
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .p-retailer-cat {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .p-retailers-note {
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .p-retailers-note a { color: var(--ink-3); }
+
   /* ── How-it-works (simplified methodology) ────────────────────────────── */
   .p-how h2 {
     font-family: var(--serif);
@@ -477,6 +520,32 @@
         <p class="p-cta-note">Public launch imminent. <a href="/contact.html">Get emailed the moment it ships.</a></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ── Where it works — retailer grid ────────────────────────────────────── -->
+<section class="p-section" id="retailers">
+  <div class="wrap-wide">
+    <p class="p-eyebrow" style="color: var(--gold); margin-bottom: 12px;">Where it works</p>
+    <h2 style="font-family: var(--serif); font-weight: 700; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">Twelve retailers today. More every month.</h2>
+    <p style="font-size: 17px; color: var(--ink-3); max-width: 640px; margin: 0;">Same score, same accuracy, same one-click badge on every one.</p>
+
+    <div class="p-retailers">
+      <div class="p-retailer"><div class="p-retailer-name">Amazon</div><div class="p-retailer-cat">General retail</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Target</div><div class="p-retailer-cat">General retail</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Walmart</div><div class="p-retailer-cat">General retail</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Costco</div><div class="p-retailer-cat">Warehouse club</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Home Depot</div><div class="p-retailer-cat">Home improvement</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Lowe's</div><div class="p-retailer-cat">Home improvement</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Wayfair</div><div class="p-retailer-cat">Furniture &amp; home</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Best Buy</div><div class="p-retailer-cat">Electronics</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Nordstrom</div><div class="p-retailer-cat">Fashion &amp; department</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Macy's</div><div class="p-retailer-cat">Fashion &amp; department</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">Sephora</div><div class="p-retailer-cat">Beauty</div></div>
+      <div class="p-retailer"><div class="p-retailer-name">RockAuto</div><div class="p-retailer-cat">Auto parts</div></div>
+    </div>
+
+    <p class="p-retailers-note">Don't see the retailer you shop at most? <a href="/contact.html?topic=retailer-request">Tell us which one to add next.</a></p>
   </div>
 </section>
 
