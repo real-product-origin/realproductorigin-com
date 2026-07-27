@@ -200,15 +200,13 @@
   .s-section ol, .s-section ul { padding-left: 22px; margin: 0 0 20px; }
   .s-section li { margin-bottom: 6px; }
   .s-section li::marker { color: var(--gold); }
-  /* Cap paragraph + list reading width even when the parent container
-     is a wide .wrap-wide (1180px). Cards, grids, tables ignore this.
-     Numbered steps ARE exempt — each step is a boxed card with its
-     own visual chunking, so capping them leaves empty right-side space. */
-  .s-section > .wrap-wide > p,
-  .s-section > .wrap-wide > ol:not(.steps),
-  .s-section > .wrap-wide > ul,
-  .s-section > .wrap-wide > h3,
-  .s-section > .wrap-wide > .defs,
+  /* Only the section-lede (the one intro paragraph under each h2) gets
+     a reading-width cap. Body copy, numbered steps, h3 subheads, and
+     definition lists all extend to the full .wrap-wide (1180px) so
+     they visually align with cards + tables in the same section.
+     Prevents the "narrow paragraph, wide step-box" mismatch that
+     showed up when only .steps got exempted from the earlier cap. */
+  .s-section > .wrap-wide > .section-lede { max-width: 780px; }
   .s-section > .wrap-wide > .callout { max-width: 780px; }
 
   /* ── Cards & layout ───────────────────────────────────────────────────── */
