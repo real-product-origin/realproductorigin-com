@@ -6,6 +6,10 @@
 <title>Sign in — Product Origin Checker</title>
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="stylesheet" href="/assets/styles.css">
+<!-- Google Identity Services. Loaded async — button renders once the
+     script is ready + we've confirmed via /auth/config that a client_id
+     is configured on the backend. -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
   main { max-width: 460px; margin: 96px auto; padding: 0 24px; }
   h1 { font-family: var(--serif); font-size: clamp(28px, 3.4vw, 36px); font-weight: 600; letter-spacing: -0.02em; margin: 0 0 10px; color: var(--ink-deep); text-align: center; }
@@ -39,6 +43,13 @@
   .poll-note { font-size: 11px; color: var(--muted); margin: 12px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; }
   .poll-note .dot { display: inline-block; width: 6px; height: 6px; border-radius: 999px; background: var(--gold); animation: pulse 1.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+  /* Google Sign-In slot + "or" divider. Hidden by default; shown when
+     /auth/config confirms the backend has a client_id configured. */
+  .google-slot { display: none; margin: 0 0 18px; }
+  .google-slot.shown { display: flex; justify-content: center; }
+  .divider { display: none; align-items: center; gap: 12px; margin: 0 0 18px; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .divider.shown { display: flex; }
+  .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 </style>
 </head>
 <body>
@@ -72,15 +83,19 @@
   <h1>Sign in to continue</h1>
   <p class="lead">Enter your email. We'll send you a 6-digit sign-in code — no password to remember.</p>
 
-  <!-- Panel 1: Email input -->
-  <form class="card" id="signin-form">
-    <div>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus autocomplete="email">
-    </div>
-    <button class="btn btn-primary" type="submit" id="submit-btn">Send sign-in code</button>
-    <div class="error" id="error" style="display:none;"></div>
-  </form>
+  <!-- Panel 1: Google (optional) + Email input -->
+  <div class="card" id="signin-panel">
+    <div id="google-slot" class="google-slot"></div>
+    <div id="google-divider" class="divider"><span>or</span></div>
+    <form id="signin-form" style="display: flex; flex-direction: column; gap: 14px;">
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus autocomplete="email">
+      </div>
+      <button class="btn btn-primary" type="submit" id="submit-btn">Send sign-in code</button>
+      <div class="error" id="error" style="display:none;"></div>
+    </form>
+  </div>
 
   <!-- Panel 2: Code input + background polling. Shown after email submit. -->
   <form class="card code-panel" id="code-form" style="display:none;">
@@ -220,7 +235,7 @@ function storeSessionAndRedirect(sessionToken, expiresAt) {
     if (expiresAt) localStorage.setItem("rpo_session_expires", expiresAt);
   } catch (_) {}
   document.getElementById("code-form").style.display = "none";
-  document.getElementById("signin-form").style.display = "none";
+  document.getElementById("signin-panel").style.display = "none";
   document.getElementById("success").style.display = "block";
   // Tiny pause so the "Signed in — redirecting" flash is legible.
   setTimeout(() => { location.replace(returnUrl); }, 400);
@@ -273,7 +288,7 @@ document.getElementById("signin-form").addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, redirect_to: returnUrl, nonce: currentNonce }),
     });
     if (!r.ok) throw new Error("Request failed");
-    document.getElementById("signin-form").style.display = "none";
+    document.getElementById("signin-panel").style.display = "none";
     document.getElementById("sent-email").textContent = email;
     document.getElementById("code-form").style.display = "flex";
     setTimeout(() => document.getElementById("code").focus(), 40);
@@ -335,6 +350,66 @@ document.getElementById("try-again").addEventListener("click", (e) => {
   stopPolling();
   location.reload();
 });
+
+// ── Google Sign-In (GIS) ─────────────────────────────────────────────
+// Deployments without a configured client_id (dev + preview) get no
+// Google button — the email + code flow works standalone.
+async function initGoogleSignIn() {
+  let clientId = null;
+  try {
+    const r = await fetch(`${API_BASE}/auth/config`);
+    if (r.ok) {
+      const cfg = await r.json();
+      clientId = cfg.google_oauth_client_id || null;
+    }
+  } catch (_) { /* backend offline — no button, no problem */ }
+  if (!clientId) return;
+
+  // Wait for the GIS script (loaded async) to attach the global.
+  const startedAt = Date.now();
+  while (!(window.google && window.google.accounts && window.google.accounts.id)) {
+    if (Date.now() - startedAt > 6000) return;  // give up quietly
+    await new Promise(r => setTimeout(r, 100));
+  }
+
+  window.google.accounts.id.initialize({
+    client_id: clientId,
+    callback: async (credentialResponse) => {
+      if (!credentialResponse || !credentialResponse.credential) return;
+      try {
+        const r = await fetch(`${API_BASE}/auth/google`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id_token: credentialResponse.credential }),
+        });
+        if (!r.ok) throw new Error(`google signin failed: ${r.status}`);
+        const data = await r.json();
+        stopPolling();
+        storeSessionAndRedirect(data.session_token, data.expires_at);
+      } catch (ex) {
+        const err = document.getElementById("error");
+        err.textContent = "Google sign-in failed. Try email instead.";
+        err.style.display = "block";
+      }
+    },
+    auto_select: false,
+    cancel_on_tap_outside: true,
+  });
+
+  const slot = document.getElementById("google-slot");
+  window.google.accounts.id.renderButton(slot, {
+    type: "standard",
+    theme: "outline",
+    size: "large",
+    text: "signin_with",
+    shape: "rectangular",
+    logo_alignment: "left",
+    width: 300,
+  });
+  slot.classList.add("shown");
+  document.getElementById("google-divider").classList.add("shown");
+}
+initGoogleSignIn();
 </script>
 </body>
 </html>
