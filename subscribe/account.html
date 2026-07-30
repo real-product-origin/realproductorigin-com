@@ -88,6 +88,44 @@
     border-color: var(--border-strong);
   }
 
+  /* Switch-plan card — tier switcher */
+  #switch-plan-card .switch-help {
+    color: var(--ink-3); font-size: 13.5px; line-height: 1.5;
+    margin: 0 0 14px;
+  }
+  #switch-plan-options {
+    display: grid; gap: 8px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 560px) {
+    #switch-plan-options { grid-template-columns: 1fr 1fr; }
+  }
+  #switch-plan-options .btn {
+    display: block; width: 100%; text-align: left;
+    padding: 12px 16px; font-size: 14px; line-height: 1.4;
+    background: #fff; color: var(--ink-deep);
+    border: 1px solid var(--border-strong); border-radius: 8px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  #switch-plan-options .btn-switch:hover:not(:disabled) {
+    border-color: var(--ink-deep);
+    background: var(--bg-cream);
+  }
+  #switch-plan-options .btn-current {
+    background: var(--bg-cream);
+    border-color: var(--border-strong);
+    cursor: default;
+    opacity: 0.85;
+  }
+  #switch-plan-options .btn:disabled { cursor: not-allowed; }
+  #switch-plan-options .tag {
+    display: inline-block; margin-left: 8px;
+    background: var(--ink-deep); color: #fff;
+    font-size: 11px; padding: 2px 8px; border-radius: 4px;
+    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .switch-msg { font-size: 13.5px; margin: 10px 0 0; min-height: 20px; }
+
   /* Access-code grant card gets a warm gold accent */
   .card.grant-card {
     background: var(--gold-soft);
@@ -207,6 +245,32 @@
         <div class="plan-name" id="plan-name">—</div>
         <div class="plan-meta" id="plan-meta"></div>
         <div class="plan-cta" id="plan-cta"></div>
+      </div>
+
+      <!-- ── Switch plan (in-app tier switcher, powers POST /subscription/change-plan) ── -->
+      <!-- Shown only for users with a paid subscription. Free-tier users
+           see "Compare plans" → /pricing.html in the plan-cta above. -->
+      <div id="switch-plan-wrap" style="display:none;">
+        <p class="section-eyebrow">Switch plan</p>
+        <div class="card" id="switch-plan-card">
+          <h2>Change your plan</h2>
+          <p class="switch-help">
+            Upgrades take effect immediately (prorated). Downgrades take effect
+            at the end of your current billing period — you keep your current
+            plan and pay nothing extra until then.
+          </p>
+          <div id="switch-plan-options"></div>
+          <p class="switch-msg" id="switch-plan-msg"></p>
+        </div>
+      </div>
+
+      <!-- Scheduled-change notice (shown when Stripe has a pending downgrade). -->
+      <div id="scheduled-change-wrap" style="display:none;">
+        <p class="section-eyebrow gold">Scheduled change</p>
+        <div class="card grant-card">
+          <h2>Plan change scheduled</h2>
+          <div class="plan-meta" id="scheduled-change-meta"></div>
+        </div>
       </div>
 
       <!-- ── Active access-code grant (shown only if present) ───────────── -->
@@ -349,9 +413,129 @@ function renderDashboard(status) {
     document.getElementById("access-grant-meta").textContent = parts.join(" ") + ".";
   }
 
+  // Switch-plan card + scheduled-change notice — paid subscribers only.
+  if (sub) {
+    renderSwitchPlan(sub).catch((e) =>
+      console.info("switch-plan render skipped:", e && e.message));
+  }
+  const scheduled = sub && sub.scheduled_change;
+  if (scheduled) {
+    document.getElementById("scheduled-change-wrap").style.display = "";
+    const label = PLAN_LABELS[scheduled.plan] || scheduled.plan;
+    const when = scheduled.effective_date
+      ? " on " + fmtDate(scheduled.effective_date)
+      : " at end of current period";
+    document.getElementById("scheduled-change-meta").innerHTML =
+      "Your subscription will switch to <strong>" + label +
+      " · " + (scheduled.billing_period || "") + "</strong>" + when +
+      ". You'll keep your current plan until then. Nothing to do — this " +
+      "happens automatically.";
+  }
+
   document.getElementById("loading").style.display = "none";
   document.getElementById("error").style.display = "none";
   document.getElementById("dashboard").style.display = "";
+}
+
+// ── Switch-plan card ─────────────────────────────────────────────────
+// Fetches GET /pricing, then renders one button per (plan, billing_period)
+// other than the user's current one. Clicking a button POSTs to
+// /subscription/change-plan with { plan, billing_period } — the backend
+// figures out upgrade vs downgrade and calls Stripe accordingly.
+//
+// Kept in a separate function so the free-tier / access-grant-only paths
+// don't pay the extra /pricing fetch.
+async function renderSwitchPlan(currentSub) {
+  const wrap = document.getElementById("switch-plan-wrap");
+  const optionsEl = document.getElementById("switch-plan-options");
+  const msgEl = document.getElementById("switch-plan-msg");
+  if (!wrap || !optionsEl) return;
+  wrap.style.display = "";
+  optionsEl.textContent = "Loading plans…";
+
+  let pricing;
+  try {
+    const r = await fetch(API + "/pricing");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    pricing = await r.json();
+  } catch (e) {
+    optionsEl.textContent = "";
+    msgEl.textContent = "Couldn't load pricing. Refresh to try again.";
+    return;
+  }
+
+  optionsEl.innerHTML = "";
+  const currentPlan = (currentSub.plan || "").toLowerCase();
+  const currentPeriod = (currentSub.billing_period || "").toLowerCase();
+  const tiers = ["basic", "pro", "premium"];
+  const periods = ["monthly", "yearly"];
+
+  for (const plan of tiers) {
+    const block = pricing[plan];
+    if (!block) continue;
+    for (const period of periods) {
+      const p = block[period];
+      if (!p || !p.cost_display) continue;
+      const isCurrent = (plan === currentPlan && period === currentPeriod);
+      const btn = document.createElement("button");
+      btn.className = "btn " + (isCurrent ? "btn-current" : "btn-switch");
+      btn.disabled = isCurrent;
+      const label = PLAN_LABELS[plan] || plan;
+      const cost = p.cost_display;
+      btn.innerHTML = isCurrent
+        ? "<strong>" + label + " · " + period + "</strong> — " + cost +
+          " <span class=\"tag\">Current</span>"
+        : "<strong>" + label + " · " + period + "</strong> — " + cost;
+      if (!isCurrent) {
+        btn.addEventListener("click", () => doChangePlan(plan, period, btn));
+      }
+      optionsEl.appendChild(btn);
+    }
+  }
+}
+
+async function doChangePlan(plan, billing_period, clickedBtn) {
+  const token = getToken();
+  if (!token) { goSignIn(); return; }
+  const msgEl = document.getElementById("switch-plan-msg");
+  const label = (PLAN_LABELS[plan] || plan) + " · " + billing_period;
+  const proceed = window.confirm(
+    "Switch to " + label + "?\n\n" +
+    "Upgrades: charged the prorated difference today.\n" +
+    "Downgrades: happens at the end of your current period, no refund."
+  );
+  if (!proceed) return;
+  const allBtns = document.querySelectorAll("#switch-plan-options .btn");
+  allBtns.forEach((b) => { b.disabled = true; });
+  clickedBtn.textContent = "Switching…";
+  msgEl.textContent = "";
+
+  try {
+    const r = await fetch(API + "/subscription/change-plan", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ plan: plan, billing_period: billing_period }),
+    });
+    const body = await r.json().catch(() => ({}));
+    if (!r.ok) {
+      throw new Error(body.detail || ("HTTP " + r.status));
+    }
+    msgEl.style.color = "#166534";
+    msgEl.textContent = body.message || "Plan changed.";
+    // Refresh the dashboard so the new plan + any scheduled change show.
+    setTimeout(() => window.location.reload(), 1200);
+  } catch (e) {
+    msgEl.style.color = "#b91c1c";
+    msgEl.textContent = "Couldn't change plan: " + (e.message || e);
+    allBtns.forEach((b) => {
+      if (!b.classList.contains("btn-current")) b.disabled = false;
+    });
+    clickedBtn.textContent = "";  // will be re-rendered on reload / retry
+    renderSwitchPlan({ plan: null, billing_period: null }).catch(() => {});
+  }
 }
 
 async function loadStatus(token) {
