@@ -1,7 +1,8 @@
 <!-- Favicon — simplified to just the pin head (the map + route are illegible at 16px).
-     The pin shape alone retains brand recognition at very small sizes. -->
+     The pin shape alone retains brand recognition at very small sizes.
+     v0.12.77: coral pin, matching the destination pin in the full mark. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <path d="M 16 3 C 9 3, 4 8, 4 14 C 4 22, 16 30, 16 30 C 16 30, 28 22, 28 14 C 28 8, 23 3, 16 3 Z"
-        fill="#111827"/>
-  <circle cx="16" cy="14" r="4" fill="#fff"/>
+        fill="#ea580c"/>
+  <circle cx="16" cy="14" r="4" fill="#faf6ed"/>
 </svg>

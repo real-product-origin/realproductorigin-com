@@ -23,9 +23,11 @@
   --bg-cream: #faf6ed;         /* warm paper for editorial sections */
   --bg-cream-deep: #f4eddb;    /* slightly deeper cream */
   --bg-cream-warm: #efe5cf;    /* even warmer, used behind hero mock */
-  --accent: #c0322b;           /* concern red — used sparingly */
+  --accent: #c0322b;           /* concern red — hover/CTA/attention (semantic, not brand) */
   --accent-2: #8a1f18;         /* deeper red for hover / accents */
   --accent-soft: #fef2f2;
+  --brand-pin: #ea580c;        /* v0.12.77 coral — logo mark's destination pin + wordmark period */
+  --brand-route: #0284c7;      /* v0.12.77 ocean blue — logo mark's origin dot + dashed route */
   --gold: #a5844a;             /* warm secondary accent (dividers, kickers) */
   --gold-soft: #f4ecdd;
   --green: #15803d;
@@ -83,7 +85,9 @@ img { max-width: 100%; height: auto; }
 }
 .brand .mark svg { display: block; width: 100%; height: 100%; }
 .brand .wordmark { display: inline-block; }
-.brand .period { color: var(--accent); font-weight: 900; margin-left: 0.5px; }
+.brand .period,
+.wordmark .period,
+.period { color: var(--brand-pin); font-weight: 900; margin-left: 0.5px; }
 
 /* ── Top nav ──────────────────────────────────────────────────────────────── */
 
