@@ -84,6 +84,16 @@
       a.setAttribute("hreflang", l.code);
       a.setAttribute("lang", l.code);
       if (l.code === active) a.setAttribute("aria-current", "true");
+      // Set the rpo_lang cookie on click. Cloudflare Pages `_middleware.js`
+      // reads this cookie and treats it as authoritative — it overrides
+      // CF-IPCountry-based auto-redirect, so a user who explicitly picks
+      // a language keeps it on every future visit regardless of IP.
+      a.addEventListener("click", function () {
+        try {
+          document.cookie = "rpo_lang=" + l.code +
+            "; Path=/; Max-Age=31536000; SameSite=Lax";
+        } catch (_) {}
+      });
       li.appendChild(a);
       menu.appendChild(li);
     });
