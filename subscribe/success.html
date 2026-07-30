@@ -81,6 +81,9 @@
       <div><b>Plan:</b> <span id="detail-plan"></span></div>
       <div><b>Billing:</b> <span id="detail-billing"></span></div>
       <div><b>Next renewal:</b> <span id="detail-renewal"></span></div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 6px;">
+        Renews automatically — cancel any time from <b>Manage subscription</b>.
+      </div>
     </div>
 
     <div class="handoff-section shown" id="handoff-section">
@@ -88,7 +91,7 @@
       <div id="ext-detected-block" style="display: none;">
         <div style="background: #f0fdf4; border: 1px solid #86efac; color: #14532d; padding: 14px 18px; border-radius: 10px; margin-top: 24px; text-align: center; font-size: 14px;">
           <strong>✓ Extension activated in this browser.</strong><br>
-          <span style="font-size: 13px; color: #166534;">You're all set — head to any product page on a supported retailer (currently Amazon) to see origin scores.</span>
+          <span style="font-size: 13px; color: #166534;">You're all set — head to any product page on a supported retailer to see origin scores.</span>
         </div>
       </div>
 
@@ -96,7 +99,7 @@
       <div id="ext-not-detected-block" style="display: none;">
         <div class="install-cta" style="text-align: center; padding: 20px 24px; margin-top: 24px;">
           <p style="margin: 0 0 4px; font-size: 15px; color: #0c4a6e;"><strong>One more step: install the extension.</strong></p>
-          <p style="margin: 0 0 14px; font-size: 13px; color: #075985;">Your subscription is active — you just need the Chrome extension to see origin scores on the retailers we support (currently Amazon).</p>
+          <p style="margin: 0 0 14px; font-size: 13px; color: #075985;">Your subscription is active — you just need the Chrome extension to see origin scores on the retailers we support.</p>
           <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener" style="text-decoration: none;">Install from Chrome Web Store →</a>
           <p style="margin: 12px 0 0; font-size: 12px; color: #075985;">
             Once installed, open the extension and click <b>Sign in</b>. Or check your inbox for our sign-in link.
@@ -259,9 +262,26 @@ function handleActive(data) {
   el.activePlan.textContent = planLabel + " · " + periodLabel;
   el.detailPlan.textContent = planLabel;
   el.detailBilling.textContent = periodLabel;
-  el.detailRenewal.textContent = data.current_period_end
-    ? new Date(data.current_period_end).toLocaleDateString(undefined, {year: "numeric", month: "long", day: "numeric"})
-    : "—";
+  // Stripe's `invoice.paid` webhook (which populates current_period_end)
+  // fires asynchronously — often 1-3s after checkout completes. If it
+  // hasn't landed by the time we render, compute an expected date locally
+  // as a fallback so the user isn't left staring at "—". Once Stripe's
+  // webhook lands, the extension popup + subscription/status will show the
+  // authoritative date.
+  const _fmtDate = (d) => d.toLocaleDateString(undefined,
+    {year: "numeric", month: "long", day: "numeric"});
+  if (data.current_period_end) {
+    el.detailRenewal.textContent = _fmtDate(new Date(data.current_period_end));
+  } else {
+    const now = new Date();
+    const expected = new Date(now);
+    if (data.billing_period === "yearly") {
+      expected.setFullYear(expected.getFullYear() + 1);
+    } else {
+      expected.setMonth(expected.getMonth() + 1);
+    }
+    el.detailRenewal.textContent = _fmtDate(expected) + " (expected)";
+  }
   el.tokenBlock.textContent = data.session_token;
   el.emailRepeat.textContent = data.email || "";
 
