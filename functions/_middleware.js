@@ -28,6 +28,13 @@ const COUNTRY_TO_LANG = {
   ES: "es", MX: "es", AR: "es", CL: "es", CO: "es", PE: "es", VE: "es",
   UY: "es", PY: "es", BO: "es", EC: "es", DO: "es", CU: "es", GT: "es",
   HN: "es", SV: "es", NI: "es", CR: "es", PA: "es", PR: "es",
+  // Japanese
+  JP: "ja",
+  // Chinese — Simplified for mainland + Singapore; Traditional for
+  // Taiwan + Hong Kong + Macau. Matches the extension's default
+  // detectBrowserLocale mapping (see extension/i18n.js).
+  CN: "zh-Hans", SG: "zh-Hans",
+  TW: "zh-Hant", HK: "zh-Hant", MO: "zh-Hant",
 };
 
 // Pages that have translated versions. For non-translated pages we still
@@ -59,7 +66,9 @@ export async function onRequest(context) {
   // Any API route defined under functions/api/ — leave alone.
   if (path.startsWith("/api/")) return next();
   // If the visitor is already inside a translated dir, no redirect.
-  if (/^\/(fr|de|es)(\/|$)/.test(path)) return next();
+  // Note: zh-Hans / zh-Hant have hyphens — safe in URL paths and safe
+  // in the regex character-class alternation below.
+  if (/^\/(fr|de|es|ja|zh-Hans|zh-Hant)(\/|$)/.test(path)) return next();
 
   // Respect explicit user choice (from switcher or prior auto-redirect).
   const cookieHeader = request.headers.get("Cookie") || "";
@@ -67,8 +76,11 @@ export async function onRequest(context) {
   if (chosen) {
     // If user chose "en" explicitly, we're already serving that — no-op.
     if (chosen === "en") return next();
-    // Otherwise redirect to their chosen lang if different from current.
-    if (chosen === "fr" || chosen === "de" || chosen === "es") {
+    // Otherwise redirect to their chosen lang if it's one we support.
+    if (
+      chosen === "fr" || chosen === "de" || chosen === "es" ||
+      chosen === "ja" || chosen === "zh-Hans" || chosen === "zh-Hant"
+    ) {
       return redirectToLang(path, chosen, /* setCookie */ false);
     }
     // Any other value is stale/bogus — just pass through.

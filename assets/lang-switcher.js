@@ -1,39 +1,58 @@
 // Marketing site language switcher.
 //
-// Renders a small dropdown in the header nav. Reads the current locale from
-// <html lang="…">, computes the target URL for the selected language, and
+// Renders a compact button in the header nav that opens a floating panel
+// listing every supported locale (native name + English gloss + current
+// pick indicated). Reads the current locale from <html lang="…">, computes
+// the target URL for the selected language, sets the `rpo_lang` cookie
+// (which the Cloudflare Pages middleware treats as authoritative — the
+// visitor's manual choice sticks across visits regardless of geo), then
 // navigates.
 //
 // URL routing rules:
-//   * Home:      /  <->  /fr/  <->  /de/  <->  /es/
-//   * pricing.html and products.html exist in fr/de/es; other pages don't.
-//     For a page that isn't translated in the target language, we fall
-//     back to that language's home (/fr/, /de/, /es/) so the user still
-//     sees the translated site.
+//   * Home:      /  <->  /LANG/
+//   * pricing.html + products.html exist in every translated locale.
+//     Other pages (why, support, etc.) don't — for those, switching to
+//     a non-English language sends the visitor to the language home
+//     rather than dropping them on an English page mid-flow. Switching
+//     back to English on a non-translated page keeps the current URL.
 //
-// Kept ~50 lines and dependency-free so it can load with `defer` from a
-// single <script> tag across every marketing page.
+// Dependency-free (~110 lines including UI + click handlers + CSS
+// selectors). Loads with `defer` from a single <script> tag across
+// every marketing page (see assets/styles.css for the visual styles).
+
 (function () {
   var LANGS = [
-    { code: "en", label: "English" },
-    { code: "fr", label: "Français" },
-    { code: "de", label: "Deutsch" },
-    { code: "es", label: "Español" },
+    { code: "en",      native: "English",       gloss: "English"             },
+    { code: "fr",      native: "Français",      gloss: "French"              },
+    { code: "de",      native: "Deutsch",       gloss: "German"              },
+    { code: "es",      native: "Español",       gloss: "Spanish"             },
+    { code: "ja",      native: "日本語",         gloss: "Japanese"            },
+    { code: "zh-Hans", native: "简体中文",       gloss: "Chinese (Simplified)"},
+    { code: "zh-Hant", native: "繁體中文",       gloss: "Chinese (Traditional)"},
   ];
-  // Pages that have translated versions under /fr/, /de/, /es/. If the current
+
+  // Pages that have translated versions under each /LANG/. If the current
   // path matches one, the switcher preserves the page; otherwise switching
-  // language goes to the home of that language.
+  // language goes to the language home.
   var TRANSLATED_PAGES = ["index.html", "pricing.html", "products.html"];
 
+  // Match all supported LANG prefixes in the URL path so we can strip them
+  // to figure out "what page is this, agnostic of language".
+  var LANG_PREFIX_RE = /^\/(fr|de|es|ja|zh-Hans|zh-Hant)\//;
+
   function currentLang() {
-    var tag = (document.documentElement.getAttribute("lang") || "en").toLowerCase();
-    if (tag.indexOf("zh") === 0) return tag; // not currently supported for marketing but future-proof
-    return tag.split("-")[0];
+    var tag = (document.documentElement.getAttribute("lang") || "en");
+    // Normalize case for the Chinese script subtag: html lang="zh-Hans"
+    // is the canonical form; also accept lowercase from other tools.
+    if (/^zh/i.test(tag)) {
+      if (/hant/i.test(tag)) return "zh-Hant";
+      return "zh-Hans";
+    }
+    return tag.toLowerCase().split("-")[0];
   }
 
   function currentPageBasename() {
-    // Strip any /fr/, /de/, /es/ prefix, keep the trailing filename.
-    var path = location.pathname.replace(/^\/(fr|de|es)\//, "/");
+    var path = location.pathname.replace(LANG_PREFIX_RE, "/");
     if (path === "/" || path === "") return "index.html";
     var parts = path.split("/");
     return parts[parts.length - 1] || "index.html";
@@ -43,11 +62,8 @@
     var page = currentPageBasename();
     var isTranslated = TRANSLATED_PAGES.indexOf(page) !== -1;
     if (lang === "en") {
-      // If the current page has a translated version, switching back to en
-      // means the English page. If not, we're already on the English-only
-      // page — keep the user on it rather than sending them to home.
       if (isTranslated) return page === "index.html" ? "/" : "/" + page;
-      return location.pathname;
+      return location.pathname.replace(LANG_PREFIX_RE, "/"); // stay on this en-only page
     }
     if (isTranslated) {
       return page === "index.html" ? "/" + lang + "/" : "/" + lang + "/" + page;
@@ -58,62 +74,90 @@
   function build() {
     var nav = document.querySelector("header nav");
     if (!nav) return;
-    if (nav.querySelector(".lang-switcher")) return; // idempotent
+    if (nav.querySelector(".lang-switcher")) return;
     var active = currentLang();
+    var activeMeta = LANGS.find(function (l) { return l.code === active; }) || LANGS[0];
 
     var wrap = document.createElement("div");
     wrap.className = "lang-switcher";
+
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "lang-switcher__toggle";
     btn.setAttribute("aria-haspopup", "listbox");
     btn.setAttribute("aria-expanded", "false");
-    var activeLangMeta = LANGS.find(function (l) { return l.code === active; }) || LANGS[0];
-    btn.textContent = activeLangMeta.label + " ▾";
+    btn.setAttribute("aria-label", "Change language — currently " + activeMeta.native);
+    btn.innerHTML =
+      '<svg class="lang-switcher__globe" viewBox="0 0 20 20" aria-hidden="true">' +
+        '<circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.4"/>' +
+        '<path d="M 10 2.5 Q 4 10 10 17.5 M 10 2.5 Q 16 10 10 17.5 M 2.5 10 L 17.5 10" ' +
+              'fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>' +
+      '</svg>' +
+      '<span class="lang-switcher__label">' + activeMeta.native + '</span>' +
+      '<svg class="lang-switcher__caret" viewBox="0 0 12 12" aria-hidden="true">' +
+        '<path d="M 3 4.5 L 6 8 L 9 4.5" fill="none" stroke="currentColor" ' +
+              'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>';
 
-    var menu = document.createElement("ul");
-    menu.className = "lang-switcher__menu";
-    menu.setAttribute("role", "listbox");
-    menu.hidden = true;
+    var panel = document.createElement("div");
+    panel.className = "lang-switcher__panel";
+    panel.setAttribute("role", "listbox");
+    panel.setAttribute("aria-label", "Language");
+    panel.hidden = true;
+
     LANGS.forEach(function (l) {
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = targetUrlForLang(l.code);
-      a.textContent = l.label;
-      a.setAttribute("role", "option");
-      a.setAttribute("hreflang", l.code);
-      a.setAttribute("lang", l.code);
-      if (l.code === active) a.setAttribute("aria-current", "true");
-      // Set the rpo_lang cookie on click. Cloudflare Pages `_middleware.js`
-      // reads this cookie and treats it as authoritative — it overrides
-      // CF-IPCountry-based auto-redirect, so a user who explicitly picks
-      // a language keeps it on every future visit regardless of IP.
-      a.addEventListener("click", function () {
+      var opt = document.createElement("a");
+      opt.className = "lang-switcher__option" + (l.code === active ? " is-active" : "");
+      opt.href = targetUrlForLang(l.code);
+      opt.setAttribute("role", "option");
+      opt.setAttribute("hreflang", l.code);
+      opt.setAttribute("lang", l.code);
+      if (l.code === active) opt.setAttribute("aria-current", "true");
+      opt.innerHTML =
+        '<span class="lang-switcher__native">' + l.native + '</span>' +
+        '<span class="lang-switcher__gloss">' + l.gloss + '</span>' +
+        (l.code === active
+          ? '<svg class="lang-switcher__check" viewBox="0 0 14 14" aria-hidden="true">' +
+              '<path d="M 3 7 L 6 10 L 11 4" fill="none" stroke="currentColor" ' +
+                    'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>'
+          : '');
+      opt.addEventListener("click", function () {
+        // Cookie is authoritative — geo-redirect middleware respects a
+        // manually-picked language on every future visit, regardless of IP.
         try {
           document.cookie = "rpo_lang=" + l.code +
             "; Path=/; Max-Age=31536000; SameSite=Lax";
         } catch (_) {}
       });
-      li.appendChild(a);
-      menu.appendChild(li);
+      panel.appendChild(opt);
     });
 
+    function open() {
+      panel.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+      wrap.classList.add("is-open");
+    }
+    function close() {
+      panel.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+      wrap.classList.remove("is-open");
+    }
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      var open = !menu.hidden;
-      menu.hidden = open;
-      btn.setAttribute("aria-expanded", String(!open));
+      if (panel.hidden) open(); else close();
     });
     document.addEventListener("click", function (e) {
-      if (!wrap.contains(e.target) && !menu.hidden) {
-        menu.hidden = true;
-        btn.setAttribute("aria-expanded", "false");
-      }
+      if (!wrap.contains(e.target) && !panel.hidden) close();
+    });
+    // Esc closes the panel and returns focus to the toggle — standard
+    // WAI-ARIA behavior for a listbox popup.
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) { close(); btn.focus(); }
     });
 
     wrap.appendChild(btn);
-    wrap.appendChild(menu);
-    // Insert before the sign-in link if present, else at the end of nav.
+    wrap.appendChild(panel);
     var signIn = nav.querySelector("#nav-account-link");
     if (signIn) nav.insertBefore(wrap, signIn);
     else nav.appendChild(wrap);
