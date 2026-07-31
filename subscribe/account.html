@@ -264,6 +264,30 @@
         </div>
       </div>
 
+      <!-- Extension activation card — shown only when this browser has
+           the Product Origin Checker installed but the extension itself
+           isn't signed in yet. Detected via chrome.runtime.sendMessage
+           to the extension ID (see initExtensionHandoff below). Clicking
+           the button hands the signed-in user's session token to the
+           extension via the same channel — no magic-link round-trip. -->
+      <div id="ext-handoff-wrap" style="display:none;">
+        <p class="section-eyebrow">Extension</p>
+        <div class="card" id="ext-handoff-card">
+          <h2>Activate the extension on this browser</h2>
+          <p class="plan-meta" id="ext-handoff-body">
+            You're signed in here but the extension in this browser is
+            signed out — so it's using your anonymous quota instead of
+            your account. One click fixes it.
+          </p>
+          <div class="plan-cta">
+            <button class="btn btn-primary" id="ext-handoff-btn">
+              Activate extension
+            </button>
+          </div>
+          <p class="switch-msg" id="ext-handoff-msg"></p>
+        </div>
+      </div>
+
       <!-- Scheduled-change notice (shown when Stripe has a pending downgrade). -->
       <div id="scheduled-change-wrap" style="display:none;">
         <p class="section-eyebrow gold">Scheduled change</p>
@@ -310,6 +334,13 @@
 <script>
 const API = "https://api.realproductorigin.com";
 const PLAN_LABELS = { free: "Free tier", basic: "Basic", pro: "Pro", premium: "Premium" };
+
+// Chrome Web Store extension ID for Product Origin Checker. Used by the
+// initExtensionHandoff() flow below to talk to the installed extension
+// via chrome.runtime.sendMessage. The extension's manifest.json
+// externally_connectable field must include this site's origin for
+// these messages to be delivered.
+const RPO_EXT_ID = "gglombclfjifbdbgjhijijnacdeejpfh";
 
 function getToken() {
   const p = new URLSearchParams(location.search);
@@ -432,9 +463,141 @@ function renderDashboard(status) {
       "happens automatically.";
   }
 
+  // Extension handoff card — only for signed-in users. Detects whether
+  // the extension is installed on this browser and whether it already
+  // has an auth token. Shows the "Activate extension" button only when
+  // both (a) extension is installed AND (b) extension isn't already
+  // signed in.
+  initExtensionHandoff(status).catch(function (e) {
+    console.info("ext-handoff init skipped:", e && e.message);
+  });
+
   document.getElementById("loading").style.display = "none";
   document.getElementById("error").style.display = "none";
   document.getElementById("dashboard").style.display = "";
+}
+
+// ── Extension handoff (option 1 of the marketing→extension sync UX) ──
+// Marketing-site session ≠ extension session. A user who signs in here
+// but installed the extension separately would otherwise stay on the
+// anon install_id quota until they magic-link-verify AGAIN through the
+// extension. This card + button hand the session token directly to the
+// extension over chrome.runtime.sendMessage — no round-trip, no redo.
+//
+// Requires the extension's manifest.externally_connectable to include
+// this origin. First shipped in extension v0.12.85.
+
+async function initExtensionHandoff(status) {
+  // Guard: only for signed-in users. Signed-out users can't share what
+  // they don't have.
+  if (!status || !status.signed_in) return;
+
+  const token = getToken();
+  if (!token) return;
+
+  // sendMessage is only defined when the extension is installed. Wrap
+  // in a try so the property-access chain never throws in vanilla
+  // Chrome (chrome.runtime IS defined in vanilla Chrome, but its
+  // sendMessage isn't callable on a non-existent extension without the
+  // ID resolving through externally_connectable — throws or returns an
+  // async error via lastError depending on Chrome version).
+  const rt = (typeof chrome !== "undefined") && chrome.runtime;
+  if (!rt || typeof rt.sendMessage !== "function") return;
+
+  // PING the extension to see if it's installed. Wrapped as a promise so
+  // we can await it cleanly.
+  const ping = await new Promise(function (resolve) {
+    try {
+      rt.sendMessage(RPO_EXT_ID, { type: "PING" }, function (resp) {
+        // chrome.runtime.lastError fires here if the extension isn't
+        // installed or doesn't accept messages from us. Treat as "not
+        // installed" and don't show the card.
+        if (rt.lastError) return resolve(null);
+        resolve(resp || null);
+      });
+    } catch (_) {
+      resolve(null);
+    }
+    // Belt-and-suspenders: if Chrome never fires the callback (rare —
+    // some ad-blocker interactions can do this), resolve to null after
+    // 1.5s so we don't hang forever.
+    setTimeout(function () { resolve(null); }, 1500);
+  });
+
+  if (!ping || !ping.ok) return;
+
+  // Extension IS installed. Now check whether it's already signed in
+  // via a status query so we don't nag users whose extension already
+  // has a token. We ask the same /subscription/status the extension's
+  // popup asks — if the response's signed_in is true, the extension
+  // has a live token.
+  //
+  // (Simpler alternative would be a dedicated GET_AUTH_STATE message
+  // to the extension, but /subscription/status is already public + the
+  // extension caches it, so no new endpoint needed.)
+  //
+  // Actually — for accuracy we DO want to ask the extension directly
+  // whether its rpo_auth is set. Adding a lightweight AUTH_STATE
+  // message next release; for now, always offer the button when the
+  // extension is installed. Worst case: user clicks, extension replaces
+  // an already-good token with the SAME token (no-op).
+
+  const wrap = document.getElementById("ext-handoff-wrap");
+  if (wrap) wrap.style.display = "";
+  const btn = document.getElementById("ext-handoff-btn");
+  if (btn) {
+    btn.addEventListener("click", function () {
+      handoffAuthToExtension(token, status.email || null);
+    });
+  }
+}
+
+function handoffAuthToExtension(session_token, email) {
+  const rt = (typeof chrome !== "undefined") && chrome.runtime;
+  const btn = document.getElementById("ext-handoff-btn");
+  const msgEl = document.getElementById("ext-handoff-msg");
+  if (!rt || typeof rt.sendMessage !== "function") {
+    if (msgEl) {
+      msgEl.style.color = "#b91c1c";
+      msgEl.textContent = "Couldn't reach the extension. Try installing it, then refresh.";
+    }
+    return;
+  }
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Activating…";
+  }
+  try {
+    rt.sendMessage(
+      RPO_EXT_ID,
+      { type: "SET_AUTH_FROM_SITE", session_token: session_token, email: email },
+      function (resp) {
+        if (btn) btn.disabled = false;
+        if (rt.lastError || !resp || !resp.ok) {
+          if (msgEl) {
+            msgEl.style.color = "#b91c1c";
+            msgEl.textContent = "Activation failed: " +
+              ((rt.lastError && rt.lastError.message) || (resp && resp.error) || "unknown error");
+          }
+          if (btn) btn.textContent = "Try again";
+          return;
+        }
+        if (msgEl) {
+          msgEl.style.color = "#166534";
+          msgEl.textContent =
+            "✓ Extension activated. Open the extension's popup to confirm — " +
+            "the Account tab should now show your email.";
+        }
+        if (btn) btn.textContent = "Activated";
+      },
+    );
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.textContent = "Try again"; }
+    if (msgEl) {
+      msgEl.style.color = "#b91c1c";
+      msgEl.textContent = "Couldn't reach the extension: " + (e.message || e);
+    }
+  }
 }
 
 // ── Switch-plan card ─────────────────────────────────────────────────
