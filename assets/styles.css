@@ -1123,6 +1123,15 @@ footer .copy {
   padding-left: 24px;
   padding-right: 24px;
 }
+footer .disclaimer {
+  width: 100%;
+  max-width: 1180px;
+  margin: 12px auto 0;
+  padding: 0 24px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.38);
+}
 
 /* ── Article style (privacy/terms/methodology/contact) ────────────────────── */
 
