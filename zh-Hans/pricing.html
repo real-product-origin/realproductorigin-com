@@ -375,7 +375,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">订阅</button>
-        <div class="note">一键跳转至 Stripe 收银台。安全，可随时取消。</div>
+        <div class="note"><strong>自动续订：每月 $4.99（如选年付：每年 $49.99）。</strong>可随时通过扩展的"账户"标签取消（打开 Stripe 安全客户门户）——取消将在当前计费周期结束时生效。年付订户会在每次续订前 30 天收到邮件提醒。详见完整<a href="/terms.html">服务条款</a>。</div>
       </div>
     </div>
 
@@ -395,7 +395,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">订阅</button>
-        <div class="note">一键跳转至 Stripe 收银台。安全，可随时取消。</div>
+        <div class="note"><strong>自动续订：每月 $9.99（如选年付：每年 $99.99）。</strong>可随时通过扩展的"账户"标签取消（打开 Stripe 安全客户门户）——取消将在当前计费周期结束时生效。年付订户会在每次续订前 30 天收到邮件提醒。详见完整<a href="/terms.html">服务条款</a>。</div>
       </div>
     </div>
 
@@ -760,7 +760,7 @@ async function subscribe(plan) {
     const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
       method: "POST",
       headers,
-      body: JSON.stringify({ plan, billing_period: billingPeriod }),
+      body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();

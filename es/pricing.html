@@ -375,7 +375,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">Suscribirse</button>
-        <div class="note">Un clic al pago de Stripe. Seguro, cancele cuando quiera.</div>
+        <div class="note"><strong>Se renueva automáticamente a $4,99/mes (o $49,99/año si elige anual).</strong> Cancele en cualquier momento desde la pestaña «Cuenta» de la extensión (abre el portal seguro de clientes de Stripe) — la cancelación surte efecto al final de su período de facturación actual. Los suscriptores anuales reciben un correo de recordatorio 30 días antes de cada renovación. Consulte los <a href="/terms.html">Términos completos</a>.</div>
       </div>
     </div>
 
@@ -395,7 +395,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">Suscribirse</button>
-        <div class="note">Un clic al pago de Stripe. Seguro, cancele cuando quiera.</div>
+        <div class="note"><strong>Se renueva automáticamente a $9,99/mes (o $99,99/año si elige anual).</strong> Cancele en cualquier momento desde la pestaña «Cuenta» de la extensión (abre el portal seguro de clientes de Stripe) — la cancelación surte efecto al final de su período de facturación actual. Los suscriptores anuales reciben un correo de recordatorio 30 días antes de cada renovación. Consulte los <a href="/terms.html">Términos completos</a>.</div>
       </div>
     </div>
 
@@ -760,7 +760,7 @@ async function subscribe(plan) {
     const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
       method: "POST",
       headers,
-      body: JSON.stringify({ plan, billing_period: billingPeriod }),
+      body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();

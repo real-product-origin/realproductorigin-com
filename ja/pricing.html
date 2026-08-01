@@ -375,7 +375,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">サブスクライブ</button>
-        <div class="note">ワンクリックでStripeチェックアウトへ。安全、いつでもキャンセル可能。</div>
+        <div class="note"><strong>月額 $4.99 で自動更新（年払いを選択の場合は年 $49.99）。</strong>拡張機能の「アカウント」タブからいつでも解約できます（Stripe のセキュアなカスタマーポータルが開きます） — 解約は現在の請求期間終了時に有効になります。年払いのお客様には各更新の 30 日前にメールでリマインダーをお送りします。詳しくは<a href="/terms.html">利用規約</a>をご覧ください。</div>
       </div>
     </div>
 
@@ -395,7 +395,7 @@
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">サブスクライブ</button>
-        <div class="note">ワンクリックでStripeチェックアウトへ。安全、いつでもキャンセル可能。</div>
+        <div class="note"><strong>月額 $9.99 で自動更新（年払いを選択の場合は年 $99.99）。</strong>拡張機能の「アカウント」タブからいつでも解約できます（Stripe のセキュアなカスタマーポータルが開きます） — 解約は現在の請求期間終了時に有効になります。年払いのお客様には各更新の 30 日前にメールでリマインダーをお送りします。詳しくは<a href="/terms.html">利用規約</a>をご覧ください。</div>
       </div>
     </div>
 
@@ -760,7 +760,7 @@ async function subscribe(plan) {
     const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
       method: "POST",
       headers,
-      body: JSON.stringify({ plan, billing_period: billingPeriod }),
+      body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();
