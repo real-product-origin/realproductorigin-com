@@ -11,6 +11,7 @@
 //
 // Usage — wrap only the digits, never the surrounding words:
 //   <span data-rpo-free-quota>20</span> checks
+//   <span data-rpo-basic-quota>50</span> checks a month
 // The static text inside is the fallback, so the page reads correctly with
 // JS off, on a failed fetch, or before this script runs. That fallback is
 // why this script only ever *replaces* a number and never writes one into
@@ -24,24 +25,38 @@
 (function () {
   "use strict";
 
-  var NODES = document.querySelectorAll("[data-rpo-free-quota]");
-  if (!NODES.length) return;
+  // One marker per metered tier. Basic was hardcoded until 2026-08-02,
+  // which meant changing its cap from 100 to 50 touched 30 places across
+  // seven locales — exactly the drift this script exists to prevent. It
+  // was only ever half-solved.
+  var TARGETS = [
+    { attr: "data-rpo-free-quota", plan: "free" },
+    { attr: "data-rpo-basic-quota", plan: "basic" },
+  ];
+  var anyNode = TARGETS.some(function (t) {
+    return document.querySelector("[" + t.attr + "]");
+  });
+  if (!anyNode) return;
 
   // Same endpoint the pricing page already calls; it sets a 60s
   // Cache-Control, so a visitor loading two pages pays for one request.
   fetch("https://api.realproductorigin.com/pricing")
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) {
-      var checks = data && data.free && data.free.checks;
-      var limit = checks && checks.limit;
-      // Guard hard. A null/0/undefined limit means "unlimited" or "we
-      // don't know" — writing either into "your first N checks are free"
-      // produces a worse sentence than the static fallback.
-      if (typeof limit !== "number" || limit <= 0) return;
-
-      var text = String(limit);
-      for (var i = 0; i < NODES.length; i++) {
-        if (NODES[i].textContent.trim() !== text) NODES[i].textContent = text;
+      if (!data) return;
+      for (var t = 0; t < TARGETS.length; t++) {
+        var plan = data[TARGETS[t].plan];
+        var checks = plan && plan.checks;
+        var limit = checks && checks.limit;
+        // Guard hard, per tier. A null/0/undefined limit means "unlimited"
+        // or "we don't know" — writing either into "your first N checks
+        // are free" produces a worse sentence than the static fallback.
+        if (typeof limit !== "number" || limit <= 0) continue;
+        var text = String(limit);
+        var nodes = document.querySelectorAll("[" + TARGETS[t].attr + "]");
+        for (var i = 0; i < nodes.length; i++) {
+          if (nodes[i].textContent.trim() !== text) nodes[i].textContent = text;
+        }
       }
     })
     .catch(function () {
