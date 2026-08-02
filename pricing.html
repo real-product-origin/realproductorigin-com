@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — Product Origin Checker</title>
-<meta name="description" content="Four simple tiers — a free 20-check one-time trial plus Basic, Pro, and Premium subscriptions for unlimited access, sources, methodology, and the mobile app.">
+<meta name="description" content="A free 20-check trial, Basic at $4.99/mo for 100 checks a month, and Unlimited at $9.99/mo. Sources cited and contest available on every tier, including Free.">
 <meta property="og:title" content="Pricing — Product Origin Checker">
-<meta property="og:description" content="Free tier plus Basic $4.99, Pro $9.99, Premium $19.99 per month. Annual pricing available.">
+<meta property="og:description" content="Free 20-check trial, Basic $4.99/mo, Unlimited $9.99/mo. Annual pricing available. Sources cited on every tier.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/pricing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pricing — Product Origin Checker">
-<meta name="twitter:description" content="Free tier plus Basic $4.99, Pro $9.99, Premium $19.99 per month. Annual pricing available.">
+<meta name="twitter:description" content="Free 20-check trial, Basic $4.99/mo, Unlimited $9.99/mo. Annual pricing available. Sources cited on every tier.">
 <link rel="canonical" href="https://realproductorigin.com/pricing">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/pricing.html">
@@ -38,7 +38,7 @@
     {
       "@type": "Product",
       "name": "Real Product Origin — Basic subscription",
-      "description": "Unlimited monthly product-origin checks on the online retailers we support (Amazon, Target, Walmart, and 27 other major retailers). No sources or contest access.",
+      "description": "100 product-origin checks a month on the 30 online retailers we support, with sources cited on every claim and the ability to contest any score.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
@@ -62,14 +62,14 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Pro subscription",
-      "description": "Unlimited monthly checks, sources cited on every claim, the ability to contest scores, and priority email support.",
+      "name": "Real Product Origin — Unlimited subscription",
+      "description": "Unlimited checks with no cap, plus priority email support. Sources cited and score contests are included on every tier.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
         {
           "@type": "Offer",
-          "name": "Pro monthly",
+          "name": "Unlimited monthly",
           "price": "9.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -77,7 +77,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Pro annual",
+          "name": "Unlimited annual",
           "price": "99.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -87,23 +87,23 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Premium subscription",
-      "description": "Everything in Pro, plus the mobile app with in-store barcode scanning on iOS and Android.",
+      "name": "Real Product Origin — Supporter subscription",
+      "description": "Everything in Unlimited. Nothing extra. For people who want to fund the work. A subscription, not a charitable donation, and not tax-deductible.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
         {
           "@type": "Offer",
-          "name": "Premium monthly",
-          "price": "19.99",
+          "name": "Supporter monthly",
+          "price": "25.00",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
           "availability": "https://schema.org/InStock"
         },
         {
           "@type": "Offer",
-          "name": "Premium annual",
-          "price": "199.99",
+          "name": "Supporter annual",
+          "price": "250.00",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
           "availability": "https://schema.org/InStock"
@@ -131,18 +131,18 @@
         },
         {
           "@type": "Question",
-          "name": "Why hide sources and methodology on the lower tiers?",
+          "name": "Do I need to pay to see your sources?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sourcing every claim is expensive on our side — every check calls out to multiple public databases and pays for LLM tokens. Pro and Premium subscribers fund that work; Basic and Free get the score itself, which is the answer most people are looking for."
+            "text": "No. Every tier — including Free — shows the sources behind every claim, and every tier can contest a score. Sourcing is expensive on our side, but a score you can't check isn't worth much, so the evidence is never the thing we charge for. What you pay for is how many products you can check."
           }
         },
         {
           "@type": "Question",
-          "name": "What's included in the mobile app on Premium?",
+          "name": "What's included in the mobile app?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The mobile app requires a Premium subscription."
+            "text": "Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The apps are free on every tier; what you can check follows your plan, exactly as it does in the extension."
           }
         },
         {
@@ -229,8 +229,8 @@
 
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; max-width: 1020px; margin: 0 auto; padding: 0 20px;
   }
   @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; } }
   @media (max-width: 620px)  { .price-grid { grid-template-columns: 1fr; max-width: 460px; } }
@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">Simple pricing</p>
     <h1>Free to try. Pick the tier that fits.</h1>
-    <p class="subtitle">A one-time allowance of <span data-rpo-free-quota>20</span> free checks — powered by Claude AI and cited public sources. Upgrade only for what you actually need: unlimited checks, sources, methodology, contest, or the mobile app.</p>
+    <p class="subtitle">A one-time allowance of <span data-rpo-free-quota>20</span> free checks — powered by Claude AI and cited public sources. Sources, methodology and score contests are included on every tier, including Free. What you pay for is how many products you can check.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Billing period">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Monthly</button>
@@ -341,7 +341,7 @@
 </section>
 
 <section class="price-cards">
-  <div class="price-grid">
+  <div class="price-grid price-grid-3">
 
     <!-- Free -->
     <div class="price-card">
@@ -351,9 +351,9 @@
       <ul class="features">
         <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> checks</strong> to try it — one time, not monthly</li>
         <li>All four indicators on every score</li>
-        <li class="crossed">Sources &amp; methodology hidden</li>
-        <li class="crossed">Can't contest scores</li>
-        <li class="crossed">Extension only, no mobile</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest any score you disagree with</li>
+        <li>Browser extension and mobile apps</li>
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">Install the extension</a>
@@ -367,11 +367,11 @@
       <div class="price" data-price="basic">$4.99<small>/mo</small></div>
       <div class="price-note" data-note="basic">Cancel anytime.</div>
       <ul class="features">
-        <li><strong>Unlimited</strong> checks — no monthly cap</li>
+        <li><strong>100 checks</strong> a month</li>
         <li>All four indicators on every score</li>
-        <li class="crossed">Sources &amp; methodology hidden</li>
-        <li class="crossed">Can't contest scores</li>
-        <li class="crossed">Extension only, no mobile</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest any score you disagree with</li>
+        <li>Browser extension and mobile apps</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">Subscribe</button>
@@ -379,42 +379,23 @@
       </div>
     </div>
 
-    <!-- Pro (featured) -->
+    <!-- Unlimited (plan id stays `pro` — Stripe metadata, stored
+         subscriptions and access codes all carry it) -->
     <div class="price-card featured">
       <span class="badge">Most popular</span>
-      <div class="plan-name">Pro</div>
+      <div class="plan-name">Unlimited</div>
       <div class="price" data-price="pro">$9.99<small>/mo</small></div>
       <div class="price-note" data-note="pro">Cancel anytime.</div>
       <ul class="features">
-        <li><strong>Unlimited</strong> checks — no monthly cap</li>
+        <li><strong>Unlimited</strong> checks — no cap</li>
         <li>All four indicators on every score</li>
-        <li><strong>Sources cited</strong> on every claim</li>
-        <li><strong>Contest scores</strong> you disagree with</li>
+        <li>Sources cited on every claim</li>
+        <li>Contest any score you disagree with</li>
         <li><strong>Priority</strong> email support</li>
-        <li class="crossed">Extension only, no mobile</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">Subscribe</button>
         <div class="note"><strong>Auto-renews at $9.99/mo (or $99.99/yr if annual chosen).</strong> Cancel any time from the extension's Account tab (opens Stripe's secure portal) — cancellation takes effect at the end of your current period. Annual subscribers receive an email reminder 30 days before each renewal. Full <a href="/terms.html">Terms</a>.</div>
-      </div>
-    </div>
-
-    <!-- Premium -->
-    <div class="price-card">
-      <div class="plan-name">Premium</div>
-      <div class="price" data-price="premium">$19.99<small>/mo</small></div>
-      <div class="price-note" data-note="premium">Cancel anytime.</div>
-      <ul class="features">
-        <li><strong>Unlimited</strong> checks — no monthly cap</li>
-        <li>All four indicators on every score</li>
-        <li>Sources cited on every claim</li>
-        <li>Contest scores you disagree with</li>
-        <li>Priority email support</li>
-        <li><strong>Mobile app</strong> — scan barcodes on the go</li>
-      </ul>
-      <div class="price-cta">
-        <button class="btn btn-primary disabled" disabled aria-disabled="true">Coming soon</button>
-        <div class="note">Available once the mobile app clears App Store and Play Store review.</div>
       </div>
     </div>
 
@@ -446,93 +427,80 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">A full feature-by-feature look at what each plan includes.</p>
 
       <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px;">
+        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
           <colgroup>
-            <col style="width: 34%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
+            <col style="width: 40%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
+            <col style="width: 20%;">
           </colgroup>
           <thead>
             <tr style="border-bottom: 1px solid var(--border);">
               <th scope="col" style="text-align: left; padding: 18px 20px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">Feature</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold); position: relative;">
+              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">
                 <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle;">★ Most popular</span>
-                <div>Pro</div>
+                <div>Unlimited</div>
               </th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Premium</th>
             </tr>
           </thead>
-          <tbody style="color: var(--ink-2);">
+          <tbody>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Monthly checks</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">20</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Unlimited</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); font-weight: 700; color: var(--ink-deep);">Unlimited</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Unlimited</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Checks</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span>, one time</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">100 / month</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Unlimited</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Four-indicator score</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Four-indicator score</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Sources cited</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Sources cited</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Contest a score</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Contest a score</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Priority support</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Browser extension</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Browser extension</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android app</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android app</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Auto-check default</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Off</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Off</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">On</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">In-store barcode scan</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Priority support</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14-day refund</th>
-              <td style="text-align: center; padding: 14px 12px; color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14-day refund</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- SUPPORTER — deliberately BELOW the table and visually parallel,
+           never a fourth column. Rendering it as the rightmost "best value"
+           tier would imply more capability than Unlimited, which it does
+           not have. It is available to people who look for it; it is never
+           pushed in an upgrade prompt or a quota-reached screen. -->
+      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
+        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">Supporter — <span data-price="supporter">$25.00/mo</span></h3>
+        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">Cancel anytime.</div>
+        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">
+          Everything in Unlimited. Nothing extra. For people who want to fund the work.
+        </p>
+        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">
+          Supporters get no priority over anyone else, no influence over scores or which
+          retailers we build next, and no acknowledgment attached to any score. The product
+          is identical to Unlimited. That is the point — this exists so people who care about
+          the work can pay more toward it, not so they can buy standing.
+        </p>
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">
+          Real Product Origin LLC is a for-profit company. Supporter is a subscription, not a
+          charitable donation, and is not tax-deductible.
+        </p>
+        <button class="btn btn-secondary subscribe-btn" data-plan="supporter">Become a Supporter</button>
+      </div>
+
 
       <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
         Prices shown are monthly. Annual pricing saves ~17%. See our <a href="/refunds.html">refund policy</a>.
@@ -575,12 +543,12 @@
     <p>Thirty retailers across 29 domains today — covering general retail (Amazon, Target, Walmart), home improvement, home & furniture, electronics, warehouse membership, fashion, beauty, and auto parts. See the <a href="/products.html#retailers">full list with categories</a>, or <a href="/contact.html?topic=retailer-request">tell us which one to add next</a>.</p>
   </details>
   <details>
-    <summary>Why hide sources and methodology on the lower tiers?</summary>
-    <p>Sourcing every claim is expensive on our side — every check calls out to multiple public databases and pays for LLM tokens. Pro and Premium subscribers fund that work; Basic and Free get the score itself, which is the answer most people are looking for.</p>
+    <summary>Do I need to pay to see your sources?</summary>
+    <p>No. Every tier — including Free — shows the sources behind every claim, and every tier can contest a score. Sourcing is expensive on our side, but a score you can't check isn't worth much, so the evidence is never the thing we charge for. What you pay for is how many products you can check.</p>
   </details>
   <details>
-    <summary>What's included in the mobile app on Premium?</summary>
-    <p>Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The mobile app requires a Premium subscription.</p>
+    <summary>What's included in the mobile app?</summary>
+    <p>Barcode scanning on both iOS and Android — point your camera at a product in a physical store, get the same country-of-origin score you'd see on a supported online retailer. The apps are free on every tier; what you can check follows your plan, exactly as it does in the extension.</p>
   </details>
   <details>
     <summary>How do I upgrade or downgrade?</summary>
@@ -664,7 +632,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   } catch (_) {}
 })();
 
-const PLANS = ["basic", "pro", "premium"];
+const PLANS = ["basic", "pro", "supporter"];
 let billingPeriod = "monthly";
 // Hardcoded fallbacks — used until /pricing responds. Kept in sync with
 // backend DEFAULT_PRICES_CENTS in app/services/pricing.py.
@@ -675,8 +643,8 @@ const FALLBACK = {
   pro:     { monthly: { cost_display: "$9.99/mo",  cost_per_month_display: "$9.99"  },
              yearly:  { cost_display: "$99.99/yr", cost_per_month_display: "$8.33"  },
              discount_vs_monthly_pct: 17 },
-  premium: { monthly: { cost_display: "$19.99/mo", cost_per_month_display: "$19.99" },
-             yearly:  { cost_display: "$199.99/yr",cost_per_month_display: "$16.67" },
+  supporter: { monthly: { cost_display: "$25.00/mo", cost_per_month_display: "$25.00" },
+             yearly:  { cost_display: "$250.00/yr", cost_per_month_display: "$20.83" },
              discount_vs_monthly_pct: 17 },
 };
 // Cached from /pricing so the toggle can flip labels without re-fetching.
@@ -696,6 +664,15 @@ function renderPricesFor(period) {
     if (!el || !liveData[plan]) continue;
     const p = liveData[plan][period];
     if (!p) continue;
+    // Supporter renders inline in a heading, not as a big card numeral, so
+    // it takes the plain string rather than the <small>-wrapped markup.
+    if (plan === "supporter") {
+      el.textContent = p.cost_display;
+      if (note) note.textContent = period === "yearly"
+        ? `Billed annually — ${p.cost_per_month_display}/mo. Cancel anytime.`
+        : "Cancel anytime.";
+      continue;
+    }
     if (period === "monthly") {
       el.innerHTML = p.cost_display.replace("/mo", "") + "<small>/mo</small>";
       note.textContent = "Cancel anytime.";

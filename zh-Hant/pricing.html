@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>訂閱方案 — Product Origin Checker</title>
-<meta name="description" content="四個簡單方案 — 20 次查詢的免費試用方案,加上 Basic、Pro、Premium 訂閱方案,提供無限次查詢、來源、方法論,以及行動應用程式。">
+<meta name="description" content="20 次免費試用查詢,Basic 每月 4.99 美元含 100 次查詢,無限方案每月 9.99 美元。所有方案(含免費)均標註來源並支援異議。">
 <meta property="og:title" content="訂閱方案 — Product Origin Checker">
-<meta property="og:description" content="免費方案外,提供 Basic $4.99、Pro $9.99、Premium $19.99 月費方案。並提供年付選項。">
+<meta property="og:description" content="20 次免費試用查詢,Basic 每月 4.99 美元含 100 次查詢,無限方案每月 9.99 美元。所有方案(含免費)均標註來源並支援異議。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/pricing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="訂閱方案 — Product Origin Checker">
-<meta name="twitter:description" content="免費方案外,提供 Basic $4.99、Pro $9.99、Premium $19.99 月費方案。並提供年付選項。">
+<meta name="twitter:description" content="20 次免費試用查詢,Basic 每月 4.99 美元含 100 次查詢,無限方案每月 9.99 美元。所有方案(含免費)均標註來源並支援異議。">
 <link rel="canonical" href="https://realproductorigin.com/zh-Hant/pricing">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/pricing.html">
@@ -62,14 +62,14 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Pro 訂閱",
+      "name": "Real Product Origin — Unlimited subscription",
       "description": "每月無限次查詢、每項結論皆註明來源、可對評分提出異議,並享優先電子郵件支援。",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
         {
           "@type": "Offer",
-          "name": "Pro 月付",
+          "name": "Unlimited 月付",
           "price": "9.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -77,7 +77,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Pro 年付",
+          "name": "Unlimited 年付",
           "price": "99.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -87,27 +87,15 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Premium 訂閱",
-      "description": "包含 Pro 的所有功能,再加上可在實體店面掃描條碼的 iOS 與 Android 行動應用程式。",
+      "name": "Real Product Origin — Supporter subscription",
+      "description": "Everything in Unlimited. Nothing extra. For people who want to fund the work. A subscription, not a charitable donation, and not tax-deductible.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
-        {
-          "@type": "Offer",
-          "name": "Premium 月付",
-          "price": "19.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        },
-        {
-          "@type": "Offer",
-          "name": "Premium 年付",
-          "price": "199.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        }
+        {"@type": "Offer", "name": "Supporter monthly", "price": "25.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "Supporter annual", "price": "250.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"}
       ]
     },
     {
@@ -131,18 +119,18 @@
         },
         {
           "@type": "Question",
-          "name": "為什麼在較低方案中隱藏來源與方法論?",
+          "name": "查看你們的來源需要付費嗎?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "為每項結論註明來源在我們這邊成本相當可觀 — 每一次查詢都要向多個公開資料庫發出請求,並支付 LLM token 費用。Pro 與 Premium 訂閱者資助了這部分工作;Basic 與 Free 則獲得評分本身,這對多數人而言就是他們想要的答案。"
+            "text": "不需要。包括免費方案在內的所有方案,都會顯示每項結論的來源,也都可以對評分提出異議。查證來源對我們成本不低,但無法查核的評分意義有限,因此我們從不把證據本身作為收費項目。您付費購買的是可以查詢的商品數量。"
           }
         },
         {
           "@type": "Question",
-          "name": "Premium 的行動應用程式包含哪些功能?",
+          "name": "行動應用程式包含哪些功能?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "支援 iOS 與 Android 的條碼掃描 — 在實體店面把相機對準商品,即可獲得與線上支援零售商相同的原產國評分。行動應用程式需要 Premium 訂閱。"
+            "text": "iOS 與 Android 上的條碼掃描 — 在實體店用相機對準商品,即可獲得與支援的線上零售商相同的產地評分。應用程式在所有方案中均免費;可查詢的範圍與擴充功能一樣,取決於您的訂閱方案。"
           }
         },
         {
@@ -229,8 +217,8 @@
 
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; max-width: 1020px; margin: 0 auto; padding: 0 20px;
   }
   @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; } }
   @media (max-width: 620px)  { .price-grid { grid-template-columns: 1fr; max-width: 460px; } }
@@ -331,7 +319,7 @@
   <div class="wrap-wide">
     <p class="kicker">簡單透明的方案</p>
     <h1>免費試用。選擇最合適的方案。</h1>
-    <p class="subtitle"><span data-rpo-free-quota>20</span> 次免費查詢（一次性,非每月） — 由 Claude AI 與公開來源共同提供。只在您真正需要時才升級:無限次查詢、來源、方法論、異議功能,或行動應用程式。</p>
+    <p class="subtitle"><span data-rpo-free-quota>20</span> 次免費查詢（一次性,非每月） — 由 Claude AI 與公開來源共同提供。來源、方法論與異議功能在所有方案中均包含,免費方案也不例外。您付費購買的是可以查詢的商品數量。</p>
 
     <div class="billing-toggle" role="tablist" aria-label="計費週期">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">月付</button>
@@ -341,7 +329,7 @@
 </section>
 
 <section class="price-cards">
-  <div class="price-grid">
+  <div class="price-grid price-grid-3">
 
     <!-- Free -->
     <div class="price-card">
@@ -349,11 +337,11 @@
       <div class="price">$0<small>/月</small></div>
       <div class="price-note">無需信用卡。</div>
       <ul class="features">
-        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> 次查詢</strong>試用 — 一次性,非每月</li>
-        <li>每份評分皆包含四項指標</li>
-        <li class="crossed">不顯示來源與方法論</li>
-        <li class="crossed">無法對評分提出異議</li>
-        <li class="crossed">僅擴充功能,不含行動版</li>
+        <li><span id="free-quota-line"><strong><span data-rpo-free-quota>20</span> 次查詢</strong>試用 — 一次性,非每月</span></li>
+        <li>每次評分均包含四項指標</li>
+        <li>每項結論均標註來源</li>
+        <li>可對任何評分提出異議</li>
+        <li>瀏覽器擴充功能與行動應用程式</li>
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">安裝擴充功能</a>
@@ -367,11 +355,11 @@
       <div class="price" data-price="basic">$4.99<small>/月</small></div>
       <div class="price-note" data-note="basic">隨時可取消。</div>
       <ul class="features">
-        <li><strong>無限次</strong>查詢 — 無每月上限</li>
-        <li>每份評分皆包含四項指標</li>
-        <li class="crossed">不顯示來源與方法論</li>
-        <li class="crossed">無法對評分提出異議</li>
-        <li class="crossed">僅擴充功能,不含行動版</li>
+        <li>每月 <strong>100 次</strong>查詢</li>
+        <li>每次評分均包含四項指標</li>
+        <li>每項結論均標註來源</li>
+        <li>可對任何評分提出異議</li>
+        <li>瀏覽器擴充功能與行動應用程式</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">訂閱</button>
@@ -382,16 +370,15 @@
     <!-- Pro (featured) -->
     <div class="price-card featured">
       <span class="badge">最受歡迎</span>
-      <div class="plan-name">Pro</div>
+      <div class="plan-name">無限</div>
       <div class="price" data-price="pro">$9.99<small>/月</small></div>
       <div class="price-note" data-note="pro">隨時可取消。</div>
       <ul class="features">
-        <li><strong>無限次</strong>查詢 — 無每月上限</li>
-        <li>每份評分皆包含四項指標</li>
-        <li>每項結論皆<strong>註明來源</strong></li>
-        <li>可對您不同意的評分<strong>提出異議</strong></li>
+        <li><strong>無限次</strong>查詢 — 沒有上限</li>
+        <li>每次評分均包含四項指標</li>
+        <li>每項結論均標註來源</li>
+        <li>可對任何評分提出異議</li>
         <li><strong>優先</strong>電子郵件支援</li>
-        <li class="crossed">僅擴充功能,不含行動版</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">訂閱</button>
@@ -399,24 +386,7 @@
       </div>
     </div>
 
-    <!-- Premium -->
-    <div class="price-card">
-      <div class="plan-name">Premium</div>
-      <div class="price" data-price="premium">$19.99<small>/月</small></div>
-      <div class="price-note" data-note="premium">隨時可取消。</div>
-      <ul class="features">
-        <li><strong>無限次</strong>查詢 — 無每月上限</li>
-        <li>每份評分皆包含四項指標</li>
-        <li>每項結論皆註明來源</li>
-        <li>可對您不同意的評分提出異議</li>
-        <li>優先電子郵件支援</li>
-        <li><strong>行動應用程式</strong> — 隨身掃描條碼</li>
-      </ul>
-      <div class="price-cta">
-        <button class="btn btn-primary disabled" disabled aria-disabled="true">即將推出</button>
-        <div class="note">將於行動應用程式通過 App Store 與 Play Store 審核後推出。</div>
-      </div>
-    </div>
+    
 
   </div>
 
@@ -446,93 +416,62 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">逐項比較每個方案包含的所有功能。</p>
 
       <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px;">
+        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
           <colgroup>
-            <col style="width: 34%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
+            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
           </colgroup>
           <thead>
             <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">功能</th>
+              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold); position: relative;">
-                <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle;">★ 最受歡迎</span>
-                <div>Pro</div>
-              </th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Premium</th>
+              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">無限</th>
             </tr>
           </thead>
-          <tbody style="color: var(--ink-2);">
+          <tbody>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">每月查詢次數</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">20</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); font-weight: 700; color: var(--ink-deep);">無限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無限</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">查詢次數</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span> 次（一次性）</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">每月 100 次</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無限</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">四項指標評分</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">四項指標評分</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">註明來源</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">標註來源</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">對評分提出異議</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">對評分提出異議</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">優先支援</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">瀏覽器擴充功能</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">瀏覽器擴充功能</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android 應用程式</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android 應用程式</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">自動查詢預設值</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">關閉</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">關閉</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">開啟</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">實體店面條碼掃描</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">優先支援</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14 天退款保證</th>
-              <td style="text-align: center; padding: 14px 12px; color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14 天退款</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- SUPPORTER — below the table and visually parallel, never a fourth
+           column. Rendering it as the rightmost "best value" tier would
+           imply capability it does not have. -->
+      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
+        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">支持者 — <span data-price="supporter">$25.00/mo</span></h3>
+        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">可隨時取消。</div>
+        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">包含無限方案的全部內容,沒有額外權益。獻給願意資助這項工作的人。</p>
+        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">支持者不會獲得任何優先權,不能影響評分或我們接下來支援哪些零售商,也不會在任何評分上署名。產品內容與無限方案完全相同。這正是本意 — 讓在意這項工作的人可以多付一些,而不是用錢換取特殊地位。</p>
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC 是一家營利公司。支持者是訂閱,而非慈善捐贈,不可用於稅務抵扣。</p>
+        <button class="btn btn-secondary subscribe-btn" data-plan="supporter">成為支持者</button>
+      </div>
+
 
       <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
         所列價格皆為月付。年付方案約可省 17%。請參閱我們的<a href="/refunds.html">退款政策</a>。
@@ -575,12 +514,12 @@
     <p>目前支援 30 家零售商,涵蓋 29 個網域 — 綜合零售(Amazon、Target、Walmart)、居家五金、家具、電子、量販、時尚、美妝、汽車零件。您可以查看<a href="/zh-Hant/products.html#retailers">依分類列出的完整清單</a>,或<a href="/contact.html?topic=retailer-request">告訴我們下一家該支援哪家零售商</a>。</p>
   </details>
   <details>
-    <summary>為什麼在較低方案中隱藏來源與方法論?</summary>
-    <p>為每項結論註明來源在我們這邊成本相當可觀 — 每一次查詢都要向多個公開資料庫發出請求,並支付 LLM token 費用。Pro 與 Premium 訂閱者資助了這部分工作;Basic 與 Free 則獲得評分本身,這對多數人而言就是他們想要的答案。</p>
+    <summary>查看你們的來源需要付費嗎?</summary>
+    <p>不需要。包括免費方案在內的所有方案,都會顯示每項結論的來源,也都可以對評分提出異議。查證來源對我們成本不低,但無法查核的評分意義有限,因此我們從不把證據本身作為收費項目。您付費購買的是可以查詢的商品數量。</p>
   </details>
   <details>
-    <summary>Premium 的行動應用程式包含哪些功能?</summary>
-    <p>支援 iOS 與 Android 的條碼掃描 — 在實體店面把相機對準商品,即可獲得與線上支援零售商相同的原產國評分。行動應用程式需要 Premium 訂閱。</p>
+    <summary>行動應用程式包含哪些功能?</summary>
+    <p>iOS 與 Android 上的條碼掃描 — 在實體店用相機對準商品,即可獲得與支援的線上零售商相同的產地評分。應用程式在所有方案中均免費;可查詢的範圍與擴充功能一樣,取決於您的訂閱方案。</p>
   </details>
   <details>
     <summary>要如何升級或降級?</summary>
@@ -664,7 +603,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   } catch (_) {}
 })();
 
-const PLANS = ["basic", "pro", "premium"];
+const PLANS = ["basic", "pro", "supporter"];
 let billingPeriod = "monthly";
 // 硬編碼的備援值 — 於 /pricing 回應之前使用。與後端
 // app/services/pricing.py 中的 DEFAULT_PRICES_CENTS 保持同步。
@@ -675,8 +614,8 @@ const FALLBACK = {
   pro:     { monthly: { cost_display: "$9.99/mo",  cost_per_month_display: "$9.99"  },
              yearly:  { cost_display: "$99.99/yr", cost_per_month_display: "$8.33"  },
              discount_vs_monthly_pct: 17 },
-  premium: { monthly: { cost_display: "$19.99/mo", cost_per_month_display: "$19.99" },
-             yearly:  { cost_display: "$199.99/yr",cost_per_month_display: "$16.67" },
+  supporter: { monthly: { cost_display: "$25.00/mo", cost_per_month_display: "$25.00" },
+             yearly:  { cost_display: "$250.00/yr", cost_per_month_display: "$20.83" },
              discount_vs_monthly_pct: 17 },
 };
 // 由 /pricing 取得後快取,讓計費週期切換不需重新請求。
@@ -696,6 +635,11 @@ function renderPricesFor(period) {
     if (!el || !liveData[plan]) continue;
     const p = liveData[plan][period];
     if (!p) continue;
+    if (plan === "supporter") {
+      el.textContent = p.cost_display;
+      if (note) note.textContent = p.cost_display;
+      continue;
+    }
     if (period === "monthly") {
       el.innerHTML = p.cost_display.replace("/mo", "") + "<small>/月</small>";
       note.textContent = "隨時可取消。";

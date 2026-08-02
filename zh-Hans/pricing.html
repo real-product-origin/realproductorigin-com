@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>定价 — Product Origin Checker</title>
-<meta name="description" content="四档简洁定价 —— 20 次查询的免费试用方案，以及 Basic、Pro、Premium 三档订阅，提供无限查询、来源、方法论以及手机 App 等权益。">
+<meta name="description" content="20 次免费试用查询，Basic 每月 4.99 美元含 100 次查询，无限方案每月 9.99 美元。所有方案（含免费）均标注来源并支持异议。">
 <meta property="og:title" content="定价 — Product Origin Checker">
-<meta property="og:description" content="免费档另加 Basic $4.99、Pro $9.99、Premium $19.99 每月。亦可按年订阅。">
+<meta property="og:description" content="20 次免费试用查询，Basic 每月 4.99 美元含 100 次查询，无限方案每月 9.99 美元。所有方案（含免费）均标注来源并支持异议。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/pricing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定价 — Product Origin Checker">
-<meta name="twitter:description" content="免费档另加 Basic $4.99、Pro $9.99、Premium $19.99 每月。亦可按年订阅。">
+<meta name="twitter:description" content="20 次免费试用查询，Basic 每月 4.99 美元含 100 次查询，无限方案每月 9.99 美元。所有方案（含免费）均标注来源并支持异议。">
 <link rel="canonical" href="https://realproductorigin.com/zh-Hans/pricing">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/pricing.html">
@@ -62,14 +62,14 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Pro 订阅",
+      "name": "Real Product Origin — Unlimited subscription",
       "description": "无限次每月查询，每条论断附来源，可对评分提出申诉，另享邮件优先支持。",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "软件订阅",
       "offers": [
         {
           "@type": "Offer",
-          "name": "Pro 月付",
+          "name": "Unlimited 月付",
           "price": "9.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -77,7 +77,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Pro 年付",
+          "name": "Unlimited 年付",
           "price": "99.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -87,27 +87,15 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Premium 订阅",
-      "description": "包含 Pro 的全部权益，另加 iOS 与 Android 版手机 App，可在实体店中扫描条码。",
+      "name": "Real Product Origin — Supporter subscription",
+      "description": "Everything in Unlimited. Nothing extra. For people who want to fund the work. A subscription, not a charitable donation, and not tax-deductible.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
-      "category": "软件订阅",
+      "category": "Software subscription",
       "offers": [
-        {
-          "@type": "Offer",
-          "name": "Premium 月付",
-          "price": "19.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        },
-        {
-          "@type": "Offer",
-          "name": "Premium 年付",
-          "price": "199.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        }
+        {"@type": "Offer", "name": "Supporter monthly", "price": "25.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "Supporter annual", "price": "250.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"}
       ]
     },
     {
@@ -131,18 +119,18 @@
         },
         {
           "@type": "Question",
-          "name": "为什么较低档位不显示来源与方法论？",
+          "name": "查看你们的来源需要付费吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "对每条论断附上来源在我们这一端成本不低 —— 每次查询都要调用多个公共数据库并支付 LLM token 费用。Pro 与 Premium 用户为这部分工作买单；Basic 与 Free 用户拿到评分本身，也就是大多数人最想要的答案。"
+            "text": "不需要。包括免费方案在内的所有方案，都会显示每项结论的来源，也都可以对评分提出异议。核实来源对我们成本不低，但无法核查的评分意义有限，因此我们从不把证据本身作为收费项目。您付费购买的是可以查询的商品数量。"
           }
         },
         {
           "@type": "Question",
-          "name": "Premium 的手机 App 包含哪些功能？",
+          "name": "手机 App 包含哪些功能？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "iOS 与 Android 均支持扫码 —— 在实体店把摄像头对准商品，即可获得与支持的在线零售商上相同的产地评分。手机 App 需要 Premium 订阅。"
+            "text": "iOS 与 Android 上的条码扫描 —— 在实体店用相机对准商品，即可获得与受支持在线零售商相同的产地评分。App 在所有方案中均免费；可查询的范围与扩展一样，取决于您的订阅方案。"
           }
         },
         {
@@ -229,8 +217,8 @@
 
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; max-width: 1020px; margin: 0 auto; padding: 0 20px;
   }
   @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; } }
   @media (max-width: 620px)  { .price-grid { grid-template-columns: 1fr; max-width: 460px; } }
@@ -331,7 +319,7 @@
   <div class="wrap-wide">
     <p class="kicker">简单定价</p>
     <h1>免费试用。选择适合您的档位。</h1>
-    <p class="subtitle">每位用户享 <span data-rpo-free-quota>20</span> 次免费查询（一次性，非每月） —— 由 Claude AI 与经过引用的公开来源驱动。仅在您真正需要时升级：无限查询、来源、方法论、申诉，或手机 App。</p>
+    <p class="subtitle">每位用户享 <span data-rpo-free-quota>20</span> 次免费查询（一次性，非每月） —— 由 Claude AI 与经过引用的公开来源驱动。来源、方法论与异议功能在所有方案中均包含，免费方案也不例外。您付费购买的是可以查询的商品数量。</p>
 
     <div class="billing-toggle" role="tablist" aria-label="计费周期">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">月付</button>
@@ -341,7 +329,7 @@
 </section>
 
 <section class="price-cards">
-  <div class="price-grid">
+  <div class="price-grid price-grid-3">
 
     <!-- Free -->
     <div class="price-card">
@@ -349,11 +337,11 @@
       <div class="price">$0<small>/月</small></div>
       <div class="price-note">无需信用卡。</div>
       <ul class="features">
-        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> 次查询</strong>试用 —— 一次性，非每月</li>
-        <li>每次评分都包含全部四项指标</li>
-        <li class="crossed">来源与方法论隐藏</li>
-        <li class="crossed">无法申诉评分</li>
-        <li class="crossed">仅限扩展，不含移动端</li>
+        <li><span id="free-quota-line"><strong><span data-rpo-free-quota>20</span> 次查询</strong>试用 —— 一次性，非每月</span></li>
+        <li>每次评分均包含四项指标</li>
+        <li>每项结论均标注来源</li>
+        <li>可对任何评分提出异议</li>
+        <li>浏览器扩展与手机 App</li>
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">安装扩展</a>
@@ -367,11 +355,11 @@
       <div class="price" data-price="basic">$4.99<small>/月</small></div>
       <div class="price-note" data-note="basic">随时取消。</div>
       <ul class="features">
-        <li><strong>无限次</strong>查询 —— 无月度上限</li>
-        <li>每次评分都包含全部四项指标</li>
-        <li class="crossed">来源与方法论隐藏</li>
-        <li class="crossed">无法申诉评分</li>
-        <li class="crossed">仅限扩展，不含移动端</li>
+        <li>每月 <strong>100 次</strong>查询</li>
+        <li>每次评分均包含四项指标</li>
+        <li>每项结论均标注来源</li>
+        <li>可对任何评分提出异议</li>
+        <li>浏览器扩展与手机 App</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">订阅</button>
@@ -382,16 +370,15 @@
     <!-- Pro (featured) -->
     <div class="price-card featured">
       <span class="badge">最受欢迎</span>
-      <div class="plan-name">Pro</div>
+      <div class="plan-name">无限</div>
       <div class="price" data-price="pro">$9.99<small>/月</small></div>
       <div class="price-note" data-note="pro">随时取消。</div>
       <ul class="features">
-        <li><strong>无限次</strong>查询 —— 无月度上限</li>
-        <li>每次评分都包含全部四项指标</li>
-        <li>每条论断均<strong>附来源</strong></li>
-        <li>可对不认同的评分<strong>提出申诉</strong></li>
-        <li><strong>邮件优先</strong>支持</li>
-        <li class="crossed">仅限扩展，不含移动端</li>
+        <li><strong>无限次</strong>查询 —— 没有上限</li>
+        <li>每次评分均包含四项指标</li>
+        <li>每项结论均标注来源</li>
+        <li>可对任何评分提出异议</li>
+        <li><strong>优先</strong>邮件支持</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">订阅</button>
@@ -399,24 +386,7 @@
       </div>
     </div>
 
-    <!-- Premium -->
-    <div class="price-card">
-      <div class="plan-name">Premium</div>
-      <div class="price" data-price="premium">$19.99<small>/月</small></div>
-      <div class="price-note" data-note="premium">随时取消。</div>
-      <ul class="features">
-        <li><strong>无限次</strong>查询 —— 无月度上限</li>
-        <li>每次评分都包含全部四项指标</li>
-        <li>每条论断均附来源</li>
-        <li>可对不认同的评分提出申诉</li>
-        <li>邮件优先支持</li>
-        <li><strong>手机 App</strong> —— 出门在外扫码查询</li>
-      </ul>
-      <div class="price-cta">
-        <button class="btn btn-primary disabled" disabled aria-disabled="true">即将推出</button>
-        <div class="note">待手机 App 通过 App Store 与 Play Store 审核后即可开放。</div>
-      </div>
-    </div>
+    
 
   </div>
 
@@ -446,93 +416,62 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">逐项对比每个方案所包含的完整功能。</p>
 
       <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px;">
+        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
           <colgroup>
-            <col style="width: 34%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
+            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
           </colgroup>
           <thead>
             <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">功能</th>
+              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold); position: relative;">
-                <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle;">★ 最受欢迎</span>
-                <div>Pro</div>
-              </th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Premium</th>
+              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">无限</th>
             </tr>
           </thead>
-          <tbody style="color: var(--ink-2);">
+          <tbody>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">每月查询次数</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">20</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">无限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); font-weight: 700; color: var(--ink-deep);">无限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">无限</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">查询次数</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span> 次（一次性）</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">每月 100 次</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">无限</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">四指标评分</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">四项指标评分</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">附来源</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">标注来源</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">申诉评分</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">对评分提出异议</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">优先支持</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">浏览器扩展</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">浏览器扩展</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android App</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android App</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">自动查询默认值</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">关闭</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">关闭</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">开启</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">实体店条码扫描</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">优先支持</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14 天退款</th>
-              <td style="text-align: center; padding: 14px 12px; color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14 天退款</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- SUPPORTER — below the table and visually parallel, never a fourth
+           column. Rendering it as the rightmost "best value" tier would
+           imply capability it does not have. -->
+      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
+        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">支持者 — <span data-price="supporter">$25.00/mo</span></h3>
+        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">可随时取消。</div>
+        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">包含无限方案的全部内容，没有额外权益。献给愿意资助这项工作的人。</p>
+        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">支持者不会获得任何优先权，不能影响评分或我们接下来支持哪些零售商，也不会在任何评分上署名。产品内容与无限方案完全相同。这正是本意 —— 让在意这项工作的人可以多付一些，而不是用钱换取特殊地位。</p>
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC 是一家营利公司。支持者是订阅，而非慈善捐赠，不可用于税务抵扣。</p>
+        <button class="btn btn-secondary subscribe-btn" data-plan="supporter">成为支持者</button>
+      </div>
+
 
       <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
         所显示价格为月付。年付可节省约 17%。请参阅我们的<a href="/refunds.html">退款政策</a>。
@@ -575,12 +514,12 @@
     <p>目前 30 家零售商，覆盖 29 个域名 —— 综合零售（Amazon、Target、Walmart）、家居装修、家具、电子、仓储会员、时尚、美妆、汽车配件。请查看<a href="/zh-Hans/products.html#retailers">按类别划分的完整列表</a>，或<a href="/contact.html?topic=retailer-request">告诉我们下一家该加入哪一家</a>。</p>
   </details>
   <details>
-    <summary>为什么较低档位不显示来源与方法论？</summary>
-    <p>对每条论断附上来源在我们这一端成本不低 —— 每次查询都要调用多个公共数据库并支付 LLM token 费用。Pro 与 Premium 用户为这部分工作买单；Basic 与 Free 用户拿到评分本身，也就是大多数人最想要的答案。</p>
+    <summary>查看你们的来源需要付费吗？</summary>
+    <p>不需要。包括免费方案在内的所有方案，都会显示每项结论的来源，也都可以对评分提出异议。核实来源对我们成本不低，但无法核查的评分意义有限，因此我们从不把证据本身作为收费项目。您付费购买的是可以查询的商品数量。</p>
   </details>
   <details>
-    <summary>Premium 的手机 App 包含哪些功能？</summary>
-    <p>iOS 与 Android 均支持扫码 —— 在实体店把摄像头对准商品，即可获得与支持的在线零售商上相同的产地评分。手机 App 需要 Premium 订阅。</p>
+    <summary>手机 App 包含哪些功能？</summary>
+    <p>iOS 与 Android 上的条码扫描 —— 在实体店用相机对准商品，即可获得与受支持在线零售商相同的产地评分。App 在所有方案中均免费；可查询的范围与扩展一样，取决于您的订阅方案。</p>
   </details>
   <details>
     <summary>如何升级或降级？</summary>
@@ -664,7 +603,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   } catch (_) {}
 })();
 
-const PLANS = ["basic", "pro", "premium"];
+const PLANS = ["basic", "pro", "supporter"];
 let billingPeriod = "monthly";
 // Hardcoded fallbacks — used until /pricing responds. Kept in sync with
 // backend DEFAULT_PRICES_CENTS in app/services/pricing.py.
@@ -675,8 +614,8 @@ const FALLBACK = {
   pro:     { monthly: { cost_display: "$9.99/mo",  cost_per_month_display: "$9.99"  },
              yearly:  { cost_display: "$99.99/yr", cost_per_month_display: "$8.33"  },
              discount_vs_monthly_pct: 17 },
-  premium: { monthly: { cost_display: "$19.99/mo", cost_per_month_display: "$19.99" },
-             yearly:  { cost_display: "$199.99/yr",cost_per_month_display: "$16.67" },
+  supporter: { monthly: { cost_display: "$25.00/mo", cost_per_month_display: "$25.00" },
+             yearly:  { cost_display: "$250.00/yr", cost_per_month_display: "$20.83" },
              discount_vs_monthly_pct: 17 },
 };
 // Cached from /pricing so the toggle can flip labels without re-fetching.
@@ -696,6 +635,11 @@ function renderPricesFor(period) {
     if (!el || !liveData[plan]) continue;
     const p = liveData[plan][period];
     if (!p) continue;
+    if (plan === "supporter") {
+      el.textContent = p.cost_display;
+      if (note) note.textContent = p.cost_display;
+      continue;
+    }
     if (period === "monthly") {
       el.innerHTML = p.cost_display.replace("/mo", "") + "<small>/月</small>";
       note.textContent = "随时取消。";

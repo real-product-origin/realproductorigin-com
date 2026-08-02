@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>料金 — Product Origin Checker</title>
-<meta name="description" content="4つのシンプルなプラン — 月20回のチェックが無料のプランに加え、無制限アクセス、出典、方法論、モバイルアプリのためのBasic、Pro、Premiumサブスクリプションをご用意しています。">
+<meta name="description" content="20回の無料チェック、月100回の Basic（月額4.99ドル）、無制限プラン（月額9.99ドル）。出典の明記と異議申し立ては無料プランを含む全プランに含まれます。">
 <meta property="og:title" content="料金 — Product Origin Checker">
-<meta property="og:description" content="無料プランに加え、月額Basic $4.99、Pro $9.99、Premium $19.99。年額プランもご利用いただけます。">
+<meta property="og:description" content="20回の無料チェック、月100回の Basic（月額4.99ドル）、無制限プラン（月額9.99ドル）。出典の明記と異議申し立ては無料プランを含む全プランに含まれます。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/pricing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="料金 — Product Origin Checker">
-<meta name="twitter:description" content="無料プランに加え、月額Basic $4.99、Pro $9.99、Premium $19.99。年額プランもご利用いただけます。">
+<meta name="twitter:description" content="20回の無料チェック、月100回の Basic（月額4.99ドル）、無制限プラン（月額9.99ドル）。出典の明記と異議申し立ては無料プランを含む全プランに含まれます。">
 <link rel="canonical" href="https://realproductorigin.com/ja/pricing.html">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/pricing.html">
@@ -62,14 +62,14 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Proサブスクリプション",
+      "name": "Real Product Origin — Unlimited subscription",
       "description": "月間無制限のチェック、すべての主張に出典明記、スコアへの異議申し立て機能、優先メールサポート。",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
         {
           "@type": "Offer",
-          "name": "Pro monthly",
+          "name": "Unlimited monthly",
           "price": "9.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -77,7 +77,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Pro annual",
+          "name": "Unlimited annual",
           "price": "99.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -87,27 +87,15 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Premiumサブスクリプション",
-      "description": "Proのすべてに加え、iOSおよびAndroidで店頭バーコードスキャンが可能なモバイルアプリを含みます。",
+      "name": "Real Product Origin — Supporter subscription",
+      "description": "Everything in Unlimited. Nothing extra. For people who want to fund the work. A subscription, not a charitable donation, and not tax-deductible.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
       "category": "Software subscription",
       "offers": [
-        {
-          "@type": "Offer",
-          "name": "Premium monthly",
-          "price": "19.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        },
-        {
-          "@type": "Offer",
-          "name": "Premium annual",
-          "price": "199.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        }
+        {"@type": "Offer", "name": "Supporter monthly", "price": "25.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "Supporter annual", "price": "250.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"}
       ]
     },
     {
@@ -131,18 +119,18 @@
         },
         {
           "@type": "Question",
-          "name": "なぜ下位プランでは出典と方法論を非表示にしているのですか?",
+          "name": "出典を見るには支払いが必要ですか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "すべての主張に出典を付けるには私たち側でコストがかかります — 各チェックで複数の公的データベースを呼び出し、LLMトークンの費用も発生します。ProとPremiumのご加入者がその費用を支えてくださっています。BasicとFreeでは、多くの方が求めている答えであるスコアそのものをお届けします。"
+            "text": "いいえ。無料プランを含むすべてのプランで、記載ごとの出典を確認でき、どのプランでもスコアに異議を申し立てられます。裏付けの調査には費用がかかりますが、確認できないスコアには意味がありません。ですから根拠を有料にすることはありません。お支払いいただくのは、チェックできる商品の数に対してです。"
           }
         },
         {
           "@type": "Question",
-          "name": "Premiumのモバイルアプリには何が含まれますか?",
+          "name": "モバイルアプリには何が含まれますか？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "iOSとAndroidの両方でのバーコードスキャン — 実店舗で商品にカメラを向けるだけで、対応オンラインリテーラーで見られるのと同じ原産国スコアが得られます。モバイルアプリのご利用にはPremiumサブスクリプションが必要です。"
+            "text": "iOS と Android でのバーコードスキャンです。実店舗で商品にカメラを向けると、対応オンライン店舗と同じ原産地スコアが表示されます。アプリはすべてのプランで無料で、チェックできる範囲は拡張機能と同じくご契約プランに従います。"
           }
         },
         {
@@ -229,8 +217,8 @@
 
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; max-width: 1020px; margin: 0 auto; padding: 0 20px;
   }
   @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; } }
   @media (max-width: 620px)  { .price-grid { grid-template-columns: 1fr; max-width: 460px; } }
@@ -331,7 +319,7 @@
   <div class="wrap-wide">
     <p class="kicker">シンプルな料金体系</p>
     <h1>無料でお試しください。合ったプランをお選びいただけます。</h1>
-    <p class="subtitle"><span data-rpo-free-quota>20</span>回の無料チェック（1回限り、毎月ではありません） — Claude AIと出典明記の公的情報源が支えています。アップグレードは、本当に必要なものだけ: 無制限チェック、出典、方法論、異議申し立て、あるいはモバイルアプリ。</p>
+    <p class="subtitle"><span data-rpo-free-quota>20</span>回の無料チェック（1回限り、毎月ではありません） — Claude AI と出典明記の公的情報源が支えています。出典・方法論・異議申し立ては無料プランを含むすべてのプランに含まれます。お支払いいただくのは、チェックできる商品の数に対してです。</p>
 
     <div class="billing-toggle" role="tablist" aria-label="お支払い周期">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">月額</button>
@@ -341,7 +329,7 @@
 </section>
 
 <section class="price-cards">
-  <div class="price-grid">
+  <div class="price-grid price-grid-3">
 
     <!-- Free -->
     <div class="price-card">
@@ -349,11 +337,11 @@
       <div class="price">$0<small>/月</small></div>
       <div class="price-note">クレジットカード不要。</div>
       <ul class="features">
-        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span>回のチェック</strong>でお試し — 1回限り、毎月ではありません</li>
-        <li>すべてのスコアで4つの指標を表示</li>
-        <li class="crossed">出典と方法論は非表示</li>
-        <li class="crossed">スコアへの異議申し立て不可</li>
-        <li class="crossed">拡張機能のみ、モバイルなし</li>
+        <li><span id="free-quota-line"><strong><span data-rpo-free-quota>20</span>回のチェック</strong>でお試し — 1回限り、毎月ではありません</span></li>
+        <li>すべての結果に4つの指標</li>
+        <li>すべての記載に出典を明記</li>
+        <li>どの結果にも異議を申し立て可能</li>
+        <li>ブラウザ拡張機能とモバイルアプリ</li>
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">拡張機能をインストール</a>
@@ -367,11 +355,11 @@
       <div class="price" data-price="basic">$4.99<small>/月</small></div>
       <div class="price-note" data-note="basic">いつでもキャンセル可能。</div>
       <ul class="features">
-        <li><strong>無制限</strong>チェック — 月間上限なし</li>
-        <li>すべてのスコアで4つの指標を表示</li>
-        <li class="crossed">出典と方法論は非表示</li>
-        <li class="crossed">スコアへの異議申し立て不可</li>
-        <li class="crossed">拡張機能のみ、モバイルなし</li>
+        <li>月<strong>100回</strong>のチェック</li>
+        <li>すべての結果に4つの指標</li>
+        <li>すべての記載に出典を明記</li>
+        <li>どの結果にも異議を申し立て可能</li>
+        <li>ブラウザ拡張機能とモバイルアプリ</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">サブスクライブ</button>
@@ -382,16 +370,15 @@
     <!-- Pro (featured) -->
     <div class="price-card featured">
       <span class="badge">最も人気</span>
-      <div class="plan-name">Pro</div>
+      <div class="plan-name">無制限</div>
       <div class="price" data-price="pro">$9.99<small>/月</small></div>
       <div class="price-note" data-note="pro">いつでもキャンセル可能。</div>
       <ul class="features">
-        <li><strong>無制限</strong>チェック — 月間上限なし</li>
-        <li>すべてのスコアで4つの指標を表示</li>
-        <li>すべての主張に<strong>出典を明記</strong></li>
-        <li>納得できないスコアに<strong>異議を申し立て</strong></li>
+        <li><strong>無制限</strong>のチェック — 上限なし</li>
+        <li>すべての結果に4つの指標</li>
+        <li>すべての記載に出典を明記</li>
+        <li>どの結果にも異議を申し立て可能</li>
         <li><strong>優先</strong>メールサポート</li>
-        <li class="crossed">拡張機能のみ、モバイルなし</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">サブスクライブ</button>
@@ -399,24 +386,7 @@
       </div>
     </div>
 
-    <!-- Premium -->
-    <div class="price-card">
-      <div class="plan-name">Premium</div>
-      <div class="price" data-price="premium">$19.99<small>/月</small></div>
-      <div class="price-note" data-note="premium">いつでもキャンセル可能。</div>
-      <ul class="features">
-        <li><strong>無制限</strong>チェック — 月間上限なし</li>
-        <li>すべてのスコアで4つの指標を表示</li>
-        <li>すべての主張に出典を明記</li>
-        <li>納得できないスコアに異議を申し立て</li>
-        <li>優先メールサポート</li>
-        <li><strong>モバイルアプリ</strong> — 外出先でバーコードスキャン</li>
-      </ul>
-      <div class="price-cta">
-        <button class="btn btn-primary disabled" disabled aria-disabled="true">近日公開</button>
-        <div class="note">モバイルアプリがApp StoreおよびPlay Storeの審査を通過次第、ご利用いただけます。</div>
-      </div>
-    </div>
+    
 
   </div>
 
@@ -446,93 +416,62 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">各プランに含まれる機能を、項目ごとに完全比較。</p>
 
       <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px;">
+        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
           <colgroup>
-            <col style="width: 34%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
+            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
           </colgroup>
           <thead>
             <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">機能</th>
+              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold); position: relative;">
-                <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle;">★ 最も人気</span>
-                <div>Pro</div>
-              </th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Premium</th>
+              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">無制限</th>
             </tr>
           </thead>
-          <tbody style="color: var(--ink-2);">
+          <tbody>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">月間チェック回数</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">20</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無制限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); font-weight: 700; color: var(--ink-deep);">無制限</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無制限</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">チェック回数</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span>回（1回限り）</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">月100回</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無制限</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">4指標スコア</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">4指標のスコア</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">出典明記</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">出典の明記</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">スコアへの異議申し立て</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">スコアへの異議申し立て</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">優先サポート</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">ブラウザ拡張機能</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">ブラウザ拡張機能</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android アプリ</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Androidアプリ</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">自動チェックの初期設定</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オフ</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オフ</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オン</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">店頭バーコードスキャン</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">優先サポート</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14日間の返金</th>
-              <td style="text-align: center; padding: 14px 12px; color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14日間の返金</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- SUPPORTER — below the table and visually parallel, never a fourth
+           column. Rendering it as the rightmost "best value" tier would
+           imply capability it does not have. -->
+      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
+        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">サポーター — <span data-price="supporter">$25.00/mo</span></h3>
+        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">いつでも解約できます。</div>
+        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">無制限プランのすべて。それ以上はありません。この取り組みを支えたい方のために。</p>
+        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">サポーターに優先権はなく、スコアや対応店舗の選定に影響を与えることもなく、スコアに名前が載ることもありません。製品の内容は無制限プランと同一です。それこそが趣旨です — この取り組みを大切に思う方が多く負担できるようにするためであり、特別な立場を買うためではありません。</p>
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC は営利企業です。サポーターは寄付ではなくサブスクリプションであり、税額控除の対象にはなりません。</p>
+        <button class="btn btn-secondary subscribe-btn" data-plan="supporter">サポーターになる</button>
+      </div>
+
 
       <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
         表示価格は月額です。年額プランなら約17%お得。<a href="/refunds.html">返金ポリシー</a>もご確認ください。
@@ -575,12 +514,12 @@
     <p>現在30のリテーラー、29ドメインに対応 — 総合小売（Amazon、Target、Walmart）、DIY、家具、家電、会員制倉庫、ファッション、美容、自動車部品などのカテゴリを網羅。<a href="/ja/products.html#retailers">カテゴリー付きの全リスト</a>をご覧いただくか、<a href="/contact.html?topic=retailer-request">次に追加してほしいリテーラーをお知らせください</a>。</p>
   </details>
   <details>
-    <summary>なぜ下位プランでは出典と方法論を非表示にしているのですか?</summary>
-    <p>すべての主張に出典を付けるには私たち側でコストがかかります — 各チェックで複数の公的データベースを呼び出し、LLMトークンの費用も発生します。ProとPremiumのご加入者がその費用を支えてくださっています。BasicとFreeでは、多くの方が求めている答えであるスコアそのものをお届けします。</p>
+    <summary>出典を見るには支払いが必要ですか？</summary>
+    <p>いいえ。無料プランを含むすべてのプランで、記載ごとの出典を確認でき、どのプランでもスコアに異議を申し立てられます。裏付けの調査には費用がかかりますが、確認できないスコアには意味がありません。ですから根拠を有料にすることはありません。お支払いいただくのは、チェックできる商品の数に対してです。</p>
   </details>
   <details>
-    <summary>Premiumのモバイルアプリには何が含まれますか?</summary>
-    <p>iOSとAndroidの両方でのバーコードスキャン — 実店舗で商品にカメラを向けるだけで、対応オンラインリテーラーで見られるのと同じ原産国スコアが得られます。モバイルアプリのご利用にはPremiumサブスクリプションが必要です。</p>
+    <summary>モバイルアプリには何が含まれますか？</summary>
+    <p>iOS と Android でのバーコードスキャンです。実店舗で商品にカメラを向けると、対応オンライン店舗と同じ原産地スコアが表示されます。アプリはすべてのプランで無料で、チェックできる範囲は拡張機能と同じくご契約プランに従います。</p>
   </details>
   <details>
     <summary>プランのアップグレードやダウングレードはどうすればできますか?</summary>
@@ -664,7 +603,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   } catch (_) {}
 })();
 
-const PLANS = ["basic", "pro", "premium"];
+const PLANS = ["basic", "pro", "supporter"];
 let billingPeriod = "monthly";
 // Hardcoded fallbacks — used until /pricing responds. Kept in sync with
 // backend DEFAULT_PRICES_CENTS in app/services/pricing.py.
@@ -675,8 +614,8 @@ const FALLBACK = {
   pro:     { monthly: { cost_display: "$9.99/mo",  cost_per_month_display: "$9.99"  },
              yearly:  { cost_display: "$99.99/yr", cost_per_month_display: "$8.33"  },
              discount_vs_monthly_pct: 17 },
-  premium: { monthly: { cost_display: "$19.99/mo", cost_per_month_display: "$19.99" },
-             yearly:  { cost_display: "$199.99/yr",cost_per_month_display: "$16.67" },
+  supporter: { monthly: { cost_display: "$25.00/mo", cost_per_month_display: "$25.00" },
+             yearly:  { cost_display: "$250.00/yr", cost_per_month_display: "$20.83" },
              discount_vs_monthly_pct: 17 },
 };
 // Cached from /pricing so the toggle can flip labels without re-fetching.
@@ -696,6 +635,11 @@ function renderPricesFor(period) {
     if (!el || !liveData[plan]) continue;
     const p = liveData[plan][period];
     if (!p) continue;
+    if (plan === "supporter") {
+      el.textContent = p.cost_display;
+      if (note) note.textContent = p.cost_display;
+      continue;
+    }
     if (period === "monthly") {
       el.innerHTML = p.cost_display.replace("/mo", "") + "<small>/月</small>";
       note.textContent = "いつでもキャンセル可能。";

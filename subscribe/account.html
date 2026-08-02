@@ -333,7 +333,10 @@
 
 <script>
 const API = "https://api.realproductorigin.com";
-const PLAN_LABELS = { free: "Free tier", basic: "Basic", pro: "Pro", premium: "Premium" };
+// `pro` displays as "Unlimited" — the id is permanent (Stripe metadata,
+// stored subscriptions, access codes all carry it). `premium` is retired
+// but stays mapped so an existing holder sees a name, not a raw id.
+const PLAN_LABELS = { free: "Free tier", basic: "Basic", pro: "Unlimited", supporter: "Supporter", premium: "Premium" };
 
 // Chrome Web Store extension ID for Product Origin Checker. Used by the
 // initExtensionHandoff() flow below to talk to the installed extension

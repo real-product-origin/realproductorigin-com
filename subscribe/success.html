@@ -257,7 +257,8 @@ function handleActive(data) {
 
   // 2. Populate the visible UI.
   el.activeEmail.textContent = data.email || "";
-  const planLabel = ({basic: "Basic", pro: "Pro", premium: "Premium"})[data.plan] || data.plan || "";
+  const planLabel = ({basic: "Basic", pro: "Unlimited", supporter: "Supporter",
+                     premium: "Premium"})[data.plan] || data.plan || "";
   const periodLabel = data.billing_period === "yearly" ? "yearly" : "monthly";
   el.activePlan.textContent = planLabel + " · " + periodLabel;
   el.detailPlan.textContent = planLabel;

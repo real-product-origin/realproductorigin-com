@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Precios — Product Origin Checker</title>
-<meta name="description" content="Cuatro niveles sencillos — una prueba gratuita de 20 comprobaciones más las suscripciones Basic, Pro y Premium para acceso ilimitado, fuentes, metodología y la aplicación móvil.">
+<meta name="description" content="Prueba gratuita de 20 comprobaciones, Basic por 4,99 $/mes con 100 comprobaciones mensuales e Ilimitado por 9,99 $/mes. Fuentes citadas e impugnaciones en todos los niveles, incluido el gratuito.">
 <meta property="og:title" content="Precios — Product Origin Checker">
-<meta property="og:description" content="Nivel gratuito más Basic $4.99, Pro $9.99, Premium $19.99 al mes. Precios anuales disponibles.">
+<meta property="og:description" content="Prueba gratuita de 20 comprobaciones, Basic por 4,99 $/mes con 100 comprobaciones mensuales e Ilimitado por 9,99 $/mes. Fuentes citadas e impugnaciones en todos los niveles, incluido el gratuito.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/pricing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Precios — Product Origin Checker">
-<meta name="twitter:description" content="Nivel gratuito más Basic $4.99, Pro $9.99, Premium $19.99 al mes. Precios anuales disponibles.">
+<meta name="twitter:description" content="Prueba gratuita de 20 comprobaciones, Basic por 4,99 $/mes con 100 comprobaciones mensuales e Ilimitado por 9,99 $/mes. Fuentes citadas e impugnaciones en todos los niveles, incluido el gratuito.">
 <link rel="canonical" href="https://realproductorigin.com/es/pricing.html">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/pricing.html">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/pricing.html">
@@ -69,7 +69,7 @@
       "offers": [
         {
           "@type": "Offer",
-          "name": "Pro mensual",
+          "name": "Unlimited mensual",
           "price": "9.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -77,7 +77,7 @@
         },
         {
           "@type": "Offer",
-          "name": "Pro anual",
+          "name": "Unlimited anual",
           "price": "99.99",
           "priceCurrency": "USD",
           "url": "https://realproductorigin.com/pricing",
@@ -87,27 +87,15 @@
     },
     {
       "@type": "Product",
-      "name": "Real Product Origin — Suscripción Premium",
-      "description": "Todo lo de Pro, más la aplicación móvil con escaneo de códigos de barras en tienda en iOS y Android.",
+      "name": "Real Product Origin — Supporter subscription",
+      "description": "Everything in Unlimited. Nothing extra. For people who want to fund the work. A subscription, not a charitable donation, and not tax-deductible.",
       "brand": {"@id": "https://realproductorigin.com/#organization"},
-      "category": "Suscripción de software",
+      "category": "Software subscription",
       "offers": [
-        {
-          "@type": "Offer",
-          "name": "Premium mensual",
-          "price": "19.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        },
-        {
-          "@type": "Offer",
-          "name": "Premium anual",
-          "price": "199.99",
-          "priceCurrency": "USD",
-          "url": "https://realproductorigin.com/pricing",
-          "availability": "https://schema.org/InStock"
-        }
+        {"@type": "Offer", "name": "Supporter monthly", "price": "25.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "Supporter annual", "price": "250.00", "priceCurrency": "USD",
+         "url": "https://realproductorigin.com/pricing", "availability": "https://schema.org/InStock"}
       ]
     },
     {
@@ -131,18 +119,18 @@
         },
         {
           "@type": "Question",
-          "name": "¿Por qué ocultar las fuentes y la metodología en los niveles inferiores?",
+          "name": "¿Tengo que pagar para ver sus fuentes?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Documentar cada afirmación nos resulta caro — cada comprobación consulta varias bases de datos públicas y paga tokens de LLM. Los suscriptores Pro y Premium financian ese trabajo; Basic y Free obtienen la propia puntuación, que es la respuesta que la mayoría busca."
+            "text": "No. Todos los niveles —incluido el gratuito— muestran las fuentes de cada afirmación, y en todos se puede impugnar un resultado. Documentar cada dato nos cuesta dinero, pero un resultado que no se puede verificar vale poco, así que las pruebas nunca son lo que cobramos. Lo que se paga es cuántos productos puede comprobar."
           }
         },
         {
           "@type": "Question",
-          "name": "¿Qué incluye la aplicación móvil en Premium?",
+          "name": "¿Qué incluye la aplicación móvil?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Escaneo de códigos de barras tanto en iOS como en Android — apunte la cámara a un producto en una tienda física y obtenga la misma puntuación de país de origen que vería en un minorista en línea compatible. La aplicación móvil requiere una suscripción Premium."
+            "text": "Escaneo de códigos de barras en iOS y Android: apunte la cámara a un producto en una tienda física y obtenga el mismo resultado de origen que vería en un comercio online compatible. Las apps son gratuitas en todos los niveles; lo que puede comprobar depende de su plan, igual que en la extensión."
           }
         },
         {
@@ -229,8 +217,8 @@
 
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px; max-width: 1240px; margin: 0 auto; padding: 0 20px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px; max-width: 1020px; margin: 0 auto; padding: 0 20px;
   }
   @media (max-width: 1100px) { .price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 720px; } }
   @media (max-width: 620px)  { .price-grid { grid-template-columns: 1fr; max-width: 460px; } }
@@ -331,7 +319,7 @@
   <div class="wrap-wide">
     <p class="kicker">Precios sencillos</p>
     <h1>Gratis para probar. Elija el nivel que se adapte.</h1>
-    <p class="subtitle">Una asignación única de <span data-rpo-free-quota>20</span> comprobaciones gratuitas — impulsadas por Claude AI y fuentes públicas citadas. Suba de nivel solo por lo que realmente necesite: comprobaciones ilimitadas, fuentes, metodología, impugnación o la aplicación móvil.</p>
+    <p class="subtitle">Una asignación única de <span data-rpo-free-quota>20</span> comprobaciones gratuitas — con Claude AI y fuentes públicas citadas. Las fuentes, la metodología y las impugnaciones se incluyen en todos los niveles, incluido el gratuito. Lo que se paga es cuántos productos puede comprobar.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Periodo de facturación">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Mensual</button>
@@ -341,7 +329,7 @@
 </section>
 
 <section class="price-cards">
-  <div class="price-grid">
+  <div class="price-grid price-grid-3">
 
     <!-- Free -->
     <div class="price-card">
@@ -349,11 +337,11 @@
       <div class="price">$0<small>/mes</small></div>
       <div class="price-note">Sin tarjeta de crédito.</div>
       <ul class="features">
-        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> comprobaciones</strong> para probarlo — una sola vez, no mensual</li>
-        <li>Los cuatro indicadores en cada puntuación</li>
-        <li class="crossed">Fuentes y metodología ocultas</li>
-        <li class="crossed">No se pueden impugnar las puntuaciones</li>
-        <li class="crossed">Solo extensión, sin móvil</li>
+        <li><span id="free-quota-line"><strong><span data-rpo-free-quota>20</span> comprobaciones</strong> para probarlo — una sola vez, no mensual</span></li>
+        <li>Los cuatro indicadores en cada resultado</li>
+        <li>Fuentes citadas en cada afirmación</li>
+        <li>Impugne cualquier resultado</li>
+        <li>Extensión de navegador y apps móviles</li>
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">Instalar la extensión</a>
@@ -367,11 +355,11 @@
       <div class="price" data-price="basic">$4.99<small>/mes</small></div>
       <div class="price-note" data-note="basic">Cancele cuando quiera.</div>
       <ul class="features">
-        <li>Comprobaciones <strong>ilimitadas</strong> — sin límite mensual</li>
-        <li>Los cuatro indicadores en cada puntuación</li>
-        <li class="crossed">Fuentes y metodología ocultas</li>
-        <li class="crossed">No se pueden impugnar las puntuaciones</li>
-        <li class="crossed">Solo extensión, sin móvil</li>
+        <li><strong>100 comprobaciones</strong> al mes</li>
+        <li>Los cuatro indicadores en cada resultado</li>
+        <li>Fuentes citadas en cada afirmación</li>
+        <li>Impugne cualquier resultado</li>
+        <li>Extensión de navegador y apps móviles</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="basic">Suscribirse</button>
@@ -382,16 +370,15 @@
     <!-- Pro (destacado) -->
     <div class="price-card featured">
       <span class="badge">Más popular</span>
-      <div class="plan-name">Pro</div>
+      <div class="plan-name">Ilimitado</div>
       <div class="price" data-price="pro">$9.99<small>/mes</small></div>
       <div class="price-note" data-note="pro">Cancele cuando quiera.</div>
       <ul class="features">
-        <li>Comprobaciones <strong>ilimitadas</strong> — sin límite mensual</li>
-        <li>Los cuatro indicadores en cada puntuación</li>
-        <li><strong>Fuentes citadas</strong> en cada afirmación</li>
-        <li><strong>Impugne las puntuaciones</strong> con las que no esté de acuerdo</li>
-        <li>Soporte <strong>prioritario</strong> por correo electrónico</li>
-        <li class="crossed">Solo extensión, sin móvil</li>
+        <li><strong>Comprobaciones ilimitadas</strong> — sin tope</li>
+        <li>Los cuatro indicadores en cada resultado</li>
+        <li>Fuentes citadas en cada afirmación</li>
+        <li>Impugne cualquier resultado</li>
+        <li>Soporte <strong>prioritario</strong> por correo</li>
       </ul>
       <div class="price-cta">
         <button class="btn btn-primary subscribe-btn" data-plan="pro">Suscribirse</button>
@@ -399,24 +386,7 @@
       </div>
     </div>
 
-    <!-- Premium -->
-    <div class="price-card">
-      <div class="plan-name">Premium</div>
-      <div class="price" data-price="premium">$19.99<small>/mes</small></div>
-      <div class="price-note" data-note="premium">Cancele cuando quiera.</div>
-      <ul class="features">
-        <li>Comprobaciones <strong>ilimitadas</strong> — sin límite mensual</li>
-        <li>Los cuatro indicadores en cada puntuación</li>
-        <li>Fuentes citadas en cada afirmación</li>
-        <li>Impugne las puntuaciones con las que no esté de acuerdo</li>
-        <li>Soporte prioritario por correo electrónico</li>
-        <li><strong>Aplicación móvil</strong> — escanee códigos de barras sobre la marcha</li>
-      </ul>
-      <div class="price-cta">
-        <button class="btn btn-primary disabled" disabled aria-disabled="true">Próximamente</button>
-        <div class="note">Disponible cuando la aplicación móvil supere la revisión de App Store y Play Store.</div>
-      </div>
-    </div>
+    
 
   </div>
 
@@ -446,93 +416,62 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">Una vista completa, función por función, de lo que incluye cada plan.</p>
 
       <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px;">
+        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
           <colgroup>
-            <col style="width: 34%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
-            <col style="width: 16.5%;">
+            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
           </colgroup>
           <thead>
             <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">Función</th>
+              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
               <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold); position: relative;">
-                <span style="display: inline-block; margin-bottom: 4px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle;">★ Más popular</span>
-                <div>Pro</div>
-              </th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Premium</th>
+              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">Ilimitado</th>
             </tr>
           </thead>
-          <tbody style="color: var(--ink-2);">
+          <tbody>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Comprobaciones mensuales</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">20</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Ilimitadas</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); font-weight: 700; color: var(--ink-deep);">Ilimitadas</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Ilimitadas</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Comprobaciones</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span>, una vez</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">100 / mes</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Ilimitado</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Puntuación de cuatro indicadores</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Resultado de cuatro indicadores</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Fuentes citadas</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Fuentes citadas</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Impugnar una puntuación</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Impugnar un resultado</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Soporte prioritario</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Extensión de navegador</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Extensión de navegador</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">App iOS + Android</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Aplicación iOS + Android</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Comprobación automática por defecto</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Desactivada</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Desactivada</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">Activada</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Escaneo de código de barras en tienda</th>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); background: var(--gold-soft); color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">Soporte prioritario</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
             </tr>
             <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">Reembolso de 14 días</th>
-              <td style="text-align: center; padding: 14px 12px; color: var(--muted); font-size: 16px;">—</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; background: var(--gold-soft); color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
-              <td style="text-align: center; padding: 14px 12px; color: var(--green); font-weight: 700; font-size: 18px;">✓</td>
+              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">Reembolso de 14 días</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- SUPPORTER — below the table and visually parallel, never a fourth
+           column. Rendering it as the rightmost "best value" tier would
+           imply capability it does not have. -->
+      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
+        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">Colaborador — <span data-price="supporter">$25.00/mo</span></h3>
+        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">Cancele cuando quiera.</div>
+        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">Todo lo de Ilimitado. Nada más. Para quienes quieren financiar este trabajo.</p>
+        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">Los colaboradores no tienen prioridad sobre nadie, ni influencia sobre los resultados o sobre qué comercios añadimos después, ni mención alguna en ningún resultado. El producto es idéntico a Ilimitado. Ese es justamente el objetivo: que quien valore este trabajo pueda aportar más, no que compre influencia.</p>
+        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC es una empresa con ánimo de lucro. Colaborador es una suscripción, no un donativo, y no es deducible de impuestos.</p>
+        <button class="btn btn-secondary subscribe-btn" data-plan="supporter">Hazte Colaborador</button>
+      </div>
+
 
       <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
         Los precios mostrados son mensuales. Los precios anuales ahorran ~17 %. Consulte nuestra <a href="/refunds.html">política de reembolsos</a>.
@@ -575,12 +514,12 @@
     <p>Treinta minoristas en 29 dominios — comercio general (Amazon, Target, Walmart), bricolaje, mobiliario, electrónica, club de mayoristas, moda, belleza, autopartes. Vea la <a href="/es/products.html#retailers">lista completa con categorías</a>, o <a href="/contact.html?topic=retailer-request">díganos cuál añadir a continuación</a>.</p>
   </details>
   <details>
-    <summary>¿Por qué ocultar las fuentes y la metodología en los niveles inferiores?</summary>
-    <p>Documentar cada afirmación nos resulta caro — cada comprobación consulta varias bases de datos públicas y paga tokens de LLM. Los suscriptores Pro y Premium financian ese trabajo; Basic y Free obtienen la propia puntuación, que es la respuesta que la mayoría busca.</p>
+    <summary>¿Tengo que pagar para ver sus fuentes?</summary>
+    <p>No. Todos los niveles —incluido el gratuito— muestran las fuentes de cada afirmación, y en todos se puede impugnar un resultado. Documentar cada dato nos cuesta dinero, pero un resultado que no se puede verificar vale poco, así que las pruebas nunca son lo que cobramos. Lo que se paga es cuántos productos puede comprobar.</p>
   </details>
   <details>
-    <summary>¿Qué incluye la aplicación móvil en Premium?</summary>
-    <p>Escaneo de códigos de barras tanto en iOS como en Android — apunte la cámara a un producto en una tienda física y obtenga la misma puntuación de país de origen que vería en un minorista en línea compatible. La aplicación móvil requiere una suscripción Premium.</p>
+    <summary>¿Qué incluye la aplicación móvil?</summary>
+    <p>Escaneo de códigos de barras en iOS y Android: apunte la cámara a un producto en una tienda física y obtenga el mismo resultado de origen que vería en un comercio online compatible. Las apps son gratuitas en todos los niveles; lo que puede comprobar depende de su plan, igual que en la extensión.</p>
   </details>
   <details>
     <summary>¿Cómo cambio de nivel (subir o bajar)?</summary>
@@ -664,7 +603,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   } catch (_) {}
 })();
 
-const PLANS = ["basic", "pro", "premium"];
+const PLANS = ["basic", "pro", "supporter"];
 let billingPeriod = "monthly";
 // Valores de respaldo codificados — usados hasta que /pricing responda. Sincronizados con
 // el DEFAULT_PRICES_CENTS del backend en app/services/pricing.py.
@@ -675,8 +614,8 @@ const FALLBACK = {
   pro:     { monthly: { cost_display: "$9.99/mo",  cost_per_month_display: "$9.99"  },
              yearly:  { cost_display: "$99.99/yr", cost_per_month_display: "$8.33"  },
              discount_vs_monthly_pct: 17 },
-  premium: { monthly: { cost_display: "$19.99/mo", cost_per_month_display: "$19.99" },
-             yearly:  { cost_display: "$199.99/yr",cost_per_month_display: "$16.67" },
+  supporter: { monthly: { cost_display: "$25.00/mo", cost_per_month_display: "$25.00" },
+             yearly:  { cost_display: "$250.00/yr", cost_per_month_display: "$20.83" },
              discount_vs_monthly_pct: 17 },
 };
 // En caché desde /pricing para que el selector pueda cambiar etiquetas sin volver a pedir.
@@ -696,6 +635,11 @@ function renderPricesFor(period) {
     if (!el || !liveData[plan]) continue;
     const p = liveData[plan][period];
     if (!p) continue;
+    if (plan === "supporter") {
+      el.textContent = p.cost_display;
+      if (note) note.textContent = p.cost_display;
+      continue;
+    }
     if (period === "monthly") {
       el.innerHTML = p.cost_display.replace("/mo", "") + "<small>/mes</small>";
       note.textContent = "Cancele cuando quiera.";
