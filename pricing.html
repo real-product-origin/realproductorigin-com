@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — Product Origin Checker</title>
-<meta name="description" content="Four simple tiers — a free 20-checks-a-month plan plus Basic, Pro, and Premium subscriptions for unlimited access, sources, methodology, and the mobile app.">
+<meta name="description" content="Four simple tiers — a free 20-check one-time trial plus Basic, Pro, and Premium subscriptions for unlimited access, sources, methodology, and the mobile app.">
 <meta property="og:title" content="Pricing — Product Origin Checker">
 <meta property="og:description" content="Free tier plus Basic $4.99, Pro $9.99, Premium $19.99 per month. Annual pricing available.">
 <meta property="og:type" content="website">
@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">Simple pricing</p>
     <h1>Free to try. Pick the tier that fits.</h1>
-    <p class="subtitle">Twenty free checks every month, every tier — powered by Claude AI and cited public sources. Upgrade only for what you actually need: unlimited checks, sources, methodology, contest, or the mobile app.</p>
+    <p class="subtitle">A one-time allowance of <span data-rpo-free-quota>20</span> free checks — powered by Claude AI and cited public sources. Upgrade only for what you actually need: unlimited checks, sources, methodology, contest, or the mobile app.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Billing period">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Monthly</button>
@@ -349,7 +349,7 @@
       <div class="price">$0<small>/mo</small></div>
       <div class="price-note">No credit card required.</div>
       <ul class="features">
-        <li id="free-quota-line"><strong>20 checks</strong> to try it — one time, not monthly</li>
+        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> checks</strong> to try it — one time, not monthly</li>
         <li>All four indicators on every score</li>
         <li class="crossed">Sources &amp; methodology hidden</li>
         <li class="crossed">Can't contest scores</li>
@@ -357,7 +357,7 @@
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">Install the extension</a>
-        <div class="note">No sign-up required. 20 free checks to try it.</div>
+        <div class="note">No sign-up required. <span data-rpo-free-quota>20</span> free checks to try it.</div>
       </div>
     </div>
 
@@ -564,7 +564,7 @@
 
   <details>
     <summary>Do I need to create an account to use the free tier?</summary>
-    <p>No. Install the extension and your first 20 checks work anonymously. You only sign in when you want to subscribe or use the mobile app.</p>
+    <p>No. Install the extension and your first <span data-rpo-free-quota>20</span> checks work anonymously. You only sign in when you want to subscribe or use the mobile app.</p>
   </details>
   <details>
     <summary>What counts as a "check"?</summary>
@@ -821,5 +821,6 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

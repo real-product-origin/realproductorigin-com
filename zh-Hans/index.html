@@ -144,7 +144,7 @@
           <a class="btn btn-primary" href="#install">安装浏览器扩展</a>
           <a class="btn btn-secondary" href="/zh-Hans/products.html#methodology">工作原理</a>
         </div>
-        <p class="cta-note">前 20 次查询免费（一次性）。<a href="/zh-Hans/pricing.html">$4.99/月</a> 起享无限次查询。适用于 Chrome 和 Brave（Edge 与 Firefox 即将推出）。iOS 与 Android 版即将推出。</p>
+        <p class="cta-note">前 <span data-rpo-free-quota>20</span> 次查询免费（一次性）。<a href="/zh-Hans/pricing.html">$4.99/月</a> 起享无限次查询。适用于 Chrome 和 Brave（Edge 与 Firefox 即将推出）。iOS 与 Android 版即将推出。</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -995,7 +995,7 @@
 
     <details>
       <summary>是免费的吗？</summary>
-      <p>前 20 次查询免费（一次性），无需信用卡。超出后，订阅从 $4.99/月 起 —— 详情请见<a href="/zh-Hans/pricing.html">定价页</a>。</p>
+      <p>前 <span data-rpo-free-quota>20</span> 次查询免费（一次性），无需信用卡。超出后，订阅从 $4.99/月 起 —— 详情请见<a href="/zh-Hans/pricing.html">定价页</a>。</p>
     </details>
 
     <details>
@@ -1121,5 +1121,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

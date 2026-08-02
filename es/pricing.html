@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">Precios sencillos</p>
     <h1>Gratis para probar. Elija el nivel que se adapte.</h1>
-    <p class="subtitle">Veinte comprobaciones gratuitas cada mes, en todos los niveles — impulsadas por Claude AI y fuentes públicas citadas. Suba de nivel solo por lo que realmente necesite: comprobaciones ilimitadas, fuentes, metodología, impugnación o la aplicación móvil.</p>
+    <p class="subtitle">Una asignación única de <span data-rpo-free-quota>20</span> comprobaciones gratuitas — impulsadas por Claude AI y fuentes públicas citadas. Suba de nivel solo por lo que realmente necesite: comprobaciones ilimitadas, fuentes, metodología, impugnación o la aplicación móvil.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Periodo de facturación">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Mensual</button>
@@ -349,7 +349,7 @@
       <div class="price">$0<small>/mes</small></div>
       <div class="price-note">Sin tarjeta de crédito.</div>
       <ul class="features">
-        <li id="free-quota-line"><strong>20 comprobaciones</strong> al mes</li>
+        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> comprobaciones</strong> para probarlo — una sola vez, no mensual</li>
         <li>Los cuatro indicadores en cada puntuación</li>
         <li class="crossed">Fuentes y metodología ocultas</li>
         <li class="crossed">No se pueden impugnar las puntuaciones</li>
@@ -357,7 +357,7 @@
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">Instalar la extensión</a>
-        <div class="note">Gratis para siempre. Sin registro para sus primeras 20 comprobaciones.</div>
+        <div class="note">Gratis para siempre. Sin registro para sus primeras <span data-rpo-free-quota>20</span> comprobaciones.</div>
       </div>
     </div>
 
@@ -564,7 +564,7 @@
 
   <details>
     <summary>¿Necesito crear una cuenta para usar el nivel gratuito?</summary>
-    <p>No. Instale la extensión y sus primeras 20 comprobaciones funcionan de forma anónima. Solo inicia sesión cuando quiera suscribirse o usar la aplicación móvil.</p>
+    <p>No. Instale la extensión y sus primeras <span data-rpo-free-quota>20</span> comprobaciones funcionan de forma anónima. Solo inicia sesión cuando quiera suscribirse o usar la aplicación móvil.</p>
   </details>
   <details>
     <summary>¿Qué cuenta como «comprobación»?</summary>
@@ -821,5 +821,6 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

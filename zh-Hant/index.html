@@ -144,7 +144,7 @@
           <a class="btn btn-primary" href="#install">取得瀏覽器擴充功能</a>
           <a class="btn btn-secondary" href="/zh-Hant/products.html#methodology">運作原理</a>
         </div>
-        <p class="cta-note">前 20 次查詢免費（一次性）。無限次查詢方案自 <a href="/zh-Hant/pricing.html">$4.99/月</a> 起。支援 Chrome 與 Brave（Edge 與 Firefox 即將推出）。iOS 與 Android 版本即將推出。</p>
+        <p class="cta-note">前 <span data-rpo-free-quota>20</span> 次查詢免費（一次性）。無限次查詢方案自 <a href="/zh-Hant/pricing.html">$4.99/月</a> 起。支援 Chrome 與 Brave（Edge 與 Firefox 即將推出）。iOS 與 Android 版本即將推出。</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -995,7 +995,7 @@
 
     <details>
       <summary>這項服務免費嗎?</summary>
-      <p>前 20 次查詢免費（一次性）,無需信用卡。超過之後,訂閱方案自 $4.99/月起 — 請參見<a href="/zh-Hant/pricing.html">訂閱方案頁面</a>。</p>
+      <p>前 <span data-rpo-free-quota>20</span> 次查詢免費（一次性）,無需信用卡。超過之後,訂閱方案自 $4.99/月起 — 請參見<a href="/zh-Hant/pricing.html">訂閱方案頁面</a>。</p>
     </details>
 
     <details>
@@ -1121,5 +1121,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

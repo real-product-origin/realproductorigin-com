@@ -413,11 +413,21 @@ function renderDashboard(status) {
     btn.textContent = "Manage subscription";
     btn.addEventListener("click", openPortal);
     cta.appendChild(btn);
-  } else if (status.plan === "free") {
-    const used = Number(status.checks_used || 0);
-    const quota = Number(status.quota_per_month || 20);
-    const remaining = Math.max(0, quota - used);
-    meta.innerHTML = "<strong>" + quota + " checks per month</strong> · " + remaining + " remaining this month.";
+  } else if (status.quota && typeof status.quota.limit === "number") {
+    // Any METERED plan, not just Free — Basic is capped too now. Read the
+    // quota block the server sends rather than the plan id, so a tier
+    // becoming metered (or stopping) needs no change here.
+    //
+    // No `|| 20` fallback: the cap is an admin-settable value, and a
+    // hardcoded default meant this page could confidently print a number
+    // the product does not enforce. If the block is absent we say nothing.
+    const q = status.quota;
+    const remaining = Math.max(0, q.limit - Number(q.used || 0));
+    // A lifetime allowance never resets — "remaining this month" would
+    // promise a reset that does not come.
+    meta.innerHTML = q.period_kind === "lifetime"
+      ? "<strong>" + q.limit + " checks</strong>, one time · " + remaining + " remaining."
+      : "<strong>" + q.limit + " checks per month</strong> · " + remaining + " remaining this month.";
     const link = document.createElement("a");
     link.className = "btn btn-primary";
     link.href = "/pricing.html";

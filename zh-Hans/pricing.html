@@ -123,7 +123,7 @@
         },
         {
           "@type": "Question",
-          "name": "什么算作一次"查询"？",
+          "name": "什么算作一次“查询”？",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "在启用扩展的情况下，您浏览我们所支持零售商（目前 30 家）的任意一个商品页面，即算作一次。命中缓存 —— 90 天内对同一商品的重复访问 —— 不计入您的每月配额。"
@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">简单定价</p>
     <h1>免费试用。选择适合您的档位。</h1>
-    <p class="subtitle">每位用户享 20 次免费查询（一次性，非每月） —— 由 Claude AI 与经过引用的公开来源驱动。仅在您真正需要时升级：无限查询、来源、方法论、申诉，或手机 App。</p>
+    <p class="subtitle">每位用户享 <span data-rpo-free-quota>20</span> 次免费查询（一次性，非每月） —— 由 Claude AI 与经过引用的公开来源驱动。仅在您真正需要时升级：无限查询、来源、方法论、申诉，或手机 App。</p>
 
     <div class="billing-toggle" role="tablist" aria-label="计费周期">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">月付</button>
@@ -349,7 +349,7 @@
       <div class="price">$0<small>/月</small></div>
       <div class="price-note">无需信用卡。</div>
       <ul class="features">
-        <li id="free-quota-line"><strong>20 次查询</strong>试用 —— 一次性，非每月</li>
+        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> 次查询</strong>试用 —— 一次性，非每月</li>
         <li>每次评分都包含全部四项指标</li>
         <li class="crossed">来源与方法论隐藏</li>
         <li class="crossed">无法申诉评分</li>
@@ -357,7 +357,7 @@
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">安装扩展</a>
-        <div class="note">无需注册。20 次免费查询，即刻试用。</div>
+        <div class="note">无需注册。<span data-rpo-free-quota>20</span> 次免费查询，即刻试用。</div>
       </div>
     </div>
 
@@ -564,10 +564,10 @@
 
   <details>
     <summary>使用免费档需要注册账户吗？</summary>
-    <p>不需要。安装扩展后，您的前 20 次查询可匿名进行。仅当您想订阅或使用手机 App 时才需要登录。</p>
+    <p>不需要。安装扩展后，您的前 <span data-rpo-free-quota>20</span> 次查询可匿名进行。仅当您想订阅或使用手机 App 时才需要登录。</p>
   </details>
   <details>
-    <summary>什么算作一次"查询"？</summary>
+    <summary>什么算作一次“查询”？</summary>
     <p>在启用扩展的情况下，您浏览受支持零售商（见<a href="/zh-Hans/products.html#retailers">完整列表</a>）的任意一个商品页面即算作一次。命中缓存 —— 90 天内对同一商品的重复访问 —— <em>不</em>计入您的每月配额。</p>
   </details>
   <details>
@@ -821,5 +821,6 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

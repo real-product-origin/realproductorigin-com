@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">Einfache Preise</p>
     <h1>Kostenlos testen. Wählen Sie die passende Stufe.</h1>
-    <p class="subtitle">Zwanzig kostenlose Prüfungen jeden Monat, in jeder Stufe — angetrieben von Claude AI und zitierten öffentlichen Quellen. Upgraden Sie nur für das, was Sie wirklich brauchen: unbegrenzte Prüfungen, Quellen, Methodik, Widerspruch oder die mobile App.</p>
+    <p class="subtitle">Ein einmaliges Kontingent von <span data-rpo-free-quota>20</span> kostenlosen Prüfungen — angetrieben von Claude AI und zitierten öffentlichen Quellen. Upgraden Sie nur für das, was Sie wirklich brauchen: unbegrenzte Prüfungen, Quellen, Methodik, Widerspruch oder die mobile App.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Abrechnungszeitraum">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Monatlich</button>
@@ -349,7 +349,7 @@
       <div class="price">$0<small>/Mon.</small></div>
       <div class="price-note">Keine Kreditkarte erforderlich.</div>
       <ul class="features">
-        <li id="free-quota-line"><strong>20 Prüfungen</strong> pro Monat</li>
+        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> Prüfungen</strong> zum Ausprobieren — einmalig, nicht monatlich</li>
         <li>Alle vier Indikatoren bei jeder Bewertung</li>
         <li class="crossed">Quellen &amp; Methodik verborgen</li>
         <li class="crossed">Bewertungen können nicht angefochten werden</li>
@@ -357,7 +357,7 @@
       </ul>
       <div class="price-cta">
         <a class="btn btn-secondary" href="#install">Erweiterung installieren</a>
-        <div class="note">Für immer kostenlos. Keine Registrierung für Ihre ersten 20 Prüfungen erforderlich.</div>
+        <div class="note">Für immer kostenlos. Keine Registrierung für Ihre ersten <span data-rpo-free-quota>20</span> Prüfungen erforderlich.</div>
       </div>
     </div>
 
@@ -564,7 +564,7 @@
 
   <details>
     <summary>Muss ich ein Konto anlegen, um die kostenlose Stufe zu nutzen?</summary>
-    <p>Nein. Installieren Sie die Erweiterung und Ihre ersten 20 Prüfungen funktionieren anonym. Sie melden sich nur an, wenn Sie ein Abonnement abschließen oder die mobile App nutzen möchten.</p>
+    <p>Nein. Installieren Sie die Erweiterung und Ihre ersten <span data-rpo-free-quota>20</span> Prüfungen funktionieren anonym. Sie melden sich nur an, wenn Sie ein Abonnement abschließen oder die mobile App nutzen möchten.</p>
   </details>
   <details>
     <summary>Was zählt als „Prüfung“?</summary>
@@ -821,5 +821,6 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

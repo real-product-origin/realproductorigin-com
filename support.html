@@ -820,7 +820,7 @@
 
     </div>
 
-    <p class="fine"><strong>No sign-up required.</strong> Your first 20 checks work with no account — a one-time free allowance, not a monthly one. Sign in only if you subscribe or want to sync across devices.</p>
+    <p class="fine"><strong>No sign-up required.</strong> Your first <span data-rpo-free-quota>20</span> checks work with no account — a one-time free allowance, not a monthly one. Sign in only if you subscribe or want to sync across devices.</p>
 
     <!-- Video row -->
     <div class="video-row">
@@ -1088,7 +1088,7 @@
       <details class="trouble">
         <summary>I hit "quota exceeded" on the Free tier</summary>
         <div class="trouble-body">
-          <p>The free allowance is <strong>20 checks, one time</strong> — it's a trial, not a monthly quota, so it doesn't reset. Products you already scored keep working permanently at no charge; the allowance only applies to scoring a product you haven't checked before. Options:</p>
+          <p>The free allowance is <strong><span data-rpo-free-quota>20</span> checks, one time</strong> — it's a trial, not a monthly quota, so it doesn't reset. Products you already scored keep working permanently at no charge; the allowance only applies to scoring a product you haven't checked before. Options:</p>
           <ul>
             <li>Subscribe to <strong>Basic — $4.99/mo</strong> ($49.99/yr) for unlimited checks.</li>
             <li>Subscribe to <strong>Pro — $9.99/mo</strong> ($99.99/yr) for unlimited checks plus priority support.</li>
@@ -1347,5 +1347,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

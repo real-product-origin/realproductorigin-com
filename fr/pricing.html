@@ -331,7 +331,7 @@
   <div class="wrap-wide">
     <p class="kicker">Tarifs simples</p>
     <h1>Gratuit à essayer. Choisissez la formule qui vous convient.</h1>
-    <p class="subtitle">Vingt vérifications gratuites (une seule fois, pas chaque mois) — propulsées par Claude AI et des sources publiques citées. Passez à un niveau supérieur uniquement pour ce dont vous avez vraiment besoin : vérifications illimitées, sources, méthodologie, contestation ou l'application mobile.</p>
+    <p class="subtitle">Une allocation unique de <span data-rpo-free-quota>20</span> vérifications gratuites — propulsées par Claude AI et des sources publiques citées. Passez à un niveau supérieur uniquement pour ce dont vous avez vraiment besoin : vérifications illimitées, sources, méthodologie, contestation ou l'application mobile.</p>
 
     <div class="billing-toggle" role="tablist" aria-label="Période de facturation">
       <button id="btn-monthly" class="active" role="tab" aria-selected="true">Mensuel</button>
@@ -349,7 +349,7 @@
       <div class="price">$0<small>/mois</small></div>
       <div class="price-note">Aucune carte de crédit requise.</div>
       <ul class="features">
-        <li id="free-quota-line"><strong>20 vérifications</strong> par mois</li>
+        <li id="free-quota-line"><strong><span data-rpo-free-quota>20</span> vérifications</strong> pour essayer — une seule fois, pas par mois</li>
         <li>Les quatre indicateurs sur chaque score</li>
         <li class="crossed">Sources et méthodologie masquées</li>
         <li class="crossed">Impossible de contester les scores</li>
@@ -821,5 +821,6 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>

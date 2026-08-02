@@ -144,7 +144,7 @@
           <a class="btn btn-primary" href="#install">Get the browser extension</a>
           <a class="btn btn-secondary" href="/products.html#methodology">How it works</a>
         </div>
-        <p class="cta-note">Your first 20 checks are free. Unlimited from <a href="/pricing.html">$4.99/mo</a>. Chrome, Edge, and Brave (Firefox coming soon). iOS &amp; Android on the way.</p>
+        <p class="cta-note">Your first <span data-rpo-free-quota>20</span> checks are free. Unlimited from <a href="/pricing.html">$4.99/mo</a>. Chrome, Edge, and Brave (Firefox coming soon). iOS &amp; Android on the way.</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -995,7 +995,7 @@
 
     <details>
       <summary>Is this free?</summary>
-      <p>Your first 20 checks are free, no credit card required. They're a one-time allowance, not a monthly one. Beyond that, subscriptions start at $4.99/mo — see the <a href="/pricing.html">pricing page</a>.</p>
+      <p>Your first <span data-rpo-free-quota>20</span> checks are free, no credit card required. They're a one-time allowance, not a monthly one. Beyond that, subscriptions start at $4.99/mo — see the <a href="/pricing.html">pricing page</a>.</p>
     </details>
 
     <details>
@@ -1121,5 +1121,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
 })();
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
 </body>
 </html>
