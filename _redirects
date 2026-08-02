@@ -8,6 +8,17 @@
 /methodology         /products#methodology  301
 /methodology.html    /products.html#methodology  301
 #
+# /lookup retired 2026-08-02. A pasted URL gives the server a product
+# identifier and nothing else — the page could only answer for products
+# already scored by an extension user, or ones Claude happened to
+# recognise from a bare id, so it mostly returned "Unknown product" and
+# read as "we can't find much". Making it genuinely work would require
+# fetching retailer pages server-side, which is specifically what the
+# 2026-08-01 legal review told us not to do. Send the traffic to the
+# extension, which scores from the user's own browser.
+/lookup              /products  301
+/lookup.html         /products.html  301
+#
 # Catch-all 404 for anything not matching a real static file. Without this
 # Cloudflare Pages was serving index.html with a 200 status for unknown
 # URLs — a soft-404 that confused users and hurt SEO. The `404` status
