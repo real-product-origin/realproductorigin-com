@@ -215,6 +215,87 @@
   .billing-toggle button.active { background: var(--ink-deep); color: #fff; }
   .billing-toggle .save-pill { font-size: 10px; margin-left: 6px; padding: 2px 6px; background: var(--green); color: #fff; border-radius: 8px; font-weight: 700; letter-spacing: 0.04em; }
 
+  /* ── "What actually differs" ─────────────────────────────────────
+   * The check allowance is the entire distinction between tiers now, so
+   * it gets the typographic weight a nine-row tick table was wasting. */
+  .checks-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px; margin: 0;
+  }
+  @media (max-width: 720px) { .checks-row { grid-template-columns: 1fr; } }
+  .checks-cell {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 20px 20px; text-align: center;
+  }
+  .checks-cell-hero { border: 2px solid var(--ink-deep); }
+  .checks-plan {
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .checks-num {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(44px, 6vw, 64px); line-height: 1;
+    letter-spacing: -0.03em; color: var(--ink-deep); margin-bottom: 8px;
+  }
+  .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
+  .checks-fine { font-size: 12px; color: var(--muted); }
+
+  .same-box {
+    margin: 30px 0 0; padding: 24px 26px;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  }
+  .same-title {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--green, #15803d); margin: 0 0 14px;
+  }
+  .same-list { list-style: none; padding: 0; margin: 0 0 14px; }
+  .same-list li {
+    position: relative; padding: 0 0 0 26px; margin-bottom: 10px;
+    font-size: 15px; line-height: 1.55; color: var(--ink-3);
+  }
+  .same-list li:last-child { margin-bottom: 0; }
+  /* A single tick per line, at the start of a sentence that says what the
+   * thing IS — rather than a grid of ticks that says nothing. */
+  .same-list li::before {
+    content: ""; position: absolute; left: 2px; top: 6px;
+    width: 6px; height: 11px;
+    border-right: 2.5px solid var(--green, #15803d);
+    border-bottom: 2.5px solid var(--green, #15803d);
+    transform: rotate(45deg);
+  }
+  .same-list li strong { color: var(--ink-deep); }
+  .same-note {
+    margin: 0; padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 13px; line-height: 1.6; color: var(--muted);
+  }
+
+  /* Supporter: full width and level with the section, never a fourth
+   * column. Four cards at $0/$4.99/$9.99/$25 read as a ladder whose
+   * rightmost rung is the best one, and Supporter is not better than
+   * Unlimited — it is the same thing, priced higher on purpose. */
+  .supporter-card {
+    margin: 30px 0 0; padding: 24px 26px;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  }
+  .supporter-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+  }
+  .supporter-title {
+    font-family: var(--serif); font-size: 24px; font-weight: 700;
+    margin: 0; color: var(--ink-deep);
+  }
+  .supporter-price {
+    font-family: var(--serif); font-size: 24px; font-weight: 700;
+    color: var(--ink-deep);
+  }
+  .supporter-lead { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+  .supporter-body { margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
+  .supporter-disc { margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .supporter-note { margin: 0 0 12px; font-size: 12px; color: var(--muted); }
+
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -408,74 +489,68 @@
      COMPARISON TABLE — "Everything, side by side"
      ═════════════════════════════════════════════════════════════════════ -->
 
-<section id="compare" aria-labelledby="compare-heading" style="padding: 48px 0 40px; border-top: 1px solid var(--border); background: var(--bg-soft);">
+<section id="compare" aria-labelledby="compare-heading" style="padding: 48px 0 56px; border-top: 1px solid var(--border); background: var(--bg-soft);">
   <div class="wrap-wide">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px;">
-      <p style="display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px;">プラン比較</p>
-      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">すべてを、並べて。</h2>
-      <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">各プランに含まれる機能を、項目ごとに完全比較。</p>
+    <div style="max-width: 1020px; margin: 0 auto; padding: 0 24px;">
+      <p style="display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px;">実際に違うのは</p>
+      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">違いはチェックできる商品の数だけです。</h2>
+      <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">それ以外 — スコア、その根拠、そして異議を申し立てられること — はすべてのプランで同じです。無料プランも含みます。</p>
 
-      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
-          <colgroup>
-            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
-          </colgroup>
-          <thead>
-            <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">無制限</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">チェック回数</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span>回（1回限り）</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">月100回</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">無制限</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">4指標のスコア</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">出典の明記</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">スコアへの異議申し立て</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">ブラウザ拡張機能</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android アプリ</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">自動チェックの初期設定</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オフ</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オフ</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">オン</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">優先サポート</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14日間の返金</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- The distinction, at the size it deserves. -->
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num"><span data-rpo-free-quota>20</span></div>
+          <div class="checks-sub">回のチェック（1回限り）<br><span class="checks-fine">リセットされません</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">100</div>
+          <div class="checks-sub">回のチェック／月<br><span class="checks-fine">毎月1日にリセット</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">無制限</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">上限なし<br><span class="checks-fine">好きなだけチェックできます</span></div>
+        </div>
       </div>
 
-      <!-- SUPPORTER — below the table and visually parallel, never a fourth
-           column. Rendering it as the rightmost "best value" tier would
-           imply capability it does not have. -->
-      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
-        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">サポーター — <span data-price="supporter">$25.00/mo</span></h3>
-        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">いつでも解約できます。</div>
-        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">無制限プランのすべて。それ以上はありません。この取り組みを支えたい方のために。</p>
-        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">サポーターに優先権はなく、スコアや対応店舗の選定に影響を与えることもなく、スコアに名前が載ることもありません。製品の内容は無制限プランと同一です。それこそが趣旨です — この取り組みを大切に思う方が多く負担できるようにするためであり、特別な立場を買うためではありません。</p>
-        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC は営利企業です。サポーターは寄付ではなくサブスクリプションであり、税額控除の対象にはなりません。</p>
+      <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
+        チェックとは、ある商品を初めてスコアリングすることです。一度スコアリングした商品を再び開くのはいつでも無料で、回数を使い切った後も同じです。 <a href="/terms.html#what-is-a-check">利用規約の正式な定義</a>。
+      </p>
+
+      <!-- Stated as prose, not as a column of ticks. These are the reasons
+           to trust the product at all; three identical ✓ marks in a table
+           was the weakest possible way to say them. -->
+      <div class="same-box">
+        <h3 class="same-title">無料プランを含む、すべてのプランで</h3>
+        <ul class="same-list">
+          <li><strong>4つの指標すべて</strong>を毎回表示 — 製造地、発送元、販売者、お金の流れ先。</li>
+          <li><strong>すべての記載に出典を明記。</strong>根拠を有料にすることはありません。確認できないスコアには意味がないからです。</li>
+          <li><strong>おかしいと思ったスコアには異議を申し立て</strong>られます。あらためて検証します。</li>
+          <li><strong>ブラウザ拡張機能と iOS・Android アプリ。</strong>アプリは無料で、チェックできる範囲はご契約プランに従います。</li>
+        </ul>
+        <p class="same-note">無制限プランでは優先メールサポートが加わり、クリックを待たずに各商品ページを自動でチェックする設定が初期状態になります。これは設定です — 自動チェックは無料プランを含むどのプランでもオン・オフを切り替えられます。</p>
+      </div>
+
+      <!-- SUPPORTER — in the pricing conversation, directly under the
+           tiers, but deliberately NOT a fourth card. Four cards priced
+           $0 / $4.99 / $9.99 / $25 read as a capability ladder to anyone
+           skimming, and the rightmost one reads as the best. Supporter is
+           not better than Unlimited; it is the same thing at a higher
+           price, for people who want to fund the work. Full width and
+           visually level says that; a fourth column would contradict it. -->
+      <div id="supporter" class="supporter-card">
+        <div class="supporter-head">
+          <h3 class="supporter-title">サポーター</h3>
+          <div class="supporter-price"><span data-price="supporter">$25.00/mo</span></div>
+        </div>
+        <p class="supporter-lead">無制限プランのすべて。それ以上はありません。この取り組みを支えたい方のために。</p>
+        <p class="supporter-body">サポーターに優先権はなく、スコアや対応店舗の選定に影響を与えることもなく、スコアに名前が載ることもありません。製品の内容は無制限プランと同一です。それこそが趣旨です — この取り組みを大切に思う方が多く負担できるようにするためであり、特別な立場を買うためではありません。</p>
+        <p class="supporter-disc">Real Product Origin LLC は営利企業です。サポーターは寄付ではなくサブスクリプションであり、税額控除の対象にはなりません。</p>
+        <div data-note="supporter" class="supporter-note">いつでも解約できます。</div>
         <button class="btn btn-secondary subscribe-btn" data-plan="supporter">サポーターになる</button>
       </div>
-
-
-      <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
-        表示価格は月額です。年額プランなら約17%お得。<a href="/refunds.html">返金ポリシー</a>もご確認ください。
-      </p>
     </div>
   </div>
 </section>

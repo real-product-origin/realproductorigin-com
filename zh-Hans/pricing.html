@@ -215,6 +215,87 @@
   .billing-toggle button.active { background: var(--ink-deep); color: #fff; }
   .billing-toggle .save-pill { font-size: 10px; margin-left: 6px; padding: 2px 6px; background: var(--green); color: #fff; border-radius: 8px; font-weight: 700; letter-spacing: 0.04em; }
 
+  /* ── "What actually differs" ─────────────────────────────────────
+   * The check allowance is the entire distinction between tiers now, so
+   * it gets the typographic weight a nine-row tick table was wasting. */
+  .checks-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px; margin: 0;
+  }
+  @media (max-width: 720px) { .checks-row { grid-template-columns: 1fr; } }
+  .checks-cell {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 20px 20px; text-align: center;
+  }
+  .checks-cell-hero { border: 2px solid var(--ink-deep); }
+  .checks-plan {
+    font-family: var(--sans); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .checks-num {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(44px, 6vw, 64px); line-height: 1;
+    letter-spacing: -0.03em; color: var(--ink-deep); margin-bottom: 8px;
+  }
+  .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
+  .checks-fine { font-size: 12px; color: var(--muted); }
+
+  .same-box {
+    margin: 30px 0 0; padding: 24px 26px;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  }
+  .same-title {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--green, #15803d); margin: 0 0 14px;
+  }
+  .same-list { list-style: none; padding: 0; margin: 0 0 14px; }
+  .same-list li {
+    position: relative; padding: 0 0 0 26px; margin-bottom: 10px;
+    font-size: 15px; line-height: 1.55; color: var(--ink-3);
+  }
+  .same-list li:last-child { margin-bottom: 0; }
+  /* A single tick per line, at the start of a sentence that says what the
+   * thing IS — rather than a grid of ticks that says nothing. */
+  .same-list li::before {
+    content: ""; position: absolute; left: 2px; top: 6px;
+    width: 6px; height: 11px;
+    border-right: 2.5px solid var(--green, #15803d);
+    border-bottom: 2.5px solid var(--green, #15803d);
+    transform: rotate(45deg);
+  }
+  .same-list li strong { color: var(--ink-deep); }
+  .same-note {
+    margin: 0; padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 13px; line-height: 1.6; color: var(--muted);
+  }
+
+  /* Supporter: full width and level with the section, never a fourth
+   * column. Four cards at $0/$4.99/$9.99/$25 read as a ladder whose
+   * rightmost rung is the best one, and Supporter is not better than
+   * Unlimited — it is the same thing, priced higher on purpose. */
+  .supporter-card {
+    margin: 30px 0 0; padding: 24px 26px;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  }
+  .supporter-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+  }
+  .supporter-title {
+    font-family: var(--serif); font-size: 24px; font-weight: 700;
+    margin: 0; color: var(--ink-deep);
+  }
+  .supporter-price {
+    font-family: var(--serif); font-size: 24px; font-weight: 700;
+    color: var(--ink-deep);
+  }
+  .supporter-lead { margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+  .supporter-body { margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3); }
+  .supporter-disc { margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .supporter-note { margin: 0 0 12px; font-size: 12px; color: var(--muted); }
+
   .price-cards { padding: 32px 0 80px; }
   .price-grid {
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -408,74 +489,68 @@
      COMPARISON TABLE — "Everything, side by side"
      ═════════════════════════════════════════════════════════════════════ -->
 
-<section id="compare" aria-labelledby="compare-heading" style="padding: 48px 0 40px; border-top: 1px solid var(--border); background: var(--bg-soft);">
+<section id="compare" aria-labelledby="compare-heading" style="padding: 48px 0 56px; border-top: 1px solid var(--border); background: var(--bg-soft);">
   <div class="wrap-wide">
-    <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px;">
-      <p style="display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px;">档位对比</p>
-      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">所有内容，并排对比。</h2>
-      <p style="font-size: 16px; color: var(--ink-3); max-width: 640px; margin: 0 0 28px; line-height: 1.55;">逐项对比每个方案所包含的完整功能。</p>
+    <div style="max-width: 1020px; margin: 0 auto; padding: 0 24px;">
+      <p style="display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px;">真正的差别</p>
+      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">唯一的差别，是你能查询多少件商品。</h2>
+      <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">其余的一切 —— 评分、评分背后的依据，以及对评分提出异议的能力 —— 在所有方案中完全相同，免费方案也不例外。</p>
 
-      <div style="overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--border); background: #fff;">
-        <table class="compare-table" style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px;">
-          <colgroup>
-            <col style="width: 40%;"><col style="width: 20%;"><col style="width: 20%;"><col style="width: 20%;">
-          </colgroup>
-          <thead>
-            <tr style="border-bottom: 1px solid var(--border);">
-              <th scope="col" style="text-align: left; padding: 18px 20px;">&nbsp;</th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Free</th>
-              <th scope="col" style="text-align: center; padding: 18px 12px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--ink-deep);">Basic</th>
-              <th scope="col" style="text-align: center; padding: 12px 12px 18px; font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--accent); background: var(--gold-soft); border-bottom: 2px solid var(--gold);">无限</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">查询次数</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);"><span data-rpo-free-quota>20</span> 次（一次性）</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">每月 100 次</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">无限</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">四项指标评分</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">标注来源</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">对评分提出异议</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">浏览器扩展</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">iOS + Android App</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">自动查询默认值</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">关闭</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">关闭</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">开启</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep); border-bottom: 1px solid var(--border);">优先支持</th><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">—</td><td style="text-align: center; padding: 14px 12px; border-bottom: 1px solid var(--border);">✓</td>
-            </tr>
-            <tr>
-              <th scope="row" style="text-align: left; padding: 14px 20px; font-weight: 600; color: var(--ink-deep);">14 天退款</th><td style="text-align: center; padding: 14px 12px;">n/a</td><td style="text-align: center; padding: 14px 12px;">✓</td><td style="text-align: center; padding: 14px 12px;">✓</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- The distinction, at the size it deserves. -->
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num"><span data-rpo-free-quota>20</span></div>
+          <div class="checks-sub">次查询（一次性）<br><span class="checks-fine">永不重置</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">100</div>
+          <div class="checks-sub">次查询／月<br><span class="checks-fine">每月 1 日重置</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">无限</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">没有上限<br><span class="checks-fine">想查多少查多少</span></div>
+        </div>
       </div>
 
-      <!-- SUPPORTER — below the table and visually parallel, never a fourth
-           column. Rendering it as the rightmost "best value" tier would
-           imply capability it does not have. -->
-      <div id="supporter" style="margin: 28px 0 0; padding: 22px 24px; border: 1px solid var(--border); border-radius: 12px; background: #fff;">
-        <h3 style="font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--ink-deep);">支持者 — <span data-price="supporter">$25.00/mo</span></h3>
-        <div data-note="supporter" style="margin: 0 0 10px; font-size: 13px; color: var(--muted);">可随时取消。</div>
-        <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.6; color: var(--ink-3);">包含无限方案的全部内容，没有额外权益。献给愿意资助这项工作的人。</p>
-        <p style="margin: 0 0 10px; font-size: 14px; line-height: 1.6; color: var(--ink-3);">支持者不会获得任何优先权，不能影响评分或我们接下来支持哪些零售商，也不会在任何评分上署名。产品内容与无限方案完全相同。这正是本意 —— 让在意这项工作的人可以多付一些，而不是用钱换取特殊地位。</p>
-        <p style="margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted);">Real Product Origin LLC 是一家营利公司。支持者是订阅，而非慈善捐赠，不可用于税务抵扣。</p>
+      <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
+        一次查询，指的是你首次为某件商品评分。重新打开已经评过分的商品始终免费 —— 即使配额已经用完也一样。 <a href="/terms.html#what-is-a-check">服务条款中的完整定义</a>。
+      </p>
+
+      <!-- Stated as prose, not as a column of ticks. These are the reasons
+           to trust the product at all; three identical ✓ marks in a table
+           was the weakest possible way to say them. -->
+      <div class="same-box">
+        <h3 class="same-title">所有方案，包括免费方案</h3>
+        <ul class="same-list">
+          <li><strong>每次评分都包含四项指标</strong> —— 产地、发货地、零售商，以及资金流向。</li>
+          <li><strong>每项结论都标注来源。</strong>我们从不把证据放在付费墙后；无法核查的评分没有多少价值。</li>
+          <li><strong>对任何你认为有误的评分提出异议</strong>，我们会重新核查。</li>
+          <li><strong>浏览器扩展与 iOS、Android App。</strong>App 免费；可查询的范围取决于你的方案。</li>
+        </ul>
+        <p class="same-note">无限方案增加优先邮件支持，并默认自动查询每个商品页面，而不是等待你点击。这只是一项设置 —— 自动查询在任何方案（包括免费方案）中都可以开启或关闭。</p>
+      </div>
+
+      <!-- SUPPORTER — in the pricing conversation, directly under the
+           tiers, but deliberately NOT a fourth card. Four cards priced
+           $0 / $4.99 / $9.99 / $25 read as a capability ladder to anyone
+           skimming, and the rightmost one reads as the best. Supporter is
+           not better than Unlimited; it is the same thing at a higher
+           price, for people who want to fund the work. Full width and
+           visually level says that; a fourth column would contradict it. -->
+      <div id="supporter" class="supporter-card">
+        <div class="supporter-head">
+          <h3 class="supporter-title">支持者</h3>
+          <div class="supporter-price"><span data-price="supporter">$25.00/mo</span></div>
+        </div>
+        <p class="supporter-lead">包含无限方案的全部内容，没有额外权益。献给愿意资助这项工作的人。</p>
+        <p class="supporter-body">支持者不会获得任何优先权，不能影响评分或我们接下来支持哪些零售商，也不会在任何评分上署名。产品内容与无限方案完全相同。这正是本意 —— 让在意这项工作的人可以多付一些，而不是用钱换取特殊地位。</p>
+        <p class="supporter-disc">Real Product Origin LLC 是一家营利公司。支持者是订阅，而非慈善捐赠，不可用于税务抵扣。</p>
+        <div data-note="supporter" class="supporter-note">可随时取消。</div>
         <button class="btn btn-secondary subscribe-btn" data-plan="supporter">成为支持者</button>
       </div>
-
-
-      <p style="margin: 20px 0 0; font-size: 13px; color: var(--muted); text-align: center;">
-        所显示价格为月付。年付可节省约 17%。请参阅我们的<a href="/refunds.html">退款政策</a>。
-      </p>
     </div>
   </div>
 </section>
