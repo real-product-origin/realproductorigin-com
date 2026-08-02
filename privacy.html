@@ -102,7 +102,7 @@
     <li><strong>Server logs:</strong> Standard request logs from our hosting provider (Render) recording request paths, timestamps, response codes. These do not include personal data beyond IP addresses and are retained for 7–30 days for operational monitoring.</li>
     <li><strong>Error tracking (if enabled):</strong> If we have Sentry enabled, application errors are sent to Sentry for diagnosis. Sentry data is automatically scrubbed of personal data we control.</li>
     <li><strong>Session token:</strong> When you sign in, we create a session token — a random string with no personal information in it — and store it in your browser's local extension storage (or the app's local sandbox on mobile). The token is sent as an <code>Authorization: Bearer</code> header on subsequent requests so we know it's still you. Sessions last 30 days from your most recent activity; signing out or 30 days of inactivity invalidates the token.</li>
-    <li><strong>Free-tier usage counter:</strong> If you have not subscribed, we count how many product checks you have used in the current calendar month, keyed on your account (if signed in) or the anonymous install identifier (if not signed in). The counter resets on the first day of the next month.</li>
+    <li><strong>Free-tier usage counter:</strong> If you have not subscribed, we count how many product checks you have used against your one-time free allowance, keyed on your account (if signed in) or the anonymous install identifier (if not signed in). This counter does not reset — the free allowance is a trial, not a recurring monthly quota.</li>
   </ul>
 
   <h3>1.3 What we DO NOT collect</h3>
