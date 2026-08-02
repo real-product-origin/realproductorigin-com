@@ -717,9 +717,20 @@ document.getElementById("btn-yearly").addEventListener("click", () => renderPric
     const r = await fetch("https://api.realproductorigin.com/pricing", { cache: "no-cache" });
     if (!r.ok) return;
     liveData = await r.json();
-    if (liveData.free && liveData.free.checks_per_month) {
-      document.getElementById("free-quota-line").innerHTML =
-        "<strong>" + liveData.free.checks_per_month + " Prüfungen</strong> pro Monat";
+    // Render the free allowance from the structured block, not from a
+    // key that presumes a monthly reset. This line used to read
+    // `checks_per_month` unconditionally and overwrote the correct
+    // static copy with "N per month" after Free became a one-time
+    // allowance — wrong number and wrong period, on the page where
+    // someone decides whether to pay. If the shape is ever anything
+    // we do not have words for, leave the static copy alone.
+    const fc = liveData.free && liveData.free.checks;
+    if (fc && fc.limit) {
+      const n = fc.limit;
+      const line =
+        fc.period === "lifetime" ? "<strong>" + n + " Prüfungen</strong> zum Ausprobieren — einmalig, nicht monatlich" :
+        fc.period === "monthly"  ? "<strong>" + n + " Prüfungen</strong> pro Monat" : null;
+      if (line) document.getElementById("free-quota-line").innerHTML = line;
     }
     // Sparen-Badge mit dem tatsächlichen Pro-Rabatt aktualisieren (repräsentativ).
     if (liveData.pro && liveData.pro.discount_vs_monthly_pct) {
