@@ -706,10 +706,14 @@
   .anat-country { flex: 1 1 auto; }
   .anat-pct { font-variant-numeric: tabular-nums; }
   .anat-track { height: 5px; border-radius: 3px; background: #eef0f3; margin: 6px 0 4px; overflow: hidden; }
+  /* The marker is an ::before on the track, and overflow:hidden clips it.
+   * The fill carries its own border-radius, so hiding overflow buys
+   * nothing on a marked track. */
+  /* Extra vertical room so the bar's marker and the confidence line's
+   * marker don't collide — 19px circles 20px apart read as one blob. */
+  .anat-track[data-n] { overflow: visible; margin: 11px 0 10px; }
   .anat-fill { height: 100%; border-radius: 3px; }
   .anat-conf { font-size: 11px; color: #6b7280; }
-  .anat-note { margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: #fff7ed; border: 1px solid #fed7aa; font-size: 10.5px; line-height: 1.45; color: #7c2d12; position: relative; }
-  .anat-note a { color: #9a3412; }
   .anat-footer { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 11px; color: var(--accent); font-weight: 600; position: relative; }
 
   /* Numbered markers tying the mock to the list beside it. They sit OUTSIDE
@@ -993,7 +997,7 @@
 
     <div class="prose">
       <h3>A worked example</h3>
-      <p>Deliberately a mixed result: one strong finding, one uncertain, and one we could not establish at all. Every element is labelled.</p>
+      <p>Deliberately a mixed result: one strong finding, one uncertain, and one we could not establish at all. Every element is labeled.</p>
     </div>
 
 <div class="anat">
@@ -1005,7 +1009,7 @@
           <div class="anat-value" style="color:#c0322b">
             <span>🇨🇳</span><span class="anat-country">China</span><span class="anat-pct" data-n="2">88%</span>
           </div>
-          <div class="anat-track"><div class="anat-fill" style="width:88%;background:#c0322b"></div></div>
+          <div class="anat-track" data-n="3"><div class="anat-fill" style="width:88%;background:#c0322b"></div></div>
           <div class="anat-conf" data-n="4">High confidence (82%)</div>
         </div>
 
@@ -1030,32 +1034,25 @@
           <div class="anat-conf" style="font-style:italic;color:#9ca3af">We couldn't confirm this from any of our sources</div>
         </div>
 
-        <div class="anat-note" data-n="3">
-          China appears on the US Department of State's list of governments with a
-          documented policy or pattern of human trafficking
-          (<a href="https://www.state.gov/reports/2025-trafficking-in-persons-report/">Trafficking in Persons Report, 2025</a>).
-          This is about a government — not this company, brand, or product.
-        </div>
-
         <div class="anat-footer" data-n="6">Sources &amp; methodology · Contest this finding</div>
       </div>
 
       <ol class="anat-notes">
         <li><strong>The four questions.</strong> Made in is where it was manufactured. Ships from is where this listing dispatches from — usually a warehouse, often not the factory. Retailer is the legal entity actually selling it, which can differ from the storefront. Money goes to is the business that ultimately receives your payment, traced through brand ownership where the public record allows.</li>
         <li><strong>The percentage</strong> is how much of that answer we attribute to that country — not how sure we are. Those are two different numbers and we show both.</li>
-        <li><strong>Colour is not our opinion about a country.</strong> A bar is red when the country appears on the published US State Department list above, applied identically to all thirteen countries on it — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria. Amber means the same list, but our attribution is uncertain. Everything else is neutral. If the State Department revises the list, these colours change with it.</li>
-        <li><strong>Confidence is how sure we are</strong>, and it is deliberately not flattering. Low confidence means the public record is thin. We would rather admit that than round a guess up into a red flag — which is why "Retailer, China, 41%, low confidence" above is amber rather than red.</li>
+        <li><strong>The color of the bar is not our opinion about a country.</strong> It is red when that country appears on the US State Department's published list of governments with a documented policy or pattern of human trafficking, applied identically to all thirteen countries on it — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria. Amber means the same list, but our attribution is uncertain. Everything else is neutral. If the State Department revises the list, these colors change with it. Hovering the bar in the extension shows this in place.</li>
+        <li><strong>Confidence is how sure we are</strong>, and it is deliberately not flattering. Low confidence means the public record is thin. We would rather admit that than round a guess up into a red flag.</li>
         <li><strong>"Not specified" is a real answer.</strong> When we cannot establish something from any source, we say so rather than showing a confident zero. An empty answer is more useful than an invented one.</li>
         <li><strong>Every claim is checkable.</strong> Sources opens the actual filings, registries and records behind each row. Contest tells us we got it wrong, and we re-examine it. Both are available on every plan, including the free one.</li>
       </ol>
     </div>
 
     <p style="font-size: 13px; color: var(--muted); margin: 24px 0 0; line-height: 1.65; max-width: 720px;">
-      The colours are driven by a published list we do not maintain, refreshed against
+      The colors are driven by a published list we do not maintain, refreshed against
       each new edition of the report. Read the full rule, including which countries are
       on it today and what the designation does and does not mean, in the
       <a href="/terms.html">Terms</a> and on this page. Hovering any label, confidence
-      value, or coloured bar in the extension shows the same explanation in place.
+      value, or colored bar in the extension shows the same explanation in place.
     </p>
 
     <div class="prose">
@@ -1080,9 +1077,9 @@
       <p>Each row shows a <strong>percentage</strong> and a <strong>confidence</strong>, and they answer different questions. The percentage is how much of that answer we attribute to that country. The confidence is how sure we are of the answer at all. "China 88%, low confidence" and "China 41%, high confidence" mean very different things, which is why we show both instead of collapsing them into one score.</p>
       <p>Confidence below 40% is shown but flagged as tentative — treat it as a lead, not a conclusion. We would rather publish a low number than round a guess up into something that looks certain.</p>
 
-      <h3>What the colours mean</h3>
+      <h3>What the colors mean</h3>
       <p>A bar is <strong>red</strong> when that country appears on the US State Department's published list of governments with a documented "policy or pattern" of human trafficking, and we attribute a majority of the row to it. <strong>Amber</strong> means the same list, but our attribution is uncertain. Everything else is <strong>neutral</strong>.</p>
-      <p>The list is not ours and we do not curate it. It currently contains thirteen countries — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria — and the rule is applied identically to all of them. If the State Department revises the list, our colours change with it. Source: <a href="https://www.state.gov/reports/2025-trafficking-in-persons-report/">Trafficking in Persons Report</a>, 2025 edition.</p>
+      <p>The list is not ours and we do not curate it. It currently contains thirteen countries — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria — and the rule is applied identically to all of them. If the State Department revises the list, our colors change with it. Source: <a href="https://www.state.gov/reports/2025-trafficking-in-persons-report/">Trafficking in Persons Report</a>, 2025 edition.</p>
       <p><strong>What it does not mean.</strong> This is a determination about a government, published by another government. It is not a finding about the company, the brand, or the product you are looking at, and it does not mean that product was made with forced labour. A red bar tells you where something comes from and what has been published about that country — the conclusion is yours to draw.</p>
 
       <h3>What "Not specified" means</h3>
