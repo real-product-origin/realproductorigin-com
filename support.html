@@ -694,6 +694,56 @@
     max-width: 720px;
   }
   .fine a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+  /* ── Anatomy of a score ─────────────────────────────────────────────── */
+  .anat { display: grid; grid-template-columns: minmax(280px, 380px) 1fr; gap: 40px; align-items: start; margin-top: 8px; }
+  @media (max-width: 860px) { .anat { grid-template-columns: 1fr; gap: 28px; } }
+  .anat-badge { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; box-shadow: 0 18px 36px -24px rgba(15,23,42,.22); font-family: var(--sans); }
+  .anat-brand { font-weight: 800; font-size: 13px; letter-spacing: -0.01em; color: var(--ink-deep); margin-bottom: 12px; }
+  .anat-row { position: relative; padding: 8px 0; border-top: 1px solid var(--border); }
+  .anat-row:first-of-type { border-top: 0; }
+  .anat-label { font-size: 11px; font-weight: 700; color: #6b7280; margin-bottom: 3px; }
+  .anat-value { display: flex; align-items: baseline; gap: 6px; font-size: 15px; font-weight: 700; color: #111827; }
+  .anat-country { flex: 1 1 auto; }
+  .anat-pct { font-variant-numeric: tabular-nums; }
+  .anat-track { height: 5px; border-radius: 3px; background: #eef0f3; margin: 6px 0 4px; overflow: hidden; }
+  .anat-fill { height: 100%; border-radius: 3px; }
+  .anat-conf { font-size: 11px; color: #6b7280; }
+  .anat-note { margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: #fff7ed; border: 1px solid #fed7aa; font-size: 10.5px; line-height: 1.45; color: #7c2d12; position: relative; }
+  .anat-note a { color: #9a3412; }
+  .anat-footer { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); font-size: 11px; color: var(--accent); font-weight: 600; position: relative; }
+
+  /* Numbered markers tying the mock to the list beside it. They sit OUTSIDE
+   * the card — inside, they landed on top of the label text. Every marked
+   * element is explicitly positioned so a marker resolves against itself
+   * rather than against the nearest positioned ancestor, which is what made
+   * the row and its confidence line stack two markers in one spot. */
+  .anat-badge { margin-left: 26px; }
+  .anat [data-n] { position: relative; }
+  .anat [data-n]::before {
+    content: attr(data-n);
+    position: absolute; left: -26px; top: 50%; transform: translateY(-50%);
+    width: 19px; height: 19px; border-radius: 999px;
+    background: var(--ink-deep); color: #fff;
+    font-size: 10px; font-weight: 800; line-height: 19px; text-align: center;
+  }
+  /* The percentage sits at the right edge, so its marker goes right. */
+  .anat [data-n="2"]::before { left: auto; right: -26px; }
+  @media (max-width: 620px) {
+    .anat-badge { margin-left: 22px; }
+    .anat [data-n]::before { left: -22px; }
+    .anat [data-n="2"]::before { right: -22px; }
+  }
+
+  .anat-notes { list-style: none; counter-reset: anat; padding: 0; margin: 0; }
+  .anat-notes li { counter-increment: anat; position: relative; padding-left: 32px; margin-bottom: 16px; font-size: 14.5px; line-height: 1.6; color: var(--ink-3); }
+  .anat-notes li::before {
+    content: counter(anat); position: absolute; left: 0; top: 1px;
+    width: 21px; height: 21px; border-radius: 999px;
+    background: var(--ink-deep); color: #fff;
+    font-size: 11px; font-weight: 800; line-height: 21px; text-align: center;
+  }
+  .anat-notes li strong { color: var(--ink-deep); }
+
 </style>
 </head>
 <body>
@@ -942,6 +992,73 @@
     </header>
 
     <div class="prose">
+      <h3>A worked example</h3>
+      <p>Deliberately a mixed result: one strong finding, one uncertain, and one we could not establish at all. Every element is labelled.</p>
+    </div>
+
+<div class="anat">
+      <div class="anat-badge">
+        <div class="anat-brand">Real Product Origin<span style="color:var(--accent)">.</span></div>
+
+        <div class="anat-row">
+          <div class="anat-label" data-n="1">Made in</div>
+          <div class="anat-value" style="color:#c0322b">
+            <span>🇨🇳</span><span class="anat-country">China</span><span class="anat-pct" data-n="2">88%</span>
+          </div>
+          <div class="anat-track"><div class="anat-fill" style="width:88%;background:#c0322b"></div></div>
+          <div class="anat-conf" data-n="4">High confidence (82%)</div>
+        </div>
+
+        <div class="anat-row">
+          <div class="anat-label">Ships from</div>
+          <div class="anat-value"><span>🇺🇸</span><span class="anat-country">United States</span><span class="anat-pct">94%</span></div>
+          <div class="anat-track"><div class="anat-fill" style="width:94%;background:#111827"></div></div>
+          <div class="anat-conf">High confidence (90%)</div>
+        </div>
+
+        <div class="anat-row">
+          <div class="anat-label">Retailer</div>
+          <div class="anat-value" style="color:#d97706"><span>🇨🇳</span><span class="anat-country">China</span><span class="anat-pct">41%</span></div>
+          <div class="anat-track"><div class="anat-fill" style="width:41%;background:#d97706"></div></div>
+          <div class="anat-conf">Low confidence (38%)</div>
+        </div>
+
+        <div class="anat-row anat-row-unknown">
+          <div class="anat-label" data-n="5">Money goes to</div>
+          <div class="anat-value" style="color:#6b7280"><span style="opacity:.35">—</span><span class="anat-country">Not specified</span></div>
+          <div class="anat-track" style="opacity:.25"><div class="anat-fill" style="width:100%;background:#d1d5db"></div></div>
+          <div class="anat-conf" style="font-style:italic;color:#9ca3af">We couldn't confirm this from any of our sources</div>
+        </div>
+
+        <div class="anat-note" data-n="3">
+          China appears on the US Department of State's list of governments with a
+          documented policy or pattern of human trafficking
+          (<a href="https://www.state.gov/reports/2025-trafficking-in-persons-report/">Trafficking in Persons Report, 2025</a>).
+          This is about a government — not this company, brand, or product.
+        </div>
+
+        <div class="anat-footer" data-n="6">Sources &amp; methodology · Contest this finding</div>
+      </div>
+
+      <ol class="anat-notes">
+        <li><strong>The four questions.</strong> Made in is where it was manufactured. Ships from is where this listing dispatches from — usually a warehouse, often not the factory. Retailer is the legal entity actually selling it, which can differ from the storefront. Money goes to is the business that ultimately receives your payment, traced through brand ownership where the public record allows.</li>
+        <li><strong>The percentage</strong> is how much of that answer we attribute to that country — not how sure we are. Those are two different numbers and we show both.</li>
+        <li><strong>Colour is not our opinion about a country.</strong> A bar is red when the country appears on the published US State Department list above, applied identically to all thirteen countries on it — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria. Amber means the same list, but our attribution is uncertain. Everything else is neutral. If the State Department revises the list, these colours change with it.</li>
+        <li><strong>Confidence is how sure we are</strong>, and it is deliberately not flattering. Low confidence means the public record is thin. We would rather admit that than round a guess up into a red flag — which is why "Retailer, China, 41%, low confidence" above is amber rather than red.</li>
+        <li><strong>"Not specified" is a real answer.</strong> When we cannot establish something from any source, we say so rather than showing a confident zero. An empty answer is more useful than an invented one.</li>
+        <li><strong>Every claim is checkable.</strong> Sources opens the actual filings, registries and records behind each row. Contest tells us we got it wrong, and we re-examine it. Both are available on every plan, including the free one.</li>
+      </ol>
+    </div>
+
+    <p style="font-size: 13px; color: var(--muted); margin: 24px 0 0; line-height: 1.65; max-width: 720px;">
+      The colours are driven by a published list we do not maintain, refreshed against
+      each new edition of the report. Read the full rule, including which countries are
+      on it today and what the designation does and does not mean, in the
+      <a href="/terms.html">Terms</a> and on this page. Hovering any label, confidence
+      value, or coloured bar in the extension shows the same explanation in place.
+    </p>
+
+    <div class="prose">
       <h3>The four indicators</h3>
       <p>Every product is scored across four questions. They can each point at a different country, and often do.</p>
 
@@ -959,8 +1076,14 @@
         <dd>The <em>beneficial</em> owner — the parent company or brand family that ultimately receives the profit. Many household brand names roll up to a small number of multinational holding groups. We surface the ultimate parent, not just the label on the box.</dd>
       </dl>
 
-      <h3>What the confidence percentage means</h3>
-      <p>Each indicator gets a percentage. Higher means we found more corroborating evidence from independent sources; lower means we found some evidence but not enough to be sure. A confidence below 40% is shown but flagged as tentative — treat it as a lead, not a conclusion.</p>
+      <h3>The two numbers are not the same number</h3>
+      <p>Each row shows a <strong>percentage</strong> and a <strong>confidence</strong>, and they answer different questions. The percentage is how much of that answer we attribute to that country. The confidence is how sure we are of the answer at all. "China 88%, low confidence" and "China 41%, high confidence" mean very different things, which is why we show both instead of collapsing them into one score.</p>
+      <p>Confidence below 40% is shown but flagged as tentative — treat it as a lead, not a conclusion. We would rather publish a low number than round a guess up into something that looks certain.</p>
+
+      <h3>What the colours mean</h3>
+      <p>A bar is <strong>red</strong> when that country appears on the US State Department's published list of governments with a documented "policy or pattern" of human trafficking, and we attribute a majority of the row to it. <strong>Amber</strong> means the same list, but our attribution is uncertain. Everything else is <strong>neutral</strong>.</p>
+      <p>The list is not ours and we do not curate it. It currently contains thirteen countries — Afghanistan, Belarus, Burma, Cambodia, China, Cuba, Eritrea, Iran, North Korea, Russia, South Sudan, Sudan and Syria — and the rule is applied identically to all of them. If the State Department revises the list, our colours change with it. Source: <a href="https://www.state.gov/reports/2025-trafficking-in-persons-report/">Trafficking in Persons Report</a>, 2025 edition.</p>
+      <p><strong>What it does not mean.</strong> This is a determination about a government, published by another government. It is not a finding about the company, the brand, or the product you are looking at, and it does not mean that product was made with forced labour. A red bar tells you where something comes from and what has been published about that country — the conclusion is yours to draw.</p>
 
       <h3>What "Not specified" means</h3>
       <p>Sometimes a row shows <strong>Not specified</strong> instead of a country. This means <em>none</em> of our sources — product page, seller history, brand records, trademark filings, customs data, category priors — surfaced a confident answer for that indicator. It's an honest gap, not a guess. We'd rather show nothing than invent an answer.</p>
