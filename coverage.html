@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request a retailer — Real Product Origin</title>
+<meta name="description" content="Tell us which store you shop at and we'll add it to the list. Requesting is free, takes one field, and needs no account.">
+<meta property="og:title" content="Request a retailer — Real Product Origin">
+<meta property="og:description" content="Tell us which store you shop at. Free, no account, one field.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/coverage">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Request a retailer — Real Product Origin">
+<meta name="twitter:description" content="Tell us which store you shop at. Free, no account, one field.">
+<link rel="canonical" href="https://realproductorigin.com/coverage">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://realproductorigin.com/coverage",
+      "url": "https://realproductorigin.com/coverage",
+      "name": "Request a retailer — Real Product Origin",
+      "description": "Ask us to support a store. Free, no account required.",
+      "isPartOf": {"@id": "https://realproductorigin.com/#organization"}
+    }
+  ]
+}
+</script>
+<style>
+  .cov-hero { max-width: 720px; }
+  .cov-hero h1 { margin-bottom: 10px; }
+  .cov-lede { font-size: 18px; line-height: 1.6; color: var(--muted, #57534e); }
+
+  .cov-form-card {
+    background: #fff; border: 1px solid #e7e5e4; border-radius: 14px;
+    padding: 26px 26px 22px; max-width: 640px; margin: 28px 0 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .cov-field { margin-bottom: 16px; }
+  .cov-field label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .cov-field .hint { font-weight: 400; color: #78716c; font-size: 13px; }
+  .cov-field input[type="text"],
+  .cov-field input[type="email"],
+  .cov-field textarea {
+    width: 100%; padding: 11px 13px; border: 1px solid #d6d3d1; border-radius: 9px;
+    font: inherit; font-size: 15px; background: #fafaf9; box-sizing: border-box;
+  }
+  .cov-field input:focus, .cov-field textarea:focus {
+    outline: none; border-color: #0284c7; background: #fff;
+    box-shadow: 0 0 0 3px rgba(2,132,199,0.12);
+  }
+  .cov-field textarea { min-height: 72px; resize: vertical; }
+  .cov-optional {
+    border-top: 1px solid #f0efed; margin-top: 20px; padding-top: 18px;
+  }
+  .cov-optional-head { font-size: 13px; color: #78716c; margin: 0 0 14px; }
+  .cov-submit {
+    background: #0284c7; color: #fff; border: none; border-radius: 9px;
+    padding: 12px 22px; font: inherit; font-weight: 600; font-size: 15px; cursor: pointer;
+  }
+  .cov-submit:hover { background: #0369a1; }
+  .cov-submit:disabled { opacity: 0.6; cursor: default; }
+
+  .cov-result { margin-top: 16px; padding: 13px 16px; border-radius: 10px; font-size: 14.5px; line-height: 1.55; display: none; }
+  .cov-result.show { display: block; }
+  .cov-result.ok { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; }
+  .cov-result.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; }
+  .cov-result.err { background: #fef2f2; border: 1px solid #fecaca; color: #7f1d1d; }
+
+  .cov-promise { max-width: 720px; margin: 44px 0 0; }
+  .cov-promise h2 { font-size: 22px; margin-bottom: 12px; }
+  .cov-promise p { line-height: 1.65; margin-bottom: 14px; }
+  .cov-pull {
+    border-left: 3px solid #ea580c; padding: 4px 0 4px 18px; margin: 20px 0;
+    font-size: 17px; line-height: 1.6; font-weight: 500;
+  }
+
+  .cov-supported { max-width: 900px; margin: 48px 0 0; }
+  .cov-supported h2 { font-size: 22px; margin-bottom: 6px; }
+  .cov-supported .sub { color: #78716c; font-size: 14.5px; margin-bottom: 18px; }
+  .cov-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cov-chip {
+    background: #fff; border: 1px solid #e7e5e4; border-radius: 999px;
+    padding: 6px 14px; font-size: 14px;
+  }
+  .cov-loading { color: #a8a29e; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cov-hero">
+    <h1>Request a retailer</h1>
+    <p class="cov-lede">
+      Tell us where you shop and we'll add it to the list. It's free, it takes
+      one field, and you don't need an account. We use these requests to decide
+      which store to build next.
+    </p>
+  </section>
+
+  <form class="cov-form-card" id="cov-form" novalidate>
+    <div class="cov-field">
+      <label for="cov-url">Which store?
+        <span class="hint">— a web address is easiest, like <code>ikea.com</code></span>
+      </label>
+      <input type="text" id="cov-url" name="retailer_url" required
+             autocomplete="off" spellcheck="false"
+             placeholder="ikea.com">
+    </div>
+
+    <div class="cov-optional">
+      <p class="cov-optional-head">Optional — all of this helps, none of it is required.</p>
+
+      <div class="cov-field">
+        <label for="cov-name">What do you call it?</label>
+        <input type="text" id="cov-name" name="retailer_name" autocomplete="off" placeholder="IKEA">
+      </div>
+
+      <div class="cov-field">
+        <label for="cov-note">What would you use it for?</label>
+        <textarea id="cov-note" name="note" maxlength="1000"
+                  placeholder="Most of my furniture comes from there and I have no idea where any of it is made."></textarea>
+      </div>
+
+      <div class="cov-field">
+        <label for="cov-email">Email
+          <span class="hint">— only ever used to tell you when this store goes live. Not a mailing list.</span>
+        </label>
+        <input type="email" id="cov-email" name="contact_email" autocomplete="email" placeholder="you@example.com">
+      </div>
+    </div>
+
+    <button type="submit" class="cov-submit" id="cov-submit">Add to the list</button>
+    <div class="cov-result" id="cov-result" role="status" aria-live="polite"></div>
+  </form>
+
+  <section class="cov-promise">
+    <h2>What a request does, and what it doesn't</h2>
+    <p>
+      A request is a vote on what we build next. It is not a purchase, and there
+      is nothing to pay — asking is free and always will be.
+    </p>
+    <p>
+      Adding a store is more work than it sounds. Each one needs an adapter that
+      finds the product, the brand, the seller, and where it ships from; testing
+      across the different page layouts that store uses; a permanent entry in our
+      regression suite; and then ongoing maintenance every time that retailer
+      redesigns. That last part never ends — it's why we're careful about which
+      ones we take on, and why knowing what people actually want matters.
+    </p>
+    <div class="cov-pull">
+      Requests tell us where to look. They never affect what we find.
+    </div>
+    <p>
+      However a store gets onto our list, the scores it produces are the same
+      scores our methodology would have produced anyway. Nobody can request a
+      result, and no one who asks for a store gets any say in how its products
+      are scored. If we ever add a way to fund coverage, that rule doesn't
+      change — and we'll publish the details before we accept anything.
+    </p>
+  </section>
+
+  <section class="cov-supported">
+    <h2>Already supported</h2>
+    <p class="sub">No need to request these — the Checker works on them today.</p>
+    <div class="cov-chips" id="cov-supported-list">
+      <span class="cov-loading">Loading…</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/products.html">Products</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/coverage.html">Request a retailer</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "My Account"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+
+// Points at a local backend when the page is served from localhost, so this
+// form can be exercised end-to-end before deploying. `?api=http://…`
+// overrides the port, because local backends don't always land on 8000.
+// Both branches are unreachable on the real site — production always talks
+// to production.
+const RPO_API = (function () {
+  const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  if (!isLocal) return "https://api.realproductorigin.com";
+  const override = new URLSearchParams(location.search).get("api");
+  return (override && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(override))
+    ? override
+    : "http://localhost:8000";
+})();
+
+// ── Supported list ────────────────────────────────────────────────────
+// Rendered from the API rather than hardcoded here. A hardcoded list on
+// this page would drift from what the backend actually routes, and this
+// is the one page where "we already support that" has to be true.
+(async function loadSupported() {
+  const host = document.getElementById("cov-supported-list");
+  try {
+    const r = await fetch(RPO_API + "/coverage/supported", { cache: "no-cache" });
+    if (!r.ok) throw new Error("http " + r.status);
+    const data = await r.json();
+    if (!data.retailers || !data.retailers.length) throw new Error("empty");
+    host.innerHTML = "";
+    for (const item of data.retailers) {
+      const chip = document.createElement("span");
+      chip.className = "cov-chip";
+      chip.textContent = item.display_name;
+      host.appendChild(chip);
+    }
+  } catch (_) {
+    // Never leave a spinner behind. Point at the page that lists them.
+    host.innerHTML = '<span class="cov-loading">' +
+      'Couldn\'t load the list just now — see ' +
+      '<a href="/pricing.html#retailers">supported sites</a>.</span>';
+  }
+})();
+
+// ── Submit ────────────────────────────────────────────────────────────
+const form = document.getElementById("cov-form");
+const resultEl = document.getElementById("cov-result");
+const submitEl = document.getElementById("cov-submit");
+
+function showResult(kind, html) {
+  resultEl.className = "cov-result show " + kind;
+  resultEl.innerHTML = html;
+}
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const url = document.getElementById("cov-url").value.trim();
+  if (!url) {
+    showResult("err", "Enter a store's web address first.");
+    document.getElementById("cov-url").focus();
+    return;
+  }
+
+  submitEl.disabled = true;
+  submitEl.textContent = "Sending…";
+
+  const payload = {
+    retailer_url: url,
+    retailer_name: document.getElementById("cov-name").value.trim() || null,
+    note: document.getElementById("cov-note").value.trim() || null,
+    contact_email: document.getElementById("cov-email").value.trim() || null,
+    source: "marketing"
+  };
+  // Don't send empty-string optionals — the API validates email format and
+  // an empty string is not a valid address.
+  Object.keys(payload).forEach(k => { if (payload[k] === null) delete payload[k]; });
+
+  try {
+    const r = await fetch(RPO_API + "/coverage/request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (r.status === 429) {
+      showResult("err", "That's a lot of requests at once — give it a minute and try again.");
+      return;
+    }
+    const data = await r.json();
+
+    if (data.status === "already_supported") {
+      showResult("info",
+        "<strong>Good news — we already cover " + escapeHtml(data.supported_as) + ".</strong><br>" +
+        "Install the Checker and it'll work there right away. " +
+        '<a href="/#install">Get the extension</a>.');
+    } else if (data.status === "already_recorded") {
+      showResult("ok", "You've already asked for this one — it's on the list.");
+    } else if (data.status === "recorded") {
+      let msg = "<strong>Thanks — that's on the list.</strong>";
+      if (data.request_count && data.request_count > 1) {
+        msg += "<br>" + data.request_count + " people have asked for " +
+               escapeHtml(data.retailer_domain) + " so far.";
+      }
+      showResult("ok", msg);
+      form.reset();
+    } else {
+      showResult("err", escapeHtml(data.message ||
+        "That doesn't look like a store's web address. Try something like ikea.com."));
+    }
+  } catch (_) {
+    showResult("err",
+      "Couldn't reach us just now. Try again, or email " +
+      '<a href="mailto:support@realproductorigin.com">support@realproductorigin.com</a>.');
+  } finally {
+    submitEl.disabled = false;
+    submitEl.textContent = "Add to the list";
+  }
+});
+
+function escapeHtml(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+</script>
+<script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
+</body>
+</html>
