@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>很遗憾您要离开 — Real Product Origin</title>
+<meta name="description" content="告诉我们您卸载 Real Product Origin 的原因——只有一个问题，但真的很有帮助。">
+<meta property="og:title" content="很遗憾您要离开">
+<meta property="og:description" content="告诉我们您卸载 Real Product Origin 的原因——只有一个问题，但真的很有帮助。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/zh-Hans/goodbye">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="产品 — Real Product Origin">
+<meta name="twitter:description" content="面向真实产品产地透明化的浏览器扩展与手机 App。">
+<link rel="canonical" href="https://realproductorigin.com/zh-Hans/goodbye">
+<link rel="alternate" hreflang="en" href="https://realproductorigin.com/products.html">
+<link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/products.html">
+<link rel="alternate" hreflang="de" href="https://realproductorigin.com/de/products.html">
+<link rel="alternate" hreflang="es" href="https://realproductorigin.com/es/products.html">
+<link rel="alternate" hreflang="ja" href="https://realproductorigin.com/ja/products.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://realproductorigin.com/zh-Hans/products.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://realproductorigin.com/zh-Hant/products.html">
+<link rel="alternate" hreflang="x-default" href="https://realproductorigin.com/products.html">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="/assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://realproductorigin.com/products",
+      "url": "https://realproductorigin.com/products",
+      "name": "产品 — Real Product Origin",
+      "description": "面向真实产品产地透明化的浏览器扩展与手机 App。",
+      "isPartOf": {"@id": "https://realproductorigin.com/#organization"}
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Real Product Origin — 浏览器扩展",
+      "operatingSystem": "Chrome, Microsoft Edge, Brave",
+      "applicationCategory": "BrowserApplication",
+      "downloadUrl": "https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Real Product Origin — 手机 App",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "MobileApplication",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "产品", "item": "https://realproductorigin.com/products"}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .p-hero {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .p-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .p-hero h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    color: var(--ink-deep);
+  }
+  .p-hero .lede {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55; color: var(--ink-3);
+    max-width: 640px; margin: 0;
+  }
+
+  /* ── Product card ─────────────────────────────────────────────────────── */
+  .p-section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+  .p-section:nth-of-type(even) { background: var(--bg-soft); }
+
+  .p-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .p-card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      justify-items: center;
+    }
+    .p-card-body { max-width: 560px; }
+  }
+
+  .p-card-visual {
+    background: linear-gradient(160deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    min-height: 300px;
+    max-width: 360px;
+    width: 100%;
+    color: var(--ink-deep);
+  }
+  .p-card-visual svg { width: 100%; height: auto; max-width: 240px; }
+
+  .p-card-body {
+    display: flex; flex-direction: column;
+    padding-top: 6px;
+  }
+  .p-card-body .p-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .p-card-body h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink-deep);
+  }
+  .p-card-body .p-pitch {
+    font-size: 17px; color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+
+  .p-benefits { list-style: none; padding: 0; margin: 0 0 28px; }
+  .p-benefits li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; font-size: 15px; line-height: 1.5;
+    color: var(--ink-2); border-bottom: 1px solid var(--border);
+  }
+  .p-benefits li:last-child { border-bottom: 0; }
+  .p-benefits .check {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    width: 22px; height: 22px; border-radius: 999px;
+    background: var(--green); color: #fff;
+    font-size: 13px; font-weight: 700; line-height: 1;
+    margin-top: 1px;
+  }
+  .p-benefits .check::before {
+    content: "";
+    width: 6px; height: 10px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+  .p-benefits li strong { color: var(--ink-deep); font-weight: 700; }
+
+  .p-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 12px; }
+  .p-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    background: var(--ink); color: #fff !important;
+    font-weight: 700; font-size: 14px; letter-spacing: -0.005em;
+    text-decoration: none !important;
+    transition: background 120ms ease, transform 120ms ease;
+  }
+  .p-btn:hover { background: var(--accent-2); color: #fff !important; transform: translateY(-1px); }
+  .p-btn.secondary {
+    background: transparent; color: var(--ink-deep) !important;
+    border: 1.5px solid var(--border-strong);
+  }
+  .p-btn.secondary:hover { border-color: var(--gold); background: var(--gold-soft); }
+  .p-btn.disabled {
+    background: var(--bg); color: var(--muted) !important;
+    border: 1px solid var(--border);
+    cursor: not-allowed; pointer-events: none;
+  }
+  .p-cta-note { font-size: 13px; color: var(--muted); margin: 4px 0 0; }
+
+  /* ── Four indicators strip ────────────────────────────────────────────── */
+  .p-indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 8px 0 0;
+  }
+  .p-ind {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px;
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+  .p-ind .n {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 999px;
+    background: var(--gold-soft); color: var(--gold);
+    font-family: var(--serif); font-weight: 700; font-size: 18px;
+  }
+  .p-ind h4 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 16px; margin: 0;
+    color: var(--ink-deep);
+  }
+  .p-ind p { margin: 0; font-size: 14px; color: var(--ink-3); line-height: 1.55; }
+
+  /* ── Where it works — retailer grid ──────────────────────────────────── */
+  .p-retailers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 32px 0 0;
+  }
+  .p-retailer {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    transition: border-color 120ms ease, transform 120ms ease;
+  }
+  .p-retailer:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .p-retailer-name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    color: var(--ink-deep);
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .p-retailer-cat {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .p-retailers-note {
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .p-retailers-note a { color: var(--ink-3); }
+
+  /* ── How-it-works (simplified methodology) ────────────────────────────── */
+  .p-how h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 3.6vw, 42px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--ink-deep);
+  }
+  .p-how .lede-under {
+    font-size: 17px; color: var(--ink-3);
+    line-height: 1.55; margin: 0 0 44px;
+    max-width: 660px;
+  }
+  .p-how h3 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.005em;
+    margin: 44px 0 12px;
+    color: var(--ink-deep);
+  }
+  .p-how h3:first-of-type { margin-top: 0; }
+  .p-how p { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin: 0 0 14px; }
+  .p-how ul { padding-left: 22px; margin: 0 0 20px; }
+  .p-how li { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin-bottom: 6px; }
+  .p-how li::marker { color: var(--gold); }
+  .p-how .callout {
+    display: flex; gap: 14px;
+    padding: 18px 22px;
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    margin: 22px 0;
+    color: var(--ink-2); font-size: 15px; line-height: 1.55;
+  }
+  .p-how .callout strong { color: var(--ink-deep); }
+
+  .p-sources-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .p-sources-panel h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .p-sources-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    padding: 0; margin: 0;
+    list-style: none;
+    font-size: 14px; color: var(--ink-3);
+  }
+  .p-sources-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.4;
+  }
+  .p-sources-list li::before {
+    content: "✓";
+    color: var(--green); font-weight: 700; flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  /* ── End CTA ─────────────────────────────────────────────────────────── */
+  .p-end-cta {
+    padding: 72px 0;
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    text-align: center;
+  }
+  .p-end-cta h2 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(30px, 4vw, 44px);
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink-deep);
+  }
+  .p-end-cta p {
+    max-width: 560px; margin: 0 auto 24px;
+    font-size: 17px; color: var(--ink-3);
+  }
+  .p-end-cta .p-cta-row { justify-content: center; }
+</style>
+<meta name="robots" content="noindex">
+
+<style>
+  .gb { max-width: 620px; margin: 0 auto; padding: 56px 20px 80px; }
+  .gb h1 { margin: 0 0 14px; }
+  .gb .lede { color: var(--ink-2); font-size: 17px; line-height: 1.6; margin: 0 0 36px; }
+  .gb fieldset { border: 0; padding: 0; margin: 0 0 28px; }
+  .gb legend { font-weight: 650; font-size: 16px; margin-bottom: 14px; padding: 0; }
+  .gb .opt { display: flex; align-items: flex-start; gap: 11px; padding: 11px 13px;
+             border: 1px solid var(--rule, #e5e0d5); border-radius: 8px; margin-bottom: 8px;
+             cursor: pointer; transition: border-color .12s, background .12s; }
+  .gb .opt:hover { border-color: var(--sea, #0284c7); background: rgba(2,132,199,.04); }
+  .gb .opt input { margin-top: 3px; flex-shrink: 0; }
+  .gb .opt span { line-height: 1.45; }
+  .gb label.blk { display: block; font-weight: 650; font-size: 16px; margin: 0 0 8px; }
+  .gb .hint { font-weight: 400; color: var(--ink-3, #8a8377); font-size: 14px; }
+  .gb textarea { width: 100%; min-height: 108px; padding: 12px 13px; font: inherit; font-size: 15px;
+                 border: 1px solid var(--rule, #e5e0d5); border-radius: 8px; resize: vertical;
+                 background: #fff; color: inherit; box-sizing: border-box; }
+  .gb textarea:focus { outline: 2px solid var(--sea, #0284c7); outline-offset: 1px; border-color: transparent; }
+  .gb .actions { display: flex; align-items: center; gap: 18px; margin-top: 26px; flex-wrap: wrap; }
+  .gb .privacy { font-size: 13.5px; color: var(--ink-3, #8a8377); margin-top: 26px; line-height: 1.5; }
+  .gb .thanks { text-align: center; padding: 40px 0; }
+  .gb .thanks h2 { margin: 0 0 12px; }
+  .gb .thanks p { color: var(--ink-2); font-size: 16.5px; line-height: 1.6; margin: 0 0 26px; }
+  .gb .muted-link { color: var(--ink-3, #8a8377); text-decoration: underline; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/zh-Hans/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/zh-Hans/products.html">产品</a>
+      <a href="/why.html">意义所在</a>
+      <a href="/zh-Hans/pricing.html">定价</a>
+      <a href="/support.html">支持</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">登录</a>
+      <a class="nav-cta" href="/#install">安装</a>
+    </nav>
+  </div>
+</header>
+<div class="gb">
+  <div id="gb-form">
+    <h1>很遗憾您要离开</h1>
+    <p class="lede" id="gb-lede" data-uninstall="您已卸载 Real Product Origin。如果您有二十秒钟，告诉我们原因，是您能为下一位使用者做的最有价值的事。" data-cancel="您的订阅已取消。如果您有二十秒钟，告诉我们原因，是您能为下一位订阅者做的最有价值的事。">您已卸载 Real Product Origin。如果您有二十秒钟，告诉我们原因，是您能为下一位使用者做的最有价值的事。</p>
+
+    <fieldset id="gb-reasons-uninstall">
+      <legend>您为什么离开？</legend>
+        <label class="opt"><input type="radio" name="reason" value="not_on_my_stores"><span>在我常逛的商店里用不了</span></label>
+        <label class="opt"><input type="radio" name="reason" value="score_wrong"><span>评分看起来不准确</span></label>
+        <label class="opt"><input type="radio" name="reason" value="score_unclear"><span>我看不懂评分</span></label>
+        <label class="opt"><input type="radio" name="reason" value="hit_free_limit"><span>免费查询次数用完了</span></label>
+        <label class="opt"><input type="radio" name="reason" value="too_expensive"><span>价格太高</span></label>
+        <label class="opt"><input type="radio" name="reason" value="in_the_way"><span>让页面变慢或变乱</span></label>
+        <label class="opt"><input type="radio" name="reason" value="privacy"><span>隐私顾虑</span></label>
+        <label class="opt"><input type="radio" name="reason" value="not_needed"><span>我就是不需要了</span></label>
+        <label class="opt"><input type="radio" name="reason" value="other"><span>其他原因</span></label>
+    </fieldset>
+
+    <fieldset id="gb-reasons-cancel" hidden>
+      <legend>您为什么离开？</legend>
+        <label class="opt"><input type="radio" name="reason_cancel" value="too_expensive"><span>相对使用量来说太贵</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="not_using"><span>用得不够多</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="missing_features"><span>缺少我需要的功能</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="found_alternative"><span>找到了更好的替代品</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="technical_problems"><span>技术问题</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="temporary"><span>只是暂停一下，我会回来</span></label>
+        <label class="opt"><input type="radio" name="reason_cancel" value="other"><span>其他原因</span></label>
+    </fieldset>
+
+    <label class="blk" for="gb-comment">有什么希望我们改进的吗？
+      <span class="hint">— 选填</span></label>
+    <textarea id="gb-comment" placeholder="写多写少都可以。"></textarea>
+
+    <div class="actions">
+      <button type="button" class="btn" id="gb-submit">发送反馈</button>
+      <a class="muted-link" href="/" id="gb-skip">暂不填写</a>
+    </div>
+
+    <p class="privacy">此处不收集您的姓名或邮箱，也不会与您的身份关联。</p>
+  </div>
+
+  <div id="gb-thanks" class="thanks" hidden>
+    <h2>谢谢，这对我们很有帮助。</h2>
+    <p>每一条反馈我们都会阅读。如果您以后想再试一次，扩展程序随时都在。</p>
+    <a class="btn" href="/">返回首页</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = 'https://api.realproductorigin.com';
+  var qs = new URLSearchParams(location.search);
+  var source = qs.get('source') === 'cancellation' ? 'cancellation' : 'uninstall';
+
+  // Swap copy + reason list for the cancellation variant. Both lists are
+  // in the DOM already so this needs no second page and no round-trip.
+  var lede = document.getElementById('gb-lede');
+  if (source === 'cancellation') {
+    lede.textContent = lede.getAttribute('data-cancel');
+    document.getElementById('gb-reasons-uninstall').hidden = true;
+    document.getElementById('gb-reasons-cancel').hidden = false;
+  }
+
+  function chosen() {
+    var name = source === 'cancellation' ? 'reason_cancel' : 'reason';
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function done() {
+    document.getElementById('gb-form').hidden = true;
+    document.getElementById('gb-thanks').hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  document.getElementById('gb-submit').addEventListener('click', function () {
+    var reason = chosen();
+    var comment = document.getElementById('gb-comment').value.trim();
+
+    // Nothing said: treat as a skip rather than posting an empty row.
+    if (!reason && !comment) { done(); return; }
+
+    var payload = {
+      source: source,
+      reason_code: reason,
+      comment: comment || null,
+      locale: document.documentElement.lang || null,
+      extension_version: qs.get('v') || null,
+      install_id: qs.get('iid') || null,
+      plan: qs.get('plan') || null
+    };
+
+    // Show the thank-you IMMEDIATELY, before the request settles, and
+    // never surface a failure. Someone who just uninstalled has no reason
+    // to care that our API had a bad moment, cannot retry, and would only
+    // read an error as one more thing this product got wrong.
+    done();
+
+    try {
+      fetch(API + '/exit-survey', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true   // survives the tab being closed straight after
+      }).catch(function () {});
+    } catch (e) { /* ignore */ }
+  });
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/zh-Hans/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">看清您买的是什么，钱又付给了谁。</p>
+    </div>
+    <div class="col">
+      <h4>产品</h4>
+      <a href="/zh-Hans/products.html">产品</a>
+      <a href="/zh-Hans/products.html#methodology">工作原理</a>
+      <a href="/why.html">意义所在</a>
+      <a href="/zh-Hans/pricing.html#retailers">支持的网站</a>
+    </div>
+    <div class="col">
+      <h4>公司</h4>
+      <a href="/support.html">支持</a>
+      <a href="/about.html">关于</a>
+      <a href="/contact.html">联系我们</a>
+      <a href="mailto:press@realproductorigin.com">媒体联络</a>
+    </div>
+    <div class="col">
+      <h4>法律信息</h4>
+      <a href="/privacy.html">隐私政策</a>
+      <a href="/terms.html">服务条款</a>
+      <a href="/refunds.html">退款政策</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. 保留所有权利。</div>
+  <div class="disclaimer">本站显示的零售商、品牌与产品名称均为各自所有者的商标，仅用于指代本服务所评估的第三方产品。Real Product Origin 不隶属于任何零售商、品牌或 Anthropic, PBC，也未获得其认可或赞助。Claude 是 Anthropic, PBC 的商标。</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "我的账户"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+</script>
+<script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
+</body>
+</html>
