@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop by origin — Real Product Origin</title>
+<meta name="description" content="Browse products by where they are actually made. Filter by country of origin, confidence, category and price.">
+<meta property="og:title" content="Products — Real Product Origin">
+<meta property="og:description" content="A browser extension and a mobile app that show what's behind every product before you buy.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://realproductorigin.com/products">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Products — Real Product Origin">
+<meta name="twitter:description" content="Browser extension and mobile app for real product-origin transparency.">
+<link rel="canonical" href="https://realproductorigin.com/shop">
+<link rel="alternate" hreflang="en" href="https://realproductorigin.com/products.html">
+<link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/products.html">
+<link rel="alternate" hreflang="de" href="https://realproductorigin.com/de/products.html">
+<link rel="alternate" hreflang="es" href="https://realproductorigin.com/es/products.html">
+<link rel="alternate" hreflang="ja" href="https://realproductorigin.com/ja/products.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://realproductorigin.com/zh-Hans/products.html">
+<link rel="alternate" hreflang="zh-Hant" href="https://realproductorigin.com/zh-Hant/products.html">
+<link rel="alternate" hreflang="x-default" href="https://realproductorigin.com/products.html">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://realproductorigin.com/#organization",
+      "name": "Real Product Origin",
+      "url": "https://realproductorigin.com/",
+      "logo": "https://realproductorigin.com/assets/favicon-512.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://realproductorigin.com/products",
+      "url": "https://realproductorigin.com/products",
+      "name": "Products — Real Product Origin",
+      "description": "Browser extension and mobile app for real product-origin transparency.",
+      "isPartOf": {"@id": "https://realproductorigin.com/#organization"}
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Real Product Origin — Browser Extension",
+      "operatingSystem": "Chrome, Microsoft Edge, Brave",
+      "applicationCategory": "BrowserApplication",
+      "downloadUrl": "https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Real Product Origin — Mobile App",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "MobileApplication",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://realproductorigin.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://realproductorigin.com/products"}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
+  .p-hero {
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .p-hero .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .p-hero h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.05; letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    color: var(--ink-deep);
+  }
+  .p-hero .lede {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55; color: var(--ink-3);
+    max-width: 640px; margin: 0;
+  }
+
+  /* ── Product card ─────────────────────────────────────────────────────── */
+  .p-section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+  .p-section:nth-of-type(even) { background: var(--bg-soft); }
+
+  .p-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .p-card {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      justify-items: center;
+    }
+    .p-card-body { max-width: 560px; }
+  }
+
+  .p-card-visual {
+    background: linear-gradient(160deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    min-height: 300px;
+    max-width: 360px;
+    width: 100%;
+    color: var(--ink-deep);
+  }
+  .p-card-visual svg { width: 100%; height: auto; max-width: 240px; }
+
+  .p-card-body {
+    display: flex; flex-direction: column;
+    padding-top: 6px;
+  }
+  .p-card-body .p-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .p-card-body h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink-deep);
+  }
+  .p-card-body .p-pitch {
+    font-size: 17px; color: var(--ink-3);
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+
+  .p-benefits { list-style: none; padding: 0; margin: 0 0 28px; }
+  .p-benefits li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0; font-size: 15px; line-height: 1.5;
+    color: var(--ink-2); border-bottom: 1px solid var(--border);
+  }
+  .p-benefits li:last-child { border-bottom: 0; }
+  .p-benefits .check {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    width: 22px; height: 22px; border-radius: 999px;
+    background: var(--green); color: #fff;
+    font-size: 13px; font-weight: 700; line-height: 1;
+    margin-top: 1px;
+  }
+  .p-benefits .check::before {
+    content: "";
+    width: 6px; height: 10px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+  .p-benefits li strong { color: var(--ink-deep); font-weight: 700; }
+
+  .p-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 12px; }
+  .p-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px;
+    background: var(--ink); color: #fff !important;
+    font-weight: 700; font-size: 14px; letter-spacing: -0.005em;
+    text-decoration: none !important;
+    transition: background 120ms ease, transform 120ms ease;
+  }
+  .p-btn:hover { background: var(--accent-2); color: #fff !important; transform: translateY(-1px); }
+  .p-btn.secondary {
+    background: transparent; color: var(--ink-deep) !important;
+    border: 1.5px solid var(--border-strong);
+  }
+  .p-btn.secondary:hover { border-color: var(--gold); background: var(--gold-soft); }
+  .p-btn.disabled {
+    background: var(--bg); color: var(--muted) !important;
+    border: 1px solid var(--border);
+    cursor: not-allowed; pointer-events: none;
+  }
+  .p-cta-note { font-size: 13px; color: var(--muted); margin: 4px 0 0; }
+
+  /* ── Four indicators strip ────────────────────────────────────────────── */
+  .p-indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 8px 0 0;
+  }
+  .p-ind {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px;
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+  .p-ind .n {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 999px;
+    background: var(--gold-soft); color: var(--gold);
+    font-family: var(--serif); font-weight: 700; font-size: 18px;
+  }
+  .p-ind h4 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 16px; margin: 0;
+    color: var(--ink-deep);
+  }
+  .p-ind p { margin: 0; font-size: 14px; color: var(--ink-3); line-height: 1.55; }
+
+  /* ── Where it works — retailer grid ──────────────────────────────────── */
+  .p-retailers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 32px 0 0;
+  }
+  .p-retailer {
+    background: var(--bg-cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    transition: border-color 120ms ease, transform 120ms ease;
+  }
+  .p-retailer:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .p-retailer-name {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    color: var(--ink-deep);
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .p-retailer-cat {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .p-retailers-note {
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .p-retailers-note a { color: var(--ink-3); }
+
+
+  /* ── How-it-works (simplified methodology) ────────────────────────────── */
+  .p-how h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 3.6vw, 42px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin: 0 0 16px;
+    color: var(--ink-deep);
+  }
+  .p-how .lede-under {
+    font-size: 17px; color: var(--ink-3);
+    line-height: 1.55; margin: 0 0 44px;
+    max-width: 660px;
+  }
+  .p-how h3 {
+    font-family: var(--sans); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.005em;
+    margin: 44px 0 12px;
+    color: var(--ink-deep);
+  }
+  .p-how h3:first-of-type { margin-top: 0; }
+  .p-how p { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin: 0 0 14px; }
+  .p-how ul { padding-left: 22px; margin: 0 0 20px; }
+  .p-how li { font-size: 16px; color: var(--ink-2); line-height: 1.65; margin-bottom: 6px; }
+  .p-how li::marker { color: var(--gold); }
+  .p-how .callout {
+    display: flex; gap: 14px;
+    padding: 18px 22px;
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    margin: 22px 0;
+    color: var(--ink-2); font-size: 15px; line-height: 1.55;
+  }
+  .p-how .callout strong { color: var(--ink-deep); }
+
+  .p-sources-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .p-sources-panel h4 {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 0 0 12px;
+  }
+  .p-sources-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    padding: 0; margin: 0;
+    list-style: none;
+    font-size: 14px; color: var(--ink-3);
+  }
+  .p-sources-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.4;
+  }
+  .p-sources-list li::before {
+    content: "✓";
+    color: var(--green); font-weight: 700; flex-shrink: 0;
+    line-height: 1.2;
+  }
+
+  /* ── End CTA ─────────────────────────────────────────────────────────── */
+  .p-end-cta {
+    padding: 72px 0;
+    background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-cream-deep) 100%);
+    text-align: center;
+  }
+  .p-end-cta h2 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(30px, 4vw, 44px);
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink-deep);
+  }
+  .p-end-cta p {
+    max-width: 560px; margin: 0 auto 24px;
+    font-size: 17px; color: var(--ink-3);
+  }
+  .p-end-cta .p-cta-row { justify-content: center; }
+</style>
+
+<style>
+  .shop { max-width: 1180px; margin: 0 auto; padding: 40px 20px 80px; }
+  .shop h1 { margin: 0 0 8px; }
+  .shop .lede { color: var(--ink-2); font-size: 17px; margin: 0 0 28px; max-width: 640px; line-height: 1.6; }
+
+  .sh-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 10px; }
+  .sh-f { display: flex; flex-direction: column; gap: 4px; }
+  .sh-f label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3,#8a8377); }
+  .sh-f select, .sh-f input { padding: 8px 10px; font: inherit; font-size: 14px; border: 1px solid var(--rule,#e5e0d5);
+                              border-radius: 8px; background: #fff; min-width: 150px; }
+  .sh-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .sh-toggle { display: inline-flex; border: 1px solid var(--rule,#e5e0d5); border-radius: 8px; overflow: hidden; }
+  .sh-toggle button { padding: 8px 14px; font: inherit; font-size: 14px; background: #fff; border: 0; cursor: pointer; color: var(--ink-2); }
+  .sh-toggle button.on { background: var(--sea,#0284c7); color: #fff; font-weight: 600; }
+  .sh-count { color: var(--ink-3,#8a8377); font-size: 14px; margin: 14px 0 18px; }
+
+  /* CARD view — origin first. The flag is the hero because it is the one
+     thing a retailer's own page will never tell you. */
+  .sh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px,1fr)); gap: 16px; }
+  .sh-card { border: 1px solid var(--rule,#e5e0d5); border-radius: 12px; padding: 18px; background: #fff;
+             display: flex; flex-direction: column; transition: border-color .12s, transform .12s; }
+  .sh-card:hover { border-color: var(--sea,#0284c7); transform: translateY(-2px); }
+  .sh-flag { font-size: 46px; line-height: 1; margin-bottom: 10px; }
+  .sh-origin { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+  .sh-meta { font-size: 13px; color: var(--ink-3,#8a8377); margin-bottom: 12px; }
+  .sh-title { font-size: 14.5px; line-height: 1.45; margin-bottom: 6px; }
+  .sh-brand { font-size: 13px; color: var(--ink-2); margin-bottom: 12px; }
+  .sh-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .sh-price { font-weight: 650; }
+  .sh-go { font-size: 13.5px; text-decoration: none; color: var(--sea,#0284c7); font-weight: 600; }
+  .sh-go:hover { text-decoration: underline; }
+
+  /* ROW view — denser, same information, scannable down a column. */
+  .sh-rows { border: 1px solid var(--rule,#e5e0d5); border-radius: 12px; overflow: hidden; background: #fff; }
+  .sh-row { display: grid; grid-template-columns: 54px 1.6fr 1fr 110px 120px; gap: 14px; align-items: center;
+            padding: 13px 16px; border-bottom: 1px solid var(--rule,#e5e0d5); }
+  .sh-row:last-child { border-bottom: 0; }
+  .sh-row .rflag { font-size: 28px; }
+  .sh-row .rtitle { font-size: 14.5px; line-height: 1.4; }
+  .sh-row .rbrand { font-size: 12.5px; color: var(--ink-3,#8a8377); }
+  .sh-row .rorigin { font-size: 14px; font-weight: 600; }
+  .sh-row .rconf { font-size: 12.5px; color: var(--ink-3,#8a8377); }
+  @media (max-width: 720px) {
+    .sh-row { grid-template-columns: 40px 1fr; row-gap: 6px; }
+    .sh-row .rorigin, .sh-row .rprice, .sh-row .rgo { grid-column: 2; }
+  }
+
+  .sh-empty { padding: 60px 20px; text-align: center; color: var(--ink-3,#8a8377); line-height: 1.7; }
+  /* `display` beats the [hidden] attribute, so an explicit display rule
+     makes hidden a no-op — the button stayed visible with nothing left to
+     load. Scope the display to :not([hidden]). */
+  .sh-more:not([hidden]) { display: block; margin: 26px auto 0; }
+  .sh-more[hidden] { display: none; }
+  .sh-note { margin-top: 34px; font-size: 13px; color: var(--ink-3,#8a8377); line-height: 1.6; max-width: 680px; }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+<div class="shop">
+  <h1>Shop by where it's actually made</h1>
+  <p class="lede">Every product here has been scored for country of origin. Filter by
+  the things a store won't let you filter by — where it was made, and how sure we are.</p>
+
+  <div class="sh-bar">
+    <div class="sh-f"><label for="f-q">Search</label>
+      <input id="f-q" type="search" placeholder="Product name"></div>
+    <div class="sh-f"><label for="f-cat">Category</label>
+      <select id="f-cat"><option value="">Any</option></select></div>
+    <div class="sh-f"><label for="f-country">Made in</label>
+      <select id="f-country"><option value="">Any</option></select></div>
+    <div class="sh-f"><label for="f-conf">Min confidence</label>
+      <select id="f-conf">
+        <option value="">Any</option><option value="50">50%+</option>
+        <option value="70">70%+</option><option value="85">85%+</option>
+      </select></div>
+    <div class="sh-f"><label for="f-price">Max price</label>
+      <select id="f-price">
+        <option value="">Any</option><option value="25">$25</option>
+        <option value="50">$50</option><option value="100">$100</option>
+        <option value="250">$250</option>
+      </select></div>
+    <div class="sh-f"><label for="f-sort">Sort</label>
+      <select id="f-sort">
+        <option value="made_in_confidence">Most confident</option>
+        <option value="newest">Newest</option>
+        <option value="price_low">Price: low to high</option>
+        <option value="price_high">Price: high to low</option>
+      </select></div>
+
+    <div class="sh-actions">
+      <div class="sh-toggle" role="group" aria-label="Display mode">
+        <button type="button" id="v-card" class="on" aria-pressed="true">Cards</button>
+        <button type="button" id="v-row" aria-pressed="false">Rows</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="sh-count" id="sh-count" aria-live="polite">Loading…</p>
+  <div id="sh-results"></div>
+  <button type="button" class="btn sh-more" id="sh-more" hidden>Show more</button>
+
+  <p class="sh-note">Links go straight to the retailer. We don't use affiliate links and
+  earn nothing if you buy — so nothing here is ranked by what pays us.</p>
+</div>
+
+<script>
+(function () {
+  var API = "https://api.realproductorigin.com";
+  var PAGE = 24;
+  var offset = 0, mode = localStorage.getItem("rpo_shop_view") || "card", total = 0;
+
+  function flag(cc) {
+    if (!cc || cc.length !== 2 || cc === "??") return "\uD83C\uDFF3\uFE0F";
+    return String.fromCodePoint(
+      0x1F1E6 + cc.toUpperCase().charCodeAt(0) - 65,
+      0x1F1E6 + cc.toUpperCase().charCodeAt(1) - 65);
+  }
+  function esc(s) {
+    return (s == null ? "" : String(s)).replace(/[&<>"']/g,
+      function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; });
+  }
+  function params() {
+    var p = new URLSearchParams();
+    var map = { q:"f-q", category:"f-cat", made_in:"f-country",
+                min_confidence:"f-conf", max_price:"f-price", sort:"f-sort" };
+    Object.keys(map).forEach(function (k) {
+      var v = document.getElementById(map[k]).value;
+      if (v) p.set(k, v);
+    });
+    p.set("limit", PAGE); p.set("offset", offset);
+    return p.toString();
+  }
+
+  function card(it) {
+    var m = it.made_in || {};
+    return '<div class="sh-card">' +
+      '<div class="sh-flag">' + flag(m.country_code) + '</div>' +
+      '<div class="sh-origin">' + esc(m.country || "Unknown") + '</div>' +
+      '<div class="sh-meta">' + (m.percent != null ? Math.round(m.percent) + '% · ' : '') +
+        (m.confidence != null ? Math.round(m.confidence) + '% confidence' : 'confidence unknown') + '</div>' +
+      '<div class="sh-title">' + esc(it.title) + '</div>' +
+      '<div class="sh-brand">' + esc(it.brand || "") + '</div>' +
+      '<div class="sh-foot">' +
+        '<span class="sh-price">' + (it.price ? '$' + esc(it.price) : '') + '</span>' +
+        (it.url ? '<a class="sh-go" href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">View at ' + esc(it.retailer || 'store') + ' &rarr;</a>' : '') +
+      '</div></div>';
+  }
+
+  function row(it) {
+    var m = it.made_in || {};
+    return '<div class="sh-row">' +
+      '<div class="rflag">' + flag(m.country_code) + '</div>' +
+      '<div><div class="rtitle">' + esc(it.title) + '</div>' +
+           '<div class="rbrand">' + esc(it.brand || "") + '</div></div>' +
+      '<div><div class="rorigin">' + esc(m.country || "Unknown") + '</div>' +
+           '<div class="rconf">' + (m.confidence != null ? Math.round(m.confidence) + '% confidence' : '') + '</div></div>' +
+      '<div class="rprice sh-price">' + (it.price ? '$' + esc(it.price) : '') + '</div>' +
+      '<div class="rgo">' + (it.url ? '<a class="sh-go" href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">View &rarr;</a>' : '') + '</div>' +
+    '</div>';
+  }
+
+  function render(items, append) {
+    var host = document.getElementById("sh-results");
+    var html = mode === "card"
+      ? '<div class="sh-grid">' + items.map(card).join("") + '</div>'
+      : '<div class="sh-rows">' + items.map(row).join("") + '</div>';
+    if (append && host.firstElementChild) {
+      var inner = host.firstElementChild;
+      inner.insertAdjacentHTML("beforeend",
+        items.map(mode === "card" ? card : row).join(""));
+    } else {
+      host.innerHTML = html;
+    }
+  }
+
+  function load(append) {
+    fetch(API + "/shop/products?" + params())
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        total = d.total || 0;
+        if (!d.items || !d.items.length) {
+          if (!append) {
+            document.getElementById("sh-results").innerHTML =
+              '<div class="sh-empty">Nothing matches those filters yet.<br>' +
+              'We only list products someone has actually scored — try widening the filters.</div>';
+            document.getElementById("sh-count").textContent = "0 products";
+          }
+          document.getElementById("sh-more").hidden = true;
+          return;
+        }
+        render(d.items, append);
+        document.getElementById("sh-count").textContent =
+          total + (total === 1 ? " product" : " products");
+        document.getElementById("sh-more").hidden = (offset + d.items.length) >= total;
+      })
+      .catch(function () {
+        document.getElementById("sh-count").textContent = "";
+        document.getElementById("sh-results").innerHTML =
+          '<div class="sh-empty">Couldn\'t load products just now. Please try again.</div>';
+      });
+  }
+
+  function reset() { offset = 0; load(false); }
+
+  ["f-q","f-cat","f-country","f-conf","f-price","f-sort"].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(id === "f-q" ? "input" : "change", function () {
+      clearTimeout(el._t); el._t = setTimeout(reset, id === "f-q" ? 300 : 0);
+    });
+  });
+
+  function setMode(m) {
+    mode = m;
+    localStorage.setItem("rpo_shop_view", m);
+    document.getElementById("v-card").classList.toggle("on", m === "card");
+    document.getElementById("v-row").classList.toggle("on", m === "row");
+    document.getElementById("v-card").setAttribute("aria-pressed", m === "card");
+    document.getElementById("v-row").setAttribute("aria-pressed", m === "row");
+    reset();
+  }
+  document.getElementById("v-card").addEventListener("click", function () { setMode("card"); });
+  document.getElementById("v-row").addEventListener("click", function () { setMode("row"); });
+
+  document.getElementById("sh-more").addEventListener("click", function () {
+    offset += PAGE; load(true);
+  });
+
+  // Populate filters from what actually has products behind it.
+  fetch(API + "/shop/filters").then(function (r) { return r.json(); }).then(function (d) {
+    (d.categories || []).forEach(function (c) {
+      document.getElementById("f-cat").insertAdjacentHTML("beforeend",
+        '<option value="' + esc(c) + '">' + esc(c) + '</option>');
+    });
+    (d.made_in_countries || []).forEach(function (c) {
+      document.getElementById("f-country").insertAdjacentHTML("beforeend",
+        '<option value="' + esc(c) + '">' + flag(c) + ' ' + esc(c) + '</option>');
+    });
+  }).catch(function () {});
+
+  setMode(mode);
+})();
+</script>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/products.html">Products</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/coverage.html">Request a retailer</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "My Account"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+</script>
+<script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
+</body>
+</html>
