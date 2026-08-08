@@ -253,6 +253,13 @@ function handleActive(data) {
       email: data.email,
     };
     localStorage.setItem("rpo_session", JSON.stringify(authSyncPayload));
+    // Tell the extension's content script directly. It mounted at
+    // document_end — long before this token existed, because we only
+    // have it once Stripe's webhook lands — so it cannot rely on having
+    // been watching at the right moment. notifyExtension() below also
+    // repeats this while we wait, since an extension that updates or
+    // wakes late needs to be told again, not once.
+    notifyExtension();
   } catch (_) {}
 
   // 2. Populate the visible UI.
@@ -304,26 +311,53 @@ function handleActive(data) {
   } catch (_) {}
 }
 
+// Re-announce the token to the extension's content script. Safe to call
+// repeatedly — auth_sync re-reads localStorage and ignores a token it has
+// already consumed (the key is gone by then).
+function notifyExtension() {
+  try {
+    window.postMessage({type: "rpo:auth:success"}, window.location.origin);
+  } catch (_) {}
+}
+
 function detectExtensionPickup() {
-  let elapsedMs = 0;
+  // Real elapsed time, not a tick count. Chrome throttles timers to about
+  // one tick per second in a background tab, and buyers routinely switch
+  // tabs while Stripe finishes — counting ticks would turn "5 seconds"
+  // into twenty and time the whole state machine wrong.
+  const startedAt = Date.now();
+  let lastNotifyAt = startedAt;
+  let ctaShown = false;
   const iv = setInterval(function () {
-    elapsedMs += 250;
+    const elapsedMs = Date.now() - startedAt;
     const still = localStorage.getItem("rpo_session");
     if (!still) {
-      // Extension's auth_sync consumed it → we're paired.
+      // Extension's auth_sync consumed it → we're paired. This can happen
+      // AFTER the CTA below was shown (slow service-worker wake, extension
+      // mid-update), so correct the display rather than assuming the 5s
+      // verdict was final.
       clearInterval(iv);
       el.extCheckingBlock.style.display = "none";
       el.extDetectedBlock.style.display = "block";
       el.extNotDetectedBlock.style.display = "none";
       return;
     }
-    if (elapsedMs >= 5000) {
-      // Extension didn't pick it up. Show the install CTA + fallback.
-      clearInterval(iv);
+    if (elapsedMs >= 5000 && !ctaShown) {
+      // Nothing yet. Show the install CTA so a genuinely extension-less
+      // buyer is not left staring at a spinner — but keep watching. We
+      // used to stop here, which turned "your extension was slow" into
+      // "install the extension", told to the one person who can't act
+      // on it.
+      ctaShown = true;
       el.extCheckingBlock.style.display = "none";
       el.extDetectedBlock.style.display = "none";
       el.extNotDetectedBlock.style.display = "block";
     }
+    if (Date.now() - lastNotifyAt >= 2000) {
+      lastNotifyAt = Date.now();
+      notifyExtension();
+    }
+    if (elapsedMs >= 60000) clearInterval(iv);
   }, 250);
 }
 
