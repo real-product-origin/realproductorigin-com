@@ -799,6 +799,97 @@ document.getElementById("btn-yearly").addEventListener("click", () => renderPric
 // Rationale: pay-first has the lowest checkout-abandonment risk (Baymard
 // research + Stripe's own guidance), and magic-link auth means returning
 // users don't need a password to reclaim the account.
+// ── Already-subscribed dialog ────────────────────────────────────────
+// POST /subscription/checkout answers 409 when the signed-in visitor
+// already has an active subscription. It refuses instead of selling a
+// second concurrent one — that is how a test account ended up paying
+// for Basic and Unlimited at the same time, on one card, for two weeks.
+//
+// The response carries the reason as structured fields (plan ids,
+// direction, whether the plan is already set to cancel) rather than a
+// sentence, because the backend cannot localize and this site ships in
+// seven languages. The copy below is this page's.
+const PLAN_BLOCK_LABELS = {
+  "free": "Free",
+  "basic": "Basic",
+  "pro": "Unlimited",
+  "supporter": "Supporter"
+};
+const PLAN_BLOCK_STRINGS = {
+  "title_already": "You’re already subscribed",
+  "title_cancelling": "Your subscription is still active",
+  "upgrade": "You’re on {cur}. To move up to {req}, use <strong>Change plan</strong> on your account page — that switches the subscription you already have, and you’re charged only the difference for the rest of this billing period. Subscribing here would start a second subscription and bill you for both.",
+  "downgrade": "You’re on {cur}. To move to {req}, use <strong>Change plan</strong> on your account page — the switch takes effect at the end of your current billing period, and you keep {cur} until then. Subscribing here would start a second subscription and bill you for both.",
+  "noop": "You’re already on {cur}, billed {period}. There’s nothing to buy here — you can change or cancel your plan from your account page.",
+  "cancelling": "Your {cur} plan is still active and is already set to end at the close of your current billing period. Resume it from your account page — subscribing again now would charge you twice for days you’ve already paid for.",
+  "monthly": "monthly",
+  "yearly": "yearly",
+  "cta_account": "Go to my account",
+  "cta_close": "Close",
+  "your_plan": "your plan"
+};
+
+function planBlockLabel(id) {
+  // Never interpolate a raw server value into innerHTML — only ids we
+  // recognise become text, anything else falls back to a neutral word.
+  return PLAN_BLOCK_LABELS[id] || PLAN_BLOCK_STRINGS.your_plan;
+}
+
+function showAlreadySubscribed(d) {
+  const S = PLAN_BLOCK_STRINGS;
+  const cur = planBlockLabel(d.current_plan);
+  const req = planBlockLabel(d.requested_plan);
+  const period = d.current_billing_period === "yearly" ? S.yearly : S.monthly;
+
+  let title = S.title_already;
+  let body;
+  if (d.cancel_at_period_end) {
+    // Distinct on purpose: "you're already subscribed" reads as nonsense
+    // to someone who just cancelled and came back.
+    title = S.title_cancelling;
+    body = S.cancelling;
+  } else if (d.direction === "upgrade") {
+    body = S.upgrade;
+  } else if (d.direction === "downgrade") {
+    body = S.downgrade;
+  } else {
+    body = S.noop;
+  }
+  body = body.replace(/\{cur\}/g, cur)
+             .replace(/\{req\}/g, req)
+             .replace(/\{period\}/g, period);
+
+  const scrim = document.createElement("div");
+  scrim.className = "rpo-dialog-scrim";
+  scrim.innerHTML =
+    '<div class="rpo-dialog" role="dialog" aria-modal="true" aria-labelledby="rpo-blocked-title">' +
+      '<h2 id="rpo-blocked-title"></h2><p></p>' +
+      '<div class="rpo-dialog-actions">' +
+        '<a class="btn btn-primary"></a>' +
+        '<button class="btn btn-secondary" type="button"></button>' +
+      '</div>' +
+    '</div>';
+  scrim.querySelector("h2").textContent = title;
+  scrim.querySelector("p").innerHTML = body;
+  const go = scrim.querySelector("a.btn");
+  go.href = d.manage_url || "/subscribe/account.html";
+  go.textContent = S.cta_account;
+  const close = scrim.querySelector("button.btn");
+  close.textContent = S.cta_close;
+
+  function dismiss() {
+    scrim.remove();
+    document.removeEventListener("keydown", onKey);
+  }
+  function onKey(e) { if (e.key === "Escape") dismiss(); }
+  close.addEventListener("click", dismiss);
+  scrim.addEventListener("click", e => { if (e.target === scrim) dismiss(); });
+  document.addEventListener("keydown", onKey);
+
+  document.body.appendChild(scrim);
+  go.focus();
+}
+
 async function subscribe(plan) {
   const params = new URLSearchParams(location.search);
   const token = params.get("session_token") || localStorage.getItem("rpo_session_token");
@@ -810,6 +901,14 @@ async function subscribe(plan) {
       headers,
       body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
+    if (r.status === 409) {
+      // Refused as a duplicate. Explain it and point at the plan
+      // switcher rather than dropping the buyer on a generic error.
+      let detail = {};
+      try { detail = (await r.json()).detail || {}; } catch (_) {}
+      showAlreadySubscribed(detail);
+      return;
+    }
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();
     location.href = data.checkout_url;

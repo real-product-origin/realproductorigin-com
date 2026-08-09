@@ -779,6 +779,97 @@ document.getElementById("btn-yearly").addEventListener("click", () => renderPric
 // 而我們的 webhook 與成功頁面上的 /session-status 輪詢會建立帳號。
 // 理由:先付款的流程在結帳中斷風險最低(Baymard 研究與 Stripe 官方建議),
 // 且採用魔法連結認證,回訪使用者不需密碼即可取回帳號。
+// ── Already-subscribed dialog ────────────────────────────────────────
+// POST /subscription/checkout answers 409 when the signed-in visitor
+// already has an active subscription. It refuses instead of selling a
+// second concurrent one — that is how a test account ended up paying
+// for Basic and Unlimited at the same time, on one card, for two weeks.
+//
+// The response carries the reason as structured fields (plan ids,
+// direction, whether the plan is already set to cancel) rather than a
+// sentence, because the backend cannot localize and this site ships in
+// seven languages. The copy below is this page's.
+const PLAN_BLOCK_LABELS = {
+  "free": "Free",
+  "basic": "Basic",
+  "pro": "無限",
+  "supporter": "支持者"
+};
+const PLAN_BLOCK_STRINGS = {
+  "title_already": "您已訂閱",
+  "title_cancelling": "您的訂閱仍然有效",
+  "upgrade": "您目前使用的是{cur}。如需升級至{req}，請在帳戶頁面使用<strong>變更方案</strong>——這會直接切換您已有的訂閱，本計費週期內僅需補差額。在此處訂閱會另外建立一個訂閱，兩個都會向您收費。",
+  "downgrade": "您目前使用的是{cur}。如需變更為{req}，請在帳戶頁面使用<strong>變更方案</strong>——變更將於目前計費週期結束時生效，在此之前您仍可使用{cur}。在此處訂閱會另外建立一個訂閱，兩個都會向您收費。",
+  "noop": "您已在使用{cur}（{period}計費）。此處無需購買——您可以在帳戶頁面變更或取消方案。",
+  "cancelling": "您的{cur}方案仍然有效，並已設定為在目前計費週期結束時到期。請在帳戶頁面恢復訂閱——現在重新訂閱會導致您已付費的天數被重複收費。",
+  "monthly": "按月",
+  "yearly": "按年",
+  "cta_account": "前往我的帳戶",
+  "cta_close": "關閉",
+  "your_plan": "您的方案"
+};
+
+function planBlockLabel(id) {
+  // Never interpolate a raw server value into innerHTML — only ids we
+  // recognise become text, anything else falls back to a neutral word.
+  return PLAN_BLOCK_LABELS[id] || PLAN_BLOCK_STRINGS.your_plan;
+}
+
+function showAlreadySubscribed(d) {
+  const S = PLAN_BLOCK_STRINGS;
+  const cur = planBlockLabel(d.current_plan);
+  const req = planBlockLabel(d.requested_plan);
+  const period = d.current_billing_period === "yearly" ? S.yearly : S.monthly;
+
+  let title = S.title_already;
+  let body;
+  if (d.cancel_at_period_end) {
+    // Distinct on purpose: "you're already subscribed" reads as nonsense
+    // to someone who just cancelled and came back.
+    title = S.title_cancelling;
+    body = S.cancelling;
+  } else if (d.direction === "upgrade") {
+    body = S.upgrade;
+  } else if (d.direction === "downgrade") {
+    body = S.downgrade;
+  } else {
+    body = S.noop;
+  }
+  body = body.replace(/\{cur\}/g, cur)
+             .replace(/\{req\}/g, req)
+             .replace(/\{period\}/g, period);
+
+  const scrim = document.createElement("div");
+  scrim.className = "rpo-dialog-scrim";
+  scrim.innerHTML =
+    '<div class="rpo-dialog" role="dialog" aria-modal="true" aria-labelledby="rpo-blocked-title">' +
+      '<h2 id="rpo-blocked-title"></h2><p></p>' +
+      '<div class="rpo-dialog-actions">' +
+        '<a class="btn btn-primary"></a>' +
+        '<button class="btn btn-secondary" type="button"></button>' +
+      '</div>' +
+    '</div>';
+  scrim.querySelector("h2").textContent = title;
+  scrim.querySelector("p").innerHTML = body;
+  const go = scrim.querySelector("a.btn");
+  go.href = d.manage_url || "/subscribe/account.html";
+  go.textContent = S.cta_account;
+  const close = scrim.querySelector("button.btn");
+  close.textContent = S.cta_close;
+
+  function dismiss() {
+    scrim.remove();
+    document.removeEventListener("keydown", onKey);
+  }
+  function onKey(e) { if (e.key === "Escape") dismiss(); }
+  close.addEventListener("click", dismiss);
+  scrim.addEventListener("click", e => { if (e.target === scrim) dismiss(); });
+  document.addEventListener("keydown", onKey);
+
+  document.body.appendChild(scrim);
+  go.focus();
+}
+
 async function subscribe(plan) {
   const params = new URLSearchParams(location.search);
   const token = params.get("session_token") || localStorage.getItem("rpo_session_token");
@@ -790,6 +881,14 @@ async function subscribe(plan) {
       headers,
       body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
+    if (r.status === 409) {
+      // Refused as a duplicate. Explain it and point at the plan
+      // switcher rather than dropping the buyer on a generic error.
+      let detail = {};
+      try { detail = (await r.json()).detail || {}; } catch (_) {}
+      showAlreadySubscribed(detail);
+      return;
+    }
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();
     location.href = data.checkout_url;

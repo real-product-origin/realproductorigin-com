@@ -1330,3 +1330,37 @@ article code { background: var(--bg-soft); padding: 2px 6px; border-radius: 4px;
     right: -8px;
   }
 }
+
+/* ── "You already have a plan" dialog ─────────────────────────────────
+   Shown when checkout refuses a duplicate purchase (HTTP 409). The
+   buyer clicked Subscribe while already subscribed; selling them a
+   second concurrent subscription would bill them twice, so the pricing
+   pages explain the situation and send them to the plan switcher.
+   Lives here rather than in pricing.html because seven localized
+   pricing pages share it and hand-copied CSS drifts. */
+.rpo-dialog-scrim {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(17, 24, 39, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.rpo-dialog {
+  background: var(--bg); border: 1px solid var(--border-strong);
+  border-radius: 14px; max-width: 460px; width: 100%;
+  padding: 24px; box-shadow: 0 18px 48px rgba(17, 24, 39, 0.22);
+  text-align: left;
+}
+.rpo-dialog h2 {
+  font-family: var(--serif); font-size: 21px; line-height: 1.25;
+  margin: 0 0 12px; color: var(--ink-deep);
+}
+.rpo-dialog p {
+  font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 0 0 20px;
+}
+.rpo-dialog .rpo-dialog-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.rpo-dialog .rpo-dialog-actions .btn { flex: 1 1 auto; text-align: center; }
+@media (max-width: 420px) {
+  .rpo-dialog .rpo-dialog-actions { flex-direction: column; }
+}
