@@ -94,7 +94,7 @@
 
   <h3>1.2 Information collected automatically</h3>
   <ul>
-    <li><strong>Product identifiers:</strong> The retailer's own product identifier for the item you ask us to score — for example an Amazon ASIN, a Target TCIN, a Walmart item ID, or the equivalent SKU or catalogue number used by each of the 30 retailers we support. We cache scores by that identifier.</li>
+    <li><strong>Product identifiers:</strong> The retailer's own product identifier for the item you ask us to score — for example an Amazon ASIN, a Target TCIN, a Walmart item ID, or the equivalent SKU or catalogue number used by each of the 33 retailers we support. We cache scores by that identifier.</li>
     <li><strong>Product-page content (transient):</strong> The extension activates only on product-detail pages of the retailers we support. When it is active on such a page — either automatically or when you ask it to score — it reads the page's public product information and sends it to our backend to compute an origin score. Specifically: the product title, brand, seller name, price, "Sold by" and "Ships from" fields, product description, A+ content text, up to 15 questions-and-answers, a short excerpt of top reviews, and up to 8 product gallery image URLs.
       <br><br>
       <strong>We keep our conclusions, not the retailer's content.</strong> That page content is used to compute the score and is then discarded. What we retain is the product identifier, the four scores with their confidence levels, and the citation URLs supporting them — plus a few short factual fields (title, brand, seller, price) so we can show you which product a cached score belongs to. Product descriptions, A+ content, questions-and-answers, review excerpts, and gallery image URLs are <em>not</em> stored. We do not keep copies of retailer page text, and we do not store retailer product images.
@@ -111,12 +111,12 @@
 
   <h3>1.3 What we DO NOT collect</h3>
   <ul>
-    <li>We do not collect your account information, login, or order history on any supported retailer (currently Amazon, Target, Walmart, and 27 other major retailers).</li>
-    <li>We do not collect your browsing history outside of product pages on the retailers we support (currently Amazon, Target, Walmart, and 27 other major retailers).</li>
+    <li>We do not collect your account information, login, or order history on any supported retailer (currently Amazon, Target, Walmart, and 30 other major retailers).</li>
+    <li>We do not collect your browsing history outside of product pages on the retailers we support (currently Amazon, Target, Walmart, and 30 other major retailers).</li>
     <li>We do not collect or store your full payment-card number, CVC, or expiry date. If you subscribe, Stripe collects those directly through their hosted checkout — see section 3. We only receive back a Stripe customer identifier and subscription metadata (plan, dates, status), as described in section 1.1.</li>
     <li>We do not collect precise location: no GPS coordinates, no city, no street. The only geographic signal we collect is the coarse country code described in section 1.2, which is derived from your browser's timezone and never reveals more than a country.</li>
     <li>We do not collect advertising IDs, contacts, or microphone/camera data. The anonymous install UUID described in section 1.2 is not an advertising identifier — it is never shared with third parties for advertising and it does not survive an uninstall.</li>
-    <li>The browser extension does not have permission to read or write pages on any site other than the retailers it currently supports (Amazon, Target, Walmart, and 27 other major retailers).</li>
+    <li>The browser extension does not have permission to read or write pages on any site other than the retailers it currently supports (Amazon, Target, Walmart, and 30 other major retailers).</li>
     <li>The mobile app does not request permission to read your contacts, photos, location, or clipboard contents outside of the explicit "Check the link you copied?" prompt.</li>
   </ul>
 
