@@ -10,7 +10,8 @@
 //
 // URL routing rules:
 //   * Home:      /  <->  /LANG/
-//   * pricing.html + products.html exist in every translated locale.
+//   * pricing.html, products.html and coverage.html exist in every
+//     translated locale.
 //     Other pages (why, support, etc.) don't — for those, switching to
 //     a non-English language sends the visitor to the language home
 //     rather than dropping them on an English page mid-flow. Switching
@@ -34,7 +35,11 @@
   // Pages that have translated versions under each /LANG/. If the current
   // path matches one, the switcher preserves the page; otherwise switching
   // language goes to the language home.
-  var TRANSLATED_PAGES = ["index.html", "pricing.html", "products.html"];
+  // goodbye.html is translated too but deliberately absent: it is noindex,
+  // reached only from an uninstall redirect, and carries query params the
+  // switcher would drop.
+  var TRANSLATED_PAGES = ["index.html", "pricing.html", "products.html",
+                          "coverage.html"];
 
   // Match all supported LANG prefixes in the URL path so we can strip them
   // to figure out "what page is this, agnostic of language".

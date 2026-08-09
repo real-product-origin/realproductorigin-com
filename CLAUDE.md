@@ -32,13 +32,26 @@ both are reachable.
 ```
 /*.html                 English pages (14 of them)
 /es /fr /de /ja /zh-Hans /zh-Hant
-                        locale dirs — ONLY index, pricing, products.
-                        Everything else is English-only.
+                        locale dirs — ONLY index, pricing, products,
+                        coverage, goodbye. Everything else is
+                        English-only.
 /assets/                styles.css, lang-switcher.js, favicons
 /subscribe/             sign-in + account pages
 /functions/             Cloudflare Pages Functions
 build-goodbye.py        generates goodbye.html for all 7 locales
+build-coverage.py       generates coverage.html for all 7 locales
 ```
+
+The two `build-*.py` scripts are the only generated pages. Edit the copy
+in the script and re-run it — editing the generated HTML directly means
+the next run silently reverts you. Both take their header and footer
+from that locale's `products.html`, so a nav or footer change to the
+translated pages propagates on the next run.
+
+`assets/lang-switcher.js` has its own `TRANSLATED_PAGES` list. A page
+translated into every locale has to be added there too, or the language
+switcher drops the visitor on the locale home page instead of the
+translation that exists.
 
 Seven locales total: en (root) + six subdirectories.
 

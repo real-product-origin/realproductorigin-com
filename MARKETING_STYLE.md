@@ -179,9 +179,19 @@ extend that page rather than creating a new one.
 - `support.html` — install / usage / troubleshooting / contact
 - `about.html` — team + provenance
 - `contact.html` — contact form
-- `lookup.html` — paste-a-URL scoring for extension-less users
+- `coverage.html` — request a retailer. Generated for all 7 locales by
+  `build-coverage.py`; edit the copy there, not the HTML.
+- `shop.html` — origin-forward browse
+- `goodbye.html` — uninstall / cancellation exit survey, noindex.
+  Generated for all 7 locales by `build-goodbye.py`.
 - `refunds.html`, `privacy.html`, `terms.html` — legal (edit only when
   legal counsel signs off)
+
+`lookup.html` (paste-a-URL scoring) was **retired 2026-08-02** and 301s
+to `/products` — see the note in `_redirects` for why. Don't rebuild it
+without re-reading that: a pasted URL gives the server an identifier and
+nothing else, and fetching retailer pages server-side to fix that is
+what the 2026-08-01 legal review ruled out.
 - `404.html` — the 404 page
 - `subscribe/*.html` — auth-related pages (see next section)
 - `MARKETING_STYLE.md` — this file
