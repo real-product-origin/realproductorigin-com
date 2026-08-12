@@ -90,6 +90,33 @@
   ]
 }
 </script>
+<style>
+  /* GTM §4: mock cards carry fabricated scores, so they must be labelled
+     as fictional wherever they appear. Muted deliberately — it is a
+     disclosure, not a design element. */
+  .mock-disclaimer {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 14px 0 0; text-align: center; font-style: italic;
+  }
+  section.dark .mock-disclaimer { color: rgba(255,255,255,0.55); }
+  /* §1.2a — the AI is a capability claim; the non-affiliation note rides
+     with it rather than living only in the footer. */
+  .anthropic-note {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 10px 0 0;
+  }
+  /* §1.2 differentiator — the strongest claim on the page, so it gets
+     weight without becoming a heading. */
+  .differentiator {
+    font-size: 18px; line-height: 1.6; font-weight: 500;
+    border-left: 3px solid var(--accent, #ea580c);
+    padding: 4px 0 4px 18px; margin: 0 0 22px; max-width: 720px;
+  }
+  .problem-statement {
+    font-size: 16.5px; line-height: 1.65; color: var(--ink-3, #57534e);
+    margin: 0 0 18px; max-width: 720px;
+  }
+</style>
 </head>
 <body>
 
@@ -128,15 +155,16 @@
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <p class="kicker">Una herramienta de compra impulsada por IA para total tranquilidad</p>
+        <p class="kicker">Tienda estadounidense. Marca de apariencia estadounidense. Empresa matriz extranjera. Nosotros lo comprobamos.</p>
         <h1>Sepa qué está <em>realmente</em> comprando.</h1>
         <p class="tagline">Y a quién está pagando realmente.</p>
-        <p class="sub">Las fichas de productos en los grandes minoristas en línea dejan calladamente cuatro preguntas sin responder. Nosotros respondemos a las cuatro — dónde está fabricado, desde dónde se envía, quién es el minorista y adónde va finalmente el dinero. La IA Claude lee cada página de producto y razona sobre solicitudes de marca, registros aduaneros, bases de datos de marcas y registros mercantiles. Cada afirmación cita su fuente, con bandas de confianza honestas cuando las pruebas son escasas.</p>
+        <p class="sub">Las fichas de productos en los grandes minoristas en línea dejan calladamente cuatro preguntas sin responder. Nosotros respondemos a las cuatro — dónde está fabricado, desde dónde se envía, quién es el minorista y adónde va finalmente el dinero. Claude lee la página del producto, el registro del vendedor, las solicitudes de marca y los registros mercantiles en segundos, y luego cita cada uno.  Cada afirmación cita su fuente, con bandas de confianza honestas cuando las pruebas son escasas.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#install">Obtener la extensión del navegador</a>
           <a class="btn btn-secondary" href="/es/products.html#methodology">Cómo funciona</a>
         </div>
         <p class="cta-note">Sus primeras <span data-rpo-free-quota>20</span> comprobaciones son gratuitas — una sola vez, no mensual. Planes desde <a href="/es/pricing.html">4,99 $/mes</a>. Chrome y Brave (Edge y Firefox próximamente). iOS y Android en camino.</p>
+        <p class="anthropic-note">Claude es una marca de Anthropic, PBC. Somos clientes de Anthropic: no estamos afiliados, respaldados ni patrocinados por ellos.</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -151,7 +179,7 @@
           <div class="browser-viewport">
             <div class="mock-stack">
 
-              <!-- ─── Slide 1: GLAMORA — opaque drop-shipper apparel (all red) ─── -->
+              <!-- ─── Slide 1: VELTRAY — opaque drop-shipper apparel (all red) ─── -->
               <div class="mock-slide active" data-slide="0">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -160,7 +188,7 @@
                         <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">GLAMORA</div>
+                    <div class="mock-brand">VELTRAY</div>
                     <div class="mock-title">Vestido camiseta casual holgado para mujer, manga larga</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4,4 · 18.203</div>
                     <div class="mock-price">$28<small>,99</small></div>
@@ -209,7 +237,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 2: NORDLYS — Nordic outdoor brand, multi-country, well-scored ─── -->
+              <!-- ─── Slide 2: ORVENNA — Nordic outdoor brand, multi-country, well-scored ─── -->
               <div class="mock-slide" data-slide="1">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -221,7 +249,7 @@
                         <line x1="22" y1="38" x2="42" y2="38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">NORDLYS</div>
+                    <div class="mock-brand">ORVENNA</div>
                     <div class="mock-title">Mochila Klassik para uso diario, rojo buey, 16 L</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4,7 · 9.412</div>
                     <div class="mock-price">$80<small>,00</small></div>
@@ -270,7 +298,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 3: TRADEFORCE — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
+              <!-- ─── Slide 3: BRAKTON — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
               <div class="mock-slide" data-slide="2">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -290,7 +318,7 @@
                         <path d="M22 34 L22 38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">TRADEFORCE</div>
+                    <div class="mock-brand">BRAKTON</div>
                     <div class="mock-title">Kit taladro atornillador inalámbrico 20 V, 2 baterías</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4,3 · 6.754</div>
                     <div class="mock-price">$129<small>,00</small></div>
@@ -339,7 +367,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 4: MERIDIAN CO. — international watch brand (mostly ink) ─── -->
+              <!-- ─── Slide 4: HORVELL — international watch brand (mostly ink) ─── -->
               <div class="mock-slide" data-slide="3">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -352,7 +380,7 @@
                         <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">MERIDIAN CO.</div>
+                    <div class="mock-brand">HORVELL</div>
                     <div class="mock-title">Reloj cronógrafo solar para hombre, brazalete plateado</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4,6 · 2.847</div>
                     <div class="mock-price">$189<small>,00</small></div>
@@ -401,7 +429,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 5: BLOOM LAB — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
+              <!-- ─── Slide 5: BELVANE — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
               <div class="mock-slide" data-slide="4">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -417,7 +445,7 @@
                         <line x1="23" y1="44" x2="35" y2="44"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">BLOOM LAB</div>
+                    <div class="mock-brand">BELVANE</div>
                     <div class="mock-title">Crema hidratante Hydra-Renew Ceramida, 50 ml</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4,5 · 3.116</div>
                     <div class="mock-price">$42<small>,00</small></div>
@@ -477,6 +505,7 @@
           <button type="button" aria-label="Ejemplo de reloj"></button>
           <button type="button" aria-label="Ejemplo de cosmético"></button>
         </div>
+        <p class="mock-disclaimer">Ejemplo ilustrativo. Las marcas y las puntuaciones mostradas son ficticias.</p>
       </div>
 
     </div>
@@ -564,7 +593,7 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     RETAILER GRID — full categorized list (30 retailers across 6 categories)
+     RETAILER GRID — full categorized list (33 retailers across 6 categories)
      ═════════════════════════════════════════════════════════════════════ -->
 
 <section class="retailers-callout" aria-labelledby="retailers-heading">
@@ -665,6 +694,8 @@
   <div class="wrap-wide">
     <p class="eyebrow">Las cuatro preguntas</p>
     <h2>Cuatro cosas que una ficha de producto en línea típica no responde.</h2>
+    <p class="differentiator">Cualquiera puede leer una ficha de producto. Nosotros rastreamos al vendedor de registro a través de registros mercantiles y de marcas hasta la empresa matriz que realmente cobra el dinero, y citamos cada fuente.</p>
+    <p class="problem-statement">No puede saber quién responde si algo sale mal. No puede saber si su dinero sostiene a una empresa estadounidense o solo a un escaparate estadounidense. Y no puede saber si «vendido por» significa que el minorista evaluó el producto siquiera.</p>
     <p class="section-intro">Cada puntuación responde a cuatro preguntas distintas sobre el producto. Juntas cuentan una historia que ninguna etiqueta por separado — <em>Vendido por</em>, <em>Enviado desde</em>, <em>Fabricante</em> — puede contar por sí sola.</p>
 
     <div class="indicators">
@@ -686,7 +717,7 @@
       <div class="indicator-card">
         <p class="num"><span class="num-icon">04</span> El dinero va a</p>
         <h3>Dónde acaba finalmente el beneficio</h3>
-        <p>El país de la matriz de la marca — la entidad que capta el margen mayorista de cada venta. Un reloj NORDLYS en una tienda estadounidense: el minorista está en EE. UU., pero el dinero fluye a Japón.</p>
+        <p>El país de la matriz de la marca — la entidad que capta el margen mayorista de cada venta. Un reloj HORVELL en una tienda estadounidense: el minorista está en EE. UU., pero el dinero fluye a Japón.</p>
       </div>
     </div>
   </div>
@@ -704,7 +735,7 @@
 
     <div class="showcase-grid">
 
-      <!-- Card A: NORDLYS -->
+      <!-- Card A: HORVELL -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -717,7 +748,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">NORDLYS</p>
+            <p class="sc-brand">HORVELL</p>
             <p class="sc-title">Reloj cronógrafo solar para hombre</p>
             <p class="sc-price">$189,00</p>
           </div>
@@ -728,10 +759,10 @@
           <div class="row"><div class="row-top"><span class="row-label">Minorista</span><span class="row-pct"><span class="row-flag">🇺🇸</span> EE. UU. · 96 %</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">El dinero va a</span><span class="row-pct"><span class="row-flag">🇯🇵</span> Japón · 96 %</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
         </div>
-        <p class="sc-takeaway">Una marca japonesa reconocible. El minorista oficial es una tienda estadounidense, pero cada dólar del margen mayorista aterriza en NORDLYS Group en Tokio.</p>
+        <p class="sc-takeaway">Una marca japonesa reconocible. El minorista oficial es una tienda estadounidense, pero cada dólar del margen mayorista aterriza en HORVELL Group en Tokio.</p>
       </div>
 
-      <!-- Card B: GLAMORA -->
+      <!-- Card B: VELTRAY -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -740,7 +771,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">GLAMORA</p>
+            <p class="sc-brand">VELTRAY</p>
             <p class="sc-title">Vestido camiseta casual holgado</p>
             <p class="sc-price">$28,99</p>
           </div>
@@ -751,10 +782,10 @@
           <div class="row"><div class="row-top"><span class="row-label">Minorista</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 93 %</span></div><div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">El dinero va a</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 91 %</span></div><div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div></div>
         </div>
-        <p class="sc-takeaway">El tipo de marca que ninguna ficha etiqueta: una marca registrada en China, enviada por dropshipping a través de un almacén estadounidense. Cada línea roja es una señal.</p>
+        <p class="sc-takeaway">El tipo de marca que ninguna ficha etiqueta: una marca registrada en China, enviada por dropshipping desde un almacén estadounidense. Tres filas rojas: fabricado, vendido y cobrado, todo en un país de la lista del Departamento de Estado.</p>
       </div>
 
-      <!-- Card C: TRADEFORCE -->
+      <!-- Card C: ORVENNA -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -766,8 +797,8 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">TRADEFORCE</p>
-            <p class="sc-title">Mochila clásica Kånken</p>
+            <p class="sc-brand">ORVENNA</p>
+            <p class="sc-title">Mochila Klassik para uso diario, rojo buey, 16 L</p>
             <p class="sc-price">$80,00</p>
           </div>
         </div>
@@ -781,7 +812,7 @@
       </div>
 
     </div>
-
+    <p class="mock-disclaimer">Ejemplo ilustrativo. Las marcas y las puntuaciones mostradas son ficticias.</p>
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">3,8 M+</div>
@@ -932,7 +963,7 @@
                   </svg>
                 </div>
                 <div class="meta">
-                  <div class="brand">NORDLYS</div>
+                  <div class="brand">HORVELL</div>
                   <div class="name">Reloj cronógrafo solar para hombre</div>
                 </div>
               </div>

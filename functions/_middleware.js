@@ -40,7 +40,9 @@ const COUNTRY_TO_LANG = {
 // Pages that have translated versions. For non-translated pages we still
 // redirect visitors to the /LANG/ home so at least they see a translated
 // site — better than dropping them mid-flow on an English page.
-const TRANSLATED_PAGES = new Set(["", "index.html", "pricing.html", "products.html"]);
+const TRANSLATED_PAGES = new Set([
+  "", "index.html", "pricing.html", "products.html", "coverage.html",
+]);
 
 // Skip anything with a file extension that isn't .html. Keeps redirects off
 // static assets, favicons, and the JSON api routes.
@@ -65,6 +67,13 @@ export async function onRequest(context) {
   if (NON_HTML_EXT.test(path)) return next();
   // Any API route defined under functions/api/ — leave alone.
   if (path.startsWith("/api/")) return next();
+  // Partner landing pages (/p/<slug>) must never be geo-redirected. A
+  // redirect here would drop the sponsor's framing AND lose the referral
+  // attribution the whole page exists to record — so a German viewer of a
+  // US creator would land on /de/ and count as organic. These pages carry
+  // their own language decision; they are campaign destinations, not site
+  // navigation.
+  if (path === "/p" || path.startsWith("/p/")) return next();
   // If the visitor is already inside a translated dir, no redirect.
   // Note: zh-Hans / zh-Hant have hyphens — safe in URL paths and safe
   // in the regex character-class alternation below.
