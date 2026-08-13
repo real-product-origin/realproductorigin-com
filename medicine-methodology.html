@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicine origin: our methodology and its limits — Real Product Origin</title>
+<meta name="description" content="How we determine where a medicine was made, what the federal data can and cannot show, and why most products on a pharmacy shelf disclose nothing at all.">
+<meta property="og:title" content="Medicine origin: our methodology and its limits">
+<meta property="og:description" content="About one in three medicines yields a country. The rest disclose nothing — and that gap is entirely lawful. Here is exactly what we can and cannot see.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://realproductorigin.com/medicine-methodology">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Medicine origin: our methodology and its limits">
+<meta name="twitter:description" content="About one in three medicines yields a country. The rest disclose nothing — and that gap is lawful.">
+<link rel="canonical" href="https://realproductorigin.com/medicine-methodology">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="/assets/styles.css">
+<style>
+  .mm { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .mm-hero { padding: 56px 0 8px; }
+  .mm-hero .eyebrow {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+    margin: 0 0 12px;
+  }
+  .mm h1 {
+    font-family: var(--serif); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(30px, 4vw, 44px); line-height: 1.12; margin: 0 0 16px;
+  }
+  .mm-lede { font-size: 19px; line-height: 1.6; color: var(--ink-3); margin: 0 0 8px; }
+  .mm h2 {
+    font-family: var(--serif); font-weight: 700; letter-spacing: -0.02em;
+    font-size: 26px; margin: 44px 0 14px;
+  }
+  .mm h3 { font-size: 17px; margin: 26px 0 8px; }
+  .mm p, .mm li { line-height: 1.68; }
+  .mm p { margin: 0 0 15px; }
+  .mm ul { margin: 0 0 15px; padding-left: 22px; }
+  .mm li { margin-bottom: 8px; }
+  .mm-pull {
+    border-left: 3px solid var(--accent); padding: 6px 0 6px 20px;
+    margin: 26px 0; font-size: 19px; line-height: 1.55; font-weight: 500;
+  }
+  .mm-table { width: 100%; border-collapse: collapse; margin: 8px 0 10px; font-size: 15px; }
+  .mm-table th, .mm-table td {
+    text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .mm-table th { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+  .mm-table td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .mm-table tr.total td { font-weight: 700; border-bottom: none; }
+  .mm-asof { font-size: 13px; color: var(--muted); margin: 0 0 30px; }
+  .mm-scroll { overflow-x: auto; }
+  .mm-cannot {
+    background: var(--bg-cream); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 24px; margin: 26px 0;
+  }
+  .mm-cannot h3 { margin-top: 0; }
+  .mm-cannot ul { margin-bottom: 0; }
+  .mm-foot { margin: 48px 0 64px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<main class="mm">
+  <div class="mm-hero">
+    <p class="eyebrow">Methodology</p>
+    <h1>Medicine origin: what we can tell you, and what nobody can</h1>
+    <p class="mm-lede">
+      We publish this before anyone asks, because the limits of this data are
+      more interesting than the data itself. About one in three medicines
+      yields a country. For the rest, no one — not us, not you, not the
+      pharmacist — can find out from public records. That gap is entirely
+      lawful, and this page explains why.
+    </p>
+  </div>
+
+  <div class="mm-pull">
+    Your t-shirt must say where it was made. Your blood-pressure medication
+    need not.
+  </div>
+
+  <h2>What the numbers actually are</h2>
+  <p>
+    We processed every identifiable medicine, supplement and over-the-counter
+    product across the pharmacy retailers we support, and tried to resolve
+    each one to a manufacturing country. Most of the time we could not,
+    because nothing in the public record says.
+  </p>
+
+  <div class="mm-scroll">
+  <table class="mm-table">
+    <thead>
+      <tr><th>Outcome</th><th class="num">Products</th><th class="num">Share</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Country <em>and</em> facility role, from a named manufacturer matched to the FDA facility registry</td>
+        <td class="num">14,422</td><td class="num">16.6%</td>
+      </tr>
+      <tr>
+        <td>Country stated on the label by the manufacturer</td>
+        <td class="num">10,656</td><td class="num">12.3%</td>
+      </tr>
+      <tr>
+        <td>Private label — the maker is deliberately undisclosed</td>
+        <td class="num">4,123</td><td class="num">4.8%</td>
+      </tr>
+      <tr>
+        <td>Nothing disclosed at all</td>
+        <td class="num">54,756</td><td class="num">63.2%</td>
+      </tr>
+      <tr>
+        <td>Not yet classified</td>
+        <td class="num">2,662</td><td class="num">3.1%</td>
+      </tr>
+      <tr class="total">
+        <td>Identifiable products processed</td>
+        <td class="num">86,619</td><td class="num">100%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="mm-asof">Figures as of 11 August 2026. The four resolved outcomes account for 96.9% of the corpus; the remaining 3.1% has not been classified and we show it rather than folding it into a category it may not belong to. Figures as stated, They move as the federal registries are republished; we restate them here rather than quoting a number we no longer hold.</p>
+
+  <p>
+    The 63.2% is the finding worth sitting with. It is not a limitation of
+    our method — it is the condition of the market. Nearly two-thirds of what
+    is on a pharmacy shelf names nobody who could be asked where it was made.
+  </p>
+
+  <h2>Where a facility does resolve, we can say what it does</h2>
+  <p>
+    This is the part no other consumer-facing source offers. A manufacturing
+    site registered with the FDA carries the operations it is licensed to
+    perform, so where we match one we can distinguish between a plant that
+    produced the <strong>finished dose</strong>, one that made the
+    <strong>active ingredient</strong>, and one that only did
+    <strong>packaging and labelling</strong>. Those are very different claims
+    about a product, and they are routinely collapsed into a single "made in"
+    elsewhere.
+  </p>
+
+  <h2>What "made in" means on a medicine</h2>
+  <p>
+    It means the pill, not the medicine. When we report a country for a drug
+    product, we are reporting where the finished dose form was produced — the
+    tablet was pressed, the capsule filled, the solution bottled. We are not
+    reporting where the molecule came from.
+  </p>
+  <p>
+    The FDA and US Customs define origin differently for the same product, so
+    we publish separate lines rather than reconciling them into one country
+    that would be wrong under at least one definition.
+  </p>
+
+  <div class="mm-cannot">
+    <h3>What we never know</h3>
+    <ul>
+      <li>
+        <strong>Active-ingredient origin. Not for any product, ever.</strong>
+        The FDA collects this and does not publish it per product. A tablet
+        finished in Ireland can be built on an ingredient made anywhere, and
+        no public database connects the two. Anyone claiming full
+        supply-chain transparency for a consumer medicine is overstating what
+        exists.
+      </li>
+      <li>
+        <strong>Who makes a store brand.</strong> CVS, Walgreens, Rite Aid
+        and supermarket own-labels name no manufacturer. We can tell you the
+        retailer does not disclose it. We cannot tell you who it is.
+      </li>
+      <li>
+        <strong>Anything at the brand level.</strong> Coverage is per product.
+        Two products from one company can resolve differently, and a generic
+        may change manufacturer between refills. A result for one product is
+        never a statement about the brand.
+      </li>
+    </ul>
+  </div>
+
+  <h2>Why the gap is lawful</h2>
+  <p>
+    None of this is a failure of enforcement. The absence is written into the
+    rules, which is what makes it worth knowing about.
+  </p>
+  <h3>A distributor's name is enough</h3>
+  <p>
+    <strong>21 CFR 201.1</strong> requires a drug label to carry the name of
+    the "manufacturer, packer, or distributor." Printing only the distributor
+    is fully compliant. That is why a bottle can name an office in New Jersey
+    for a drug made on the other side of the world.
+  </p>
+  <h3>Pills are exempt from origin marking</h3>
+  <p>
+    <strong>19 CFR 134.33</strong> exempts drugs imported "in capsules,
+    pills, tablets, lozenges, or troches" from country-of-origin marking.
+    Only the bulk container has to be marked — and that container is opened
+    behind the pharmacy counter and discarded.
+  </p>
+  <h3>The law that would change this has not passed</h3>
+  <p>
+    The <strong>CLEAR LABELS Act</strong>, introduced in February 2026, would
+    require origin disclosure on prescription labels. It has been introduced.
+    It is not law, and we will not describe it as one.
+  </p>
+
+  <h2>Where this works, and where we do not apply it</h2>
+  <ul>
+    <li>
+      <strong>Supplements and over-the-counter products</strong> are where
+      this is most useful. They are ordinary product listings, the category
+      is enormous, and disclosure is worst there.
+    </li>
+    <li>
+      <strong>We do not score prescription drugs.</strong> Prescriptions are
+      dispensed rather than listed, the manufacturer can change between
+      refills, and the cost of a wrong answer is categorically higher.
+    </li>
+    <li>
+      <strong>Some pharmacy pages carry no drug data at all.</strong> Where a
+      retailer's product page publishes no ingredient text, dose or product
+      code, a medicine there is scored as an ordinary product, with no
+      medicine-specific answer.
+    </li>
+  </ul>
+
+  <h2>If we get one wrong</h2>
+  <p>
+    Every score cites its sources, and anyone can contest one — no account
+    required. Corrections from a verified source override our answer and stay
+    overridden. See <a href="/corrections.html">corrections</a> for how that
+    works and what we have changed.
+  </p>
+
+  <p class="mm-foot">
+    Nothing here is medical advice, and nothing here should be used to choose
+    or avoid a medication. Talk to a pharmacist or a physician. Origin is one
+    fact about a product; it is not a safety or efficacy judgment, and we do
+    not present it as one.
+  </p>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/products.html">Products</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/medicine-methodology.html">Medicine methodology</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/coverage.html">Request a retailer</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+</footer>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+(function () {
+  try {
+    if (localStorage.getItem("rpo_session_token")) {
+      const a = document.getElementById("nav-account-link");
+      if (a) { a.textContent = "My Account"; a.href = "/subscribe/account.html"; }
+    }
+  } catch (_) {}
+})();
+</script>
+<script src="/assets/lang-switcher.js" defer></script>
+<script src="/assets/free-quota.js" defer></script>
+</body>
+</html>
