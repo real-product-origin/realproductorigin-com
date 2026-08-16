@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — Product Origin Checker</title>
-<meta name="description" content="Real Product Origin privacy policy. No behavioural tracking, no ad networks. What we collect, why, and how you can request deletion.">
+<meta name="description" content="Real Product Origin privacy policy. We do not record the products you browse. We do not record the products you browse. No behavioural tracking, no ad networks.">
 <meta property="og:title" content="Privacy Policy — Real Product Origin">
-<meta property="og:description" content="No behavioural tracking, no ad networks. What we collect, why, and how you can request deletion.">
+<meta property="og:description" content="We do not record the products you browse. No behavioural tracking, no ad networks.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://realproductorigin.com/privacy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Privacy Policy — Real Product Origin">
-<meta name="twitter:description" content="No behavioural tracking, no ad networks. What we collect, why, and how you can request deletion.">
+<meta name="twitter:description" content="We do not record the products you browse. No behavioural tracking, no ad networks.">
 <link rel="canonical" href="https://realproductorigin.com/privacy">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
@@ -100,19 +100,39 @@
       <strong>We keep our conclusions, not the retailer's content.</strong> That page content is used to compute the score and is then discarded. What we retain is the product identifier, the four scores with their confidence levels, and the citation URLs supporting them — plus a few short factual fields (title, brand, seller, price) so we can show you which product a cached score belongs to. Product descriptions, A+ content, questions-and-answers, review excerpts, and gallery image URLs are <em>not</em> stored. We do not keep copies of retailer page text, and we do not store retailer product images.
       <br><br>
       We do <em>not</em> read your retailer account, cart, purchase history, or any other page on the retailer's site besides the product-detail page you are actively viewing. The extension has no permission for sites we do not support.</li>
-    <li><strong>Anonymous install identifier:</strong> When you install the browser extension or mobile app, we generate a random UUID and store it in your browser's local extension storage (or the app's local sandbox on mobile). This UUID is sent as an HTTP header (<code>X-Install-Id</code>) with every request to our backend so we can measure aggregate usage — how many distinct installs are active, how often each install requests a score, and cache-hit patterns. It is <em>not</em> linked to your name, email address, retailer account, IP address in our aggregates, or any other identifier. Uninstalling the extension or app permanently erases it, and reinstalling generates a new one.</li>
+    <li><strong>Anonymous install identifier:</strong> When you install the browser extension or mobile app, we generate a random UUID and store it in your browser's local extension storage (or the app's local sandbox on mobile). This UUID is sent as an HTTP header (<code>X-Install-Id</code>) with every request to our backend so we can measure aggregate usage — how many distinct installs are active, how often each install requests a score, and cache-hit patterns. It is <em>not</em> linked to your name, email address, retailer account, IP address in our aggregates, or any other identifier. Uninstalling the extension or app permanently erases it, and reinstalling generates a new one.
+      <br><br>
+      <strong>There is no table in our database that maps this identifier to a person.</strong> We used to keep a list, against each account, of the browsers that had signed into it — which meant that in principle the two could be joined. We removed that list. Signing in still carries your free-check count across, but the browser identifier is used during sign-in and then discarded rather than recorded against your account. This is enforced by automated tests that fail the build if the link is ever re-introduced.</li>
     <li><strong>Coarse country from browser timezone:</strong> We derive a two-letter country code (e.g. <code>US</code>, <code>DE</code>, <code>JP</code>) from your browser's IANA timezone (e.g. <code>America/New_York</code>) and send it as an HTTP header (<code>X-Client-Country</code>). This is <em>not</em> GPS-precise location: it never reveals a city, street, or coordinates, and we never ask your browser for its geolocation. The country is used only to plot aggregate usage on a world map so we can see roughly where our users are.</li>
     <li><strong>Submission metadata:</strong> For each complaint, we record the IP address it was submitted from and the User-Agent of the browser/device. This helps us detect abuse and is retained only for audit purposes.</li>
     <li><strong>Server logs:</strong> Standard request logs from our hosting provider (Render) recording request paths, timestamps, response codes. These do not include personal data beyond IP addresses and are retained for 7–30 days for operational monitoring.</li>
     <li><strong>Error tracking (if enabled):</strong> If we have Sentry enabled, application errors are sent to Sentry for diagnosis. Sentry data is automatically scrubbed of personal data we control.</li>
     <li><strong>Session token:</strong> When you sign in, we create a session token — a random string with no personal information in it — and store it in your browser's local extension storage (or the app's local sandbox on mobile). The token is sent as an <code>Authorization: Bearer</code> header on subsequent requests so we know it's still you. Sessions last 30 days from your most recent activity; signing out or 30 days of inactivity invalidates the token.</li>
-    <li><strong>Free-tier usage counter:</strong> If you have not subscribed, we count how many product checks you have used against your one-time free allowance, keyed on your account (if signed in) or the anonymous install identifier (if not signed in). This counter does not reset — the free allowance is a trial, not a recurring monthly quota.</li>
+    <li><strong>Free-tier usage counter:</strong> If you have not subscribed, we count how many product checks you have used against your one-time free allowance, keyed on your account (if signed in) or the anonymous install identifier (if not signed in). This counter does not reset — the free allowance is a trial, not a recurring monthly quota.
+      <br><br>
+      <strong>The counter records that a product was counted, not which product it was.</strong> Each entry stores a one-way cryptographic hash of the product identifier rather than the identifier itself. That is all the counter needs — it only has to recognise a product it has already counted, so you are never charged twice for re-viewing the same item — and it means the table cannot be read back into a list of what you looked at. Not by us, and not by anyone who obtained a copy of it.</li>
+  </ul>
+
+  <h3>1.2a Diagnostics — off unless you switch them on</h3>
+  <p>
+    If you are working with our support team on a problem, you can switch on a
+    diagnostic session from the extension's Settings pane. While it is on, we
+    record the product pages you score — the product, the answer we gave, and
+    the internal steps we took to reach it — so we can see what went wrong
+    without asking you to open a developer console.
+  </p>
+  <ul>
+    <li><strong>It is off by default and only you can turn it on.</strong> We have no way to start one. There is no screen in our admin tools that accepts an email address or a browser identifier and begins recording; the capability does not exist in the software.</li>
+    <li><strong>It is identified by a code, not by you.</strong> Turning it on generates a short code that you read out to support. That code is the only handle we get. The record carries no email address, no account, and no browser identifier — so even we cannot work out whose session it was, or connect two sessions to the same person.</li>
+    <li><strong>It stops on its own.</strong> Sessions expire after 24 hours. You can switch it off at any moment, and so can we once the problem is solved.</li>
+    <li><strong>It still only covers supported product pages.</strong> A diagnostic session does not widen what the extension can see. Your other tabs and your browsing history remain outside its reach, exactly as before.</li>
   </ul>
 
   <h3>1.3 What we DO NOT collect</h3>
   <ul>
     <li>We do not collect your account information, login, or order history on any supported retailer (currently Amazon, Target, Walmart, and 30 other major retailers).</li>
     <li>We do not collect your browsing history outside of product pages on the retailers we support (currently Amazon, Target, Walmart, and 30 other major retailers).</li>
+    <li><strong>We do not build a record of the products you look at.</strong> Scores are cached against the product, not against you — the same cached answer serves everybody who views that item. Our usage counter stores one-way hashes rather than product identifiers, and nothing in our database maps a browser identifier to a person. The one exception is a diagnostic session you switch on yourself, described in section 1.2a, which expires within 24 hours and is identified by a code rather than by you.</li>
     <li>We do not collect or store your full payment-card number, CVC, or expiry date. If you subscribe, Stripe collects those directly through their hosted checkout — see section 3. We only receive back a Stripe customer identifier and subscription metadata (plan, dates, status), as described in section 1.1.</li>
     <li>We do not collect precise location: no GPS coordinates, no city, no street. The only geographic signal we collect is the coarse country code described in section 1.2, which is derived from your browser's timezone and never reveals more than a country.</li>
     <li>We do not collect advertising IDs, contacts, or microphone/camera data. The anonymous install UUID described in section 1.2 is not an advertising identifier — it is never shared with third parties for advertising and it does not survive an uninstall.</li>
