@@ -587,6 +587,7 @@
   <div class="wrap-wide">
     <span class="trust-item">Sources cited on every score</span>
     <span class="trust-item">Honest confidence bands</span>
+    <span class="trust-item">We never record what you browse</span>
     <span class="trust-item">No tracking, no ads</span>
     <span class="trust-item">Independent — not affiliated with any retailer</span>
   </div>
@@ -595,6 +596,59 @@
 <!-- ═══════════════════════════════════════════════════════════════════════
      RETAILER GRID — full categorized list (33 retailers across 7 categories)
      ═════════════════════════════════════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PRIVACY. The strongest claim on the site, so it gets its own section
+     rather than a line in the trust strip. Every sentence here corresponds
+     to a test in the backend (tests/test_privacy_guarantees.py) that fails
+     the build if the claim stops being true.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="dark" aria-labelledby="privacy-heading">
+  <div class="wrap">
+    <p class="eyebrow">Privacy</p>
+    <h2 id="privacy-heading">We do not record what you browse.</h2>
+    <p class="section-intro">
+      Not as a policy we promise to follow. As something our software cannot
+      do — because we removed the parts that could.
+    </p>
+
+    <ul>
+      <li>
+        <strong>No record of what you looked at.</strong>
+        Scores are cached against the <em>product</em>, never against you. The
+        answer for a given item is the same answer everyone else gets, so
+        there is nothing personal to store in the first place.
+      </li>
+      <li>
+        <strong>Your free-check counter can't name a product.</strong>
+        It stores a one-way hash instead of the product identifier. That is
+        all it needs — enough to recognise something it has already counted,
+        so you're never charged twice for the same item — and it means the
+        table cannot be turned back into a list of what you viewed. Not by
+        us, not by anyone who obtained a copy.
+      </li>
+      <li>
+        <strong>Nothing connects a browser to a person.</strong>
+        The extension has an anonymous identifier so we can count how many
+        installs are active. We used to keep a list, on each account, of the
+        browsers that had signed in — which meant the two could be joined. We
+        deleted that list, and a test now fails the build if anyone puts it
+        back.
+      </li>
+      <li>
+        <strong>Diagnostics are yours to switch on. We can't.</strong>
+        If support needs to see what happened on a page, <em>you</em> turn it
+        on in the extension and read us a code. There is no screen on our side
+        that takes an email address and starts recording — the capability
+        isn't in the software. Sessions expire in 24 hours and are identified
+        by that code, never by you.
+      </li>
+    </ul>
+
+    <p style="margin-top: 32px;"><a href="/privacy.html">Read the full privacy policy →</a></p>
+  </div>
+</section>
 
 <section class="retailers-callout" aria-labelledby="retailers-heading">
   <div class="wrap-wide">
@@ -1023,7 +1077,8 @@
 
     <details>
       <summary>Do you collect my browsing history?</summary>
-      <p>No. The extension only activates on product pages of the retailers we support (Amazon, Target, Walmart, and 30 other major retailers), and the only data sent to our backend is the product identifier plus what's visible on that page. We do not collect your retailer account info, your order history, or anything from unsupported sites. Full details in our <a href="/privacy.html">Privacy Policy</a>.</p>
+      <p><strong>No — and we have built it so that we can't.</strong> The extension only activates on product pages of the retailers we support, and the only data sent to our backend is the product identifier plus what's visible on that page. We do not collect your retailer account info, your order history, or anything from unsupported sites.</p>
+      <p>More than that: there is no record anywhere in our systems of the products a particular person has looked at. Scores are cached against the product, not against you — the same answer serves everyone who views that item. Our free-check counter stores a one-way hash rather than the product identifier, so it can tell that it has counted something without being able to say what. And no table maps a browser to a person; the link that would have made that possible has been removed, with automated tests that fail the build if anyone re-introduces it. Full details in our <a href="/privacy.html">Privacy Policy</a>.</p>
     </details>
 
     <details>

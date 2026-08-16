@@ -614,6 +614,17 @@ section.dark h3 { color: #fff; }
 section.dark p { color: rgba(255, 255, 255, 0.75); }
 section.dark .eyebrow { color: #f0c76e; }
 section.dark .section-intro { color: rgba(255, 255, 255, 0.72); }
+/* Lists inside a dark section. h2/h3/p were covered; ul/li were not, so a
+   dark section containing a list rendered ink-on-ink and was effectively
+   invisible. Found on the privacy section, which is the last place we can
+   afford text nobody can read. */
+section.dark ul, section.dark ol { color: rgba(255, 255, 255, 0.75); }
+section.dark li { color: rgba(255, 255, 255, 0.75); }
+section.dark li strong { color: #fff; }
+section.dark li em { color: rgba(255, 255, 255, 0.92); }
+section.dark li::marker { color: var(--gold, #f0c76e); }
+section.dark a { color: #f0c76e; }
+section.dark a:hover { color: #fff; }
 
 /* ── Eyebrow label ─────────────────────────────────────────────────────────── */
 
