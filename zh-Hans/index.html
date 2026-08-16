@@ -90,6 +90,33 @@
   ]
 }
 </script>
+<style>
+  /* GTM §4: mock cards carry fabricated scores, so they must be labelled
+     as fictional wherever they appear. Muted deliberately — it is a
+     disclosure, not a design element. */
+  .mock-disclaimer {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 14px 0 0; text-align: center; font-style: italic;
+  }
+  section.dark .mock-disclaimer { color: rgba(255,255,255,0.55); }
+  /* §1.2a — the AI is a capability claim; the non-affiliation note rides
+     with it rather than living only in the footer. */
+  .anthropic-note {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 10px 0 0;
+  }
+  /* §1.2 differentiator — the strongest claim on the page, so it gets
+     weight without becoming a heading. */
+  .differentiator {
+    font-size: 18px; line-height: 1.6; font-weight: 500;
+    border-left: 3px solid var(--accent, #ea580c);
+    padding: 4px 0 4px 18px; margin: 0 0 22px; max-width: 720px;
+  }
+  .problem-statement {
+    font-size: 16.5px; line-height: 1.65; color: var(--ink-3, #57534e);
+    margin: 0 0 18px; max-width: 720px;
+  }
+</style>
 </head>
 <body>
 
@@ -128,15 +155,16 @@
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <p class="kicker">AI 驱动的购物工具，让您彻底安心</p>
+        <p class="kicker">美国店面。听起来像美国的品牌。外国母公司。我们来核查。</p>
         <h1>看清您<em>真正</em>在买什么。</h1>
         <p class="tagline">以及您真正在付钱给谁。</p>
-        <p class="sub">主流在线零售商的商品页面往往悄悄回避了四个问题。我们把这四个问题全部回答清楚 —— 产品在哪里制造、从哪里发货、零售商是谁、钱最终流向何处。Claude AI 会读完每一条商品页，并结合商标注册记录、海关数据、品牌数据库和公司登记信息进行推理。每一条论断都附来源；证据不足时，我们会给出诚实的置信区间。</p>
+        <p class="sub">主流在线零售商的商品页面往往悄悄回避了四个问题。我们把这四个问题全部回答清楚 —— 产品在哪里制造、从哪里发货、零售商是谁、钱最终流向何处。 Claude 在数秒内读取商品页、卖家记录、商标申请和公司登记资料，并逐一注明来源。 每一条论断都附来源；证据不足时，我们会给出诚实的置信区间。</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#install">安装浏览器扩展</a>
           <a class="btn btn-secondary" href="/zh-Hans/products.html#methodology">工作原理</a>
         </div>
         <p class="cta-note">前 <span data-rpo-free-quota>20</span> 次查询免费（一次性）。订阅方案自 <a href="/zh-Hans/pricing.html">$4.99/月</a> 起。适用于 Chrome 和 Brave（Edge 与 Firefox 即将推出）。iOS 与 Android 版即将推出。</p>
+        <p class="anthropic-note">Claude 是 Anthropic, PBC 的商标。我们是 Anthropic 的客户，与其无从属、认可或赞助关系。</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -151,7 +179,7 @@
           <div class="browser-viewport">
             <div class="mock-stack">
 
-              <!-- ─── Slide 1: GLAMORA — opaque drop-shipper apparel (all red) ─── -->
+              <!-- ─── Slide 1: VELTRAY — opaque drop-shipper apparel (all red) ─── -->
               <div class="mock-slide active" data-slide="0">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -160,7 +188,7 @@
                         <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">GLAMORA</div>
+                    <div class="mock-brand">VELTRAY</div>
                     <div class="mock-title">女式休闲宽松长袖 T 恤连衣裙</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.4 · 18,203</div>
                     <div class="mock-price">$28<small>.99</small></div>
@@ -209,7 +237,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 2: NORDLYS — Nordic outdoor brand, multi-country, well-scored ─── -->
+              <!-- ─── Slide 2: ORVENNA — Nordic outdoor brand, multi-country, well-scored ─── -->
               <div class="mock-slide" data-slide="1">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -221,7 +249,7 @@
                         <line x1="22" y1="38" x2="42" y2="38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">NORDLYS</div>
+                    <div class="mock-brand">ORVENNA</div>
                     <div class="mock-title">经典日用背包，牛血红，16 升</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.7 · 9,412</div>
                     <div class="mock-price">$80<small>.00</small></div>
@@ -270,7 +298,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 3: TRADEFORCE — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
+              <!-- ─── Slide 3: BRAKTON — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
               <div class="mock-slide" data-slide="2">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -290,7 +318,7 @@
                         <path d="M22 34 L22 38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">TRADEFORCE</div>
+                    <div class="mock-brand">BRAKTON</div>
                     <div class="mock-title">20V 无绳钻/起子套装，双电池</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.3 · 6,754</div>
                     <div class="mock-price">$129<small>.00</small></div>
@@ -339,7 +367,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 4: MERIDIAN CO. — international watch brand (mostly ink) ─── -->
+              <!-- ─── Slide 4: HORVELL — international watch brand (mostly ink) ─── -->
               <div class="mock-slide" data-slide="3">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -352,7 +380,7 @@
                         <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">MERIDIAN CO.</div>
+                    <div class="mock-brand">HORVELL</div>
                     <div class="mock-title">男式太阳能计时腕表，银色表链</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.6 · 2,847</div>
                     <div class="mock-price">$189<small>.00</small></div>
@@ -401,7 +429,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 5: BLOOM LAB — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
+              <!-- ─── Slide 5: BELVANE — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
               <div class="mock-slide" data-slide="4">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -417,7 +445,7 @@
                         <line x1="23" y1="44" x2="35" y2="44"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">BLOOM LAB</div>
+                    <div class="mock-brand">BELVANE</div>
                     <div class="mock-title">水润新生神经酰胺保湿霜，1.7 oz</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.5 · 3,116</div>
                     <div class="mock-price">$42<small>.00</small></div>
@@ -477,6 +505,7 @@
           <button type="button" aria-label="腕表示例"></button>
           <button type="button" aria-label="化妆品示例"></button>
         </div>
+        <p class="mock-disclaimer">示意示例。所示品牌名称与评分均为虚构。</p>
       </div>
 
     </div>
@@ -662,7 +691,7 @@
     </div>
 
     <p class="home-retailer-note">
-      <a href="/contact.html?topic=retailer-request">告诉我们接下来该加入哪家零售商</a>
+      <a href="/zh-Hans/coverage.html">告诉我们接下来该加入哪家零售商</a>
     </p>
   </div>
 </section>
@@ -675,6 +704,8 @@
   <div class="wrap-wide">
     <p class="eyebrow">四个问题</p>
     <h2>典型的在线商品页面所回避的四件事。</h2>
+    <p class="differentiator">商品页谁都能看。我们做的是顺着登记在册的卖家，穿过公司登记与商标注册，追到真正收走这笔钱的母公司 —— 并注明每一处来源。</p>
+    <p class="problem-statement">出了问题，您无法判断由谁负责。您无法判断这笔钱支持的是一家美国公司，还是仅仅一个美国店面。您也无法判断“销售方”是否意味着这家零售商对商品做过任何把关。</p>
     <p class="section-intro">每一次评分都会分别回答关于这件商品的四个问题。合在一起，它们讲述了任何单一标签 —— <em>销售者</em>、<em>发货地</em>、<em>制造商</em> —— 都无法独自讲述的故事。</p>
 
     <div class="indicators">
@@ -696,7 +727,7 @@
       <div class="indicator-card">
         <p class="num"><span class="num-icon">04</span> 收款方</p>
         <h3>利润最终落到哪里</h3>
-        <p>品牌母公司所在的国家 —— 也就是从每一笔销售中获取批发利润的主体。一款在美国店面上架的 NORDLYS 腕表：零售商在美国，但钱流向日本。</p>
+        <p>品牌母公司所在的国家 —— 也就是从每一笔销售中获取批发利润的主体。一款在美国店面上架的 HORVELL 腕表：零售商在美国，但钱流向日本。</p>
       </div>
     </div>
   </div>
@@ -714,7 +745,7 @@
 
     <div class="showcase-grid">
 
-      <!-- Card A: NORDLYS -->
+      <!-- Card A: HORVELL -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -727,7 +758,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">NORDLYS</p>
+            <p class="sc-brand">HORVELL</p>
             <p class="sc-title">男式太阳能计时腕表</p>
             <p class="sc-price">$189.00</p>
           </div>
@@ -738,10 +769,10 @@
           <div class="row"><div class="row-top"><span class="row-label">零售商</span><span class="row-pct"><span class="row-flag">🇺🇸</span> 美国 · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">收款方</span><span class="row-pct"><span class="row-flag">🇯🇵</span> 日本 · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
         </div>
-        <p class="sc-takeaway">一个广为人知的日本品牌。登记销售方是美国店面，但批发利润的每一美元都进入东京的 NORDLYS 集团。</p>
+        <p class="sc-takeaway">一个广为人知的日本品牌。登记销售方是美国店面，但批发利润的每一美元都进入东京的 HORVELL 集团。</p>
       </div>
 
-      <!-- Card B: GLAMORA -->
+      <!-- Card B: VELTRAY -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -750,7 +781,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">GLAMORA</p>
+            <p class="sc-brand">VELTRAY</p>
             <p class="sc-title">休闲宽松 T 恤连衣裙</p>
             <p class="sc-price">$28.99</p>
           </div>
@@ -761,10 +792,10 @@
           <div class="row"><div class="row-top"><span class="row-label">零售商</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> 中国 · 93%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">收款方</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> 中国 · 91%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div></div>
         </div>
-        <p class="sc-takeaway">典型的、页面上不会标注的那类品牌：一枚中国注册的商标，经由美国仓库代发。每一行红色都是一个信号。</p>
+        <p class="sc-takeaway">这类品牌不会出现在任何商品页的标注里：一个在中国注册的商标，从美国仓库一件代发。三行红色 —— 制造、销售和收款，全都在美国国务院名单上的国家。</p>
       </div>
 
-      <!-- Card C: TRADEFORCE -->
+      <!-- Card C: ORVENNA -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -776,8 +807,8 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">TRADEFORCE</p>
-            <p class="sc-title">Kånken 经典双肩包</p>
+            <p class="sc-brand">ORVENNA</p>
+            <p class="sc-title">经典日用背包，牛血红，16 升</p>
             <p class="sc-price">$80.00</p>
           </div>
         </div>
@@ -791,7 +822,7 @@
       </div>
 
     </div>
-
+    <p class="mock-disclaimer">示意示例。所示品牌名称与评分均为虚构。</p>
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">3.8M+</div>
@@ -850,7 +881,7 @@
     <h2>90 秒读懂我们的方法论，用大白话讲。</h2>
 
     <h3>我们从页面上读取哪些内容</h3>
-    <p style="font-size: 14px; color: var(--muted); margin: 0 0 12px;">下列字段名以 Amazon 为例。相同的信号类别适用于我们所支持的每一家零售商 —— 目前已覆盖综合、五金、家具、电子、仓储会员、时尚、美妆和汽车配件等 30 家。请查看<a href="/zh-Hans/products.html#retailers">完整列表</a>。</p>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 12px;">下列字段名以 Amazon 为例。相同的信号类别适用于我们所支持的每一家零售商 —— 目前已覆盖综合、五金、家具、电子、仓储会员、时尚、美妆和汽车配件等 33 家。请查看<a href="/zh-Hans/products.html#retailers">完整列表</a>。</p>
     <ul>
       <li><strong>原产地字段</strong> 来自零售商结构化的商品详情 —— 一旦存在，就是我们最强的信号。</li>
       <li><strong>发货地与销售者</strong> 信息，取自购买栏。</li>
@@ -942,7 +973,7 @@
                   </svg>
                 </div>
                 <div class="meta">
-                  <div class="brand">NORDLYS</div>
+                  <div class="brand">HORVELL</div>
                   <div class="name">男式太阳能计时腕表</div>
                 </div>
               </div>
@@ -972,7 +1003,7 @@
 
     <details>
       <summary>你们支持哪些零售商？</summary>
-      <p>目前 33 家零售商，覆盖 32 个域名 —— 综合零售（Amazon、Target、Walmart）、家居装修、家具、电子、仓储会员、时尚、美妆、汽车配件。请查看<a href="/zh-Hans/products.html#retailers">按类别划分的完整列表</a>，或<a href="/contact.html?topic=retailer-request">告诉我们下一家该加入哪一家</a>。</p>
+      <p>目前 33 家零售商，覆盖 32 个域名 —— 综合零售（Amazon、Target、Walmart）、家居装修、家具、电子、仓储会员、时尚、美妆、汽车配件。请查看<a href="/zh-Hans/products.html#retailers">按类别划分的完整列表</a>，或<a href="/zh-Hans/coverage.html">告诉我们下一家该加入哪一家</a>。</p>
     </details>
 
     <details>
@@ -1062,6 +1093,7 @@
       <a href="/zh-Hans/products.html#methodology">工作原理</a>
       <a href="/why.html">意义所在</a>
       <a href="/zh-Hans/pricing.html#retailers">支持的网站</a>
+      <a href="/zh-Hans/coverage.html">申请新增零售商</a>
     </div>
         <div class="col">
       <h4>公司</h4>

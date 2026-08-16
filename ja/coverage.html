@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Request a retailer — Real Product Origin</title>
-<meta name="description" content="Tell us which store you shop at and we'll add it to the list. Requesting is free, takes one field, and needs no account.">
-<meta property="og:title" content="Request a retailer — Real Product Origin">
-<meta property="og:description" content="Tell us which store you shop at. Free, no account, one field.">
+<title>リテーラーをリクエスト — Real Product Origin</title>
+<meta name="description" content="よく使うお店を教えてください。リストに追加します。リクエストは無料、入力は1項目、アカウントも不要です。">
+<meta property="og:title" content="リテーラーをリクエスト — Real Product Origin">
+<meta property="og:description" content="よく使うお店を教えてください。無料、アカウント不要、入力は1項目。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://realproductorigin.com/coverage">
+<meta property="og:url" content="https://realproductorigin.com/ja/coverage">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Request a retailer — Real Product Origin">
-<meta name="twitter:description" content="Tell us which store you shop at. Free, no account, one field.">
-<link rel="canonical" href="https://realproductorigin.com/coverage">
+<meta name="twitter:title" content="リテーラーをリクエスト — Real Product Origin">
+<meta name="twitter:description" content="よく使うお店を教えてください。無料、アカウント不要、入力は1項目。">
+<link rel="canonical" href="https://realproductorigin.com/ja/coverage">
 <link rel="alternate" hreflang="en" href="https://realproductorigin.com/coverage">
 <link rel="alternate" hreflang="es" href="https://realproductorigin.com/es/coverage">
 <link rel="alternate" hreflang="fr" href="https://realproductorigin.com/fr/coverage">
@@ -39,11 +39,11 @@
     },
     {
       "@type": "WebPage",
-      "@id": "https://realproductorigin.com/coverage",
-      "url": "https://realproductorigin.com/coverage",
-      "name": "Request a retailer — Real Product Origin",
-      "description": "Ask us to support a store. Free, no account required.",
-      "inLanguage": "en",
+      "@id": "https://realproductorigin.com/ja/coverage",
+      "url": "https://realproductorigin.com/ja/coverage",
+      "name": "リテーラーをリクエスト — Real Product Origin",
+      "description": "対応してほしいお店をお知らせください。無料、アカウント不要。",
+      "inLanguage": "ja",
       "isPartOf": {
         "@id": "https://realproductorigin.com/#organization"
       }
@@ -122,7 +122,7 @@
 
 <header class="topnav">
   <div class="topnav-inner">
-    <a class="brand" href="/">
+    <a class="brand" href="/ja/">
       <span class="mark">
         <svg viewBox="0 0 160 160" aria-hidden="true">
           <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
@@ -136,26 +136,26 @@
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
     <nav>
-      <a href="/products.html">Products</a>
-      <a href="/why.html">Why It Matters</a>
-      <a href="/pricing.html">Pricing</a>
-      <a href="/support.html">Support</a>
-      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
-      <a class="nav-cta" href="/#install">Install</a>
+      <a href="/ja/products.html">製品</a>
+      <a href="/why.html">なぜ重要なのか</a>
+      <a href="/ja/pricing.html">料金</a>
+      <a href="/support.html">サポート</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">サインイン</a>
+      <a class="nav-cta" href="/#install">インストール</a>
     </nav>
   </div>
 </header>
 
 <main>
   <section class="cov-hero">
-    <h1>Request a retailer</h1>
-    <p class="cov-lede">Tell us where you shop and we'll add it to the list. It's free, it takes one field, and you don't need an account. We use these requests to decide which store to build next.</p>
+    <h1>リテーラーをリクエスト</h1>
+    <p class="cov-lede">よく使うお店を教えてください。リストに追加します。無料で、入力は1項目、アカウントも必要ありません。いただいたリクエストをもとに、次にどのお店へ対応するかを決めています。</p>
   </section>
 
   <form class="cov-form-card" id="cov-form" novalidate>
     <div class="cov-field">
-      <label for="cov-url">Which store?
-        <span class="hint">— a web address is easiest, like <code>ikea.com</code></span>
+      <label for="cov-url">どのお店ですか
+        <span class="hint">— ウェブアドレスが一番簡単です。例: <code>ikea.com</code></span>
       </label>
       <input type="text" id="cov-url" name="retailer_url" required
              autocomplete="off" spellcheck="false"
@@ -163,44 +163,44 @@
     </div>
 
     <div class="cov-optional">
-      <p class="cov-optional-head">Optional — all of this helps, none of it is required.</p>
+      <p class="cov-optional-head">任意 — どれも参考になりますが、必須ではありません。</p>
 
       <div class="cov-field">
-        <label for="cov-name">What do you call it?</label>
+        <label for="cov-name">お店の呼び方は</label>
         <input type="text" id="cov-name" name="retailer_name" autocomplete="off" placeholder="IKEA">
       </div>
 
       <div class="cov-field">
-        <label for="cov-note">What would you use it for?</label>
+        <label for="cov-note">どんなときに使いますか</label>
         <textarea id="cov-note" name="note" maxlength="1000"
-                  placeholder="Most of my furniture comes from there and I have no idea where any of it is made."></textarea>
+                  placeholder="家具のほとんどをそこで買っていますが、どこで作られたのか全く分かりません。"></textarea>
       </div>
 
       <div class="cov-field">
-        <label for="cov-email">Email
-          <span class="hint">— only ever used to tell you when this store goes live. Not a mailing list.</span>
+        <label for="cov-email">メールアドレス
+          <span class="hint">— このお店に対応したときのお知らせにのみ使用します。メールマガジンではありません。</span>
         </label>
         <input type="email" id="cov-email" name="contact_email" autocomplete="email" placeholder="you@example.com">
       </div>
     </div>
 
-    <button type="submit" class="cov-submit" id="cov-submit">Add to the list</button>
+    <button type="submit" class="cov-submit" id="cov-submit">リストに追加</button>
     <div class="cov-result" id="cov-result" role="status" aria-live="polite"></div>
   </form>
 
   <section class="cov-promise">
-    <h2>What a request does, and what it doesn't</h2>
-    <p>A request is a vote on what we build next. It is not a purchase, and there is nothing to pay — asking is free and always will be.</p>
-    <p>Adding a store is more work than it sounds. Each one needs an adapter that finds the product, the brand, the seller, and where it ships from; testing across the different page layouts that store uses; a permanent entry in our regression suite; and then ongoing maintenance every time that retailer redesigns. That last part never ends — it's why we're careful about which ones we take on, and why knowing what people actually want matters.</p>
-    <div class="cov-pull">Requests tell us where to look. They never affect what we find.</div>
-    <p>However a store gets onto our list, the scores it produces are the same scores our methodology would have produced anyway. Nobody can request a result, and no one who asks for a store gets any say in how its products are scored. If we ever add a way to fund coverage, that rule doesn't change — and we'll publish the details before we accept anything.</p>
+    <h2>リクエストでできること、できないこと</h2>
+    <p>リクエストは、次に何を作るかへの一票です。購入ではなく、お支払いいただくものもありません。リクエストは無料で、これからも無料です。</p>
+    <p>お店を1つ追加する作業は、見た目より大きなものです。商品・ブランド・販売者・発送元を読み取るアダプターの開発、そのお店が使う複数のページレイアウトでの検証、回帰テストへの恒久的な追加、そしてそのリテーラーがサイトを刷新するたびの継続的な保守が必要です。最後の保守は終わることがありません。だからこそ、どのお店を引き受けるかは慎重に判断しますし、実際に何が求められているかを知ることが重要になります。</p>
+    <div class="cov-pull">リクエストは、どこを見るかを教えてくれます。何を見つけるかを左右することはありません。</div>
+    <p>どのような経緯でお店がリストに加わっても、そこで算出されるスコアは、私たちの方法論が本来出したはずのスコアと同じです。結果をリクエストすることは誰にもできませんし、お店をリクエストした方がその商品の採点に関与することもありません。将来、対応を資金面で支援できる仕組みを設けたとしても、このルールは変わりません。受け付ける前に詳細を公表します。</p>
   </section>
 
   <section class="cov-supported">
-    <h2>Already supported</h2>
-    <p class="sub">No need to request these — the Checker works on them today.</p>
+    <h2>対応済み</h2>
+    <p class="sub">これらはリクエスト不要です。Checker は現在すでに動作します。</p>
     <div class="cov-chips" id="cov-supported-list">
-      <span class="cov-loading">Loading…</span>
+      <span class="cov-loading">読み込み中…</span>
     </div>
   </section>
 </main>
@@ -208,7 +208,7 @@
 <footer>
   <div class="footer-inner">
     <div class="col brand-block">
-      <a class="brand" href="/">
+      <a class="brand" href="/ja/">
       <span class="mark">
         <svg viewBox="0 0 160 160" aria-hidden="true">
           <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
@@ -221,33 +221,33 @@
       </span>
       <span class="wordmark">Real Product Origin<span class="period">.</span></span>
     </a>
-      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+      <p class="brand-tagline">何を買っているか、誰に支払っているかを知る。</p>
     </div>
     <div class="col">
-      <h4>Product</h4>
-      <a href="/products.html">Products</a>
-      <a href="/products.html#methodology">How it works</a>
-      <a href="/why.html">Why It Matters</a>
-      <a href="/pricing.html#retailers">Supported sites</a>
-      <a href="/coverage.html">Request a retailer</a>
+      <h4>製品</h4>
+      <a href="/ja/products.html">製品</a>
+      <a href="/ja/products.html#methodology">仕組み</a>
+      <a href="/why.html">なぜ重要なのか</a>
+      <a href="/ja/pricing.html#retailers">対応サイト</a>
+      <a href="/ja/coverage.html">リテーラーをリクエスト</a>
     </div>
     <div class="col">
-      <h4>Company</h4>
-      <a href="/support.html">Support</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
-      <a href="mailto:press@realproductorigin.com">Press</a>
+      <h4>会社情報</h4>
+      <a href="/support.html">サポート</a>
+      <a href="/about.html">私たちについて</a>
+      <a href="/contact.html">お問い合わせ</a>
+      <a href="mailto:press@realproductorigin.com">プレス</a>
     </div>
     <div class="col">
-      <h4>Legal</h4>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/refunds.html">Refunds</a>
+      <h4>法的情報</h4>
+      <a href="/privacy.html">プライバシー</a>
+      <a href="/terms.html">利用規約</a>
+      <a href="/refunds.html">返金</a>
       <a href="/corrections.html">Corrections</a>
     </div>
   </div>
   <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
-  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+  <div class="disclaimer">本サイトに表示されているリテーラー、ブランド、および製品名は、それぞれの所有者の商標であり、当サービスが評価対象とする第三者の製品を識別する目的でのみ使用されます。Real Product Origin は、いかなるリテーラー、ブランド、または Anthropic, PBC とも提携、承認、後援関係にありません。Claude は Anthropic, PBC の商標です。</div>
 </footer>
 
 <script>
@@ -265,15 +265,15 @@ document.getElementById("year").textContent = new Date().getFullYear();
 // API returns a machine-readable `status` and never user-facing prose —
 // which is what makes one endpoint serve seven locales.
 const M = {
-  "no_url": "Enter a store's web address first.",
-  "rate": "That's a lot of requests at once — give it a minute and try again.",
-  "list_fail": "Couldn't load the list just now — see <a href=\"/pricing.html#retailers\">supported sites</a>.",
-  "supported": "<strong>Good news — we already cover {name}.</strong><br>Install the Checker and it'll work there right away. <a href=\"/#install\">Get the extension</a>.",
-  "already": "You've already asked for this one — it's on the list.",
-  "recorded": "<strong>Thanks — that's on the list.</strong>",
-  "count": "{n} people have asked for {domain} so far.",
-  "bad_url": "That doesn't look like a store's web address. Try something like ikea.com.",
-  "network": "Couldn't reach us just now. Try again, or email <a href=\"mailto:support@realproductorigin.com\">support@realproductorigin.com</a>."
+  "no_url": "まずお店のウェブアドレスを入力してください。",
+  "rate": "短時間にリクエストが多すぎます。1分ほど待ってからもう一度お試しください。",
+  "list_fail": "リストを読み込めませんでした。<a href=\"/ja/pricing.html#retailers\">対応サイト</a>をご覧ください。",
+  "supported": "<strong>{name} はすでに対応しています。</strong><br>Checker をインストールすれば、すぐにそのサイトで動作します。<a href=\"/ja/#install\">拡張機能を入手</a>。",
+  "already": "こちらはすでにリクエスト済みです。リストに入っています。",
+  "recorded": "<strong>ありがとうございます。リストに追加しました。</strong>",
+  "count": "これまでに {n} 人が {domain} をリクエストしています。",
+  "bad_url": "お店のウェブアドレスではないようです。ikea.com のような形式でお試しください。",
+  "network": "現在接続できませんでした。もう一度お試しいただくか、<a href=\"mailto:support@realproductorigin.com\">support@realproductorigin.com</a> までご連絡ください。"
 };
 
 // Points at a local backend when the page is served from localhost, so this
@@ -334,7 +334,7 @@ form.addEventListener("submit", async function (e) {
   }
 
   submitEl.disabled = true;
-  submitEl.textContent = "Sending…";
+  submitEl.textContent = "送信中…";
 
   const payload = {
     retailer_url: url,
@@ -382,7 +382,7 @@ form.addEventListener("submit", async function (e) {
     showResult("err", M.network);
   } finally {
     submitEl.disabled = false;
-    submitEl.textContent = "Add to the list";
+    submitEl.textContent = "リストに追加";
   }
 });
 

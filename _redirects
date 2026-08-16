@@ -19,6 +19,16 @@
 /lookup              /products  301
 /lookup.html         /products.html  301
 #
+# /zh — GTM §6A.2 asks for a Chinese-language landing page before the
+# Tianliang Zhang and Learn Chinese Now placements. The pages already
+# exist: zh-Hans and zh-Hant are fully translated. What was missing is the
+# short URL a creator can say out loud or print in a description. Simplified
+# is the default because it serves the larger mainland + Singapore audience;
+# a visitor wanting Traditional is one click away in the language switcher,
+# and the middleware already routes TW/HK/MO to zh-Hant by geo anyway.
+/zh                  /zh-Hans/  302
+/zh/                 /zh-Hans/  302
+#
 # Catch-all 404 for anything not matching a real static file. Without this
 # Cloudflare Pages was serving index.html with a 200 status for unknown
 # URLs — a soft-404 that confused users and hurt SEO. The `404` status

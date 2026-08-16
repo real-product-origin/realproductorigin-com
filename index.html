@@ -90,6 +90,33 @@
   ]
 }
 </script>
+<style>
+  /* GTM §4: mock cards carry fabricated scores, so they must be labelled
+     as fictional wherever they appear. Muted deliberately — it is a
+     disclosure, not a design element. */
+  .mock-disclaimer {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 14px 0 0; text-align: center; font-style: italic;
+  }
+  section.dark .mock-disclaimer { color: rgba(255,255,255,0.55); }
+  /* §1.2a — the AI is a capability claim; the non-affiliation note rides
+     with it rather than living only in the footer. */
+  .anthropic-note {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 10px 0 0;
+  }
+  /* §1.2 differentiator — the strongest claim on the page, so it gets
+     weight without becoming a heading. */
+  .differentiator {
+    font-size: 18px; line-height: 1.6; font-weight: 500;
+    border-left: 3px solid var(--accent, #ea580c);
+    padding: 4px 0 4px 18px; margin: 0 0 22px; max-width: 720px;
+  }
+  .problem-statement {
+    font-size: 16.5px; line-height: 1.65; color: var(--ink-3, #57534e);
+    margin: 0 0 18px; max-width: 720px;
+  }
+</style>
 </head>
 <body>
 
@@ -128,15 +155,16 @@
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <p class="kicker">An AI-powered shopping tool for total peace of mind</p>
+        <p class="kicker">American storefront. American-sounding brand. Foreign parent company. We check.</p>
         <h1>Know what you're <em>really</em> buying.</h1>
         <p class="tagline">And who you're really paying.</p>
-        <p class="sub">Product listings on major online retailers quietly leave four questions unanswered. We answer all four — where it's made, where it ships from, who the retailer is, and where the money ultimately goes. Claude AI reads every product page and reasons over trademark filings, customs records, brand databases, and corporate registries. Every claim cites its source, with honest confidence bands when the evidence is thin.</p>
+        <p class="sub">Product listings on major online retailers quietly leave four questions unanswered. We answer all four — where it's made, where it ships from, who the retailer is, and where the money ultimately goes. Claude reads the product page, the seller record, trademark filings and corporate registries in seconds — then cites every one.  Every claim cites its source, with honest confidence bands when the evidence is thin.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#install">Get the browser extension</a>
           <a class="btn btn-secondary" href="/products.html#methodology">How it works</a>
         </div>
         <p class="cta-note">Your first <span data-rpo-free-quota>20</span> checks are free. Plans from <a href="/pricing.html">$4.99/mo</a>. Chrome, Edge, and Brave (Firefox coming soon). iOS &amp; Android on the way.</p>
+        <p class="anthropic-note">Claude is a trademark of Anthropic, PBC. We are a customer of Anthropic — not affiliated with, endorsed by, or sponsored by them.</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -151,7 +179,7 @@
           <div class="browser-viewport">
             <div class="mock-stack">
 
-              <!-- ─── Slide 1: GLAMORA — opaque drop-shipper apparel (all red) ─── -->
+              <!-- ─── Slide 1: VELTRAY — opaque drop-shipper apparel (all red) ─── -->
               <div class="mock-slide active" data-slide="0">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -160,7 +188,7 @@
                         <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">GLAMORA</div>
+                    <div class="mock-brand">VELTRAY</div>
                     <div class="mock-title">Women's Casual Loose T-Shirt Dress, Long Sleeve</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.4 · 18,203</div>
                     <div class="mock-price">$28<small>.99</small></div>
@@ -209,7 +237,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 2: NORDLYS — Nordic outdoor brand, multi-country, well-scored ─── -->
+              <!-- ─── Slide 2: ORVENNA — Nordic outdoor brand, multi-country, well-scored ─── -->
               <div class="mock-slide" data-slide="1">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -221,7 +249,7 @@
                         <line x1="22" y1="38" x2="42" y2="38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">NORDLYS</div>
+                    <div class="mock-brand">ORVENNA</div>
                     <div class="mock-title">Klassik Daypack, Ox Red, 16 L</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.7 · 9,412</div>
                     <div class="mock-price">$80<small>.00</small></div>
@@ -270,7 +298,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 3: TRADEFORCE — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
+              <!-- ─── Slide 3: BRAKTON — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
               <div class="mock-slide" data-slide="2">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -290,7 +318,7 @@
                         <path d="M22 34 L22 38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">TRADEFORCE</div>
+                    <div class="mock-brand">BRAKTON</div>
                     <div class="mock-title">20V Cordless Drill Driver Kit, 2-Battery</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.3 · 6,754</div>
                     <div class="mock-price">$129<small>.00</small></div>
@@ -339,7 +367,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 4: MERIDIAN CO. — international watch brand (mostly ink) ─── -->
+              <!-- ─── Slide 4: HORVELL — international watch brand (mostly ink) ─── -->
               <div class="mock-slide" data-slide="3">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -352,7 +380,7 @@
                         <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">MERIDIAN CO.</div>
+                    <div class="mock-brand">HORVELL</div>
                     <div class="mock-title">Men's Solar Chronograph Watch, Silver Bracelet</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.6 · 2,847</div>
                     <div class="mock-price">$189<small>.00</small></div>
@@ -401,7 +429,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 5: BLOOM LAB — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
+              <!-- ─── Slide 5: BELVANE — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
               <div class="mock-slide" data-slide="4">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -417,7 +445,7 @@
                         <line x1="23" y1="44" x2="35" y2="44"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">BLOOM LAB</div>
+                    <div class="mock-brand">BELVANE</div>
                     <div class="mock-title">Hydra-Renew Ceramide Moisturizer, 1.7 oz</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.5 · 3,116</div>
                     <div class="mock-price">$42<small>.00</small></div>
@@ -477,6 +505,7 @@
           <button type="button" aria-label="Watch example"></button>
           <button type="button" aria-label="Cosmetic example"></button>
         </div>
+        <p class="mock-disclaimer">Illustrative example. Brand names and scores shown are fictional.</p>
       </div>
 
     </div>
@@ -729,6 +758,8 @@
   <div class="wrap-wide">
     <p class="eyebrow">The four questions</p>
     <h2>Four things a typical online product listing doesn't answer.</h2>
+    <p class="differentiator">Anyone can read a listing. We trace the seller of record through corporate filings and trademark registries to the parent company that actually collects the money — and cite every source.</p>
+    <p class="problem-statement">You can't tell who is accountable if something goes wrong. You can't tell whether your money supports an American company or only an American storefront. And you can't tell whether “sold by” means the retailer made any judgment about the product at all.</p>
     <p class="section-intro">Every score answers four separate questions about the product. Together they tell a story that no single label — <em>Sold by</em>, <em>Ships from</em>, <em>Manufacturer</em> — can ever tell on its own.</p>
 
     <div class="indicators">
@@ -750,7 +781,7 @@
       <div class="indicator-card">
         <p class="num"><span class="num-icon">04</span> Money goes to</p>
         <h3>Where the profit ultimately lands</h3>
-        <p>The brand parent's country — the entity that captures the wholesale margin from every sale. A NORDLYS watch on a US storefront: retailer is US, but the money flows to Japan.</p>
+        <p>The brand parent's country — the entity that captures the wholesale margin from every sale. A HORVELL watch on a US storefront: retailer is US, but the money flows to Japan.</p>
       </div>
     </div>
   </div>
@@ -768,7 +799,7 @@
 
     <div class="showcase-grid">
 
-      <!-- Card A: NORDLYS -->
+      <!-- Card A: HORVELL -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -781,7 +812,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">NORDLYS</p>
+            <p class="sc-brand">HORVELL</p>
             <p class="sc-title">Men's Solar Chronograph Watch</p>
             <p class="sc-price">$189.00</p>
           </div>
@@ -792,10 +823,10 @@
           <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct"><span class="row-flag">🇺🇸</span> US · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct"><span class="row-flag">🇯🇵</span> Japan · 96%</span></div><div class="row-track"><div class="row-fill" style="width:96%"></div></div></div>
         </div>
-        <p class="sc-takeaway">A recognisable Japanese brand. Retailer of record is a US storefront, but every dollar of the wholesale margin lands with NORDLYS Group in Tokyo.</p>
+        <p class="sc-takeaway">A recognisable Japanese brand. Retailer of record is a US storefront, but every dollar of the wholesale margin lands with HORVELL Group in Tokyo.</p>
       </div>
 
-      <!-- Card B: GLAMORA -->
+      <!-- Card B: VELTRAY -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -804,7 +835,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">GLAMORA</p>
+            <p class="sc-brand">VELTRAY</p>
             <p class="sc-title">Casual Loose T-Shirt Dress</p>
             <p class="sc-price">$28.99</p>
           </div>
@@ -815,10 +846,10 @@
           <div class="row"><div class="row-top"><span class="row-label">Retailer</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 93%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">Money goes to</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 91%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div></div>
         </div>
-        <p class="sc-takeaway">The kind of brand no listing labels: a Chinese-registered trademark, drop-shipped through a US warehouse. Every red row is a signal.</p>
+        <p class="sc-takeaway">The kind of brand no listing labels: a Chinese-registered trademark, drop-shipped through a US warehouse. Three red rows — made, sold, and paid, all in a country on the State Department's list.</p>
       </div>
 
-      <!-- Card C: TRADEFORCE -->
+      <!-- Card C: ORVENNA -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -830,8 +861,8 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">TRADEFORCE</p>
-            <p class="sc-title">Kånken Classic Backpack</p>
+            <p class="sc-brand">ORVENNA</p>
+            <p class="sc-title">Klassik Daypack, Ox Red, 16 L</p>
             <p class="sc-price">$80.00</p>
           </div>
         </div>
@@ -845,7 +876,7 @@
       </div>
 
     </div>
-
+    <p class="mock-disclaimer">Illustrative example. Brand names and scores shown are fictional.</p>
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">3.8M+</div>
@@ -904,7 +935,7 @@
     <h2>Plain-English methodology, in 90 seconds.</h2>
 
     <h3>What we read from the page</h3>
-    <p style="font-size: 14px; color: var(--muted); margin: 0 0 12px;">Field names below reflect Amazon. The same signal categories apply to every retailer we support — 30 today across general, hardware, furniture, electronics, warehouse, fashion, beauty, and auto parts. See the <a href="/products.html#retailers">full list</a>.</p>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 12px;">Field names below reflect Amazon. The same signal categories apply to every retailer we support — 33 today across general, hardware, furniture, electronics, warehouse, fashion, beauty, and auto parts. See the <a href="/products.html#retailers">full list</a>.</p>
     <ul>
       <li><strong>Country of Origin field</strong> from the retailer's structured product details — when present, this is our strongest signal.</li>
       <li><strong>Ships-from and Sold-by</strong> lines from the buy box.</li>
@@ -996,7 +1027,7 @@
                   </svg>
                 </div>
                 <div class="meta">
-                  <div class="brand">NORDLYS</div>
+                  <div class="brand">HORVELL</div>
                   <div class="name">Men's Solar Chronograph Watch</div>
                 </div>
               </div>
@@ -1076,14 +1107,14 @@
     <div class="cta-section-inner">
       <p class="eyebrow">Install</p>
       <h2 style="margin-bottom: 12px;">Get the browser extension.</h2>
-      <p style="font-size: 17px; color: var(--ink-3); max-width: 560px; margin: 0 0 24px;">Live on the Chrome Web Store today, which covers Chrome, Edge, and Brave. A dedicated Firefox listing is pending review. Your first <span data-rpo-free-quota>20</span> checks are free, then plans from <a href="/pricing.html">$4.99/mo</a>. Zero tracking, zero ads, sources cited on every claim.</p>
+      <p style="font-size: 17px; color: var(--ink-3); max-width: 560px; margin: 0 0 24px;">Live on the Chrome Web Store today, which covers Chrome, Edge, and Brave.  Your first <span data-rpo-free-quota>20</span> checks are free, then plans from <a href="/pricing.html">$4.99/mo</a>. Zero tracking, zero ads, sources cited on every claim.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Chrome</a>
         <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Edge</a>
         <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Brave</a>
         <a class="btn btn-secondary" href="#" aria-disabled="true" onclick="event.preventDefault()">Install for Firefox <span style="margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; background:#f3f4f6; color:#6b7280;">Coming soon</span></a>
       </div>
-      <p class="cta-note" style="margin-top: 16px;">Chrome, Edge, and Brave all install from the Chrome Web Store today. A dedicated Firefox listing is pending approval — <a href="/contact.html?topic=beta-access">tell us to email you</a> when they go live.</p>
+      <p class="cta-note" style="margin-top: 16px;">Chrome, Edge, and Brave all install from the Chrome Web Store today. <a href="/contact.html?topic=beta-access">tell us to email you</a> when they go live.</p>
     </div>
   </div>
 </section>

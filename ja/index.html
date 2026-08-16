@@ -90,6 +90,33 @@
   ]
 }
 </script>
+<style>
+  /* GTM §4: mock cards carry fabricated scores, so they must be labelled
+     as fictional wherever they appear. Muted deliberately — it is a
+     disclosure, not a design element. */
+  .mock-disclaimer {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 14px 0 0; text-align: center; font-style: italic;
+  }
+  section.dark .mock-disclaimer { color: rgba(255,255,255,0.55); }
+  /* §1.2a — the AI is a capability claim; the non-affiliation note rides
+     with it rather than living only in the footer. */
+  .anthropic-note {
+    font-size: 12.5px; line-height: 1.5; color: var(--muted, #78716c);
+    margin: 10px 0 0;
+  }
+  /* §1.2 differentiator — the strongest claim on the page, so it gets
+     weight without becoming a heading. */
+  .differentiator {
+    font-size: 18px; line-height: 1.6; font-weight: 500;
+    border-left: 3px solid var(--accent, #ea580c);
+    padding: 4px 0 4px 18px; margin: 0 0 22px; max-width: 720px;
+  }
+  .problem-statement {
+    font-size: 16.5px; line-height: 1.65; color: var(--ink-3, #57534e);
+    margin: 0 0 18px; max-width: 720px;
+  }
+</style>
 </head>
 <body>
 
@@ -128,15 +155,16 @@
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <p class="kicker">安心してお買い物いただくためのAI搭載ツール</p>
+        <p class="kicker">米国のストアフロント。米国風のブランド名。親会社は外国。私たちが確認します。</p>
         <h1><em>本当は</em>何を買っているのかを、知る。</h1>
         <p class="tagline">そして、本当は誰に支払っているのかを。</p>
-        <p class="sub">大手オンラインリテーラーの商品ページは、4つの質問にひっそりと答えないままになっています。私たちはそのすべてにお答えします — どこで作られているか、どこから発送されるか、リテーラーは誰か、そしてお金は最終的にどこへ流れるか。Claude AIがすべての商品ページを読み込み、商標登録、通関記録、ブランドデータベース、企業登記情報をもとに推論します。すべての主張には出典を明記し、証拠が乏しい場合には確信度を正直にお伝えします。</p>
+        <p class="sub">大手オンラインリテーラーの商品ページは、4つの質問にひっそりと答えないままになっています。私たちはそのすべてにお答えします — どこで作られているか、どこから発送されるか、リテーラーは誰か、そしてお金は最終的にどこへ流れるか。 Claude が商品ページ、販売者情報、商標出願、企業登記を数秒で読み取り、そのすべてを出典として示します。 すべての主張には出典を明記し、証拠が乏しい場合には確信度を正直にお伝えします。</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#install">ブラウザ拡張機能を入手</a>
           <a class="btn btn-secondary" href="/ja/products.html#methodology">仕組みを見る</a>
         </div>
         <p class="cta-note">最初の<span data-rpo-free-quota>20</span>回のチェックは無料です（1回限り）。プランは<a href="/ja/pricing.html">月額$4.99</a>から。Chrome、Brave（Edge、Firefox は近日対応）に対応。iOSおよびAndroidにも近日対応予定です。</p>
+        <p class="anthropic-note">Claude は Anthropic, PBC の商標です。当社は Anthropic の顧客であり、提携・推奨・後援関係はありません。</p>
       </div>
 
       <div class="hero-mock" aria-hidden="true">
@@ -151,7 +179,7 @@
           <div class="browser-viewport">
             <div class="mock-stack">
 
-              <!-- ─── Slide 1: GLAMORA — opaque drop-shipper apparel (all red) ─── -->
+              <!-- ─── Slide 1: VELTRAY — opaque drop-shipper apparel (all red) ─── -->
               <div class="mock-slide active" data-slide="0">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -160,7 +188,7 @@
                         <path d="M22 10 L28 10 L27 20 L37 20 L36 10 L42 10 L48 24 L44 27 L41 25 L50 54 L14 54 L23 25 L20 27 L16 24 Z"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">GLAMORA</div>
+                    <div class="mock-brand">VELTRAY</div>
                     <div class="mock-title">レディース カジュアル ゆったりTシャツドレス、長袖</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.4 · 18,203</div>
                     <div class="mock-price">$28<small>.99</small></div>
@@ -209,7 +237,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 2: NORDLYS — Nordic outdoor brand, multi-country, well-scored ─── -->
+              <!-- ─── Slide 2: ORVENNA — Nordic outdoor brand, multi-country, well-scored ─── -->
               <div class="mock-slide" data-slide="1">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -221,7 +249,7 @@
                         <line x1="22" y1="38" x2="42" y2="38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">NORDLYS</div>
+                    <div class="mock-brand">ORVENNA</div>
                     <div class="mock-title">クラシック デイパック、Ox Red、16 L</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.7 · 9,412</div>
                     <div class="mock-price">$80<small>.00</small></div>
@@ -270,7 +298,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 3: TRADEFORCE — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
+              <!-- ─── Slide 3: BRAKTON — cordless drill, US-marketed but Chinese-owned parent (TTI-style) ─── -->
               <div class="mock-slide" data-slide="2">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -290,7 +318,7 @@
                         <path d="M22 34 L22 38"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">TRADEFORCE</div>
+                    <div class="mock-brand">BRAKTON</div>
                     <div class="mock-title">20V コードレスドリルドライバーキット、バッテリー2個</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.3 · 6,754</div>
                     <div class="mock-price">$129<small>.00</small></div>
@@ -339,7 +367,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 4: MERIDIAN CO. — international watch brand (mostly ink) ─── -->
+              <!-- ─── Slide 4: HORVELL — international watch brand (mostly ink) ─── -->
               <div class="mock-slide" data-slide="3">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -352,7 +380,7 @@
                         <circle cx="32" cy="32" r="1.2" fill="currentColor"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">MERIDIAN CO.</div>
+                    <div class="mock-brand">HORVELL</div>
                     <div class="mock-title">メンズ ソーラー クロノグラフ ウォッチ、シルバーブレスレット</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.6 · 2,847</div>
                     <div class="mock-price">$189<small>.00</small></div>
@@ -401,7 +429,7 @@
                 </div>
               </div>
 
-              <!-- ─── Slide 5: BLOOM LAB — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
+              <!-- ─── Slide 5: BELVANE — Italian cosmetic brand, manufactured in China (money stays in Italy) ─── -->
               <div class="mock-slide" data-slide="4">
                 <div class="mock-slide-grid">
                   <div class="mock-listing">
@@ -417,7 +445,7 @@
                         <line x1="23" y1="44" x2="35" y2="44"/>
                       </svg>
                     </div>
-                    <div class="mock-brand">BLOOM LAB</div>
+                    <div class="mock-brand">BELVANE</div>
                     <div class="mock-title">ハイドラ・リニュー セラミド モイスチャライザー、1.7 oz</div>
                     <div class="mock-stars"><span class="stars">★★★★★</span> 4.5 · 3,116</div>
                     <div class="mock-price">$42<small>.00</small></div>
@@ -477,6 +505,7 @@
           <button type="button" aria-label="腕時計の例"></button>
           <button type="button" aria-label="化粧品の例"></button>
         </div>
+        <p class="mock-disclaimer">説明用の例です。表示されているブランド名とスコアは架空のものです。</p>
       </div>
 
     </div>
@@ -662,7 +691,7 @@
     </div>
 
     <p class="home-retailer-note">
-      <a href="/contact.html?topic=retailer-request">次に追加してほしいリテーラーをお知らせください</a>
+      <a href="/ja/coverage.html">次に追加してほしいリテーラーをお知らせください</a>
     </p>
   </div>
 </section>
@@ -675,6 +704,8 @@
   <div class="wrap-wide">
     <p class="eyebrow">4つの質問</p>
     <h2>一般的なオンライン商品ページが答えていない、4つのこと。</h2>
+    <p class="differentiator">商品ページは誰でも読めます。私たちは登記上の販売者から、企業登記と商標登録をたどって、実際に代金を受け取る親会社まで追跡します。そのすべての出典を明示します。</p>
+    <p class="problem-statement">問題が起きたとき、誰が責任を負うのか分かりません。あなたのお金が米国企業を支えているのか、米国の店構えだけを支えているのかも分かりません。そして「販売元」が、そのリテーラーが商品を何らかの形で吟味したことを意味するのかどうかも分かりません。</p>
     <p class="section-intro">すべてのスコアは、商品について4つの独立した質問にお答えします。それらを合わせて読み解くと、<em>販売元</em>、<em>発送元</em>、<em>製造元</em>といった単一のラベルだけでは決して見えてこない物語が浮かび上がります。</p>
 
     <div class="indicators">
@@ -714,7 +745,7 @@
 
     <div class="showcase-grid">
 
-      <!-- Card A: NORDLYS -->
+      <!-- Card A: HORVELL -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -727,7 +758,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">NORDLYS</p>
+            <p class="sc-brand">HORVELL</p>
             <p class="sc-title">メンズ ソーラー クロノグラフ ウォッチ</p>
             <p class="sc-price">$189.00</p>
           </div>
@@ -741,7 +772,7 @@
         <p class="sc-takeaway">よく知られた日本ブランド。販売元は米国のショップですが、卸売マージンのすべては東京のセイコーグループへ渡ります。</p>
       </div>
 
-      <!-- Card B: GLAMORA -->
+      <!-- Card B: VELTRAY -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -750,7 +781,7 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">GLAMORA</p>
+            <p class="sc-brand">VELTRAY</p>
             <p class="sc-title">カジュアル ゆったりTシャツドレス</p>
             <p class="sc-price">$28.99</p>
           </div>
@@ -761,10 +792,10 @@
           <div class="row"><div class="row-top"><span class="row-label">リテーラー</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 93%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:93%"></div></div></div>
           <div class="row"><div class="row-top"><span class="row-label">お金の流れ先</span><span class="row-pct is-cn"><span class="row-flag">🇨🇳</span> China · 91%</span></div><div class="row-track"><div class="row-fill is-cn" style="width:91%"></div></div></div>
         </div>
-        <p class="sc-takeaway">どの商品ページにも表示されないタイプのブランド: 中国で登録された商標が、米国の倉庫経由でドロップシッピングされています。赤い行はすべて注意信号です。</p>
+        <p class="sc-takeaway">どの商品ページも表示しない種類のブランドです。中国で登録された商標が、米国の倉庫からドロップシッピングされています。赤い行が3つ — 製造、販売、そして代金の行き先が、いずれも米国務省のリストに載る国です。</p>
       </div>
 
-      <!-- Card C: TRADEFORCE -->
+      <!-- Card C: ORVENNA -->
       <div class="showcase-card">
         <div class="sc-listing">
           <div class="sc-image">
@@ -776,8 +807,8 @@
             </svg>
           </div>
           <div class="sc-meta">
-            <p class="sc-brand">TRADEFORCE</p>
-            <p class="sc-title">カンケン クラシック バックパック</p>
+            <p class="sc-brand">ORVENNA</p>
+            <p class="sc-title">クラシック デイパック、Ox Red、16 L</p>
             <p class="sc-price">$80.00</p>
           </div>
         </div>
@@ -791,7 +822,7 @@
       </div>
 
     </div>
-
+    <p class="mock-disclaimer">説明用の例です。表示されているブランド名とスコアは架空のものです。</p>
     <div class="stat-strip">
       <div class="stat">
         <div class="stat-num">380万件以上</div>
@@ -942,7 +973,7 @@
                   </svg>
                 </div>
                 <div class="meta">
-                  <div class="brand">NORDLYS</div>
+                  <div class="brand">HORVELL</div>
                   <div class="name">メンズ ソーラー クロノグラフ ウォッチ</div>
                 </div>
               </div>
@@ -972,7 +1003,7 @@
 
     <details>
       <summary>どのリテーラーに対応していますか?</summary>
-      <p>現在33のリテーラー、32ドメインに対応 — 総合小売（Amazon、Target、Walmart）、DIY、家具、家電、会員制倉庫、ファッション、美容、自動車部品などのカテゴリを網羅。<a href="/ja/products.html#retailers">カテゴリー付きの全リスト</a>をご覧いただくか、<a href="/contact.html?topic=retailer-request">次に追加してほしいリテーラーをお知らせください</a>。</p>
+      <p>現在33のリテーラー、32ドメインに対応 — 総合小売（Amazon、Target、Walmart）、DIY、家具、家電、会員制倉庫、ファッション、美容、自動車部品などのカテゴリを網羅。<a href="/ja/products.html#retailers">カテゴリー付きの全リスト</a>をご覧いただくか、<a href="/ja/coverage.html">次に追加してほしいリテーラーをお知らせください</a>。</p>
     </details>
 
     <details>
@@ -1062,6 +1093,7 @@
       <a href="/ja/products.html#methodology">仕組み</a>
       <a href="/why.html">なぜ重要なのか</a>
       <a href="/ja/pricing.html#retailers">対応サイト</a>
+      <a href="/ja/coverage.html">リテーラーをリクエスト</a>
     </div>
         <div class="col">
       <h4>会社情報</h4>
