@@ -587,6 +587,7 @@
   <div class="wrap-wide">
     <span class="trust-item">すべてのスコアに出典を明記</span>
     <span class="trust-item">正直な確信度表示</span>
+    <span class="trust-item">閲覧内容を記録しません</span>
     <span class="trust-item">トラッキングなし、広告なし</span>
     <span class="trust-item">独立系 — いかなるリテーラーとも提携していません</span>
   </div>
@@ -596,6 +597,42 @@
      RETAILER GRID — full categorized list (33 retailers across 7 categories)
      ═════════════════════════════════════════════════════════════════════ -->
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PRIVACY. The strongest claim on the site, so it gets its own section
+     rather than a line in the trust strip. Every sentence here corresponds
+     to a test in the backend (tests/test_privacy_guarantees.py) that fails
+     the build if the claim stops being true.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="dark" aria-labelledby="privacy-heading">
+  <div class="wrap">
+    <p class="eyebrow">プライバシー</p>
+    <h2 id="privacy-heading">閲覧内容を記録しません。</h2>
+    <p class="section-intro">
+      守ると約束した方針としてではありません。当社のソフトウェアにそれができないからです。できてしまう部分を取り除きました。
+    </p>
+
+    <ul>
+      <li>
+        <strong>何を見たかの記録がありません。</strong>
+        スコアは<em>商品</em>に対してキャッシュされ、利用者に対しては保存されません。ある商品の答えは誰が見ても同じであり、そもそも保存すべき個人的な情報が存在しません。
+      </li>
+      <li>
+        <strong>無料チェックのカウンターは商品名を持ちません。</strong>
+        商品の識別子ではなく一方向ハッシュを保存します。すでに数えた商品を認識し、同じ商品で二重に消費されないようにするには、それで十分です。そしてこの方式では、その表を閲覧履歴の一覧に戻すことができません。当社にも、コピーを入手した誰かにもできません。
+      </li>
+      <li>
+        <strong>ブラウザーと個人を結びつけるものがありません。</strong>
+        拡張機能には、有効なインストール数を数えるための匿名の識別子があります。以前は各アカウントに、サインインしたブラウザーの一覧を保持していました。これがあると両者を結びつけられてしまいます。その一覧は削除し、誰かが元に戻した場合はテストがビルドを失敗させます。
+      </li>
+      <li>
+        <strong>診断を有効にするのは利用者です。当社にはできません。</strong>
+        サポートがページ上で何が起きたかを確認する必要がある場合、<em>利用者ご自身</em>が拡張機能で有効にし、コードを読み上げます。当社側には、メールアドレスを入力して記録を開始する画面はありません。その機能がソフトウェアに存在しないためです。セッションは24時間で失効し、識別はそのコードによって行われ、利用者本人によっては行われません。
+      </li>
+    </ul>
+
+    <p style="margin-top: 32px;"><a href="/privacy.html">プライバシーポリシー全文を読む →</a></p>
+  </div>
+</section>
 <section class="retailers-callout" aria-labelledby="retailers-heading">
   <div class="wrap-wide">
     <div style="text-align: center; max-width: 760px; margin: 0 auto 32px;">

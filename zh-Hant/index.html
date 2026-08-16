@@ -587,6 +587,7 @@
   <div class="wrap-wide">
     <span class="trust-item">每項評分皆註明來源</span>
     <span class="trust-item">誠實的信心區間</span>
+    <span class="trust-item">我們從不記錄您瀏覽了什麼</span>
     <span class="trust-item">不追蹤、無廣告</span>
     <span class="trust-item">獨立運作 — 與任何零售商皆無關聯</span>
   </div>
@@ -596,6 +597,42 @@
      RETAILER GRID — full categorized list (33 retailers across 7 categories)
      ═════════════════════════════════════════════════════════════════════ -->
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PRIVACY. The strongest claim on the site, so it gets its own section
+     rather than a line in the trust strip. Every sentence here corresponds
+     to a test in the backend (tests/test_privacy_guarantees.py) that fails
+     the build if the claim stops being true.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="dark" aria-labelledby="privacy-heading">
+  <div class="wrap">
+    <p class="eyebrow">隱私</p>
+    <h2 id="privacy-heading">我們不記錄您瀏覽了什麼。</h2>
+    <p class="section-intro">
+      這不是一條我們承諾遵守的政策,而是我們的軟體做不到的事——因為我們移除了能夠做到這件事的部分。
+    </p>
+
+    <ul>
+      <li>
+        <strong>沒有關於您看過什麼的紀錄。</strong>
+        評分是依<em>商品</em>快取的,而不是依您快取。同一件商品的答案與其他所有人看到的完全相同,因此一開始就沒有任何個人資訊需要儲存。
+      </li>
+      <li>
+        <strong>免費檢查次數的計數器說不出是哪一件商品。</strong>
+        它儲存的是單向雜湊值,而不是商品識別碼。這樣就已足夠:足以辨識已經計過數的商品,使同一件商品不會被重複計費;同時也代表這張表無法被還原成您的瀏覽清單。我們做不到,取得副本的任何人也做不到。
+      </li>
+      <li>
+        <strong>沒有任何東西把瀏覽器與個人連結起來。</strong>
+        擴充功能有一個匿名識別碼,用來統計有多少安裝處於使用中。我們過去會在每個帳戶下保留一份已登入瀏覽器的清單,這使兩者可以被關聯起來。我們刪除了那份清單,現在如果有人把它加回去,測試會讓建置失敗。
+      </li>
+      <li>
+        <strong>診斷由您開啟。我們無法開啟。</strong>
+        如果客服需要查看某個頁面上發生了什麼,由<em>您</em>在擴充功能中開啟,並把一段代碼唸給我們。我們這邊不存在任何輸入電子郵件就開始記錄的介面——軟體裡沒有這個能力。工作階段會在 24 小時後失效,並且以該代碼識別,而不是以您識別。
+      </li>
+    </ul>
+
+    <p style="margin-top: 32px;"><a href="/privacy.html">閱讀完整隱私政策 →</a></p>
+  </div>
+</section>
 <section class="retailers-callout" aria-labelledby="retailers-heading">
   <div class="wrap-wide">
     <div style="text-align: center; max-width: 760px; margin: 0 auto 32px;">

@@ -587,6 +587,7 @@
   <div class="wrap-wide">
     <span class="trust-item">Fuentes citadas en cada puntuación</span>
     <span class="trust-item">Bandas de confianza honestas</span>
+    <span class="trust-item">Nunca registramos lo que usted navega</span>
     <span class="trust-item">Sin rastreo, sin anuncios</span>
     <span class="trust-item">Independiente — no afiliado con ningún minorista</span>
   </div>
@@ -596,6 +597,42 @@
      RETAILER GRID — full categorized list (33 retailers across 7 categories)
      ═════════════════════════════════════════════════════════════════════ -->
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PRIVACY. The strongest claim on the site, so it gets its own section
+     rather than a line in the trust strip. Every sentence here corresponds
+     to a test in the backend (tests/test_privacy_guarantees.py) that fails
+     the build if the claim stops being true.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="dark" aria-labelledby="privacy-heading">
+  <div class="wrap">
+    <p class="eyebrow">Privacidad</p>
+    <h2 id="privacy-heading">No registramos lo que usted navega.</h2>
+    <p class="section-intro">
+      No como una política que prometemos cumplir. Como algo que nuestro software no puede hacer, porque eliminamos las partes que podían.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Ningún registro de lo que usted miró.</strong>
+        Las puntuaciones se almacenan en caché asociadas al <em>producto</em>, nunca a usted. La respuesta para un artículo es la misma que recibe cualquier otra persona, así que no hay nada personal que guardar.
+      </li>
+      <li>
+        <strong>Su contador de comprobaciones gratuitas no puede nombrar un producto.</strong>
+        Guarda un hash unidireccional en lugar del identificador del producto. Es todo lo que necesita: lo suficiente para reconocer algo que ya ha contado, de modo que nunca se le cobre dos veces por el mismo artículo, y significa que la tabla no puede convertirse de nuevo en una lista de lo que usted vio. Ni por nosotros, ni por nadie que obtenga una copia.
+      </li>
+      <li>
+        <strong>Nada conecta un navegador con una persona.</strong>
+        La extensión tiene un identificador anónimo para que podamos contar cuántas instalaciones están activas. Antes guardábamos en cada cuenta una lista de los navegadores que habían iniciado sesión, lo que permitía unir ambos datos. Eliminamos esa lista, y ahora una prueba hace fallar la compilación si alguien vuelve a añadirla.
+      </li>
+      <li>
+        <strong>Los diagnósticos los activa usted. Nosotros no podemos.</strong>
+        Si el soporte necesita ver qué ocurrió en una página, es <em>usted</em> quien lo activa en la extensión y nos lee un código. No existe ninguna pantalla de nuestro lado que acepte un correo electrónico y empiece a grabar: esa capacidad no está en el software. Las sesiones caducan a las 24 horas y se identifican por ese código, nunca por usted.
+      </li>
+    </ul>
+
+    <p style="margin-top: 32px;"><a href="/privacy.html">Leer la política de privacidad completa →</a></p>
+  </div>
+</section>
 <section class="retailers-callout" aria-labelledby="retailers-heading">
   <div class="wrap-wide">
     <div style="text-align: center; max-width: 760px; margin: 0 auto 32px;">

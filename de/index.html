@@ -587,6 +587,7 @@
   <div class="wrap-wide">
     <span class="trust-item">Quellen zu jeder Bewertung zitiert</span>
     <span class="trust-item">Ehrliche Konfidenzbänder</span>
+    <span class="trust-item">Wir zeichnen nie auf, was Sie ansehen</span>
     <span class="trust-item">Kein Tracking, keine Werbung</span>
     <span class="trust-item">Unabhängig — nicht mit einem Händler verbunden</span>
   </div>
@@ -596,6 +597,42 @@
      RETAILER GRID — full categorized list (33 retailers across 7 categories)
      ═════════════════════════════════════════════════════════════════════ -->
 
+<!-- ═══════════════════════════════════════════════════════════════════════
+     PRIVACY. The strongest claim on the site, so it gets its own section
+     rather than a line in the trust strip. Every sentence here corresponds
+     to a test in the backend (tests/test_privacy_guarantees.py) that fails
+     the build if the claim stops being true.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<section class="dark" aria-labelledby="privacy-heading">
+  <div class="wrap">
+    <p class="eyebrow">Datenschutz</p>
+    <h2 id="privacy-heading">Wir zeichnen nicht auf, was Sie ansehen.</h2>
+    <p class="section-intro">
+      Nicht als Richtlinie, deren Einhaltung wir versprechen. Sondern als etwas, das unsere Software nicht kann — weil wir die Teile entfernt haben, die es könnten.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Keine Aufzeichnung dessen, was Sie angesehen haben.</strong>
+        Bewertungen werden zum <em>Produkt</em> zwischengespeichert, nie zu Ihnen. Die Antwort für einen Artikel ist dieselbe, die alle anderen auch bekommen — es gibt also von vornherein nichts Persönliches zu speichern.
+      </li>
+      <li>
+        <strong>Ihr Zähler für kostenlose Prüfungen kann kein Produkt benennen.</strong>
+        Er speichert einen Einweg-Hash statt der Produktkennung. Mehr braucht er nicht — gerade genug, um etwas wiederzuerkennen, das bereits gezählt wurde, damit Ihnen derselbe Artikel nie zweimal berechnet wird — und es bedeutet, dass sich die Tabelle nicht in eine Liste dessen zurückverwandeln lässt, was Sie angesehen haben. Weder durch uns noch durch jemanden, der eine Kopie erlangt.
+      </li>
+      <li>
+        <strong>Nichts verbindet einen Browser mit einer Person.</strong>
+        Die Erweiterung hat eine anonyme Kennung, damit wir zählen können, wie viele Installationen aktiv sind. Früher führten wir zu jedem Konto eine Liste der angemeldeten Browser — womit sich beides verknüpfen ließ. Wir haben diese Liste gelöscht, und ein Test lässt den Build nun fehlschlagen, falls sie jemand wieder einführt.
+      </li>
+      <li>
+        <strong>Diagnosen schalten Sie ein. Wir können es nicht.</strong>
+        Wenn der Support sehen muss, was auf einer Seite passiert ist, schalten <em>Sie</em> es in der Erweiterung ein und lesen uns einen Code vor. Es gibt auf unserer Seite keine Maske, die eine E-Mail-Adresse annimmt und eine Aufzeichnung startet — diese Fähigkeit steckt nicht in der Software. Sitzungen laufen nach 24 Stunden ab und werden über diesen Code identifiziert, nie über Sie.
+      </li>
+    </ul>
+
+    <p style="margin-top: 32px;"><a href="/privacy.html">Vollständige Datenschutzerklärung lesen →</a></p>
+  </div>
+</section>
 <section class="retailers-callout" aria-labelledby="retailers-heading">
   <div class="wrap-wide">
     <div style="text-align: center; max-width: 760px; margin: 0 auto 32px;">
