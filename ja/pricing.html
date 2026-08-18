@@ -481,6 +481,19 @@
     </form>
   </div>
 
+
+  <!-- Product-news consent. UNTICKED by default and never pre-selected:
+       opt-in is the standard the GDPR requires, and buying something is not
+       agreement to be marketed at. The value rides along with the checkout
+       request; the backend records when and where it was given. -->
+  <div style="max-width: 720px; margin: 28px auto 0; padding: 16px 24px; text-align: left;">
+    <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.6; cursor: pointer;">
+      <input type="checkbox" id="marketing-opt-in" style="margin-top: 3px; flex-shrink: 0;">
+      <span><strong>製品に関するお知らせをメールで受け取る</strong><br>
+        <span style="color: var(--muted); font-size: 13px;">対応店舗の追加、判定の改善、調査でわかったこと。多くても年に数回、閲覧履歴を送ることはなく、配信停止はワンクリックです。</span>
+      </span>
+    </label>
+  </div>
   <p style="max-width: 720px; margin: 24px auto 0; padding: 0 24px; text-align: center; font-size: 13px; color: var(--muted); line-height: 1.6;">
   </p>
 </section>
@@ -791,7 +804,7 @@ async function subscribe(plan) {
     const r = await fetch("https://api.realproductorigin.com/subscription/checkout", {
       method: "POST",
       headers,
-      body: JSON.stringify({ plan, billing_period: billingPeriod, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
+      body: JSON.stringify({ plan, billing_period: billingPeriod, marketing_opt_in: !!(document.getElementById("marketing-opt-in") || {}).checked, locale: (function(){var m=location.pathname.match(/^\/(zh-Hans|zh-Hant|ja|de|fr|es)\//);return m?m[1]:"en";})() }),
     });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const data = await r.json();
