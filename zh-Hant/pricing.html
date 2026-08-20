@@ -852,5 +852,25 @@ document.querySelectorAll(".subscribe-btn").forEach(btn => {
 </script>
 <script src="/assets/lang-switcher.js" defer></script>
 <script src="/assets/free-quota.js" defer></script>
+<script>
+// Whether the newsletter box starts ticked is a legal question about
+// where the visitor is, not about which translation of this page they
+// are reading — see backend services/marketing_jurisdiction.py. It is
+// answered per request, uncached, by the API; the markup ships unticked
+// so an unreachable API leaves an honest box rather than a ticked one we
+// could not defend.
+(async function newsletterDefault() {
+  var box = document.getElementById("marketing-opt-in");
+  if (!box) return;
+  try {
+    var r = await fetch("https://api.realproductorigin.com/reference/newsletter-consent", { cache: "no-store" });
+    if (!r.ok) return;
+    var rules = await r.json();
+    // Never un-tick: by the time this lands they may already have
+    // reached over and ticked it themselves.
+    if (rules.default_checked === true) box.checked = true;
+  } catch (_) {}
+})();
+</script>
 </body>
 </html>

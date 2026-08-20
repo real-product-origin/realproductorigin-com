@@ -47,6 +47,16 @@
      /auth/config confirms the backend has a client_id configured. */
   .google-slot { display: none; margin: 0 0 18px; }
   .google-slot.shown { display: flex; justify-content: center; }
+  /* Consent row. `text-transform` is reset off the bare `label` rule above,
+     which uppercases field titles — legal wording read in small caps is
+     wording nobody read. */
+  .consent { display: flex; gap: 10px; align-items: flex-start; cursor: pointer;
+             font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;
+             line-height: 1.55; color: var(--ink); margin: -2px 0 2px; }
+  .consent[hidden] { display: none; }
+  .consent input { margin: 3px 0 0; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--ink); }
+  .consent strong { display: block; font-weight: 600; }
+  .consent-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
   .divider { display: none; align-items: center; gap: 12px; margin: 0 0 18px; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
   .divider.shown { display: flex; }
   .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
@@ -92,6 +102,21 @@
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus autocomplete="email">
       </div>
+      <!-- Newsletter consent.
+           Hidden until GET /reference/newsletter-consent answers, and it
+           is that answer — not this markup and not the page's language —
+           that decides whether the box starts ticked. Rendering it
+           unticked here and letting the script tick it means the failure
+           mode of the fetch is the lawful one: if the API is unreachable,
+           the visitor sees an honest unticked box rather than a ticked one
+           we cannot justify. See services/marketing_jurisdiction.py. -->
+      <label class="consent" id="consent-row" hidden>
+        <input type="checkbox" id="marketing-opt-in">
+        <span>
+          <strong id="consent-headline">Email me occasional product news</strong>
+          <span class="consent-sub" id="consent-sub">New retailers, scoring improvements, and what we've found. A few times a year at most — never your browsing, and one click to stop.</span>
+        </span>
+      </label>
       <button class="btn btn-primary" type="submit" id="submit-btn">Send sign-in code</button>
       <div class="error" id="error" style="display:none;"></div>
     </form>
@@ -211,6 +236,94 @@ const returnUrl = safeReturnTo
 
 const API_BASE = "https://api.realproductorigin.com";
 
+// ── Newsletter consent ────────────────────────────────────────────────
+//
+// Two independent questions, and the whole point is that they stay
+// independent:
+//
+//   WHAT LANGUAGE the box is written in — a preference, read from the
+//   page they arrived from or their browser. Cosmetic. Wrong guess costs
+//   nothing.
+//
+//   WHETHER the box starts ticked — a legal conclusion, read from the
+//   API, which sees the network the request came from. Wrong guess is a
+//   consent record we cannot defend.
+//
+// Deriving the second from the first is the classic version of this bug:
+// a German speaker in Chicago is governed by Illinois, an American
+// reading English from Lisbon is governed by Portugal. Language is not
+// location. Only the fetch below may decide the tick.
+const CONSENT_COPY = {
+  "en": ["Email me occasional product news", "New retailers, scoring improvements, and what we've found. A few times a year at most — never your browsing, and one click to stop."],
+  "de": ["Gelegentlich Produktneuigkeiten per E-Mail", "Neue Händler, bessere Bewertungen und was wir herausgefunden haben. Höchstens ein paar Mal im Jahr, niemals Ihr Surfverhalten, und ein Klick genügt zum Abbestellen."],
+  "es": ["Envíenme novedades del producto de vez en cuando", "Nuevas tiendas, mejoras en la puntuación y lo que hemos descubierto. Unas pocas veces al año como mucho, nunca tu navegación, y basta un clic para darte de baja."],
+  "fr": ["M'envoyer occasionnellement des nouvelles du produit", "Nouvelles enseignes, améliorations du score et ce que nous avons trouvé. Quelques fois par an au maximum, jamais votre navigation, et un seul clic pour arrêter."],
+  "ja": ["製品に関するお知らせをメールで受け取る", "対応店舗の追加、判定の改善、調査でわかったこと。多くても年に数回、閲覧履歴を送ることはなく、配信停止はワンクリックです。"],
+  "zh-Hans": ["通过邮件接收产品动态", "新增零售商、评分改进，以及我们的发现。一年最多几次，绝不包含你的浏览记录，一键即可退订。"],
+  "zh-Hant": ["透過電子郵件接收產品動態", "新增零售商、評分改進，以及我們的發現。一年最多幾次，絕不包含你的瀏覽紀錄，一鍵即可退訂。"],
+};
+
+// Mirrors services/locales.normalize. Returns null for anything we don't
+// translate, so the caller falls back to English rather than blanking the
+// row — an empty consent line is worse than an English one.
+function normalizeLocale(raw) {
+  const tag = String(raw || "").trim().replace(/_/g, "-");
+  if (!tag) return null;
+  if (CONSENT_COPY[tag]) return tag;
+  const lower = tag.toLowerCase();
+  if (lower.indexOf("zh") === 0) {
+    const region = lower.split("-").pop();
+    return (region === "tw" || region === "hk" || region === "mo" || region === "hant")
+      ? "zh-Hant" : "zh-Hans";
+  }
+  const base = lower.split("-")[0];
+  return CONSENT_COPY[base] ? base : null;
+}
+
+// Which language to write the box in. The page they came from beats the
+// browser: someone reading /de/pricing.html chose German on purpose,
+// whatever their OS is set to.
+function consentLocale() {
+  const localeDirs = /\/(zh-Hans|zh-Hant|ja|de|fr|es)\//;
+  for (const src of [location.search, returnUrl || "", document.referrer || ""]) {
+    const hit = localeDirs.exec(src);
+    if (hit) return hit[1];
+  }
+  const params = new URLSearchParams(location.search);
+  return normalizeLocale(params.get("lang"))
+      || normalizeLocale(navigator.language)
+      || "en";
+}
+
+// True only once the API has said so. Read at submit time.
+function marketingOptIn() {
+  const box = document.getElementById("marketing-opt-in");
+  return !!(box && box.checked);
+}
+
+(async function setUpConsentBox() {
+  const row = document.getElementById("consent-row");
+  const box = document.getElementById("marketing-opt-in");
+  if (!row || !box) return;
+  const copy = CONSENT_COPY[consentLocale()] || CONSENT_COPY["en"];
+  document.getElementById("consent-headline").textContent = copy[0];
+  document.getElementById("consent-sub").textContent = copy[1];
+  try {
+    // no-store on the server side; `cache: "no-store"` here so a back
+    // button or a bfcache restore can't resurrect a tick decided for a
+    // different network.
+    const r = await fetch(`${API_BASE}/reference/newsletter-consent`, { cache: "no-store" });
+    if (r.ok) {
+      const rules = await r.json();
+      box.checked = rules.default_checked === true;
+    }
+  } catch (_) {
+    // Unreachable API — leave it unticked. The box is still offered, and
+    // anyone who wants the newsletter can still say so.
+  }
+  row.hidden = false;
+})();
+
 // A per-attempt random nonce that the backend stores against the MagicLink
 // row. This tab polls /auth/session-status?nonce=X so we get the session
 // as soon as EITHER the code is submitted OR the magic-link is clicked —
@@ -300,7 +413,7 @@ document.getElementById("signin-form").addEventListener("submit", async (e) => {
     const r = await fetch(`${API_BASE}/auth/request-magic-link`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, redirect_to: returnUrl, nonce: currentNonce }),
+      body: JSON.stringify({ email, redirect_to: returnUrl, nonce: currentNonce, marketing_opt_in: marketingOptIn() }),
     });
     if (!r.ok) throw new Error("Request failed");
     document.getElementById("signin-panel").style.display = "none";
@@ -398,7 +511,7 @@ async function initGoogleSignIn() {
         const r = await fetch(`${API_BASE}/auth/google`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id_token: credentialResponse.credential }),
+          body: JSON.stringify({ id_token: credentialResponse.credential, marketing_opt_in: marketingOptIn() }),
         });
         if (!r.ok) throw new Error(`google signin failed: ${r.status}`);
         const data = await r.json();
