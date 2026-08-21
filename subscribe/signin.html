@@ -50,13 +50,14 @@
   /* Consent row. `text-transform` is reset off the bare `label` rule above,
      which uppercases field titles — legal wording read in small caps is
      wording nobody read. */
-  .consent { display: flex; gap: 10px; align-items: flex-start; cursor: pointer;
-             font-size: 14px; font-weight: 400; letter-spacing: 0; text-transform: none;
-             line-height: 1.55; color: var(--ink); margin: -2px 0 2px; }
+  .consent { display: flex; gap: 9px; align-items: flex-start; cursor: pointer;
+             font-size: 13px; font-weight: 400; letter-spacing: 0; text-transform: none;
+             line-height: 1.5; color: var(--ink-3);
+             margin: 2px 0 0; padding-top: 14px; border-top: 1px solid var(--border); }
   .consent[hidden] { display: none; }
-  .consent input { margin: 3px 0 0; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--ink); }
-  .consent strong { display: block; font-weight: 600; }
-  .consent-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; }
+  .consent input { margin: 1px 0 0; flex-shrink: 0; width: 15px; height: 15px; accent-color: var(--ink); }
+  .consent strong { display: block; font-weight: 500; }
+  .consent-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
   .divider { display: none; align-items: center; gap: 12px; margin: 0 0 18px; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
   .divider.shown { display: flex; }
   .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
@@ -102,6 +103,8 @@
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="you@example.com" required autofocus autocomplete="email">
       </div>
+      <button class="btn btn-primary" type="submit" id="submit-btn">Send sign-in code</button>
+      <div class="error" id="error" style="display:none;"></div>
       <!-- Newsletter consent.
            Hidden until GET /reference/newsletter-consent answers, and it
            is that answer — not this markup and not the page's language —
@@ -117,8 +120,6 @@
           <span class="consent-sub" id="consent-sub">New retailers, scoring improvements, and what we've found. A few times a year at most — never your browsing, and one click to stop.</span>
         </span>
       </label>
-      <button class="btn btn-primary" type="submit" id="submit-btn">Send sign-in code</button>
-      <div class="error" id="error" style="display:none;"></div>
     </form>
   </div>
 
