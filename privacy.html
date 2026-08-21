@@ -225,8 +225,8 @@
       </tr>
       <tr>
         <td><strong>Cloudflare, Inc.</strong></td>
-        <td>Standard web-server logs for our marketing site (realproductorigin.com), which is hosted on Cloudflare Pages: request URL, response code, timestamp, IP address, and User-Agent. No extension or backend traffic is routed through Cloudflare.</td>
-        <td>Marketing-site CDN, DNS resolution, DDoS protection.</td>
+        <td>Standard web-server logs: request URL, response code, timestamp, IP address, and User-Agent. This covers our marketing site (realproductorigin.com), which is hosted on Cloudflare Pages, and also our API (api.realproductorigin.com), which our hosting provider serves through Cloudflare's network. Requests from the extension and the mobile app therefore pass through Cloudflare as well. Cloudflare tells our API which country a request came from; we use that to decide which country's email rules apply to the newsletter box, and we store it only as the country on your account.</td>
+        <td>CDN, DNS resolution, DDoS protection for both the marketing site and the API.</td>
       </tr>
       <tr>
         <td><strong>Sentry, Inc.</strong> (if enabled)</td>
