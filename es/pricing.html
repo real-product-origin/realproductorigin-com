@@ -240,6 +240,11 @@
   }
   .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
   .checks-fine { font-size: 12px; color: var(--muted); }
+  .checks-kind {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 10px;
+  }
 
   .same-box {
     margin: 30px 0 0; padding: 24px 26px;
@@ -510,6 +515,7 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">Todo lo demás — la puntuación, las pruebas que la respaldan y la posibilidad de rebatirla — es igual en todos los niveles, incluido el gratuito.</p>
 
       <!-- The distinction, at the size it deserves. -->
+      <p class="checks-kind">Comprobaciones de producto</p>
       <div class="checks-row">
         <div class="checks-cell">
           <div class="checks-plan">Free</div>
@@ -528,8 +534,32 @@
         </div>
       </div>
 
+      <p class="checks-kind" style="margin-top: 26px;">Comprobaciones de marca</p>
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num">5</div>
+          <div class="checks-sub">comprobaciones de marca, una sola vez<br><span class="checks-fine">No se renueva nunca</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">10</div>
+          <div class="checks-sub">comprobaciones de marca al mes<br><span class="checks-fine">Se renueva el día 1</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">Ilimitado</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">sin límite<br><span class="checks-fine">Consulte cuantas quiera</span></div>
+        </div>
+      </div>
+
       <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
-        Una comprobación es la primera vez que puntúa un producto concreto. Volver a abrir algo que ya puntuó es gratis, siempre — incluso después de agotar su asignación. <a href="/terms.html#what-is-a-check">Definición completa en los Términos</a>.
+        Una <strong>comprobación de producto</strong> es la primera vez que puntúa un producto concreto. Una <strong>comprobación de marca</strong> es la primera vez que consulta una empresa concreta. Son cupos separados — comprobar un producto nunca gasta una comprobación de marca. Volver a abrir algo que ya comprobó es siempre gratis, incluso después de agotar su cupo.
+        <a href="/terms.html#what-is-a-check">Definiciones completas en los Términos</a>.
+      </p>
+
+      <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.6;">
+        Los registros públicos de una marca — quién registró el nombre, en qué país y dónde está registrado el sitio web — son <strong>gratuitos para todos, en todos los planes, sin límite</strong>. Una comprobación de marca solo se usa para nuestra evaluación más profunda de quién posee finalmente la empresa.
       </p>
 
       <!-- Stated as prose, not as a column of ticks. These are the reasons

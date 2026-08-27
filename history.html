@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your scan history — Real Product Origin</title>
+<meta name="description" content="An opt-in record of the products and brands you have checked. Off by default, deletable at any time.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://realproductorigin.com/history">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+
+  .acct-hero { padding: 40px 0 22px; background: linear-gradient(180deg, var(--bg-cream), var(--bg-cream-deep)); border-bottom: 1px solid var(--border); }
+  .acct-hero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 10px; color: var(--ink-deep); }
+  .acct-hero p { font-size: 16px; color: var(--ink-3); max-width: 620px; margin: 0; line-height: 1.55; }
+  .acct-body { padding: 30px 0 60px; }
+  .acct-gate { padding: 40px 0 60px; }
+  .acct-gate p { font-size: 16px; color: var(--ink-3); margin: 0 0 18px; }
+
+  .bq-form { display: flex; gap: 8px; max-width: 560px; margin: 0 0 8px; }
+  .bq-input { flex: 1; min-width: 0; padding: 11px 13px; font: inherit; font-size: 15px; color: var(--ink-2); background: #fff; border: 1px solid var(--border); border-radius: 8px; }
+  .bq-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .bq-go { padding: 11px 20px; font: inherit; font-size: 15px; font-weight: 600; color: #fff; background: var(--ink-deep); border: 0; border-radius: 8px; cursor: pointer; }
+  .bq-go:disabled { opacity: .55; cursor: default; }
+  .bq-note, .bq-quota { font-size: 13px; color: var(--muted); margin: 0; }
+
+  .bq-name { font-family: var(--serif); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: var(--ink-deep); margin: 26px 0 2px; }
+  .bq-domain { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+
+  /* Tier colours are the same idea as the extension's: provenance, never a
+     verdict. They must not borrow --accent, which means "act on this". */
+  .bq-block { margin: 18px 0 0; padding: 2px 0 2px 14px; border-left: 3px solid #9aa3ad; }
+  .bq-block[data-tier="record"] { border-left-color: #1d4ed8; }
+  .bq-block[data-tier="measured"] { border-left-color: #15803d; }
+  .bq-block[data-tier="reported"] { border-left-color: #c3c9d0; }
+  .bq-tier { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .bq-block[data-tier="record"] .bq-tier { color: #1d4ed8; }
+  .bq-block[data-tier="measured"] .bq-tier { color: #15803d; }
+  .bq-title { font-size: 13px; font-weight: 600; color: var(--ink-3); margin: 3px 0 4px; }
+  .bq-country { font-size: 21px; font-weight: 700; color: var(--ink-deep); margin: 0; }
+  .bq-detail { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+
+  .bq-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .bq-list li { padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
+  .bq-owner { font-weight: 600; color: var(--ink-2); display: block; }
+  .bq-meta { font-size: 13px; color: var(--ink-3); }
+  .bq-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .bq-prod { display: flex; justify-content: space-between; gap: 14px; }
+
+  .bq-flag { margin-top: 20px; padding: 13px 15px; border-radius: 8px; font-size: 14px; line-height: 1.55; }
+  .bq-conflict { background: #fdf3d7; color: #6b4f12; }
+  .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
+  .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
+
+  .hist-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 13px 0; border-top: 1px solid var(--border); }
+  .hist-main { min-width: 0; }
+  .hist-title { font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 2px 0 0; }
+  .hist-right { text-align: right; white-space: nowrap; }
+  .hist-country { font-size: 15px; font-weight: 700; color: var(--ink-deep); }
+  .hist-del { background: none; border: 0; padding: 4px 0 0; font: inherit; font-size: 12.5px; color: var(--accent); cursor: pointer; }
+  .hist-toggle { display: flex; align-items: flex-start; gap: 11px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); margin: 0 0 24px; }
+  .hist-toggle input { margin-top: 3px; width: 17px; height: 17px; }
+  .hist-toggle label { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+  .hist-toggle .fine { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .hist-danger { margin-top: 26px; font-size: 13px; color: var(--muted); }
+  .hist-danger button { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<section class="acct-hero">
+  <div class="wrap">
+    <p style="display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;">Your account</p>
+    <h1>Your scan history</h1>
+    <p>Off unless you turn it on. We do not keep a record of what you check unless you ask us to — and you can delete it, all of it, at any moment.</p>
+  </div>
+</section>
+
+<section class="acct-body">
+  <div class="wrap">
+    <div id="hist-gate" class="acct-gate" hidden>
+      <p>Sign in to manage your history.</p>
+      <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fhistory.html">Sign in</a>
+    </div>
+
+    <div id="hist-main" hidden>
+      <div class="hist-toggle">
+        <input type="checkbox" id="hist-enabled">
+        <label for="hist-enabled">
+          Keep a history of what I check
+          <span class="fine">Products and brands, in one list. Turning this off deletes everything already stored — stopping and forgetting are the same action.</span>
+        </label>
+      </div>
+
+      <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
+      <div id="hist-list"></div>
+
+      <p class="hist-danger" id="hist-danger" hidden>
+        <button type="button" id="hist-clear">Delete my entire history</button>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/#install">Browser extension</a>
+      <a href="/#mobile">Mobile app</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/medicine-methodology.html">Medicine methodology</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/brands.html">Brand report</a>
+      <a href="/coverage.html">Request a retailer</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+</footer>
+<script src="/assets/account-guard.js"></script>
+<script>
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+function flag(cc) {
+  var c = String(cc || "").toUpperCase();
+  if (!/^[A-Z]{2}$/.test(c)) return "";
+  return String.fromCodePoint.apply(null, c.split("").map(function (ch) {
+    return 127397 + ch.charCodeAt(0);
+  }));
+}
+
+var gate = document.getElementById("hist-gate");
+var main = document.getElementById("hist-main");
+var list = document.getElementById("hist-list");
+var empty = document.getElementById("hist-empty");
+var danger = document.getElementById("hist-danger");
+var toggle = document.getElementById("hist-enabled");
+
+function rowHtml(it) {
+  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
+  var sub = [it.kind === "brand" ? "Brand" : "Product", it.brand, it.retailer, when]
+    .filter(Boolean).join(" · ");
+  return '<div class="hist-row" data-id="' + it.id + '">'
+    + '<div class="hist-main"><p class="hist-title">' + esc(it.title || it.subject_key) + "</p>"
+    + '<p class="hist-sub">' + esc(sub)
+    // The debug link is the point of storing it: "one of my scans looked
+    // wrong last week" becomes a capture an admin can open.
+    + (it.debug_session_code ? " · diagnostic " + esc(it.debug_session_code) : "")
+    + "</p></div>"
+    + '<div class="hist-right"><span class="hist-country">' + flag(it.made_in_country_code)
+    + " " + esc(it.made_in_country || "") + "</span><br>"
+    + '<button class="hist-del" type="button">Delete</button></div></div>';
+}
+
+async function load() {
+  var r = await RPOAuth.authedFetch("/account/history?limit=200");
+  if (r === null) { gate.hidden = false; main.hidden = true; return; }
+  if (!r.ok) return;
+  var d = await r.json();
+  gate.hidden = true;
+  main.hidden = false;
+  toggle.checked = !!d.enabled;
+  var items = d.items || [];
+  list.innerHTML = items.map(rowHtml).join("");
+  empty.hidden = items.length > 0;
+  danger.hidden = items.length === 0;
+}
+
+toggle.addEventListener("change", async function () {
+  var on = toggle.checked;
+  if (!on && !confirm("Turning history off deletes everything already saved. Continue?")) {
+    toggle.checked = true;
+    return;
+  }
+  await RPOAuth.authedFetch("/account/settings", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ auto_check_preference: null, save_history: on }),
+  });
+  load();
+});
+
+list.addEventListener("click", async function (e) {
+  var btn = e.target.closest(".hist-del");
+  if (!btn) return;
+  var row = btn.closest(".hist-row");
+  await RPOAuth.authedFetch("/account/history/" + row.dataset.id, { method: "DELETE" });
+  load();
+});
+
+document.getElementById("hist-clear").addEventListener("click", async function () {
+  if (!confirm("Delete your entire history? This cannot be undone.")) return;
+  await RPOAuth.authedFetch("/account/history", { method: "DELETE" });
+  load();
+});
+
+if (!RPOAuth.isSignedIn()) { gate.hidden = false; } else { load(); }
+
+</script>
+</body>
+</html>

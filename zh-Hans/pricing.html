@@ -240,6 +240,11 @@
   }
   .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
   .checks-fine { font-size: 12px; color: var(--muted); }
+  .checks-kind {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 10px;
+  }
 
   .same-box {
     margin: 30px 0 0; padding: 24px 26px;
@@ -510,6 +515,7 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">其余的一切 —— 评分、评分背后的依据，以及对评分提出异议的能力 —— 在所有方案中完全相同，免费方案也不例外。</p>
 
       <!-- The distinction, at the size it deserves. -->
+      <p class="checks-kind">产品查询</p>
       <div class="checks-row">
         <div class="checks-cell">
           <div class="checks-plan">Free</div>
@@ -528,8 +534,32 @@
         </div>
       </div>
 
+      <p class="checks-kind" style="margin-top: 26px;">品牌查询</p>
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num">5</div>
+          <div class="checks-sub">次品牌查询（一次性）<br><span class="checks-fine">永不重置</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">10</div>
+          <div class="checks-sub">次品牌查询／月<br><span class="checks-fine">每月 1 日重置</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">无限</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">没有上限<br><span class="checks-fine">想查多少查多少</span></div>
+        </div>
+      </div>
+
       <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
-        一次查询，指的是你首次为某件商品评分。重新打开已经评过分的商品始终免费 —— 即使配额已经用完也一样。 <a href="/terms.html#what-is-a-check">服务条款中的完整定义</a>。
+        <strong>产品查询</strong>是指首次对某一产品进行评分。<strong>品牌查询</strong>是指首次查询某一家公司。两者额度独立——查询产品不会消耗品牌查询次数。重新打开已查询过的内容始终免费，即使额度用尽后也是如此。
+        <a href="/terms.html#what-is-a-check">条款中的完整定义</a>.
+      </p>
+
+      <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.6;">
+        品牌的公开记录——谁注册了该名称、在哪个国家、网站在何处注册——<strong>对所有人免费，所有方案均无限制</strong>。品牌查询次数仅用于我们对该公司最终归属的更深入评估。
       </p>
 
       <!-- Stated as prose, not as a column of ticks. These are the reasons

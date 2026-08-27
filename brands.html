@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand report — Real Product Origin</title>
+<meta name="description" content="Look up who owns a brand — the public trademark record first, our assessment kept separate.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://realproductorigin.com/brands">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+
+  .acct-hero { padding: 40px 0 22px; background: linear-gradient(180deg, var(--bg-cream), var(--bg-cream-deep)); border-bottom: 1px solid var(--border); }
+  .acct-hero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 10px; color: var(--ink-deep); }
+  .acct-hero p { font-size: 16px; color: var(--ink-3); max-width: 620px; margin: 0; line-height: 1.55; }
+  .acct-body { padding: 30px 0 60px; }
+  .acct-gate { padding: 40px 0 60px; }
+  .acct-gate p { font-size: 16px; color: var(--ink-3); margin: 0 0 18px; }
+
+  .bq-form { display: flex; gap: 8px; max-width: 560px; margin: 0 0 8px; }
+  .bq-input { flex: 1; min-width: 0; padding: 11px 13px; font: inherit; font-size: 15px; color: var(--ink-2); background: #fff; border: 1px solid var(--border); border-radius: 8px; }
+  .bq-input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .bq-go { padding: 11px 20px; font: inherit; font-size: 15px; font-weight: 600; color: #fff; background: var(--ink-deep); border: 0; border-radius: 8px; cursor: pointer; }
+  .bq-go:disabled { opacity: .55; cursor: default; }
+  .bq-note, .bq-quota { font-size: 13px; color: var(--muted); margin: 0; }
+
+  .bq-name { font-family: var(--serif); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: var(--ink-deep); margin: 26px 0 2px; }
+  .bq-domain { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+
+  /* Tier colours are the same idea as the extension's: provenance, never a
+     verdict. They must not borrow --accent, which means "act on this". */
+  .bq-block { margin: 18px 0 0; padding: 2px 0 2px 14px; border-left: 3px solid #9aa3ad; }
+  .bq-block[data-tier="record"] { border-left-color: #1d4ed8; }
+  .bq-block[data-tier="measured"] { border-left-color: #15803d; }
+  .bq-block[data-tier="reported"] { border-left-color: #c3c9d0; }
+  .bq-tier { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .bq-block[data-tier="record"] .bq-tier { color: #1d4ed8; }
+  .bq-block[data-tier="measured"] .bq-tier { color: #15803d; }
+  .bq-title { font-size: 13px; font-weight: 600; color: var(--ink-3); margin: 3px 0 4px; }
+  .bq-country { font-size: 21px; font-weight: 700; color: var(--ink-deep); margin: 0; }
+  .bq-detail { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+
+  .bq-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .bq-list li { padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
+  .bq-owner { font-weight: 600; color: var(--ink-2); display: block; }
+  .bq-meta { font-size: 13px; color: var(--ink-3); }
+  .bq-id { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .bq-prod { display: flex; justify-content: space-between; gap: 14px; }
+
+  .bq-flag { margin-top: 20px; padding: 13px 15px; border-radius: 8px; font-size: 14px; line-height: 1.55; }
+  .bq-conflict { background: #fdf3d7; color: #6b4f12; }
+  .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
+  .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
+
+  .hist-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 13px 0; border-top: 1px solid var(--border); }
+  .hist-main { min-width: 0; }
+  .hist-title { font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0; overflow-wrap: anywhere; }
+  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 2px 0 0; }
+  .hist-right { text-align: right; white-space: nowrap; }
+  .hist-country { font-size: 15px; font-weight: 700; color: var(--ink-deep); }
+  .hist-del { background: none; border: 0; padding: 4px 0 0; font: inherit; font-size: 12.5px; color: var(--accent); cursor: pointer; }
+  .hist-toggle { display: flex; align-items: flex-start; gap: 11px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); margin: 0 0 24px; }
+  .hist-toggle input { margin-top: 3px; width: 17px; height: 17px; }
+  .hist-toggle label { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+  .hist-toggle .fine { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .hist-danger { margin-top: 26px; font-size: 13px; color: var(--muted); }
+  .hist-danger button { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+    <nav>
+      <a href="/products.html">Products</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/support.html">Support</a>
+      <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
+      <a class="nav-cta" href="/#install">Install</a>
+    </nav>
+  </div>
+</header>
+
+<section class="acct-hero">
+  <div class="wrap">
+    <p style="display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;">Brand report</p>
+    <h1>Who is actually behind this brand?</h1>
+    <p>Type a company name or paste a website. We show you the public record first — who registered the name and where — and keep our own assessment clearly separate from it.</p>
+  </div>
+</section>
+
+<section class="acct-body">
+  <div class="wrap">
+    <form class="bq-form" id="bq-form" autocomplete="off">
+      <label class="sr-only" for="bq-input">Brand name or website</label>
+      <input id="bq-input" class="bq-input" type="text" placeholder="e.g. Anker, or anker.com" spellcheck="false">
+      <button id="bq-go" class="bq-go" type="submit">Look up</button>
+    </form>
+    <p class="bq-note">The public record is free and unlimited on every tier. A brand check is used only for our assessment of who ultimately owns the company.</p>
+
+    <div id="bq-status" style="margin-top:22px;font-size:15px;color:var(--ink-3);"></div>
+    <div id="bq-result"></div>
+    <p class="bq-quota" id="bq-quota" style="margin-top:18px;"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="col brand-block">
+      <a class="brand" href="/">
+      <span class="mark">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <path d="M 20 96 L 138 86 L 144 132 L 26 142 Z" fill="#faf6ed" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M 32 116 L 132 108" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M 38 124 Q 78 100 130 116" fill="none" stroke="#0284c7" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+          <circle cx="38" cy="124" r="4.5" fill="#0284c7"/>
+          <path d="M 104 32 C 86 32, 74 46, 74 60 C 74 84, 104 112, 104 112 C 104 112, 134 84, 134 60 C 134 46, 122 32, 104 32 Z" fill="#ea580c"/>
+          <circle cx="104" cy="60" r="9" fill="#faf6ed"/>
+        </svg>
+      </span>
+      <span class="wordmark">Real Product Origin<span class="period">.</span></span>
+    </a>
+      <p class="brand-tagline">Know what you're getting, and who you're paying.</p>
+    </div>
+    <div class="col">
+      <h4>Product</h4>
+      <a href="/#install">Browser extension</a>
+      <a href="/#mobile">Mobile app</a>
+      <a href="/products.html#methodology">How it works</a>
+      <a href="/medicine-methodology.html">Medicine methodology</a>
+      <a href="/why.html">Why It Matters</a>
+      <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/brands.html">Brand report</a>
+      <a href="/coverage.html">Request a retailer</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="/support.html">Support</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+      <a href="mailto:press@realproductorigin.com">Press</a>
+    </div>
+    <div class="col">
+      <h4>Legal</h4>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
+      <a href="/corrections.html">Corrections</a>
+    </div>
+  </div>
+  <div class="copy">© <span id="year"></span> Real Product Origin. All rights reserved.</div>
+  <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
+</footer>
+<script src="/assets/account-guard.js"></script>
+<script>
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+function flag(cc) {
+  var c = String(cc || "").toUpperCase();
+  if (!/^[A-Z]{2}$/.test(c)) return "";
+  return String.fromCodePoint.apply(null, c.split("").map(function (ch) {
+    return 127397 + ch.charCodeAt(0);
+  }));
+}
+
+var TIER = { record: "On the record", measured: "What we've checked",
+             assessed: "Our assessment", reported: "What people report" };
+
+function blockHtml(b) {
+  var country = b.country || b.country_code || "";
+  var html = '<section class="bq-block" data-tier="' + esc(b.tier) + '">'
+    + '<p class="bq-tier">' + esc(TIER[b.tier] || b.tier) + '</p>'
+    + '<p class="bq-title">' + esc(b.title) + '</p>';
+  if (country) html += '<p class="bq-country">' + flag(b.country_code) + " " + esc(country) + '</p>';
+  if (b.detail) html += '<p class="bq-detail">' + esc(b.detail) + '</p>';
+
+  // Filings are listed rather than reduced to one country: 66 of the 261
+  // brands we have scored hold marks in more than one, and choosing one
+  // silently states something the record does not.
+  if (b.key === "trademark" && b.items && b.items.length) {
+    html += '<ul class="bq-list">' + b.items.slice(0, 5).map(function (f) {
+      var where = [f.city, f.state, f.country_code].filter(Boolean).join(", ");
+      return "<li><span class='bq-owner'>" + esc(f.owner || "Unknown owner") + "</span>"
+        + (where ? "<span class='bq-meta'>" + flag(f.country_code) + " " + esc(where) + "</span> " : "")
+        + (f.filed ? "<span class='bq-meta'>filed " + esc(f.filed) + "</span> " : "")
+        + (f.serial ? "<span class='bq-id'>USPTO " + esc(f.serial) + "</span>" : "")
+        + "</li>";
+    }).join("") + "</ul>";
+  } else if (b.key === "products" && b.items && b.items.length) {
+    html += '<ul class="bq-list">' + b.items.slice(0, 25).map(function (it) {
+      return "<li class='bq-prod'><span>" + esc(it.title || "Untitled") + "</span>"
+        + "<span>" + flag(it.country_code) + " " + esc(it.country || it.country_code || "") + "</span></li>";
+    }).join("") + "</ul>";
+  }
+  return html + "</section>";
+}
+
+function render(d) {
+  var status = document.getElementById("bq-status");
+  var out = document.getElementById("bq-result");
+  var quota = document.getElementById("bq-quota");
+  if (!d || d.error) {
+    out.innerHTML = "";
+    status.textContent = d && d.error === "rate_limited"
+      ? "Too many lookups just now — try again in a minute."
+      : "We couldn't identify a brand from that. Try the company name, or its website.";
+    return;
+  }
+  status.textContent = "";
+  var blocks = d.blocks || [];
+  var tm = blocks.filter(function (b) { return b.key === "trademark"; })[0];
+  var as = blocks.filter(function (b) { return b.tier === "assessed"; })[0];
+
+  var extra = "";
+  if (tm && as && tm.country_code && as.country_code && tm.country_code !== as.country_code) {
+    extra += '<div class="bq-flag bq-conflict"><strong>These disagree.</strong> '
+      + "The name is registered in " + esc(tm.country || tm.country_code)
+      + "; we believe the company is " + esc(as.country || as.country_code)
+      + ". One brand in four looks local on paper and isn't.</div>";
+  }
+  if (d.assessment_withheld) {
+    extra += '<div class="bq-flag bq-withheld">You have used all your brand checks. '
+      + "The public record above is always free — our assessment of who owns the "
+      + 'company needs an upgrade. <a href="/pricing.html">See plans</a>.</div>';
+  }
+  if (d.not_found && d.not_found.length) {
+    extra += '<p class="bq-notfound"><strong>Not found:</strong> '
+      + d.not_found.map(esc).join(" · ") + "</p>";
+  }
+
+  out.innerHTML = '<h2 class="bq-name">' + esc(d.display_name || d.brand_key) + "</h2>"
+    + (d.domain ? '<p class="bq-domain">' + esc(d.domain) + "</p>" : "")
+    + blocks.map(blockHtml).join("") + extra;
+
+  var q = d.quota || {};
+  if (!q.unlimited && q.limit != null) {
+    // Never a reset date on a lifetime pool.
+    quota.textContent = q.used + " of " + q.limit + " brand checks used"
+      + (q.period_kind === "lifetime" ? "." : " this month.");
+  } else {
+    quota.textContent = "";
+  }
+}
+
+async function lookup(query) {
+  var q = String(query || "").trim();
+  if (!q) return;
+  var go = document.getElementById("bq-go");
+  document.getElementById("bq-result").innerHTML = "";
+  document.getElementById("bq-status").textContent = "Looking…";
+  go.disabled = true;
+  try {
+    var headers = {};
+    var token = RPOAuth.getToken();
+    if (token) headers.Authorization = "Bearer " + token;
+    var iid = RPOAuth.installId();
+    if (iid) headers["X-Install-Id"] = iid;
+    var r = await fetch(RPOAuth.API + "/brands/" + encodeURIComponent(q), { headers: headers });
+    if (r.status === 429) { render({ error: "rate_limited" }); return; }
+    if (!r.ok) { render({ error: "http" }); return; }
+    render(await r.json());
+  } catch (_) {
+    render({ error: "unreachable" });
+  } finally {
+    go.disabled = false;
+  }
+}
+
+document.getElementById("bq-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  var v = document.getElementById("bq-input").value;
+  history.replaceState({}, "", location.pathname + "?q=" + encodeURIComponent(v.trim()));
+  lookup(v);
+});
+
+// Deep-linkable, so a brand report can be sent to somebody.
+(function () {
+  var q = new URLSearchParams(location.search).get("q");
+  if (q) {
+    document.getElementById("bq-input").value = q;
+    lookup(q);
+  }
+})();
+
+</script>
+</body>
+</html>

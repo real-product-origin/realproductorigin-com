@@ -240,6 +240,11 @@
   }
   .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
   .checks-fine { font-size: 12px; color: var(--muted); }
+  .checks-kind {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 10px;
+  }
 
   .same-box {
     margin: 30px 0 0; padding: 24px 26px;
@@ -510,6 +515,7 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">それ以外 — スコア、その根拠、そして異議を申し立てられること — はすべてのプランで同じです。無料プランも含みます。</p>
 
       <!-- The distinction, at the size it deserves. -->
+      <p class="checks-kind">製品チェック</p>
       <div class="checks-row">
         <div class="checks-cell">
           <div class="checks-plan">Free</div>
@@ -528,8 +534,32 @@
         </div>
       </div>
 
+      <p class="checks-kind" style="margin-top: 26px;">ブランドチェック</p>
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num">5</div>
+          <div class="checks-sub">回のブランドチェック（1回限り）<br><span class="checks-fine">リセットされません</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">10</div>
+          <div class="checks-sub">回のブランドチェック／月<br><span class="checks-fine">毎月1日にリセット</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">無制限</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">上限なし<br><span class="checks-fine">好きなだけ調べられます</span></div>
+        </div>
+      </div>
+
       <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
-        チェックとは、ある商品を初めてスコアリングすることです。一度スコアリングした商品を再び開くのはいつでも無料で、回数を使い切った後も同じです。 <a href="/terms.html#what-is-a-check">利用規約の正式な定義</a>。
+        <strong>製品チェック</strong>とは、ある製品を初めて評価することです。<strong>ブランドチェック</strong>とは、ある企業を初めて調べることです。これらは別々の枠で、製品をチェックしてもブランドチェックは消費されません。すでにチェックしたものを再度開くのは、枠を使い切った後でも常に無料です。
+        <a href="/terms.html#what-is-a-check">利用規約の完全な定義</a>.
+      </p>
+
+      <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.6;">
+        ブランドの公開記録 — 誰がその名称を登録したか、どの国か、ウェブサイトの登録先はどこか — は<strong>すべてのプランで、誰でも無制限に無料</strong>です。ブランドチェックは、その企業を最終的に誰が所有しているかについての、より踏み込んだ評価にのみ使われます。
       </p>
 
       <!-- Stated as prose, not as a column of ticks. These are the reasons

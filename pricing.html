@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — Product Origin Checker</title>
-<meta name="description" content="A free 20-check trial, Basic at $4.99/mo for 50 checks a month, and Unlimited at $9.99/mo. Sources cited and contest available on every tier, including Free.">
+<meta name="description" content="A free trial of 20 product checks and 5 brand checks, Basic at $4.99/mo, and Unlimited at $9.99/mo. Sources cited and contest available on every tier, including Free.">
 <meta property="og:title" content="Pricing — Product Origin Checker">
 <meta property="og:description" content="Free 20-check trial, Basic $4.99/mo, Unlimited $9.99/mo. Annual pricing available. Sources cited on every tier.">
 <meta property="og:type" content="website">
@@ -252,6 +252,11 @@
   }
   .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
   .checks-fine { font-size: 12px; color: var(--muted); }
+  .checks-kind {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 10px;
+  }
 
   .same-box {
     margin: 30px 0 0; padding: 24px 26px;
@@ -517,10 +522,13 @@
   <div class="wrap-wide">
     <div style="max-width: 1020px; margin: 0 auto; padding: 0 24px;">
       <p style="display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px;">What actually differs</p>
-      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">The only thing that changes is how many products you can check.</h2>
+      <h2 id="compare-heading" style="font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; color: var(--ink-deep);">The only thing that changes is how much you can check.</h2>
       <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">Everything else — the score, the evidence behind it, and the ability to argue with it — is the same on every tier, including Free.</p>
 
-      <!-- The distinction, at the size it deserves. -->
+      <!-- Two separate allowances, labelled. They are not a shared pool and
+           the page must not let anyone assume they are: the Terms define a
+           check as a distinct PRODUCT, and a brand lookup is its own thing. -->
+      <p class="checks-kind">Product checks</p>
       <div class="checks-row">
         <div class="checks-cell">
           <div class="checks-plan">Free</div>
@@ -539,10 +547,39 @@
         </div>
       </div>
 
+      <p class="checks-kind" style="margin-top: 26px;">Brand checks</p>
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num">5</div>
+          <div class="checks-sub">brand checks, one time<br><span class="checks-fine">Never resets</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">10</div>
+          <div class="checks-sub">brand checks a month<br><span class="checks-fine">Resets on the 1st</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">Unlimited</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">no cap<br><span class="checks-fine">Look up as many as you like</span></div>
+        </div>
+      </div>
+
       <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
-        A check is the first time you score a distinct product. Re-opening something
-        you already scored is free, always — including after your allowance runs out.
-        <a href="/terms.html#what-is-a-check">Full definition in the Terms</a>.
+        A <strong>product check</strong> is the first time you score a distinct product.
+        A <strong>brand check</strong> is the first time you look up a distinct company.
+        They are separate allowances — checking a product never uses a brand check.
+        Re-opening either one you have already checked is free, always, including
+        after your allowance runs out.
+        <a href="/terms.html#what-is-a-check">Full definitions in the Terms</a>.
+      </p>
+
+      <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.6;">
+        The public record on a brand — who registered the name, in which country,
+        and where the website is registered — is <strong>free to everyone, on every
+        tier, with no limit</strong>. A brand check is only used for our deeper
+        assessment of who ultimately owns the company.
       </p>
 
       <!-- Stated as prose, not as a column of ticks. These are the reasons
@@ -670,6 +707,7 @@
       <a href="/medicine-methodology.html">Medicine methodology</a>
       <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
+      <a href="/brands.html">Brand report</a>
       <a href="/coverage.html">Request a retailer</a>
     </div>
         <div class="col">

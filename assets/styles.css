@@ -1169,6 +1169,11 @@ article h2 {
   color: var(--ink-deep);
 }
 article h3 { margin: 28px 0 10px; font-size: 18px; font-weight: 700; color: var(--ink-deep); }
+/* Fourth level, for the Terms' two definitions of a check. Only `footer .col
+   h4` existed, which is scoped to the footer — an h4 in a legal document was
+   falling through to browser defaults and rendering larger than the h3 above
+   it. */
+article h4 { margin: 20px 0 8px; font-size: 15px; font-weight: 700; color: var(--ink-deep); }
 article p, article ul, article ol { color: var(--ink-2); }
 article p { margin: 12px 0; }
 article ul, article ol { padding-left: 22px; }

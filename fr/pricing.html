@@ -240,6 +240,11 @@
   }
   .checks-sub { font-size: 14px; line-height: 1.45; color: var(--ink-3); }
   .checks-fine { font-size: 12px; color: var(--muted); }
+  .checks-kind {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin: 0 0 10px;
+  }
 
   .same-box {
     margin: 30px 0 0; padding: 24px 26px;
@@ -510,6 +515,7 @@
       <p style="font-size: 16px; color: var(--ink-3); max-width: 660px; margin: 0 0 32px; line-height: 1.55;">Tout le reste — le score, les preuves qui le fondent et la possibilité de le contester — est identique dans toutes les formules, y compris la gratuite.</p>
 
       <!-- The distinction, at the size it deserves. -->
+      <p class="checks-kind">Vérifications de produit</p>
       <div class="checks-row">
         <div class="checks-cell">
           <div class="checks-plan">Free</div>
@@ -528,8 +534,32 @@
         </div>
       </div>
 
+      <p class="checks-kind" style="margin-top: 26px;">Vérifications de marque</p>
+      <div class="checks-row">
+        <div class="checks-cell">
+          <div class="checks-plan">Free</div>
+          <div class="checks-num">5</div>
+          <div class="checks-sub">vérifications de marque, une seule fois<br><span class="checks-fine">Jamais renouvelées</span></div>
+        </div>
+        <div class="checks-cell">
+          <div class="checks-plan">Basic</div>
+          <div class="checks-num">10</div>
+          <div class="checks-sub">vérifications de marque par mois<br><span class="checks-fine">Renouvelées le 1er</span></div>
+        </div>
+        <div class="checks-cell checks-cell-hero">
+          <div class="checks-plan">Illimité</div>
+          <div class="checks-num">&infin;</div>
+          <div class="checks-sub">sans plafond<br><span class="checks-fine">Consultez autant de marques que vous voulez</span></div>
+        </div>
+      </div>
+
       <p style="font-size: 13px; color: var(--muted); margin: 14px 0 0; line-height: 1.6;">
-        Une vérification, c'est la première fois que vous évaluez un produit donné. Rouvrir un produit déjà évalué est toujours gratuit — y compris une fois votre quota épuisé. <a href="/terms.html#what-is-a-check">Définition complète dans les CGU</a>.
+        Une <strong>vérification de produit</strong> est la première fois que vous évaluez un produit donné. Une <strong>vérification de marque</strong> est la première fois que vous consultez une entreprise donnée. Ce sont deux quotas distincts — vérifier un produit ne consomme jamais une vérification de marque. Rouvrir quelque chose que vous avez déjà vérifié est toujours gratuit, y compris une fois votre quota épuisé.
+        <a href="/terms.html#what-is-a-check">Définitions complètes dans les Conditions</a>.
+      </p>
+
+      <p style="font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.6;">
+        Les registres publics d'une marque — qui a déposé le nom, dans quel pays, et où le site est enregistré — sont <strong>gratuits pour tous, sur toutes les formules, sans limite</strong>. Une vérification de marque n'est utilisée que pour notre analyse plus poussée de qui possède réellement l'entreprise.
       </p>
 
       <!-- Stated as prose, not as a column of ticks. These are the reasons
