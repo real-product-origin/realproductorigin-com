@@ -208,7 +208,7 @@
     </a>
     <nav>
       <a href="/products.html">Products</a>
-      <a href="/why.html">Why It Matters</a>
+      <a class="nav-hide-sm" href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
       <a class="nav-cta" href="/#install">Install</a>
@@ -307,18 +307,37 @@
         </div>
       </div>
 
-      <!-- ── Redeem section ─────────────────────────────────────────────── -->
-      <p class="section-eyebrow">Redeem</p>
+      <!-- ── What you can do while signed in ────────────────────────────
+           Levi signed in, looked for a way to check a brand and a way to
+           see what he had checked, and found neither. Both existed; both
+           were reachable only from a footer link. An account page that
+           lists a plan and nothing you can DO with it is a receipt.
+
+           The history card was previously nested inside the Redeem card
+           below — a card inside a card, under the wrong eyebrow. -->
+      <p class="section-eyebrow">Your tools</p>
       <div class="card">
-        <section class="card">
+        <h2>Check a brand or company</h2>
+        <p style="font-size:15px;color:var(--ink-3);line-height:1.55;margin:0 0 14px;">
+          Who owns a brand, where their trademarks are filed, and who
+          registered their domain. Brand checks are a separate allowance
+          from product checks — they don't spend your product scores.
+        </p>
+        <a class="nav-cta" href="/brands.html">Check a brand</a>
+      </div>
+
+      <div class="card">
         <h2>Your scan history</h2>
         <p style="font-size:15px;color:var(--ink-3);line-height:1.55;margin:0 0 14px;">
           Off unless you turn it on. We keep no record of what you check
           otherwise — and you can delete what is stored at any time.
         </p>
         <a class="nav-cta" href="/history.html">Manage history</a>
-      </section>
+      </div>
 
+      <!-- ── Redeem section ─────────────────────────────────────────────── -->
+      <p class="section-eyebrow">Redeem</p>
+      <div class="card">
         <h2>Redeem an access code</h2>
         <div class="redeem-row">
           <input type="text" id="redeem-input" placeholder="RPO-XXXX-XXXX" autocomplete="off" spellcheck="false">
