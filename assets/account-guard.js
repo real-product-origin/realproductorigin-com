@@ -74,6 +74,30 @@
     }
   }
 
+  /* Flip the nav's "Sign in" to "My Account" when there is a session.
+   *
+   * This lived as an inline copy on each page that had it, and the two
+   * newest pages simply never got a copy — so signing in, then clicking
+   * Brands, looked exactly like being signed out. It belongs here for the
+   * reason at the top of this file: "are you signed in" answered in more
+   * than one place is "are you signed in" answered differently.
+   *
+   * Runs on DOMContentLoaded because this file is loaded with `defer` on
+   * some pages and at the end of <body> on others, and the link has to
+   * exist either way. */
+  function paintNavAccountLink() {
+    var link = document.getElementById("nav-account-link");
+    if (!link || !getToken()) return;
+    link.textContent = "My Account";
+    link.href = "/subscribe/account.html";
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", paintNavAccountLink);
+  } else {
+    paintNavAccountLink();
+  }
+
   window.RPOAuth = {
     API: API,
     getToken: getToken,
@@ -82,5 +106,6 @@
     authedFetch: authedFetch,
     installId: installId,
     isSignedIn: function () { return !!getToken(); },
+    paintNavAccountLink: paintNavAccountLink,
   };
 })();
