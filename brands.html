@@ -95,7 +95,6 @@
       <a class="nav-hide-sm" href="/why.html">Why It Matters</a>
       <a href="/pricing.html">Pricing</a>
       <a class="nav-hide-sm" href="/support.html">Support</a>
-      <a href="/brands.html">Brands</a>
       <a id="nav-account-link" href="/subscribe/signin.html">Sign in</a>
       <a class="nav-cta" href="/#install">Install</a>
     </nav>
@@ -112,16 +111,28 @@
 
 <section class="acct-body">
   <div class="wrap">
+    <!-- Signed out you get the pitch, not the tool. The extension keeps its
+         anonymous allowance — it is metered against an install id and priced
+         that way — but on the site a brand check needs an account. Levi's
+         call. The hero above still says what the page is, so the URL is
+         still worth sending to somebody. -->
+    <div id="bq-gate" class="acct-gate" hidden>
+      <p>Sign in to look up a brand. Free accounts get five brand checks.</p>
+      <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fbrands.html">Sign in</a>
+    </div>
+
+    <div id="bq-main" hidden>
     <form class="bq-form" id="bq-form" autocomplete="off">
       <label class="sr-only" for="bq-input">Brand name or website</label>
       <input id="bq-input" class="bq-input" type="text" placeholder="e.g. Anker, or anker.com" spellcheck="false">
       <button id="bq-go" class="bq-go" type="submit">Look up</button>
     </form>
-    <p class="bq-note">The public record is free and unlimited on every tier. A brand check is used only for our assessment of who ultimately owns the company.</p>
+    <p class="bq-note">The public record — filings and domain registration — costs you nothing and is unlimited on every plan. A brand check is spent only on our assessment of who ultimately owns the company.</p>
 
     <div id="bq-status" style="margin-top:22px;font-size:15px;color:var(--ink-3);"></div>
     <div id="bq-result"></div>
     <p class="bq-quota" id="bq-quota" style="margin-top:18px;"></p>
+    </div>
   </div>
 </section>
 
@@ -309,8 +320,17 @@ document.getElementById("bq-form").addEventListener("submit", function (e) {
   lookup(v);
 });
 
-// Deep-linkable, so a brand report can be sent to somebody.
+// Which half of the page you get. RPOAuth.getToken() also accepts a token
+// arriving on the URL from a magic link, so returning from sign-in lands
+// straight on the tool rather than on the gate again.
 (function () {
+  var signedIn = window.RPOAuth && window.RPOAuth.isSignedIn();
+  document.getElementById("bq-gate").hidden = !!signedIn;
+  document.getElementById("bq-main").hidden = !signedIn;
+  if (!signedIn) return;
+
+  // Deep-linkable, so a brand report can be sent to somebody — but only
+  // run once we know there is an account to spend a check against.
   var q = new URLSearchParams(location.search).get("q");
   if (q) {
     document.getElementById("bq-input").value = q;
