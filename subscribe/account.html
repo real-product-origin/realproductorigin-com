@@ -179,6 +179,16 @@
   }
   .tool-go { font-size: 13.5px; font-weight: 600; color: var(--accent); }
 
+  .setting-sep { height: 1px; background: var(--border); margin: 20px 0; }
+  .setting-field label strong { font-size: 15px; font-weight: 600; color: var(--ink-deep); }
+  .setting-field .fine { display: block; font-size: 13.5px; line-height: 1.5; color: var(--ink-3); margin-top: 3px; }
+  .name-row { display: flex; gap: 8px; margin-top: 11px; max-width: 420px; }
+  .name-row input { flex: 1; min-width: 0; padding: 10px 13px; font: inherit; font-size: 15px; color: var(--ink); background: #fff; border: 1px solid var(--border-strong); border-radius: 8px; }
+  .name-row input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(17,24,39,0.08); }
+  .name-row .btn { padding: 10px 18px; font-size: 14px; white-space: nowrap; }
+  .setting-elsewhere { font-size: 13.5px; line-height: 1.55; color: var(--ink-3); margin: 0; }
+  .setting-elsewhere strong { color: var(--ink-deep); }
+
   /* ── History switch ─────────────────────────────────────────────────────── */
   .hist-toggle-row { display: flex; gap: 11px; align-items: flex-start; cursor: pointer; }
   .hist-toggle-row input { margin-top: 3px; flex: none; }
@@ -296,24 +306,59 @@
              checks — brand checks never spend your product scores.</p>
           <span class="tool-go">Look up a brand →</span>
         </a>
+
         <a class="tool" href="/history.html">
-          <h3>Your history</h3>
-          <p>Products and brands you asked us to keep, in one list. Off
-             unless you turn it on, and yours to delete at any moment.</p>
+          <h3>View scoring history</h3>
+          <p>Products and brands in one list, newest first. Off unless you
+             turn it on below, and yours to delete a row at a time or all
+             at once.</p>
           <span class="tool-go">Open your history →</span>
         </a>
+
+        <a class="tool" href="/#install">
+          <h3>Install the extension</h3>
+          <p>Scores appear on the product page itself, on Amazon, Target,
+             Walmart and 30 other retailers. Chrome, Edge, Brave and
+             Firefox.</p>
+          <span class="tool-go">Get the extension →</span>
+        </a>
+
+        <!-- Honest, because both store links on /#mobile are still
+             disabled placeholders. A card promising an install that
+             dead-ends is worse than one that says "not yet". -->
+        <a class="tool" href="/#mobile">
+          <h3>Get the mobile app</h3>
+          <p>Share any product page to the app and get the same four
+             answers. <strong>Not out yet</strong> — see what it does and
+             when it lands.</p>
+          <span class="tool-go">Preview the app →</span>
+        </a>
+
         <a class="tool" href="/products.html#methodology">
           <h3>How scoring works</h3>
           <p>What we read, which sources back each of the four answers, and
              why a confidence is shown rather than a verdict.</p>
           <span class="tool-go">Read the method →</span>
         </a>
+
+        <a class="tool" href="#settings">
+          <h3>Settings</h3>
+          <p>Whether we keep a history of what you check, and how we
+             contact you.</p>
+          <span class="tool-go">Change your settings →</span>
+        </a>
       </div>
 
-      <!-- The history switch itself, not just a link to it. Somebody
-           looking for a setting looks on the settings page. -->
-      <div class="card" id="hist-card">
-        <h2>Keep a history</h2>
+      <!-- ── Settings ───────────────────────────────────────────────────
+           Everything here is ACCOUNT-scoped, so it follows the person to
+           every browser they sign in on. That is the line, and it is why
+           the extension's debug switch is NOT here: it is about what one
+           browser is doing, and an account-wide version would turn full
+           request capture on for machines nobody is troubleshooting. -->
+      <p class="section-eyebrow" id="settings">Settings</p>
+      <div class="card">
+        <h2>Your settings</h2>
+
         <label class="hist-toggle-row">
           <input type="checkbox" id="acct-hist-enabled">
           <span>
@@ -324,6 +369,43 @@
           </span>
         </label>
         <p class="hist-status" id="acct-hist-status"></p>
+
+        <div class="setting-sep"></div>
+
+        <label class="hist-toggle-row">
+          <input type="checkbox" id="acct-news-enabled">
+          <span>
+            <strong>Email me about product news</strong>
+            <span class="fine">Occasional notes about new retailers, new
+              data sources and changes to scoring. Never shared, and every
+              email unsubscribes in one click.</span>
+          </span>
+        </label>
+        <p class="hist-status" id="acct-news-status"></p>
+
+        <div class="setting-sep"></div>
+
+        <div class="setting-field">
+          <label for="acct-name"><strong>What to call you</strong></label>
+          <span class="fine">Used at the top of an email instead of your
+            address. Leave it blank and we will use neither.</span>
+          <div class="name-row">
+            <input type="text" id="acct-name" placeholder="Your name" autocomplete="given-name" maxlength="60">
+            <button class="btn btn-primary" id="acct-name-save" type="button">Save</button>
+          </div>
+          <p class="hist-status" id="acct-name-status"></p>
+        </div>
+
+        <div class="setting-sep"></div>
+
+        <!-- Named rather than silently missing. Somebody looking for the
+             diagnostics switch should be told where it is, not left
+             assuming it was removed. -->
+        <p class="setting-elsewhere">
+          <strong>Diagnostics for support</strong> live in the extension, under
+          Help — they are per-browser on purpose, so turning them on here
+          would start capturing on machines you are not troubleshooting.
+        </p>
       </div>
 
       <!-- ── Subscription status ────────────────────────────────────────── -->
@@ -916,6 +998,65 @@ async function signOut() {
   } catch (_) {}
 })();
 
+// ── Settings ──────────────────────────────────────────────────────────
+// Everything here is account-scoped. PATCH /account/settings REQUIRES
+// auto_check_preference and reads null as "reset to the plan default" — a
+// real operation — so every write echoes back what GET returned rather
+// than sending a bare null and quietly resetting a different setting.
+let settingsState = null;
+
+async function patchSettings(patch) {
+  if (!settingsState) return false;
+  const r = await RPOAuth.authedFetch("/account/settings", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(Object.assign(
+      { auto_check_preference: settingsState.auto_check_preference }, patch)),
+  });
+  return !!(r && r.ok);
+}
+
+async function initSettings() {
+  const news = document.getElementById("acct-news-enabled");
+  const newsMsg = document.getElementById("acct-news-status");
+  const name = document.getElementById("acct-name");
+  const nameBtn = document.getElementById("acct-name-save");
+  const nameMsg = document.getElementById("acct-name-status");
+
+  const r = await RPOAuth.authedFetch("/account/settings");
+  if (!r || !r.ok) return;
+  settingsState = await r.json();
+
+  news.checked = !!settingsState.marketing_opt_in;
+  newsMsg.textContent = settingsState.marketing_opt_in
+    ? "On — we'll email occasionally." : "Off — we won't email you.";
+  name.value = settingsState.preferred_name || "";
+
+  news.addEventListener("change", async () => {
+    const on = news.checked;
+    if (!(await patchSettings({ marketing_opt_in: on }))) {
+      news.checked = !on;
+      newsMsg.textContent = "That didn't save. Try again?";
+      return;
+    }
+    settingsState.marketing_opt_in = on;
+    newsMsg.textContent = on
+      ? "On — we'll email occasionally." : "Off — we won't email you.";
+  });
+
+  nameBtn.addEventListener("click", async () => {
+    // "" is a real value here: it CLEARS the name. An optional thing you
+    // cannot un-set is not optional.
+    const v = name.value.trim();
+    nameBtn.disabled = true;
+    const ok = await patchSettings({ preferred_name: v });
+    nameBtn.disabled = false;
+    if (!ok) { nameMsg.textContent = "That didn't save. Try again?"; return; }
+    settingsState.preferred_name = v;
+    nameMsg.textContent = v ? "Saved." : "Cleared — we'll use neither.";
+  });
+}
+
 (async function init() {
   const token = getToken();
   if (!token) { goSignIn(); return; }
@@ -930,6 +1071,7 @@ async function signOut() {
       checkbox: document.getElementById("acct-hist-enabled"),
       status: document.getElementById("acct-hist-status"),
     });
+    initSettings();
     document.getElementById("redeem-input").addEventListener("keydown", (e) => {
       if (e.key === "Enter") { e.preventDefault(); redeemCode(); }
     });
