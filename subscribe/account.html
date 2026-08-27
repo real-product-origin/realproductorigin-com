@@ -150,6 +150,46 @@
   .redeem-msg.error { color: var(--accent); }
   .redeem-msg.success { color: var(--green); }
 
+  /* ── Tool grid — the destinations, above the paperwork ──────────────────── */
+  .tool-grid {
+    display: grid; gap: 14px; margin: 0 0 28px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .tool-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .tool {
+    display: block; text-decoration: none;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 22px 18px;
+    box-shadow: 0 12px 32px -20px rgba(15, 23, 42, 0.14);
+    transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  }
+  .tool:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 36px -20px rgba(15, 23, 42, 0.22);
+  }
+  .tool h3 {
+    font-family: var(--serif); font-size: 20px; font-weight: 600;
+    color: var(--ink-deep); margin: 0 0 7px; letter-spacing: -0.01em;
+  }
+  .tool p {
+    font-size: 14px; line-height: 1.55; color: var(--ink-3); margin: 0 0 12px;
+  }
+  .tool-go { font-size: 13.5px; font-weight: 600; color: var(--accent); }
+
+  /* ── History switch ─────────────────────────────────────────────────────── */
+  .hist-toggle-row { display: flex; gap: 11px; align-items: flex-start; cursor: pointer; }
+  .hist-toggle-row input { margin-top: 3px; flex: none; }
+  .hist-toggle-row strong {
+    display: block; font-size: 15px; font-weight: 600; color: var(--ink-deep);
+  }
+  .hist-toggle-row .fine {
+    display: block; font-size: 13.5px; line-height: 1.5; color: var(--ink-3); margin-top: 3px;
+  }
+  .hist-status { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
   /* ── Danger zone ────────────────────────────────────────────────────────── */
   .danger-zone {
     margin-top: 24px;
@@ -238,6 +278,54 @@
 
     <div class="acct-wrap">
 
+      <!-- ── What you can do ────────────────────────────────────────────
+           This block used to sit near the bottom, below the plan, the
+           switcher, the extension prompt and the access code. Levi:
+           "we now have several things with My Account... the page needs to
+           be redesigned so it's clear all the things you can get to."
+
+           The fix is order. A plan is a receipt; these are destinations.
+           What you can DO comes first, as a grid you can take in at a
+           glance, and everything that MANAGES the account follows. -->
+      <p class="section-eyebrow">What you can do</p>
+      <div class="tool-grid">
+        <a class="tool" href="/brands.html">
+          <h3>Check a brand</h3>
+          <p>Who owns a company, where its trademarks are filed, who
+             registered its domain. A separate allowance from your product
+             checks — brand checks never spend your product scores.</p>
+          <span class="tool-go">Look up a brand →</span>
+        </a>
+        <a class="tool" href="/history.html">
+          <h3>Your history</h3>
+          <p>Products and brands you asked us to keep, in one list. Off
+             unless you turn it on, and yours to delete at any moment.</p>
+          <span class="tool-go">Open your history →</span>
+        </a>
+        <a class="tool" href="/products.html#methodology">
+          <h3>How scoring works</h3>
+          <p>What we read, which sources back each of the four answers, and
+             why a confidence is shown rather than a verdict.</p>
+          <span class="tool-go">Read the method →</span>
+        </a>
+      </div>
+
+      <!-- The history switch itself, not just a link to it. Somebody
+           looking for a setting looks on the settings page. -->
+      <div class="card" id="hist-card">
+        <h2>Keep a history</h2>
+        <label class="hist-toggle-row">
+          <input type="checkbox" id="acct-hist-enabled">
+          <span>
+            <strong>Keep a history of what I check</strong>
+            <span class="fine">Products and brands in one list, on your
+              account. Off unless you turn it on. Turning it off deletes
+              everything already saved.</span>
+          </span>
+        </label>
+        <p class="hist-status" id="acct-hist-status"></p>
+      </div>
+
       <!-- ── Subscription status ────────────────────────────────────────── -->
       <p class="section-eyebrow">Subscription</p>
       <div class="card plan-card">
@@ -305,34 +393,6 @@
           <div class="plan-name access-code-line" id="access-code-value">—</div>
           <div class="plan-meta" id="access-grant-meta"></div>
         </div>
-      </div>
-
-      <!-- ── What you can do while signed in ────────────────────────────
-           Levi signed in, looked for a way to check a brand and a way to
-           see what he had checked, and found neither. Both existed; both
-           were reachable only from a footer link. An account page that
-           lists a plan and nothing you can DO with it is a receipt.
-
-           The history card was previously nested inside the Redeem card
-           below — a card inside a card, under the wrong eyebrow. -->
-      <p class="section-eyebrow">Your tools</p>
-      <div class="card">
-        <h2>Check a brand or company</h2>
-        <p style="font-size:15px;color:var(--ink-3);line-height:1.55;margin:0 0 14px;">
-          Who owns a brand, where their trademarks are filed, and who
-          registered their domain. Brand checks are a separate allowance
-          from product checks — they don't spend your product scores.
-        </p>
-        <a class="nav-cta" href="/brands.html">Check a brand</a>
-      </div>
-
-      <div class="card">
-        <h2>Your scan history</h2>
-        <p style="font-size:15px;color:var(--ink-3);line-height:1.55;margin:0 0 14px;">
-          Off unless you turn it on. We keep no record of what you check
-          otherwise — and you can delete what is stored at any time.
-        </p>
-        <a class="nav-cta" href="/history.html">Manage history</a>
       </div>
 
       <!-- ── Redeem section ─────────────────────────────────────────────── -->
@@ -866,6 +926,10 @@ async function signOut() {
     document.getElementById("signout-top").addEventListener("click", signOut);
     document.getElementById("signout-bottom").addEventListener("click", signOut);
     document.getElementById("redeem-btn").addEventListener("click", redeemCode);
+    RPOHistoryToggle.attach({
+      checkbox: document.getElementById("acct-hist-enabled"),
+      status: document.getElementById("acct-hist-status"),
+    });
     document.getElementById("redeem-input").addEventListener("keydown", (e) => {
       if (e.key === "Enter") { e.preventDefault(); redeemCode(); }
     });
@@ -924,6 +988,8 @@ async function signOut() {
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
+<script src="/assets/account-guard.js"></script>
+<script src="/assets/history-toggle.js"></script>
 <script src="/assets/lang-switcher.js" defer></script>
 </body>
 </html>

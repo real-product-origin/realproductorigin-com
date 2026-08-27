@@ -183,6 +183,7 @@
   <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
 </footer>
 <script src="/assets/account-guard.js"></script>
+<script src="/assets/history-toggle.js"></script>
 <script src="/assets/lang-switcher.js" defer></script>
 <script>
 
@@ -236,19 +237,12 @@ async function load() {
   danger.hidden = items.length === 0;
 }
 
-toggle.addEventListener("change", async function () {
-  var on = toggle.checked;
-  if (!on && !confirm("Turning history off deletes everything already saved. Continue?")) {
-    toggle.checked = true;
-    return;
-  }
-  await RPOAuth.authedFetch("/account/settings", {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ auto_check_preference: null, save_history: on }),
-  });
-  load();
-});
+// The switch itself is shared with /brands.html and the account page. This
+// page's own version sent auto_check_preference: null, which the settings
+// endpoint reads as "reset to the plan default" — so switching your history
+// on quietly reset whether the extension scores automatically. The shared
+// one reads the stored value and hands it back.
+RPOHistoryToggle.attach({ checkbox: toggle, onChange: load });
 
 list.addEventListener("click", async function (e) {
   var btn = e.target.closest(".hist-del");
