@@ -43,6 +43,7 @@
   .bq-title { font-size: 13px; font-weight: 600; color: var(--ink-3); margin: 3px 0 4px; }
   .bq-country { font-size: 21px; font-weight: 700; color: var(--ink-deep); margin: 0; }
   .bq-detail { font-size: 13px; color: var(--muted); margin: 2px 0 0; }
+    .bq-conf { font-size: 13px; color: var(--muted); margin: 3px 0 0; }
 
   .bq-list { list-style: none; margin: 10px 0 0; padding: 0; }
   .bq-list li { padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
@@ -198,6 +199,15 @@ function blockHtml(b) {
     + '<p class="bq-title">' + esc(b.title) + '</p>';
   if (country) html += '<p class="bq-country">' + flag(b.country_code) + " " + esc(country) + '</p>';
   if (b.detail) html += '<p class="bq-detail">' + esc(b.detail) + '</p>';
+
+  // Our own reading carries a confidence; a filing does not. Shown because
+  // an assessment at 45 looked identical to one at 90 on the single block a
+  // brand check pays for.
+  if (b.tier === "assessed" && typeof b.confidence === "number") {
+    var c = Math.round(b.confidence);
+    var word = c >= 75 ? "High" : c >= 50 ? "Moderate" : c >= 25 ? "Low" : "Very low";
+    html += '<p class="bq-conf">' + word + " confidence (" + c + "%)</p>";
+  }
 
   // Filings are listed rather than reduced to one country: 66 of the 261
   // brands we have scored hold marks in more than one, and choosing one
