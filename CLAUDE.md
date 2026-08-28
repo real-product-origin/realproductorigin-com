@@ -76,6 +76,20 @@ Seven locales total: en (root) + six subdirectories.
 Render it. Do not reason about the markup.
 
 ```bash
+python3 check-nav.py
+```
+
+Run this after ANY nav edit. There is no build step and no test runner,
+so a nav is only as correct as the last person who remembered to edit
+fifty-one files — and it has failed quietly twice. `subscribe/` had
+never carried Support at all, so signing in and clicking My Account made
+a menu item vanish; and the mobile rules were `nav a:nth-child(3)`/`(4)`
+with comments naming links that had left the nav long ago, by then
+hiding **Pricing**. The script asserts the SHAPE (same ordered
+destinations, locale prefixes normalised), not the markup — localised
+labels are fine, a missing destination is not.
+
+```bash
 python3 -m http.server 4321   # or use the `marketing` preview config
 ```
 
