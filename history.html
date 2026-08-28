@@ -67,13 +67,55 @@
   .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
   .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
 
-  .hist-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 13px 0; border-top: 1px solid var(--border); }
+  .hist-row { border-top: 1px solid var(--border); }
+  .hist-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; padding: 13px 0; width: 100%; text-align: left;
+    background: none; border: 0; font: inherit; cursor: pointer;
+  }
+  .hist-head:hover .hist-title { color: var(--accent); }
+  .hist-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .hist-main { min-width: 0; }
   .hist-title { font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0; overflow-wrap: anywhere; }
-  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 2px 0 0; }
-  .hist-right { text-align: right; white-space: nowrap; }
+  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
+
+  /* Kind and brand render identically on both row types, because "what is
+     this row about" is the same question whichever it is. */
+  .hist-tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px; margin-right: 7px; vertical-align: 1px;
+  }
+  .hist-tag.product { background: #eef2ff; color: #3730a3; }
+  .hist-tag.brand { background: #ecfdf5; color: #065f46; }
+  .hist-brand { font-weight: 600; color: var(--ink-3); }
+
+  .hist-right { text-align: right; white-space: nowrap; flex: none; }
+  /* Labelled, always. An unlabelled flag on a product row could be any of
+     four different answers, and on a brand row it was simply blank. */
+  .hist-label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .hist-country { font-size: 15px; font-weight: 700; color: var(--ink-deep); }
-  .hist-del { background: none; border: 0; padding: 4px 0 0; font: inherit; font-size: 12.5px; color: var(--accent); cursor: pointer; }
+  .hist-none { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .hist-chev { display: inline-block; margin-left: 9px; color: var(--muted); transition: transform 120ms ease; }
+  .hist-row.is-open .hist-chev { transform: rotate(90deg); }
+
+  .hist-detail { padding: 2px 0 18px; }
+  .hist-facts { display: grid; gap: 10px 18px; grid-template-columns: 1fr; margin: 0 0 14px; }
+  @media (min-width: 560px) { .hist-facts { grid-template-columns: 1fr 1fr; } }
+  .hist-fact { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 7px 11px; background: var(--bg-cream); border-radius: 8px; }
+  .hist-fact .k { color: var(--ink-3); }
+  .hist-fact .v { font-weight: 600; color: var(--ink-deep); white-space: nowrap; }
+  .hist-fact .c { font-weight: 500; color: var(--muted); font-size: 12.5px; margin-left: 5px; }
+  .hist-meta { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin: 0 0 12px; }
+  .hist-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hist-actions a, .hist-del {
+    font: inherit; font-size: 13px; font-weight: 600; text-decoration: none;
+    padding: 7px 13px; border-radius: 8px; border: 1px solid var(--border-strong);
+    color: var(--ink-3); background: #fff; cursor: pointer;
+  }
+  .hist-actions a:hover { color: var(--ink-deep); border-color: var(--ink-deep); }
+  .hist-del { color: var(--accent); border-color: rgba(180,60,50,.3); }
+  .hist-del:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
   .hist-toggle { display: flex; align-items: flex-start; gap: 11px; padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); margin: 0 0 24px; }
   .hist-toggle input { margin-top: 3px; width: 17px; height: 17px; }
   .hist-toggle label { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
@@ -234,20 +276,110 @@ var danger = document.getElementById("hist-danger");
 var filter = document.getElementById("hist-filter");
 var toggle = document.getElementById("hist-enabled");
 
+function fact(label, v) {
+  if (!v || (!v.country && !v.country_code)) return "";
+  var conf = typeof v.confidence === "number"
+    ? '<span class="c">' + Math.round(v.confidence) + "%</span>" : "";
+  return '<div class="hist-fact"><span class="k">' + esc(label) + "</span>"
+    + '<span class="v">' + flag(v.country_code) + " "
+    + esc(v.country || v.country_code || "") + conf + "</span></div>";
+}
+
+/* The headline answer for a row, LABELLED.
+ *
+ * A product row showed a bare flag, which could have been any of the four
+ * indicators; a brand row showed nothing at all, which reads as "we found
+ * nothing" rather than "this row answers a different question". */
+function headline(it) {
+  var d = it.details || {};
+  if (it.kind === "brand") {
+    var o = d.owner;
+    if (!o || !o.country_code) {
+      return '<span class="hist-label">Owner</span>'
+        + '<span class="hist-none">Not established</span>';
+    }
+    return '<span class="hist-label">Owned in</span><span class="hist-country">'
+      + flag(o.country_code) + " " + esc(o.country || o.country_code) + "</span>";
+  }
+  if (!it.made_in_country_code && !it.made_in_country) {
+    return '<span class="hist-label">Made in</span>'
+      + '<span class="hist-none">Not established</span>';
+  }
+  return '<span class="hist-label">Made in</span><span class="hist-country">'
+    + flag(it.made_in_country_code) + " "
+    + esc(it.made_in_country || it.made_in_country_code) + "</span>";
+}
+
+function detailHtml(it) {
+  var d = it.details || {};
+  var facts = "";
+  if (it.kind === "brand") {
+    var o = d.owner || {};
+    facts = fact("Ultimate owner", o.country_code ? o : null);
+    if (o.company) {
+      facts += '<div class="hist-fact"><span class="k">Company</span>'
+        + '<span class="v">' + esc(o.company) + "</span></div>";
+    }
+    if (!facts) {
+      facts = '<div class="hist-fact"><span class="k">Ultimate owner</span>'
+        + '<span class="v">Not established</span></div>';
+    }
+  } else {
+    facts = fact("Made in", {
+      country: it.made_in_country, country_code: it.made_in_country_code,
+      confidence: it.made_in_confidence,
+    })
+      + fact("Ships from", d.ships_from)
+      + fact("Retailer", d.sold_by)
+      + fact("Money goes to", d.payment_goes_to);
+    if (!facts) {
+      facts = '<div class="hist-fact"><span class="k">Made in</span>'
+        + '<span class="v">Not established</span></div>';
+    }
+  }
+
+  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleString() : "";
+  // Said plainly. This is what you were shown then, not what we would say
+  // now — scoring changes, and a history that quietly updated itself would
+  // not be a history.
+  var meta = "Saved " + esc(when) + " — the answer as shown at the time."
+    + (it.retailer ? " · " + esc(it.retailer) : "")
+    + (it.debug_session_code
+        ? " · diagnostic " + esc(it.debug_session_code) : "");
+
+  var again = it.kind === "brand"
+    ? '<a href="/brands.html?q=' + encodeURIComponent(it.brand || it.subject_key) + '">Check again</a>'
+    : "";
+  var open = it.url
+    ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">Open the product page</a>'
+    : "";
+
+  return '<div class="hist-detail"><div class="hist-facts">' + facts + "</div>"
+    + '<p class="hist-meta">' + meta + "</p>"
+    + '<div class="hist-actions">' + open + again
+    + '<button class="hist-del" type="button">Delete this row</button></div></div>';
+}
+
 function rowHtml(it) {
   var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
-  var sub = [it.kind === "brand" ? "Brand" : "Product", it.brand, it.retailer, when]
-    .filter(Boolean).join(" · ");
+  var isBrand = it.kind === "brand";
+  // Brand identity rendered the SAME way on both kinds. On a product row it
+  // is the maker; on a brand row it is the subject; either way it is the
+  // company, and it used to be buried in a run-on line of dot-separated text.
+  var tag = '<span class="hist-tag ' + (isBrand ? "brand" : "product") + '">'
+    + (isBrand ? "Brand" : "Product") + "</span>";
+  var who = it.brand
+    ? '<span class="hist-brand">' + esc(it.brand) + "</span>" : "";
+  var sub = [who, esc(it.retailer || ""), esc(when)].filter(Boolean).join(" · ");
+
   return '<div class="hist-row" data-id="' + it.id + '">'
-    + '<div class="hist-main"><p class="hist-title">' + esc(it.title || it.subject_key) + "</p>"
-    + '<p class="hist-sub">' + esc(sub)
-    // The debug link is the point of storing it: "one of my scans looked
-    // wrong last week" becomes a capture an admin can open.
-    + (it.debug_session_code ? " · diagnostic " + esc(it.debug_session_code) : "")
-    + "</p></div>"
-    + '<div class="hist-right"><span class="hist-country">' + flag(it.made_in_country_code)
-    + " " + esc(it.made_in_country || "") + "</span><br>"
-    + '<button class="hist-del" type="button">Delete</button></div></div>';
+    + '<button class="hist-head" type="button" aria-expanded="false">'
+    + '<span class="hist-main"><p class="hist-title">' + tag
+    + esc(it.title || it.subject_key) + "</p>"
+    + '<p class="hist-sub">' + sub + "</p></span>"
+    + '<span class="hist-right">' + headline(it)
+    + '<span class="hist-chev">›</span></span>'
+    + "</button></div>";
 }
 
 var activeKind = "";
@@ -308,11 +440,36 @@ async function load() {
 RPOHistoryToggle.attach({ checkbox: toggle, onChange: load });
 
 list.addEventListener("click", async function (e) {
-  var btn = e.target.closest(".hist-del");
-  if (!btn) return;
-  var row = btn.closest(".hist-row");
-  await RPOAuth.authedFetch("/account/history/" + row.dataset.id, { method: "DELETE" });
-  load();
+  // Delete first: the button lives INSIDE the open pane, so a click on it
+  // is also a click in the row and would otherwise collapse what it just
+  // deleted from under itself.
+  var del = e.target.closest(".hist-del");
+  if (del) {
+    var delRow = del.closest(".hist-row");
+    await RPOAuth.authedFetch("/account/history/" + delRow.dataset.id,
+                              { method: "DELETE" });
+    load();
+    return;
+  }
+
+  // A link in the pane is a link, not a toggle.
+  if (e.target.closest(".hist-actions a")) return;
+
+  var head = e.target.closest(".hist-head");
+  if (!head) return;
+  var row = head.closest(".hist-row");
+  var open = row.classList.toggle("is-open");
+  head.setAttribute("aria-expanded", open ? "true" : "false");
+
+  var pane = row.querySelector(".hist-detail");
+  if (open && !pane) {
+    var it = allItems.filter(function (x) {
+      return String(x.id) === row.dataset.id;
+    })[0];
+    if (it) row.insertAdjacentHTML("beforeend", detailHtml(it));
+  } else if (!open && pane) {
+    pane.remove();
+  }
 });
 
 document.getElementById("hist-clear").addEventListener("click", async function () {
