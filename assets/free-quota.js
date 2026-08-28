@@ -12,6 +12,8 @@
 // Usage — wrap only the digits, never the surrounding words:
 //   <span data-rpo-free-quota>20</span> checks
 //   <span data-rpo-basic-quota>50</span> checks a month
+//   <span data-rpo-free-brand-quota>5</span> brand checks
+//   <span data-rpo-basic-brand-quota>10</span> brand checks a month
 // The static text inside is the fallback, so the page reads correctly with
 // JS off, on a failed fetch, or before this script runs. That fallback is
 // why this script only ever *replaces* a number and never writes one into
@@ -29,9 +31,15 @@
   // which meant changing its cap from 100 to 50 touched 30 places across
   // seven locales — exactly the drift this script exists to prevent. It
   // was only ever half-solved.
+  //
+  // Brand allowances joined in 2026-08-27, the day they were written into
+  // a marketing sentence by hand — which is the same mistake, one feature
+  // later. `field` picks which block of the plan payload to read.
   var TARGETS = [
-    { attr: "data-rpo-free-quota", plan: "free" },
-    { attr: "data-rpo-basic-quota", plan: "basic" },
+    { attr: "data-rpo-free-quota", plan: "free", field: "checks" },
+    { attr: "data-rpo-basic-quota", plan: "basic", field: "checks" },
+    { attr: "data-rpo-free-brand-quota", plan: "free", field: "brand_checks" },
+    { attr: "data-rpo-basic-brand-quota", plan: "basic", field: "brand_checks" },
   ];
   var anyNode = TARGETS.some(function (t) {
     return document.querySelector("[" + t.attr + "]");
@@ -46,8 +54,8 @@
       if (!data) return;
       for (var t = 0; t < TARGETS.length; t++) {
         var plan = data[TARGETS[t].plan];
-        var checks = plan && plan.checks;
-        var limit = checks && checks.limit;
+        var block = plan && plan[TARGETS[t].field];
+        var limit = block && block.limit;
         // Guard hard, per tier. A null/0/undefined limit means "unlimited"
         // or "we don't know" — writing either into "your first N checks
         // are free" produces a worse sentence than the static fallback.
