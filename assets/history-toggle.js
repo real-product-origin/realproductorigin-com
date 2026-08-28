@@ -96,14 +96,10 @@
 
     inst.checkbox.addEventListener("change", async function () {
       var on = inst.checkbox.checked;
-      /* Off also DELETES. That is one action to a person — "stop recording"
-       * and "forget what you recorded" are the same wish — which is exactly
-       * why it cannot happen on a stray click. */
-      if (!on && !confirm(
-          "Turning history off deletes everything already saved. Continue?")) {
-        inst.checkbox.checked = true;
-        return;
-      }
+      /* Off used to DELETE, which meant a stray click destroyed a list
+       * built up over months. It no longer does — off stops recording and
+       * nothing else — so there is nothing here to confirm. Deleting is a
+       * separate, deliberate act on /history.html. */
       var ok = await set(on);
       if (!ok) {
         inst.checkbox.checked = !on;

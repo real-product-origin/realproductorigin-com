@@ -67,7 +67,91 @@
   .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
   .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
 
-  .hist-row { border-top: 1px solid var(--border); }
+  /* Clickable the way the admin tables are: the whole row tints on hover
+     and the cursor says so, rather than a chevron being the only hint. */
+  .hist-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-left: 10px; margin: 0 -10px; border-radius: 8px;
+    transition: background 100ms ease;
+  }
+  .hist-row:hover { background: var(--bg-cream); }
+  .hist-row.is-sel { background: var(--gold-soft); }
+  .hist-pick { margin: 20px 0 0; flex: none; }
+
+  .hist-bulk {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin: 18px 0 2px; font-size: 13.5px; color: var(--ink-3);
+  }
+  .hist-selall { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+  .hist-selcount { color: var(--muted); }
+  .hist-danger-btn {
+    font: inherit; font-size: 13px; font-weight: 600; padding: 7px 13px;
+    border-radius: 8px; border: 1px solid rgba(180,60,50,.3);
+    color: var(--accent); background: #fff; cursor: pointer;
+  }
+  .hist-danger-btn:disabled { opacity: .45; cursor: default; }
+  .hist-danger-btn:not(:disabled):hover { background: var(--accent); color: #fff; }
+
+  .hist-pager {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin: 22px 0 0; font-size: 13.5px; color: var(--ink-3);
+  }
+  .hist-pager button {
+    font: inherit; font-size: 13.5px; font-weight: 600; padding: 7px 13px;
+    border-radius: 8px; border: 1px solid var(--border-strong);
+    background: #fff; color: var(--ink-3); cursor: pointer;
+  }
+  .hist-pager button:disabled { opacity: .4; cursor: default; }
+
+  /* ── Modal ────────────────────────────────────────────────────────── */
+  .hist-modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .hist-modal[hidden] { display: none; }
+  .hist-modal-scrim { position: absolute; inset: 0; background: rgba(17,24,39,.45); backdrop-filter: blur(2px); }
+  .hist-modal-card {
+    position: relative; background: #fff; border-radius: 16px;
+    width: min(720px, 100%); max-height: min(86vh, 900px); overflow-y: auto;
+    padding: 30px 30px 26px; box-shadow: 0 30px 80px -30px rgba(15,23,42,.5);
+  }
+  .hist-modal-x {
+    position: absolute; top: 14px; right: 16px; font-size: 26px; line-height: 1;
+    background: none; border: 0; color: var(--muted); cursor: pointer; padding: 4px 8px;
+  }
+  .hist-modal-x:hover { color: var(--ink-deep); }
+  .m-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+  .m-title { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--ink-deep); margin: 0 0 4px; line-height: 1.2; }
+  .m-sub { font-size: 13.5px; color: var(--ink-3); margin: 0 0 4px; }
+  .m-when { font-size: 12.5px; color: var(--muted); margin: 0 0 20px; }
+  .m-h { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 22px 0 9px; }
+  .m-grid { display: grid; gap: 9px; grid-template-columns: 1fr; }
+  @media (min-width: 520px) { .m-grid { grid-template-columns: 1fr 1fr; } }
+  .m-ind { background: var(--bg-cream); border-radius: 10px; padding: 12px 14px; }
+  .m-ind .k { display: block; font-size: 12px; color: var(--ink-3); margin-bottom: 3px; }
+  .m-ind .v { font-size: 17px; font-weight: 700; color: var(--ink-deep); }
+  .m-ind .n { display: block; font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .m-note { font-size: 13.5px; line-height: 1.6; color: var(--ink-2); background: var(--gold-soft); border-radius: 10px; padding: 12px 14px; margin: 10px 0 0; }
+  .m-method { font-size: 13.5px; line-height: 1.65; color: var(--ink-2); margin: 0; white-space: pre-wrap; }
+  .m-cites { list-style: none; padding: 0; margin: 0; }
+  .m-cites li { font-size: 13px; padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; gap: 10px; justify-content: space-between; }
+  .m-cites li:last-child { border-bottom: 0; }
+  .m-cites .kind { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; flex: none; }
+  .m-block { border-left: 3px solid var(--border-strong); padding-left: 13px; margin: 0 0 16px; }
+  .m-block .tier { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .m-block .bt { font-size: 13px; font-weight: 600; color: var(--ink-3); margin: 3px 0 0; }
+  .m-block .bc { font-size: 18px; font-weight: 700; color: var(--ink-deep); margin: 3px 0 0; }
+  .m-block .bd { font-size: 13px; color: var(--ink-3); margin: 2px 0 0; }
+  .m-block .items { list-style: none; padding: 0; margin: 8px 0 0; }
+  .m-block .items li { font-size: 12.5px; color: var(--ink-3); padding: 5px 0; border-top: 1px solid var(--border); }
+  .m-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .m-actions a, .m-actions button {
+    font: inherit; font-size: 13.5px; font-weight: 600; text-decoration: none;
+    padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong);
+    color: var(--ink-3); background: #fff; cursor: pointer;
+  }
+  .m-actions .danger { color: var(--accent); border-color: rgba(180,60,50,.3); }
+  .m-gap { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; line-height: 1.6; }
+
+
   .hist-head {
     display: flex; justify-content: space-between; align-items: flex-start;
     gap: 16px; padding: 13px 0; width: 100%; text-align: left;
@@ -173,7 +257,7 @@
         <input type="checkbox" id="hist-enabled">
         <label for="hist-enabled">
           Keep a history of what I check
-          <span class="fine">Products and brands, in one list. Turning this off deletes everything already stored — stopping and forgetting are the same action.</span>
+          <span class="fine">Products and brands, in one list. Turning this off stops new entries; what is already saved stays until you delete it.</span>
         </label>
       </div>
 
@@ -192,8 +276,22 @@
         <button type="button" class="chip" data-kind="brand">Brands <span></span></button>
       </div>
 
+      <div class="hist-bulk" id="hist-bulk" hidden>
+        <label class="hist-selall">
+          <input type="checkbox" id="hist-selall"> Select all on this page
+        </label>
+        <span class="hist-selcount" id="hist-selcount"></span>
+        <button type="button" id="hist-delsel" class="hist-danger-btn" disabled>Delete selected</button>
+      </div>
+
       <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
       <div id="hist-list"></div>
+
+      <div class="hist-pager" id="hist-pager" hidden>
+        <button type="button" id="hist-prev">‹ Newer</button>
+        <span id="hist-pageinfo"></span>
+        <button type="button" id="hist-next">Older ›</button>
+      </div>
 
       <p class="hist-danger" id="hist-danger" hidden>
         <button type="button" id="hist-clear">Delete my entire history</button>
@@ -201,6 +299,20 @@
     </div>
   </div>
 </section>
+
+<!-- Detail modal.
+     A pane inside the row could not hold what a score actually shows —
+     four indicators, the transformation note, the ultimate parent, the
+     methodology and every cited source — without turning the list into a
+     wall. A dialog gets the room and puts one row's answer in front of
+     you with the list still behind it. -->
+<div class="hist-modal" id="hist-modal" hidden>
+  <div class="hist-modal-scrim" id="hist-modal-scrim"></div>
+  <div class="hist-modal-card" role="dialog" aria-modal="true" aria-labelledby="hist-modal-title">
+    <button type="button" class="hist-modal-x" id="hist-modal-x" aria-label="Close">×</button>
+    <div id="hist-modal-body"></div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-inner">
@@ -276,152 +388,353 @@ var danger = document.getElementById("hist-danger");
 var filter = document.getElementById("hist-filter");
 var toggle = document.getElementById("hist-enabled");
 
-function fact(label, v) {
-  if (!v || (!v.country && !v.country_code)) return "";
-  var conf = typeof v.confidence === "number"
-    ? '<span class="c">' + Math.round(v.confidence) + "%</span>" : "";
-  return '<div class="hist-fact"><span class="k">' + esc(label) + "</span>"
-    + '<span class="v">' + flag(v.country_code) + " "
-    + esc(v.country || v.country_code || "") + conf + "</span></div>";
+var PER_PAGE = 25;
+var TIER_RULE = { record: "#1D4ED8", measured: "#15803D", assessed: "#8A93A0", reported: "#C3C9D0" };
+var TIER_NAME = { record: "On the record", measured: "What we've checked",
+                  assessed: "Our assessment", reported: "What people report" };
+var IND_LABEL = { made_in: "Made in", ships_from: "Ships from",
+                  sold_by: "Retailer", payment_goes_to: "Money goes to" };
+
+function conf(v) {
+  return typeof v === "number" ? Math.round(v) + "%" : "";
 }
 
 /* The headline answer for a row, LABELLED.
  *
  * A product row showed a bare flag, which could have been any of the four
- * indicators; a brand row showed nothing at all, which reads as "we found
+ * indicators; a brand row showed nothing at all, which read as "we found
  * nothing" rather than "this row answers a different question". */
 function headline(it) {
-  var d = it.details || {};
-  if (it.kind === "brand") {
-    var o = d.owner;
-    if (!o || !o.country_code) {
-      return '<span class="hist-label">Owner</span>'
-        + '<span class="hist-none">Not established</span>';
-    }
-    return '<span class="hist-label">Owned in</span><span class="hist-country">'
-      + flag(o.country_code) + " " + esc(o.country || o.country_code) + "</span>";
-  }
+  var label = it.kind === "brand" ? "Owner" : "Made in";
   if (!it.made_in_country_code && !it.made_in_country) {
-    return '<span class="hist-label">Made in</span>'
+    return '<span class="hist-label">' + label + "</span>"
       + '<span class="hist-none">Not established</span>';
   }
-  return '<span class="hist-label">Made in</span><span class="hist-country">'
-    + flag(it.made_in_country_code) + " "
+  return '<span class="hist-label">' + label + "</span>"
+    + '<span class="hist-country">' + flag(it.made_in_country_code) + " "
     + esc(it.made_in_country || it.made_in_country_code) + "</span>";
 }
 
-function detailHtml(it) {
-  var d = it.details || {};
-  var facts = "";
-  if (it.kind === "brand") {
-    var o = d.owner || {};
-    facts = fact("Ultimate owner", o.country_code ? o : null);
-    if (o.company) {
-      facts += '<div class="hist-fact"><span class="k">Company</span>'
-        + '<span class="v">' + esc(o.company) + "</span></div>";
-    }
-    if (!facts) {
-      facts = '<div class="hist-fact"><span class="k">Ultimate owner</span>'
-        + '<span class="v">Not established</span></div>';
-    }
-  } else {
-    facts = fact("Made in", {
-      country: it.made_in_country, country_code: it.made_in_country_code,
-      confidence: it.made_in_confidence,
-    })
-      + fact("Ships from", d.ships_from)
-      + fact("Retailer", d.sold_by)
-      + fact("Money goes to", d.payment_goes_to);
-    if (!facts) {
-      facts = '<div class="hist-fact"><span class="k">Made in</span>'
-        + '<span class="v">Not established</span></div>';
-    }
-  }
-
-  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleString() : "";
-  // Said plainly. This is what you were shown then, not what we would say
-  // now — scoring changes, and a history that quietly updated itself would
-  // not be a history.
-  var meta = "Saved " + esc(when) + " — the answer as shown at the time."
-    + (it.retailer ? " · " + esc(it.retailer) : "")
-    + (it.debug_session_code
-        ? " · diagnostic " + esc(it.debug_session_code) : "");
-
-  var again = it.kind === "brand"
-    ? '<a href="/brands.html?q=' + encodeURIComponent(it.brand || it.subject_key) + '">Check again</a>'
-    : "";
-  var open = it.url
-    ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">Open the product page</a>'
-    : "";
-
-  return '<div class="hist-detail"><div class="hist-facts">' + facts + "</div>"
-    + '<p class="hist-meta">' + meta + "</p>"
-    + '<div class="hist-actions">' + open + again
-    + '<button class="hist-del" type="button">Delete this row</button></div></div>';
-}
-
 function rowHtml(it) {
-  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
   var isBrand = it.kind === "brand";
+  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
   // Brand identity rendered the SAME way on both kinds. On a product row it
   // is the maker; on a brand row it is the subject; either way it is the
-  // company, and it used to be buried in a run-on line of dot-separated text.
+  // company, and it used to be buried in a run-on dot-separated line.
   var tag = '<span class="hist-tag ' + (isBrand ? "brand" : "product") + '">'
     + (isBrand ? "Brand" : "Product") + "</span>";
-  var who = it.brand
-    ? '<span class="hist-brand">' + esc(it.brand) + "</span>" : "";
-  var sub = [who, esc(it.retailer || ""), esc(when)].filter(Boolean).join(" · ");
+  var bits = [];
+  if (it.brand) bits.push('<span class="hist-brand">' + esc(it.brand) + "</span>");
+  if (it.retailer) bits.push(esc(it.retailer));
+  bits.push(when);
+  // One row per subject, so say how often rather than repeating the row.
+  if (it.times > 1) bits.push(it.times + " checks");
 
   return '<div class="hist-row" data-id="' + it.id + '">'
-    + '<button class="hist-head" type="button" aria-expanded="false">'
+    + '<input type="checkbox" class="hist-pick" aria-label="Select this row">'
+    + '<button class="hist-head" type="button">'
     + '<span class="hist-main"><p class="hist-title">' + tag
     + esc(it.title || it.subject_key) + "</p>"
-    + '<p class="hist-sub">' + sub + "</p></span>"
+    + '<p class="hist-sub">' + bits.join(" · ") + "</p></span>"
     + '<span class="hist-right">' + headline(it)
     + '<span class="hist-chev">›</span></span>'
     + "</button></div>";
 }
 
-var activeKind = "";
-var allItems = [];
+/* ── The modal ──────────────────────────────────────────────────────────
+ * Everything the score showed, fetched per row rather than carried in the
+ * list: a snapshot runs to kilobytes with its sources and the list serves
+ * hundreds of rows. */
+function indHtml(d) {
+  var ind = (d && d.indicators) || {};
+  var out = "";
+  Object.keys(IND_LABEL).forEach(function (k) {
+    var v = ind[k];
+    if (!v || (!v.country && !v.country_code)) return;
+    var pct = typeof v.percent === "number" ? Math.round(v.percent) + "%" : "";
+    var parts = [pct, conf(v.confidence) ? conf(v.confidence) + " confidence" : ""]
+      .filter(Boolean).join(" · ");
+    out += '<div class="m-ind"><span class="k">' + IND_LABEL[k] + "</span>"
+      + '<span class="v">' + flag(v.country_code) + " "
+      + esc(v.country || v.country_code) + "</span>"
+      + (parts ? '<span class="n">' + esc(parts)
+          + (v.verified_by_human ? " · checked by a person" : "") + "</span>" : "")
+      + "</div>";
+  });
+  return out;
+}
+
+function blocksHtml(d) {
+  return ((d && d.blocks) || []).map(function (b) {
+    var rule = TIER_RULE[b.tier] || TIER_RULE.assessed;
+    var items = (b.items || []).slice(0, 6).map(function (f) {
+      if (f.owner) {
+        var where = [f.city, f.state, f.country_code].filter(Boolean).join(", ");
+        return "<li>" + esc(f.owner) + (where ? " — " + esc(where) : "")
+          + (f.serial ? " · USPTO " + esc(f.serial) : "") + "</li>";
+      }
+      if (f.title) {
+        return "<li>" + esc(f.title) + " — " + flag(f.country_code) + " "
+          + esc(f.country || f.country_code || "") + "</li>";
+      }
+      if (f.summary) return "<li>" + esc(f.summary) + "</li>";
+      return "";
+    }).join("");
+    return '<div class="m-block" style="border-left-color:' + rule + '">'
+      + '<span class="tier" style="color:' + rule + '">'
+      + esc(TIER_NAME[b.tier] || b.tier) + "</span>"
+      + '<p class="bt">' + esc(b.title || "") + "</p>"
+      + (b.country_code
+          ? '<p class="bc">' + flag(b.country_code) + " "
+            + esc(b.country || b.country_code) + "</p>" : "")
+      + (b.detail ? '<p class="bd">' + esc(b.detail)
+          + (conf(b.confidence) ? " · " + conf(b.confidence) + " confidence" : "")
+          + "</p>" : "")
+      + (items ? '<ul class="items">' + items + "</ul>" : "")
+      + "</div>";
+  }).join("");
+}
+
+function modalHtml(it) {
+  var d = it.details || {};
+  var isBrand = it.kind === "brand";
+  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleString() : "";
+  var first = it.first_scanned_at
+    ? new Date(it.first_scanned_at).toLocaleDateString() : "";
+
+  var body = '<p class="m-eyebrow">' + (isBrand ? "Brand report" : "Product score") + "</p>"
+    + '<h2 class="m-title" id="hist-modal-title">' + esc(it.title || it.subject_key) + "</h2>";
+  if (it.brand && it.brand !== it.title) body += '<p class="m-sub">' + esc(it.brand) + "</p>";
+  if (it.retailer) body += '<p class="m-sub">' + esc(it.retailer) + "</p>";
+
+  // Said plainly. This is what you were shown then, not what we would say
+  // now — scoring changes, and a history that quietly updated itself would
+  // not be a history.
+  body += '<p class="m-when">The answer as shown on ' + esc(when)
+    + (it.times > 1 ? " — checked " + it.times + " times since " + esc(first) : "")
+    + ".</p>";
+
+  if (isBrand) {
+    var blocks = blocksHtml(d);
+    body += blocks || '<p class="m-method">Nothing was recorded for this report.</p>';
+    if ((d.not_found || []).length) {
+      body += '<p class="m-gap"><strong>Not found:</strong> '
+        + d.not_found.map(esc).join(" · ") + "</p>";
+    }
+  } else {
+    var inds = indHtml(d);
+    if (!inds && it.made_in_country_code) {
+      inds = '<div class="m-ind"><span class="k">Made in</span><span class="v">'
+        + flag(it.made_in_country_code) + " " + esc(it.made_in_country || "")
+        + "</span></div>";
+    }
+    body += inds
+      ? '<p class="m-h">The four answers</p><div class="m-grid">' + inds + "</div>"
+      : '<p class="m-method">No indicators were recorded for this scan.</p>';
+
+    if (d.made_in_transformation_note) {
+      body += '<p class="m-note">' + esc(d.made_in_transformation_note) + "</p>";
+    }
+    if (d.payment_ultimate_parent) {
+      body += '<p class="m-h">Ultimate parent</p><p class="m-method">'
+        + esc(d.payment_ultimate_parent) + "</p>";
+    }
+    if (d.methodology) {
+      body += '<p class="m-h">How we got there</p><p class="m-method">'
+        + esc(d.methodology) + "</p>";
+    }
+    if ((d.citations || []).length) {
+      body += '<p class="m-h">Sources · ' + d.citations.length + "</p><ul class=\"m-cites\">"
+        + d.citations.map(function (c) {
+            var label = esc(c.label || c.url || "Source");
+            return "<li><span>" + (c.url
+                ? '<a href="' + esc(c.url) + '" target="_blank" rel="noopener nofollow">' + label + "</a>"
+                : label) + "</span>"
+              + (c.kind ? '<span class="kind">' + esc(c.kind) + "</span>" : "") + "</li>";
+          }).join("") + "</ul>";
+    }
+  }
+
+  var actions = [];
+  if (it.url) {
+    actions.push('<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">'
+      + (isBrand ? "Open their website" : "Open the product page") + "</a>");
+  }
+  if (isBrand) {
+    actions.push('<a href="/brands.html?q='
+      + encodeURIComponent(it.brand || it.subject_key) + '">Check again</a>');
+  }
+  if (it.debug_session_code) {
+    actions.push('<span class="m-gap">Diagnostic ' + esc(it.debug_session_code) + "</span>");
+  }
+  actions.push('<button type="button" class="danger" id="m-del" data-id="'
+    + it.id + '">Delete this row</button>');
+  body += '<div class="m-actions">' + actions.join("") + "</div>";
+  return body;
+}
+
+var modal = document.getElementById("hist-modal");
+var modalBody = document.getElementById("hist-modal-body");
+var lastFocus = null;
+
+function closeModal() {
+  modal.hidden = true;
+  modalBody.innerHTML = "";
+  if (lastFocus) { try { lastFocus.focus(); } catch (_) {} }
+}
+
+async function openModal(id, trigger) {
+  lastFocus = trigger || null;
+  modalBody.innerHTML = '<p class="m-method">Loading…</p>';
+  modal.hidden = false;
+  var r = await RPOAuth.authedFetch("/account/history/" + id);
+  if (!r || !r.ok) {
+    modalBody.innerHTML = '<p class="m-method">We could not open that one.</p>';
+    return;
+  }
+  modalBody.innerHTML = modalHtml(await r.json());
+}
+
+document.getElementById("hist-modal-x").addEventListener("click", closeModal);
+document.getElementById("hist-modal-scrim").addEventListener("click", closeModal);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !modal.hidden) closeModal();
+});
+modalBody.addEventListener("click", async function (e) {
+  var del = e.target.closest("#m-del");
+  if (!del) return;
+  if (!confirm("Delete this row? This cannot be undone.")) return;
+  await RPOAuth.authedFetch("/account/history/" + del.dataset.id, { method: "DELETE" });
+  closeModal();
+  load();
+});
+
+
+// ── List, filter, paging, selection ──────────────────────────────────────
+var activeKind = "";     // "" | "product" | "brand"
+var allItems = [];       // the rows on THIS page only
+var pageOffset = 0;
+var total = 0;
+var counts = { "": 0, product: 0, brand: 0 };
+var selected = Object.create(null);
+
+var bulk = document.getElementById("hist-bulk");
+var selAll = document.getElementById("hist-selall");
+var selCount = document.getElementById("hist-selcount");
+var delSel = document.getElementById("hist-delsel");
+var pager = document.getElementById("hist-pager");
+var pageInfo = document.getElementById("hist-pageinfo");
+var prevBtn = document.getElementById("hist-prev");
+var nextBtn = document.getElementById("hist-next");
+
+function selectedIds() {
+  return Object.keys(selected).filter(function (k) { return selected[k]; });
+}
+
+function paintSelection() {
+  var n = selectedIds().length;
+  delSel.disabled = n === 0;
+  selCount.textContent = n ? n + " selected" : "";
+  // "Select all" reflects THIS page only, which is what the label says. A
+  // box that silently meant "all 500" would delete far more than it looked
+  // like it would.
+  var boxes = list.querySelectorAll(".hist-pick");
+  var onPage = Array.prototype.filter.call(boxes, function (b) { return b.checked; });
+  selAll.checked = boxes.length > 0 && onPage.length === boxes.length;
+}
 
 function paint() {
-  var shown = activeKind
-    ? allItems.filter(function (i) { return i.kind === activeKind; })
-    : allItems;
-  list.innerHTML = shown.map(rowHtml).join("");
+  list.innerHTML = allItems.map(rowHtml).join("");
+  Array.prototype.forEach.call(list.querySelectorAll(".hist-row"), function (row) {
+    var on = !!selected[row.dataset.id];
+    row.classList.toggle("is-sel", on);
+    row.querySelector(".hist-pick").checked = on;
+  });
 
-  var counts = {
-    "": allItems.length,
-    product: allItems.filter(function (i) { return i.kind === "product"; }).length,
-    brand: allItems.filter(function (i) { return i.kind === "brand"; }).length,
-  };
-  filter.hidden = allItems.length === 0;
+  filter.hidden = counts[""] === 0;
   Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
     var k = b.getAttribute("data-kind");
     b.classList.toggle("is-on", k === activeKind);
     b.querySelector("span").textContent = counts[k];
   });
 
-  empty.textContent = allItems.length === 0
+  var pages = Math.max(1, Math.ceil(total / PER_PAGE));
+  var page = Math.floor(pageOffset / PER_PAGE) + 1;
+  pager.hidden = total <= PER_PAGE;
+  pageInfo.textContent = "Page " + page + " of " + pages + " · " + total + " saved";
+  prevBtn.disabled = pageOffset === 0;
+  nextBtn.disabled = pageOffset + PER_PAGE >= total;
+
+  bulk.hidden = allItems.length === 0;
+  empty.textContent = counts[""] === 0
     ? "Nothing saved yet."
     : "Nothing here — try another filter.";
-  empty.hidden = shown.length > 0;
-  danger.hidden = allItems.length === 0;
+  empty.hidden = allItems.length > 0;
+  danger.hidden = counts[""] === 0;
+  paintSelection();
 }
 
 Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
   b.addEventListener("click", function () {
     activeKind = b.getAttribute("data-kind");
-    paint();
+    pageOffset = 0;   // a filter change starts at the top of the new list
+    load();
   });
 });
 
+prevBtn.addEventListener("click", function () {
+  pageOffset = Math.max(0, pageOffset - PER_PAGE);
+  load();
+});
+nextBtn.addEventListener("click", function () {
+  pageOffset = pageOffset + PER_PAGE;
+  load();
+});
+
+selAll.addEventListener("change", function () {
+  Array.prototype.forEach.call(list.querySelectorAll(".hist-row"), function (row) {
+    selected[row.dataset.id] = selAll.checked;
+    row.classList.toggle("is-sel", selAll.checked);
+    row.querySelector(".hist-pick").checked = selAll.checked;
+  });
+  paintSelection();
+});
+
+delSel.addEventListener("click", async function () {
+  var ids = selectedIds();
+  if (!ids.length) return;
+  if (!confirm("Delete " + ids.length + (ids.length === 1 ? " row" : " rows")
+      + "? This cannot be undone.")) return;
+  await RPOAuth.authedFetch("/account/history/delete", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ids: ids.map(Number) }),
+  });
+  selected = Object.create(null);
+  load();
+});
+
+list.addEventListener("click", function (e) {
+  // The checkbox is for selecting, not for opening.
+  var pick = e.target.closest(".hist-pick");
+  if (pick) {
+    var pickRow = pick.closest(".hist-row");
+    selected[pickRow.dataset.id] = pick.checked;
+    pickRow.classList.toggle("is-sel", pick.checked);
+    paintSelection();
+    return;
+  }
+  var head = e.target.closest(".hist-head");
+  if (!head) return;
+  openModal(head.closest(".hist-row").dataset.id, head);
+});
+
 async function load() {
-  // Everything in one request, filtered in the page: the list is capped at
-  // 500 rows per account, so re-fetching per chip would be a round-trip
-  // for data we already hold.
-  var r = await RPOAuth.authedFetch("/account/history?limit=500");
+  // One page at a time, and the counts for the chips come from the server
+  // rather than from whatever happens to be on this page.
+  var q = "/account/history?limit=" + PER_PAGE + "&offset=" + pageOffset
+    + (activeKind ? "&kind=" + activeKind : "");
+  var r = await RPOAuth.authedFetch(q);
   if (r === null) { gate.hidden = false; main.hidden = true; return; }
   if (!r.ok) return;
   var d = await r.json();
@@ -429,6 +742,22 @@ async function load() {
   main.hidden = false;
   toggle.checked = !!d.enabled;
   allItems = d.items || [];
+  total = d.total || 0;
+  counts[""] = d.total_all || 0;
+  counts[activeKind || ""] = d.total || 0;
+
+  // The chips need all three numbers, and the request only carried one.
+  if (activeKind) {
+    counts[activeKind === "brand" ? "product" : "brand"] =
+      Math.max(0, counts[""] - d.total);
+  } else {
+    var rb = await RPOAuth.authedFetch("/account/history?limit=1&kind=brand");
+    if (rb && rb.ok) {
+      var db = await rb.json();
+      counts.brand = db.total || 0;
+      counts.product = Math.max(0, counts[""] - counts.brand);
+    }
+  }
   paint();
 }
 
@@ -438,39 +767,6 @@ async function load() {
 // on quietly reset whether the extension scores automatically. The shared
 // one reads the stored value and hands it back.
 RPOHistoryToggle.attach({ checkbox: toggle, onChange: load });
-
-list.addEventListener("click", async function (e) {
-  // Delete first: the button lives INSIDE the open pane, so a click on it
-  // is also a click in the row and would otherwise collapse what it just
-  // deleted from under itself.
-  var del = e.target.closest(".hist-del");
-  if (del) {
-    var delRow = del.closest(".hist-row");
-    await RPOAuth.authedFetch("/account/history/" + delRow.dataset.id,
-                              { method: "DELETE" });
-    load();
-    return;
-  }
-
-  // A link in the pane is a link, not a toggle.
-  if (e.target.closest(".hist-actions a")) return;
-
-  var head = e.target.closest(".hist-head");
-  if (!head) return;
-  var row = head.closest(".hist-row");
-  var open = row.classList.toggle("is-open");
-  head.setAttribute("aria-expanded", open ? "true" : "false");
-
-  var pane = row.querySelector(".hist-detail");
-  if (open && !pane) {
-    var it = allItems.filter(function (x) {
-      return String(x.id) === row.dataset.id;
-    })[0];
-    if (it) row.insertAdjacentHTML("beforeend", detailHtml(it));
-  } else if (!open && pane) {
-    pane.remove();
-  }
-});
 
 document.getElementById("hist-clear").addEventListener("click", async function () {
   if (!confirm("Delete your entire history? This cannot be undone.")) return;
