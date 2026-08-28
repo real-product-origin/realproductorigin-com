@@ -122,6 +122,10 @@
   .m-title { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--ink-deep); margin: 0 0 4px; line-height: 1.2; }
   .m-sub { font-size: 13.5px; color: var(--ink-3); margin: 0 0 4px; }
   .m-when { font-size: 12.5px; color: var(--muted); margin: 0 0 20px; }
+  .m-facts { display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; margin: 0 0 16px; align-items: baseline; }
+  .m-facts dt { font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .m-facts dd { margin: 0; font-size: 14.5px; font-weight: 600; color: var(--ink-deep); }
+  .m-facts dd a { color: var(--ink-deep); }
   .m-h { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 22px 0 9px; }
   .m-grid { display: grid; gap: 9px; grid-template-columns: 1fr; }
   @media (min-width: 520px) { .m-grid { grid-template-columns: 1fr 1fr; } }
@@ -452,13 +456,27 @@ function indHtml(d) {
     var v = ind[k];
     if (!v || (!v.country && !v.country_code)) return;
     var pct = typeof v.percent === "number" ? Math.round(v.percent) + "%" : "";
-    var parts = [pct, conf(v.confidence) ? conf(v.confidence) + " confidence" : ""]
+    var word = typeof v.confidence === "number"
+      ? (v.confidence >= 75 ? "High" : v.confidence >= 50 ? "Moderate"
+         : v.confidence >= 25 ? "Low" : "Very low") : "";
+    var parts = [pct, word ? word + " confidence (" + conf(v.confidence) + ")" : ""]
       .filter(Boolean).join(" · ");
+    // The badge shows these under every indicator, so a snapshot without
+    // them shows less than the thing it is a snapshot of.
+    var alts = (v.distribution || [])
+      .filter(function (a) { return a.country_code !== v.country_code; })
+      .slice(0, 3)
+      .map(function (a) {
+        return flag(a.country_code) + " " + esc(a.country || a.country_code)
+          + " " + Math.round(a.percent) + "%";
+      }).join(" · ");
+
     out += '<div class="m-ind"><span class="k">' + IND_LABEL[k] + "</span>"
       + '<span class="v">' + flag(v.country_code) + " "
       + esc(v.country || v.country_code) + "</span>"
       + (parts ? '<span class="n">' + esc(parts)
           + (v.verified_by_human ? " · checked by a person" : "") + "</span>" : "")
+      + (alts ? '<span class="n">Also possible: ' + alts + "</span>" : "")
       + "</div>";
   });
   return out;
@@ -504,8 +522,29 @@ function modalHtml(it) {
 
   var body = '<p class="m-eyebrow">' + (isBrand ? "Brand report" : "Product score") + "</p>"
     + '<h2 class="m-title" id="hist-modal-title">' + esc(it.title || it.subject_key) + "</h2>";
-  if (it.brand && it.brand !== it.title) body += '<p class="m-sub">' + esc(it.brand) + "</p>";
-  if (it.retailer) body += '<p class="m-sub">' + esc(it.retailer) + "</p>";
+
+  // Brand, seller and the site you scored it on are three different things
+  // and were stacked as three unlabelled lines. "Anker" the brand, "Amazon
+  // .com" the seller of record and "amazon" the site you were looking at
+  // can all differ, and which is which is the whole question this product
+  // answers — so each one is named.
+  var facts = [];
+  if (it.brand) facts.push(["Brand", esc(it.brand)]);
+  if (!isBrand && d.seller) facts.push(["Seller of record", esc(d.seller)]);
+  if (!isBrand && it.retailer) {
+    facts.push(["Scored on", it.url
+      ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">'
+        + esc(it.retailer) + "</a>"
+      : esc(it.retailer)]);
+  }
+  if (isBrand && (d.domain || it.url)) {
+    facts.push(["Website", esc(d.domain || it.url)]);
+  }
+  if (facts.length) {
+    body += '<dl class="m-facts">' + facts.map(function (f) {
+      return "<dt>" + f[0] + "</dt><dd>" + f[1] + "</dd>";
+    }).join("") + "</dl>";
+  }
 
   // Said plainly. This is what you were shown then, not what we would say
   // now — scoring changes, and a history that quietly updated itself would
@@ -516,7 +555,9 @@ function modalHtml(it) {
 
   if (isBrand) {
     var blocks = blocksHtml(d);
-    body += blocks || '<p class="m-method">Nothing was recorded for this report.</p>';
+    body += blocks || '<p class="m-method">This one was saved before we started '
+      + "keeping the full report, so only the headline above was recorded. "
+      + "Check the brand again and the next entry will have everything.</p>";
     if ((d.not_found || []).length) {
       body += '<p class="m-gap"><strong>Not found:</strong> '
         + d.not_found.map(esc).join(" · ") + "</p>";
@@ -528,9 +569,25 @@ function modalHtml(it) {
         + flag(it.made_in_country_code) + " " + esc(it.made_in_country || "")
         + "</span></div>";
     }
+    // A row saved before the snapshot existed still has its headline, so
+    // `inds` is not empty — it is just thin. Falling back only when it is
+    // EMPTY meant the commonest case, one lonely "Made in" card with no
+    // explanation, read as a bug rather than as an old row.
+    var thin = !(d.indicators && Object.keys(d.indicators).length);
     body += inds
       ? '<p class="m-h">The four answers</p><div class="m-grid">' + inds + "</div>"
-      : '<p class="m-method">No indicators were recorded for this scan.</p>';
+      : "";
+    if (thin) {
+      body += '<p class="m-method">This one was saved before we started keeping '
+        + "the full answer, so only the headline was recorded. Score it again "
+        + "and the next entry will have everything — all four indicators, the "
+        + "reasoning and every source.</p>";
+    }
+
+    if (d.description) {
+      body += '<p class="m-h">The listing</p><p class="m-method">'
+        + esc(d.description) + "</p>";
+    }
 
     if (d.made_in_transformation_note) {
       body += '<p class="m-note">' + esc(d.made_in_transformation_note) + "</p>";
