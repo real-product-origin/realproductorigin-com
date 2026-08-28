@@ -90,6 +90,26 @@ destinations, locale prefixes normalised), not the markup — localised
 labels are fine, a missing destination is not.
 
 ```bash
+python3 check-i18n.py
+```
+
+**Translation is part of shipping, not a follow-up.** Levi's standing rule,
+2026-08-27, for every thread: a change to a translated page lands in all
+seven locales in the same commit, or it is not done. This script fails when
+a page that HAS translations loses one, and warns when a translation drifts
+from its own language's usual length — a section added to the English and
+nowhere else shows up as a size gap long before anyone reads both. It
+compares each locale against ITSELF, because Chinese runs ~41% of the
+English character count and Japanese ~55%, and a flat threshold flagged
+every CJK page.
+
+`ENGLISH_ONLY` in that script is the honest debt list: fourteen pages have
+never been translated, including `brands.html` and `history.html`. Shrinking
+it is real work — `history.html` in particular builds ~16 user-facing
+strings in JavaScript and needs a string table before it can be translated
+at all. A page leaving that list without six translations is a failure.
+
+```bash
 python3 -m http.server 4321   # or use the `marketing` preview config
 ```
 
