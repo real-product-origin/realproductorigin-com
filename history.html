@@ -27,7 +27,7 @@
   }
   .chip:hover { color: var(--ink-deep); border-color: var(--ink-deep); }
   .chip.is-on { color: #fff; background: var(--ink-deep); border-color: var(--ink-deep); }
-  .chip span { opacity: .6; font-weight: 500; margin-left: 4px; }
+  .chip .chip-n { opacity: .6; font-weight: 500; margin-left: 4px; }
 
   .acct-gate { padding: 40px 0 60px; }
   .acct-gate p { font-size: 16px; color: var(--ink-3); margin: 0 0 18px; }
@@ -252,8 +252,8 @@
 <section class="acct-body">
   <div class="wrap">
     <div id="hist-gate" class="acct-gate" hidden>
-      <p>Sign in to manage your history.</p>
-      <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fhistory.html">Sign in</a>
+      <p data-i18n="hist_gateSignIn">Sign in to manage your history.</p>
+      <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fhistory.html" data-i18n="hist_signIn">Sign in</a>
     </div>
 
     <div id="hist-main" hidden>
@@ -275,30 +275,30 @@
            so an empty filter is obviously empty rather than looking
            broken. -->
       <div class="hist-filter" id="hist-filter" hidden>
-        <button type="button" class="chip is-on" data-kind="">All <span></span></button>
-        <button type="button" class="chip" data-kind="product">Products <span></span></button>
-        <button type="button" class="chip" data-kind="brand">Brands <span></span></button>
+        <button type="button" class="chip is-on" data-kind=""><span data-i18n="hist_all">All</span> <span class="chip-n"></span></button>
+        <button type="button" class="chip" data-kind="product"><span data-i18n="hist_products">Products</span> <span class="chip-n"></span></button>
+        <button type="button" class="chip" data-kind="brand"><span data-i18n="hist_brands">Brands</span> <span class="chip-n"></span></button>
       </div>
 
       <div class="hist-bulk" id="hist-bulk" hidden>
         <label class="hist-selall">
-          <input type="checkbox" id="hist-selall"> Select all on this page
+          <input type="checkbox" id="hist-selall"> <span data-i18n="hist_selectAll">Select all on this page</span>
         </label>
         <span class="hist-selcount" id="hist-selcount"></span>
-        <button type="button" id="hist-delsel" class="hist-danger-btn" disabled>Delete selected</button>
+        <button type="button" id="hist-delsel" class="hist-danger-btn" data-i18n="hist_deleteSelected" disabled>Delete selected</button>
       </div>
 
       <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
       <div id="hist-list"></div>
 
       <div class="hist-pager" id="hist-pager" hidden>
-        <button type="button" id="hist-prev">‹ Newer</button>
+        <button type="button" id="hist-prev" data-i18n="hist_newer">‹ Newer</button>
         <span id="hist-pageinfo"></span>
-        <button type="button" id="hist-next">Older ›</button>
+        <button type="button" id="hist-next" data-i18n="hist_older">Older ›</button>
       </div>
 
       <p class="hist-danger" id="hist-danger" hidden>
-        <button type="button" id="hist-clear">Delete my entire history</button>
+        <button type="button" id="hist-clear" data-i18n="hist_deleteAll">Delete my entire history</button>
       </p>
     </div>
   </div>
@@ -367,6 +367,7 @@
   <div class="disclaimer">Retailer, brand, and product names shown on this site are trademarks of their respective owners and are used solely to identify the third-party products the Service scores. Real Product Origin is not affiliated with, endorsed by, or sponsored by any retailer, brand, or Anthropic, PBC. Claude is a trademark of Anthropic, PBC.</div>
 </footer>
 <script src="/assets/account-guard.js"></script>
+<script src="/assets/i18n.js"></script>
 <script src="/assets/history-toggle.js"></script>
 <script src="/assets/lang-switcher.js" defer></script>
 <script>
@@ -392,12 +393,30 @@ var danger = document.getElementById("hist-danger");
 var filter = document.getElementById("hist-filter");
 var toggle = document.getElementById("hist-enabled");
 
+/* Shorthand. Falls back to the English already in the markup if i18n.js
+ * has not loaded, so a failed asset degrades to English rather than to a
+ * page of empty strings. */
+function T(key) {
+  if (!window.RPOi18n) return "";
+  return RPOi18n.t.apply(null, arguments);
+}
+
+/* Static markup carries its English inline and a data-i18n key. The English
+ * is the no-JS fallback; this swaps it for the visitor's language. */
+(function () {
+  if (!window.RPOi18n) return;
+  var nodes = document.querySelectorAll("[data-i18n]");
+  for (var i = 0; i < nodes.length; i++) {
+    var v = RPOi18n.t(nodes[i].getAttribute("data-i18n"));
+    if (v) nodes[i].textContent = v;
+  }
+})();
+
 var PER_PAGE = 25;
 var TIER_RULE = { record: "#1D4ED8", measured: "#15803D", assessed: "#8A93A0", reported: "#C3C9D0" };
-var TIER_NAME = { record: "On the record", measured: "What we've checked",
-                  assessed: "Our assessment", reported: "What people report" };
-var IND_LABEL = { made_in: "Made in", ships_from: "Ships from",
-                  sold_by: "Retailer", payment_goes_to: "Money goes to" };
+function tierName(t) { return T("tier_" + t) || t; }
+var IND_KEY = { made_in: "hist_madeIn", ships_from: "hist_shipsFrom",
+                sold_by: "hist_retailer", payment_goes_to: "hist_moneyGoesTo" };
 
 function conf(v) {
   return typeof v === "number" ? Math.round(v) + "%" : "";
@@ -409,10 +428,10 @@ function conf(v) {
  * indicators; a brand row showed nothing at all, which read as "we found
  * nothing" rather than "this row answers a different question". */
 function headline(it) {
-  var label = it.kind === "brand" ? "Owner" : "Made in";
+  var label = T(it.kind === "brand" ? "hist_owner" : "hist_madeIn");
   if (!it.made_in_country_code && !it.made_in_country) {
     return '<span class="hist-label">' + label + "</span>"
-      + '<span class="hist-none">Not established</span>';
+      + '<span class="hist-none">' + T("hist_notEstablished") + "</span>";
   }
   return '<span class="hist-label">' + label + "</span>"
     + '<span class="hist-country">' + flag(it.made_in_country_code) + " "
@@ -426,13 +445,13 @@ function rowHtml(it) {
   // is the maker; on a brand row it is the subject; either way it is the
   // company, and it used to be buried in a run-on dot-separated line.
   var tag = '<span class="hist-tag ' + (isBrand ? "brand" : "product") + '">'
-    + (isBrand ? "Brand" : "Product") + "</span>";
+    + T(isBrand ? "hist_brand" : "hist_product") + "</span>";
   var bits = [];
   if (it.brand) bits.push('<span class="hist-brand">' + esc(it.brand) + "</span>");
   if (it.retailer) bits.push(esc(it.retailer));
   bits.push(when);
   // One row per subject, so say how often rather than repeating the row.
-  if (it.times > 1) bits.push(it.times + " checks");
+  if (it.times > 1) bits.push(T("hist_checks", it.times));
 
   return '<div class="hist-row" data-id="' + it.id + '">'
     + '<input type="checkbox" class="hist-pick" aria-label="Select this row">'
@@ -452,14 +471,14 @@ function rowHtml(it) {
 function indHtml(d) {
   var ind = (d && d.indicators) || {};
   var out = "";
-  Object.keys(IND_LABEL).forEach(function (k) {
+  Object.keys(IND_KEY).forEach(function (k) {
     var v = ind[k];
     if (!v || (!v.country && !v.country_code)) return;
     var pct = typeof v.percent === "number" ? Math.round(v.percent) + "%" : "";
-    var word = typeof v.confidence === "number"
-      ? (v.confidence >= 75 ? "High" : v.confidence >= 50 ? "Moderate"
-         : v.confidence >= 25 ? "Low" : "Very low") : "";
-    var parts = [pct, word ? word + " confidence (" + conf(v.confidence) + ")" : ""]
+    // The four bands live in i18n.js so every surface calls 74% the same
+    // thing. Duplicating the thresholds is how one of them drifts.
+    var ck = window.RPOi18n && RPOi18n.confidenceKey(v.confidence);
+    var parts = [pct, ck ? T(ck, conf(v.confidence)) : ""]
       .filter(Boolean).join(" · ");
     // The badge shows these under every indicator, so a snapshot without
     // them shows less than the thing it is a snapshot of.
@@ -471,12 +490,12 @@ function indHtml(d) {
           + " " + Math.round(a.percent) + "%";
       }).join(" · ");
 
-    out += '<div class="m-ind"><span class="k">' + IND_LABEL[k] + "</span>"
+    out += '<div class="m-ind"><span class="k">' + T(IND_KEY[k]) + "</span>"
       + '<span class="v">' + flag(v.country_code) + " "
       + esc(v.country || v.country_code) + "</span>"
       + (parts ? '<span class="n">' + esc(parts)
-          + (v.verified_by_human ? " · checked by a person" : "") + "</span>" : "")
-      + (alts ? '<span class="n">Also possible: ' + alts + "</span>" : "")
+          + (v.verified_by_human ? " · " + T("hist_checkedByPerson") : "") + "</span>" : "")
+      + (alts ? '<span class="n">' + T("hist_alsoPossible", alts) + "</span>" : "")
       + "</div>";
   });
   return out;
@@ -500,7 +519,7 @@ function blocksHtml(d) {
     }).join("");
     return '<div class="m-block" style="border-left-color:' + rule + '">'
       + '<span class="tier" style="color:' + rule + '">'
-      + esc(TIER_NAME[b.tier] || b.tier) + "</span>"
+      + esc(tierName(b.tier)) + "</span>"
       + '<p class="bt">' + esc(b.title || "") + "</p>"
       + (b.country_code
           ? '<p class="bc">' + flag(b.country_code) + " "
@@ -520,7 +539,7 @@ function modalHtml(it) {
   var first = it.first_scanned_at
     ? new Date(it.first_scanned_at).toLocaleDateString() : "";
 
-  var body = '<p class="m-eyebrow">' + (isBrand ? "Brand report" : "Product score") + "</p>"
+  var body = '<p class="m-eyebrow">' + T(isBrand ? "hist_brandReport" : "hist_productScore") + "</p>"
     + '<h2 class="m-title" id="hist-modal-title">' + esc(it.title || it.subject_key) + "</h2>";
 
   // Brand, seller and the site you scored it on are three different things
@@ -529,16 +548,16 @@ function modalHtml(it) {
   // can all differ, and which is which is the whole question this product
   // answers — so each one is named.
   var facts = [];
-  if (it.brand) facts.push(["Brand", esc(it.brand)]);
-  if (!isBrand && d.seller) facts.push(["Seller of record", esc(d.seller)]);
+  if (it.brand) facts.push([T("hist_fieldBrand"), esc(it.brand)]);
+  if (!isBrand && d.seller) facts.push([T("hist_fieldSeller"), esc(d.seller)]);
   if (!isBrand && it.retailer) {
-    facts.push(["Scored on", it.url
+    facts.push([T("hist_fieldScoredOn"), it.url
       ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">'
         + esc(it.retailer) + "</a>"
       : esc(it.retailer)]);
   }
   if (isBrand && (d.domain || it.url)) {
-    facts.push(["Website", esc(d.domain || it.url)]);
+    facts.push([T("hist_fieldWebsite"), esc(d.domain || it.url)]);
   }
   if (facts.length) {
     body += '<dl class="m-facts">' + facts.map(function (f) {
@@ -549,9 +568,9 @@ function modalHtml(it) {
   // Said plainly. This is what you were shown then, not what we would say
   // now — scoring changes, and a history that quietly updated itself would
   // not be a history.
-  body += '<p class="m-when">The answer as shown on ' + esc(when)
-    + (it.times > 1 ? " — checked " + it.times + " times since " + esc(first) : "")
-    + ".</p>";
+  body += '<p class="m-when">' + (it.times > 1
+    ? T("hist_asShownChecked", esc(when), it.times, esc(first))
+    : T("hist_asShownOn", esc(when))) + "</p>";
 
   if (isBrand) {
     var blocks = blocksHtml(d);
@@ -559,7 +578,7 @@ function modalHtml(it) {
       + "keeping the full report, so only the headline above was recorded. "
       + "Check the brand again and the next entry will have everything.</p>";
     if ((d.not_found || []).length) {
-      body += '<p class="m-gap"><strong>Not found:</strong> '
+      body += '<p class="m-gap"><strong>' + T("hist_notFound") + "</strong> "
         + d.not_found.map(esc).join(" · ") + "</p>";
     }
   } else {
@@ -575,7 +594,7 @@ function modalHtml(it) {
     // explanation, read as a bug rather than as an old row.
     var thin = !(d.indicators && Object.keys(d.indicators).length);
     body += inds
-      ? '<p class="m-h">The four answers</p><div class="m-grid">' + inds + "</div>"
+      ? '<p class="m-h">' + T("hist_theFourAnswers") + '</p><div class="m-grid">' + inds + "</div>"
       : "";
     if (thin) {
       body += '<p class="m-method">This one was saved before we started keeping '
@@ -585,7 +604,7 @@ function modalHtml(it) {
     }
 
     if (d.description) {
-      body += '<p class="m-h">The listing</p><p class="m-method">'
+      body += '<p class="m-h">' + T("hist_theListing") + '</p><p class="m-method">'
         + esc(d.description) + "</p>";
     }
 
@@ -593,15 +612,15 @@ function modalHtml(it) {
       body += '<p class="m-note">' + esc(d.made_in_transformation_note) + "</p>";
     }
     if (d.payment_ultimate_parent) {
-      body += '<p class="m-h">Ultimate parent</p><p class="m-method">'
+      body += '<p class="m-h">' + T("hist_ultimateParent") + '</p><p class="m-method">'
         + esc(d.payment_ultimate_parent) + "</p>";
     }
     if (d.methodology) {
-      body += '<p class="m-h">How we got there</p><p class="m-method">'
+      body += '<p class="m-h">' + T("hist_howWeGotThere") + '</p><p class="m-method">'
         + esc(d.methodology) + "</p>";
     }
     if ((d.citations || []).length) {
-      body += '<p class="m-h">Sources · ' + d.citations.length + "</p><ul class=\"m-cites\">"
+      body += '<p class="m-h">' + T("hist_sources", d.citations.length) + '</p><ul class="m-cites">'
         + d.citations.map(function (c) {
             var label = esc(c.label || c.url || "Source");
             return "<li><span>" + (c.url
@@ -615,17 +634,17 @@ function modalHtml(it) {
   var actions = [];
   if (it.url) {
     actions.push('<a href="' + esc(it.url) + '" target="_blank" rel="noopener nofollow">'
-      + (isBrand ? "Open their website" : "Open the product page") + "</a>");
+      + T(isBrand ? "hist_openWebsite" : "hist_openProduct") + "</a>");
   }
   if (isBrand) {
     actions.push('<a href="/brands.html?q='
-      + encodeURIComponent(it.brand || it.subject_key) + '">Check again</a>');
+      + encodeURIComponent(it.brand || it.subject_key) + '">' + T("hist_checkAgain") + "</a>");
   }
   if (it.debug_session_code) {
-    actions.push('<span class="m-gap">Diagnostic ' + esc(it.debug_session_code) + "</span>");
+    actions.push('<span class="m-gap">' + T("hist_diagnostic", esc(it.debug_session_code)) + "</span>");
   }
   actions.push('<button type="button" class="danger" id="m-del" data-id="'
-    + it.id + '">Delete this row</button>');
+    + it.id + '">' + T("hist_deleteRow") + "</button>");
   body += '<div class="m-actions">' + actions.join("") + "</div>";
   return body;
 }
@@ -642,11 +661,11 @@ function closeModal() {
 
 async function openModal(id, trigger) {
   lastFocus = trigger || null;
-  modalBody.innerHTML = '<p class="m-method">Loading…</p>';
+  modalBody.innerHTML = '<p class="m-method">' + T("hist_loading") + "</p>";
   modal.hidden = false;
   var r = await RPOAuth.authedFetch("/account/history/" + id);
   if (!r || !r.ok) {
-    modalBody.innerHTML = '<p class="m-method">We could not open that one.</p>';
+    modalBody.innerHTML = '<p class="m-method">' + T("hist_couldNotOpen") + "</p>";
     return;
   }
   modalBody.innerHTML = modalHtml(await r.json());
@@ -660,7 +679,7 @@ document.addEventListener("keydown", function (e) {
 modalBody.addEventListener("click", async function (e) {
   var del = e.target.closest("#m-del");
   if (!del) return;
-  if (!confirm("Delete this row? This cannot be undone.")) return;
+  if (!confirm(T("hist_confirmOne"))) return;
   await RPOAuth.authedFetch("/account/history/" + del.dataset.id, { method: "DELETE" });
   closeModal();
   load();
@@ -691,7 +710,7 @@ function selectedIds() {
 function paintSelection() {
   var n = selectedIds().length;
   delSel.disabled = n === 0;
-  selCount.textContent = n ? n + " selected" : "";
+  selCount.textContent = n ? T("hist_selected", n) : "";
   // "Select all" reflects THIS page only, which is what the label says. A
   // box that silently meant "all 500" would delete far more than it looked
   // like it would.
@@ -712,20 +731,18 @@ function paint() {
   Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
     var k = b.getAttribute("data-kind");
     b.classList.toggle("is-on", k === activeKind);
-    b.querySelector("span").textContent = counts[k];
+    b.querySelector(".chip-n").textContent = counts[k];
   });
 
   var pages = Math.max(1, Math.ceil(total / PER_PAGE));
   var page = Math.floor(pageOffset / PER_PAGE) + 1;
   pager.hidden = total <= PER_PAGE;
-  pageInfo.textContent = "Page " + page + " of " + pages + " · " + total + " saved";
+  pageInfo.textContent = T("hist_pageOf", page, pages, total);
   prevBtn.disabled = pageOffset === 0;
   nextBtn.disabled = pageOffset + PER_PAGE >= total;
 
   bulk.hidden = allItems.length === 0;
-  empty.textContent = counts[""] === 0
-    ? "Nothing saved yet."
-    : "Nothing here — try another filter.";
+  empty.textContent = T(counts[""] === 0 ? "hist_nothingYet" : "hist_nothingHere");
   empty.hidden = allItems.length > 0;
   danger.hidden = counts[""] === 0;
   paintSelection();
@@ -760,8 +777,8 @@ selAll.addEventListener("change", function () {
 delSel.addEventListener("click", async function () {
   var ids = selectedIds();
   if (!ids.length) return;
-  if (!confirm("Delete " + ids.length + (ids.length === 1 ? " row" : " rows")
-      + "? This cannot be undone.")) return;
+  if (!confirm(ids.length === 1 ? T("hist_confirmOne")
+      : T("hist_confirmMany", ids.length))) return;
   await RPOAuth.authedFetch("/account/history/delete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -826,7 +843,7 @@ async function load() {
 RPOHistoryToggle.attach({ checkbox: toggle, onChange: load });
 
 document.getElementById("hist-clear").addEventListener("click", async function () {
-  if (!confirm("Delete your entire history? This cannot be undone.")) return;
+  if (!confirm(T("hist_confirmAll"))) return;
   await RPOAuth.authedFetch("/account/history", { method: "DELETE" });
   load();
 });
