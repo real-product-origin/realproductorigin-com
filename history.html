@@ -18,6 +18,17 @@
   .acct-hero h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 10px; color: var(--ink-deep); }
   .acct-hero p { font-size: 16px; color: var(--ink-3); max-width: 620px; margin: 0; line-height: 1.55; }
   .acct-body { padding: 30px 0 60px; }
+  .hist-filter { display: flex; gap: 8px; margin: 22px 0 4px; flex-wrap: wrap; }
+  .chip {
+    font: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink-3);
+    background: #fff; border: 1px solid var(--border-strong);
+    padding: 7px 14px; border-radius: 999px; cursor: pointer;
+    transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+  }
+  .chip:hover { color: var(--ink-deep); border-color: var(--ink-deep); }
+  .chip.is-on { color: #fff; background: var(--ink-deep); border-color: var(--ink-deep); }
+  .chip span { opacity: .6; font-weight: 500; margin-left: 4px; }
+
   .acct-gate { padding: 40px 0 60px; }
   .acct-gate p { font-size: 16px; color: var(--ink-3); margin: 0 0 18px; }
 
@@ -124,6 +135,21 @@
         </label>
       </div>
 
+      <!-- One list, filtered — not two lists.
+           You remember "the thing I looked at on Tuesday", not which of
+           our two features you used, so the default is everything, newest
+           first. The filter exists because the two accumulate at very
+           different rates: brand checks are capped at 5-10 a month while
+           products are not, so somebody hunting a brand should not have to
+           scroll past forty products to find it. Counts are on the chips
+           so an empty filter is obviously empty rather than looking
+           broken. -->
+      <div class="hist-filter" id="hist-filter" hidden>
+        <button type="button" class="chip is-on" data-kind="">All <span></span></button>
+        <button type="button" class="chip" data-kind="product">Products <span></span></button>
+        <button type="button" class="chip" data-kind="brand">Brands <span></span></button>
+      </div>
+
       <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
       <div id="hist-list"></div>
 
@@ -205,6 +231,7 @@ var main = document.getElementById("hist-main");
 var list = document.getElementById("hist-list");
 var empty = document.getElementById("hist-empty");
 var danger = document.getElementById("hist-danger");
+var filter = document.getElementById("hist-filter");
 var toggle = document.getElementById("hist-enabled");
 
 function rowHtml(it) {
@@ -223,18 +250,54 @@ function rowHtml(it) {
     + '<button class="hist-del" type="button">Delete</button></div></div>';
 }
 
+var activeKind = "";
+var allItems = [];
+
+function paint() {
+  var shown = activeKind
+    ? allItems.filter(function (i) { return i.kind === activeKind; })
+    : allItems;
+  list.innerHTML = shown.map(rowHtml).join("");
+
+  var counts = {
+    "": allItems.length,
+    product: allItems.filter(function (i) { return i.kind === "product"; }).length,
+    brand: allItems.filter(function (i) { return i.kind === "brand"; }).length,
+  };
+  filter.hidden = allItems.length === 0;
+  Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
+    var k = b.getAttribute("data-kind");
+    b.classList.toggle("is-on", k === activeKind);
+    b.querySelector("span").textContent = counts[k];
+  });
+
+  empty.textContent = allItems.length === 0
+    ? "Nothing saved yet."
+    : "Nothing here — try another filter.";
+  empty.hidden = shown.length > 0;
+  danger.hidden = allItems.length === 0;
+}
+
+Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
+  b.addEventListener("click", function () {
+    activeKind = b.getAttribute("data-kind");
+    paint();
+  });
+});
+
 async function load() {
-  var r = await RPOAuth.authedFetch("/account/history?limit=200");
+  // Everything in one request, filtered in the page: the list is capped at
+  // 500 rows per account, so re-fetching per chip would be a round-trip
+  // for data we already hold.
+  var r = await RPOAuth.authedFetch("/account/history?limit=500");
   if (r === null) { gate.hidden = false; main.hidden = true; return; }
   if (!r.ok) return;
   var d = await r.json();
   gate.hidden = true;
   main.hidden = false;
   toggle.checked = !!d.enabled;
-  var items = d.items || [];
-  list.innerHTML = items.map(rowHtml).join("");
-  empty.hidden = items.length > 0;
-  danger.hidden = items.length === 0;
+  allItems = d.items || [];
+  paint();
 }
 
 // The switch itself is shared with /brands.html and the account page. This
