@@ -138,6 +138,14 @@
     display: flex; flex-direction: column;
     padding-top: 6px;
   }
+  /* The surface (extension / app) still matters, but it is not the most
+     important thing to say — the eyebrow above it names the job instead.
+     Muted and directly under it, so the pairing reads as "what you can do,
+     and where". */
+  .p-card-body .p-surface {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: var(--muted); margin: -6px 0 14px; letter-spacing: 0.01em;
+  }
   .p-card-body .p-eyebrow {
     font-family: var(--sans);
     font-size: 12px; font-weight: 700;
@@ -396,8 +404,8 @@
   <div class="wrap">
     <span class="eyebrow">Products</span>
     <h1>Know what you're <em>really</em> buying, before you buy it.</h1>
-    <p class="lede">Real Product Origin ships a browser extension for online shopping and a mobile app for in-store, on-the-go, or share-with-a-friend. Both answer the same four questions about anything you're about to buy — where it's <strong>made</strong>, where it <strong>ships from</strong>, who the <strong>retailer</strong> really is, and where your <strong>money ultimately goes</strong> — and both cite their sources.</p>
-    <p class="lede" style="margin-top:14px;">There are <strong>two things you can check</strong>, and they are metered separately. A <strong>product check</strong> scores one item. A <strong>brand check</strong> asks a different question — who ultimately owns the company behind the label, where its trademarks are filed, who registered its website. Checking a brand never spends a product check.</p>
+    <p class="lede">There are <strong>two things you can check</strong>. A <strong>product check</strong> answers four questions about one item — where it's <strong>made</strong>, where it <strong>ships from</strong>, who the <strong>retailer</strong> really is, and where your <strong>money ultimately goes</strong>. A <strong>brand check</strong> asks a different question: who ultimately owns the company behind the label. Both cite their sources, they are metered separately, and checking a brand never spends a product check.</p>
+    <p class="lede" style="margin-top:14px;">Product checks run in the <strong>browser extension</strong> while you shop, or in the <strong>mobile app</strong> when you're in a store. Brand checks run in all three — extension, app, and <strong>here on the site</strong>.</p>
   </div>
 </section>
 
@@ -443,7 +451,8 @@
       </div>
 
       <div class="p-card-body">
-        <p class="p-eyebrow">Browser extension</p>
+        <p class="p-eyebrow">Check a product</p>
+        <p class="p-surface">Browser extension · Chrome, Edge, Brave</p>
         <h2>A score on the page, when you ask for it.</h2>
         <p class="p-pitch">Install once. On Amazon, Target, Walmart and 30 other major retailers, a four-line badge shows origin, shipping, retailer and beneficial ownership — with a confidence percentage and every source cited.</p>
 
@@ -460,7 +469,7 @@
           <a class="p-btn" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Install for Chrome →</a>
           <a class="p-btn secondary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Edge</a>
           <a class="p-btn secondary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Brave</a>
-          <span class="p-btn disabled">Firefox · in review</span>
+          <span class="p-btn disabled">Firefox · coming soon</span>
         </div>
         <p class="p-cta-note">Your first <span data-rpo-free-quota>20</span> checks are free. No account required.</p>
       </div>
@@ -495,14 +504,14 @@
       </div>
 
       <div class="p-card-body">
-        <p class="p-eyebrow">Brand checks</p>
+        <p class="p-eyebrow">Check a brand</p>
         <h2>Who is actually behind the label?</h2>
         <p class="p-pitch">An American-sounding brand is not an American company. A brand check asks who ultimately owns it — separately from any product — and keeps what the public record says apart from what we conclude.</p>
 
         <ul class="p-benefits">
           <li><span class="check" aria-hidden="true"></span><div><strong>The record first, our reading second.</strong> Trademark filings and domain registration are shown as filed, cited by serial number. Our own assessment of the ultimate parent sits below them, labelled as ours and carrying its confidence — never averaged into the record.</div></li>
-          <li><span class="check" aria-hidden="true"></span><div><strong>Every filing, not one country.</strong> Of the brands we have checked, 66 hold trademarks in more than one country. Picking one silently would state something the record does not, so we list them.</div></li>
-          <li><span class="check" aria-hidden="true"></span><div><strong>When they disagree, we say so.</strong> One brand in four holds a US mark over a product made in China. That gap is the most useful thing on the page and it is called out, not smoothed over.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Every filing, not one country.</strong> Brands routinely hold trademarks in more than one country. Picking one silently would state something the record does not, so we list them.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>When they disagree, we say so.</strong> One brand in four holds a US trademark over a product made somewhere else entirely. That gap is the most useful thing on the page and it is called out, not smoothed over.</div></li>
           <li><span class="check" aria-hidden="true"></span><div><strong>The public record is free.</strong> Filings and domain registration cost you nothing and are unlimited on every plan. A brand check is spent only on our assessment of who ultimately owns the company — and it is refunded if we cannot produce one.</div></li>
           <li><span class="check" aria-hidden="true"></span><div><strong>A separate allowance.</strong> <span data-rpo-free-brand-quota>5</span> brand checks on Free, <span data-rpo-basic-brand-quota>10</span> a month on Basic, unlimited on Unlimited. Checking a brand never spends a product check.</div></li>
         </ul>
@@ -561,14 +570,15 @@
       </div>
 
       <div class="p-card-body">
-        <p class="p-eyebrow">Mobile app · iOS + Android</p>
+        <p class="p-eyebrow">Check a product anywhere</p>
+        <p class="p-surface">Mobile app · iOS and Android</p>
         <h2>Score anything, anywhere.</h2>
         <p class="p-pitch">In a store looking at a shampoo bottle. Standing in a friend's kitchen. Wondering about the URL someone just texted you. The app answers in seconds — five different ways in.</p>
 
         <ul class="p-benefits">
           <li><span class="check" aria-hidden="true"></span><div><strong>Scan a barcode.</strong> Any UPC or EAN in-store. Works on grocery, hardware, household — thousands of brands.</div></li>
           <li><span class="check" aria-hidden="true"></span><div><strong>Snap a photo.</strong> For anything without a scannable barcode. Point, shoot, score.</div></li>
-          <li><span class="check" aria-hidden="true"></span><div><strong>Share from another app.</strong> All 30 supported retailers — hit Share, pick our app, get the score.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Share from another app.</strong> All 33 supported retailers — hit Share, pick our app, get the score.</div></li>
           <li><span class="check" aria-hidden="true"></span><div><strong>Paste a link.</strong> Any product URL a friend texted you.</div></li>
           <li><span class="check" aria-hidden="true"></span><div><strong>Bookmark + search history.</strong> Save what you researched. Full-text search across everything you've scored.</div></li>
         </ul>

@@ -138,6 +138,10 @@
     display: flex; flex-direction: column;
     padding-top: 6px;
   }
+  .p-card-body .p-surface {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: var(--muted); margin: -6px 0 14px; letter-spacing: 0.01em;
+  }
   .p-card-body .p-eyebrow {
     font-family: var(--sans);
     font-size: 12px; font-weight: 700;
@@ -441,7 +445,8 @@
       </div>
 
       <div class="p-card-body">
-        <p class="p-eyebrow">Browser-Erweiterung</p>
+        <p class="p-eyebrow">Ein Produkt prüfen</p>
+        <p class="p-surface">Browser-Erweiterung · Chrome, Edge, Brave</p>
         <h2>Eine Bewertung auf der Seite, wenn Sie sie wollen.</h2>
         <p class="p-pitch">Einmal installieren. Jede Produktseite auf Amazon, Target, Walmart und 30 weiteren großen Händlern erhält ein vierzeiliges Abzeichen, das Herkunft, Versand, Händler und wirtschaftliches Eigentum anzeigt — mit einem Konfidenzprozentsatz und jeder zitierten Quelle.</p>
 
@@ -458,7 +463,7 @@
           <a class="p-btn" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Für Chrome installieren →</a>
           <a class="p-btn secondary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Edge</a>
           <a class="p-btn secondary" href="https://chromewebstore.google.com/detail/gglombclfjifbdbgjhijijnacdeejpfh" target="_blank" rel="noopener">Brave</a>
-          <span class="p-btn disabled">Firefox · in Prüfung</span>
+          <span class="p-btn disabled">Firefox · in Kürze</span>
         </div>
         <p class="p-cta-note">Ihre ersten 20 Überprüfungen sind kostenlos. Kein Konto erforderlich.</p>
       </div>
@@ -466,6 +471,50 @@
   </div>
 </section>
 
+<!-- ── Brand checks ─────────────────────────────────────────────────────
+     Shipped English-only; this locale had no way to learn the feature
+     exists. The CTA target (/brands.html) is still English. -->
+<section class="p-section">
+  <div class="wrap-wide">
+    <div class="p-card">
+      <div class="p-card-visual">
+        <svg viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="20" y="34" width="200" height="232" rx="14" fill="#fff" stroke="currentColor" stroke-width="1.5" opacity="0.9"/>
+          <rect x="40" y="58" width="96" height="12" rx="3" fill="currentColor" opacity="0.55"/>
+          <rect x="40" y="78" width="60" height="7" rx="2" fill="currentColor" opacity="0.25"/>
+          <rect x="40" y="106" width="3" height="46" rx="1.5" fill="#1D4ED8"/>
+          <rect x="52" y="108" width="72" height="7" rx="2" fill="#1D4ED8" opacity="0.75"/>
+          <rect x="52" y="124" width="132" height="7" rx="2" fill="currentColor" opacity="0.3"/>
+          <rect x="52" y="138" width="104" height="7" rx="2" fill="currentColor" opacity="0.18"/>
+          <rect x="40" y="166" width="3" height="46" rx="1.5" fill="#15803D"/>
+          <rect x="52" y="168" width="84" height="7" rx="2" fill="#15803D" opacity="0.75"/>
+          <rect x="52" y="184" width="128" height="7" rx="2" fill="currentColor" opacity="0.3"/>
+          <rect x="52" y="198" width="96" height="7" rx="2" fill="currentColor" opacity="0.18"/>
+          <rect x="40" y="226" width="3" height="30" rx="1.5" fill="#8A93A0"/>
+          <rect x="52" y="228" width="66" height="7" rx="2" fill="#8A93A0" opacity="0.75"/>
+          <rect x="52" y="244" width="118" height="7" rx="2" fill="currentColor" opacity="0.25"/>
+        </svg>
+      </div>
+      <div class="p-card-body">
+        <p class="p-eyebrow">Eine Marke prüfen</p>
+        <h2>Wer steckt wirklich hinter dem Etikett?</h2>
+        <p class="p-pitch">Eine amerikanisch klingende Marke ist kein amerikanisches Unternehmen. Eine Markenprüfung fragt, wem sie letztlich gehört — unabhängig von jedem Produkt — und hält auseinander, was das öffentliche Register sagt und was wir daraus schließen.</p>
+        <ul class="p-benefits">
+          <li><span class="check" aria-hidden="true"></span><div><strong>Erst das Register, dann unsere Lesart.</strong> Markenanmeldungen und Domain-Registrierung werden so gezeigt, wie sie eingetragen sind, belegt mit der Seriennummer. Unsere eigene Einschätzung der obersten Muttergesellschaft steht darunter, als unsere gekennzeichnet und mit ihrer Konfidenz — nie mit dem Register verrechnet.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Alle Anmeldungen, nicht ein Land.</strong> Marken sind regelmäßig in mehr als einem Land eingetragen. Stillschweigend eines auszuwählen würde etwas behaupten, was das Register nicht hergibt — also listen wir sie auf.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Wenn sie sich widersprechen, sagen wir es.</strong> Eine von vier Marken hält eine US-Marke über ein Produkt, das ganz woanders hergestellt wird. Diese Lücke ist das Nützlichste auf der Seite, und sie wird benannt statt geglättet.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Das öffentliche Register ist kostenlos.</strong> Anmeldungen und Domain-Registrierung kosten Sie nichts und sind in jedem Tarif unbegrenzt. Eine Markenprüfung wird nur für unsere Einschätzung des letztlichen Eigentümers verbraucht — und sie wird gutgeschrieben, wenn wir keine liefern können.</div></li>
+          <li><span class="check" aria-hidden="true"></span><div><strong>Ein eigenes Kontingent.</strong> 5 Markenprüfungen bei Free, 10 pro Monat bei Basic, unbegrenzt bei Unlimited. Eine Markenprüfung verbraucht nie eine Produktprüfung.</div></li>
+        </ul>
+        <div class="p-cta-row">
+          <a class="p-btn" href="/brands.html">Eine Marke prüfen →</a>
+          <a class="p-btn secondary" href="/de/pricing.html">Kontingente ansehen</a>
+        </div>
+        <p class="p-cta-note">Auf der Website benötigt eine Markenprüfung ein Konto. In der Erweiterung nicht.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ── Product 2: Mobile app ────────────────────────────────────────────── -->
 <section class="p-section">
   <div class="wrap-wide">
@@ -510,7 +559,8 @@
       </div>
 
       <div class="p-card-body">
-        <p class="p-eyebrow">Mobile App · iOS + Android</p>
+        <p class="p-eyebrow">Ein Produkt überall prüfen</p>
+        <p class="p-surface">Mobile App · iOS und Android</p>
         <h2>Bewerten Sie alles, überall.</h2>
         <p class="p-pitch">In einem Geschäft vor einer Shampooflasche. In der Küche eines Freundes. Sie fragen sich, was hinter der URL steckt, die Ihnen jemand gerade geschickt hat. Die App antwortet in Sekunden — fünf verschiedene Wege hinein.</p>
 
