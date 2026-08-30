@@ -67,17 +67,11 @@
   .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
   .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
 
-  /* Clickable the way the admin tables are: the whole row tints on hover
-     and the cursor says so, rather than a chevron being the only hint. */
-  .hist-row {
-    display: flex; align-items: flex-start; gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-left: 10px; margin: 0 -10px; border-radius: 8px;
-    transition: background 100ms ease;
-  }
-  .hist-row:hover { background: var(--bg-cream); }
-  .hist-row.is-sel { background: var(--gold-soft); }
-  .hist-pick { margin: 20px 0 0; flex: none; }
+  /* Row styling lives with the table rules further down. The list-era
+     flex layout was removed when the rows became <tr>: `display:flex` on
+     a table row opts it out of table layout, so the column widths stopped
+     meaning anything. */
+  .hist-pick { margin: 0; }
 
   .hist-bulk {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
@@ -156,16 +150,7 @@
   .m-gap { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; line-height: 1.6; }
 
 
-  .hist-head {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 16px; padding: 13px 0; width: 100%; text-align: left;
-    background: none; border: 0; font: inherit; cursor: pointer;
-  }
-  .hist-head:hover .hist-title { color: var(--accent); }
   .hist-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .hist-main { min-width: 0; }
-  .hist-title { font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0; overflow-wrap: anywhere; }
-  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
 
   /* Kind and brand render identically on both row types, because "what is
      this row about" is the same question whichever it is. */
@@ -176,16 +161,11 @@
   }
   .hist-tag.product { background: #eef2ff; color: #3730a3; }
   .hist-tag.brand { background: #ecfdf5; color: #065f46; }
-  .hist-brand { font-weight: 600; color: var(--ink-3); }
 
-  .hist-right { text-align: right; white-space: nowrap; flex: none; }
   /* Labelled, always. An unlabelled flag on a product row could be any of
      four different answers, and on a brand row it was simply blank. */
-  .hist-label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .hist-country { font-size: 15px; font-weight: 700; color: var(--ink-deep); }
   .hist-none { font-size: 13px; font-weight: 500; color: var(--muted); }
-  .hist-chev { display: inline-block; margin-left: 9px; color: var(--muted); transition: transform 120ms ease; }
-  .hist-row.is-open .hist-chev { transform: rotate(90deg); }
 
   .hist-detail { padding: 2px 0 18px; }
   .hist-facts { display: grid; gap: 10px 18px; grid-template-columns: 1fr; margin: 0 0 14px; }
@@ -212,6 +192,92 @@
   .hist-danger button { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+  /* ── Tabs ─────────────────────────────────────────────────────────── */
+  .hist-tabs { display:flex; gap:4px; border-bottom:1px solid var(--border); margin:0 0 16px; }
+  .hist-tab {
+    appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+    padding:10px 16px; margin-bottom:-1px; cursor:pointer;
+    font:inherit; font-size:15px; font-weight:600; color:var(--ink-3);
+  }
+  .hist-tab:hover { color:var(--ink-deep); }
+  .hist-tab.is-on { color:var(--ink-deep); border-bottom-color:var(--accent); }
+  .hist-tab .tab-n {
+    display:inline-block; margin-left:6px; padding:1px 7px; border-radius:999px;
+    background:var(--bg-cream); font-size:12px; font-weight:700; color:var(--ink-3);
+  }
+  .hist-tab.is-on .tab-n { background:var(--accent); color:#fff; }
+
+  /* ── Filters ──────────────────────────────────────────────────────── */
+  .hist-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 14px; }
+  .f-ctl {
+    font:inherit; font-size:14px; padding:7px 10px; border:1px solid var(--border);
+    border-radius:8px; background:#fff; color:var(--ink-2); max-width:100%;
+  }
+  .f-q { min-width:220px; flex:1 1 220px; }
+  .f-date { font-size:13px; color:var(--ink-3); display:flex; align-items:center; gap:6px; }
+  .f-date .f-ctl { font-size:13px; padding:6px 8px; }
+  .f-clear {
+    appearance:none; background:none; border:0; font:inherit; font-size:13px;
+    color:var(--accent); cursor:pointer; text-decoration:underline; padding:6px 2px;
+  }
+
+  /* ── Table ────────────────────────────────────────────────────────── */
+  /* Horizontal scroll is contained here rather than on the page body, so
+     a wide table never makes the whole document scroll sideways. */
+  .hist-tablewrap { overflow-x:auto; }
+  .hist-table { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .hist-table th, .hist-table td {
+    text-align:left; padding:11px 12px; border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+  .hist-table th {
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); white-space:nowrap; padding:0;
+  }
+  .hist-table th:not(.is-sortable) { padding:11px 12px; }
+  .th-sort {
+    appearance:none; background:none; border:0; font:inherit; color:inherit;
+    display:block; width:100%; text-align:left; padding:11px 12px; cursor:pointer;
+    white-space:nowrap;
+  }
+  .th-sort:hover { background:rgba(0,0,0,.03); color:var(--ink-2); }
+  .hist-table th.is-active .th-sort { color:var(--ink-deep); }
+  /* The caret slot is always present (zero-width space when inactive) so
+     the header does not shift by a few pixels as you sort. */
+  .th-caret { display:inline-block; min-width:10px; margin-left:5px; font-size:10px; }
+
+  .hist-table tbody tr:hover { background:var(--bg-cream); }
+  .hist-table tr.is-sel { background:#eff6ff; }
+  .c-pick { width:34px; }
+  /* The flexible column. Without this the slack lands in whichever
+     column the browser picks first — which was the checkbox. */
+  .c-title { width:100%; }
+  .c-open { width:34px; text-align:right; }
+
+  .t-title {
+    display:block; font-weight:600; color:var(--ink-deep);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    max-width:min(42vw, 360px);
+  }
+  .t-country { white-space:nowrap; }
+  .t-when { white-space:nowrap; color:var(--ink-3); }
+  .t-none { color:var(--muted); }
+  .c-confidence, .c-times { text-align:right; font-variant-numeric:tabular-nums; }
+  .hist-table .hist-head {
+    appearance:none; background:none; border:0; font:inherit; font-size:18px;
+    color:var(--muted); cursor:pointer; padding:0 4px; line-height:1;
+  }
+  .hist-table .hist-head:hover { color:var(--ink-deep); }
+
+  /* Eight columns do not fit a phone, and a sideways-scrolling table is
+     worse than one that shows less. Drop the least load-bearing first. */
+  @media (max-width: 900px) { .hide-md { display:none; } }
+  @media (max-width: 640px) {
+    .hide-sm { display:none; }
+    .t-title { max-width:min(52vw, 200px); }
+    .f-q { min-width:100%; }
+  }
 </style>
 </head>
 <body>
@@ -250,7 +316,7 @@
 </section>
 
 <section class="acct-body">
-  <div class="wrap">
+  <div class="wrap-wide">
     <div id="hist-gate" class="acct-gate" hidden>
       <p data-i18n="hist_gateSignIn">Sign in to manage your history.</p>
       <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fhistory.html" data-i18n="hist_signIn">Sign in</a>
@@ -261,23 +327,37 @@
         <input type="checkbox" id="hist-enabled">
         <label for="hist-enabled">
           Keep a history of what I check
-          <span class="fine">Products and brands, in one list. Turning this off stops new entries; what is already saved stays until you delete it.</span>
+          <span class="fine">Products and brands, on separate tabs. Turning this off stops new entries; what is already saved stays until you delete it.</span>
         </label>
       </div>
 
-      <!-- One list, filtered — not two lists.
-           You remember "the thing I looked at on Tuesday", not which of
-           our two features you used, so the default is everything, newest
-           first. The filter exists because the two accumulate at very
-           different rates: brand checks are capped at 5-10 a month while
-           products are not, so somebody hunting a brand should not have to
-           scroll past forty products to find it. Counts are on the chips
-           so an empty filter is obviously empty rather than looking
-           broken. -->
-      <div class="hist-filter" id="hist-filter" hidden>
-        <button type="button" class="chip is-on" data-kind=""><span data-i18n="hist_all">All</span> <span class="chip-n"></span></button>
-        <button type="button" class="chip" data-kind="product"><span data-i18n="hist_products">Products</span> <span class="chip-n"></span></button>
-        <button type="button" class="chip" data-kind="brand"><span data-i18n="hist_brands">Brands</span> <span class="chip-n"></span></button>
+      <!-- Two tabs, not one list.
+           This was deliberately ONE list, and the reasoning was good: you
+           remember "the thing I looked at on Tuesday", not which of our
+           features you used. What changed is that the two kinds answer
+           DIFFERENT QUESTIONS — a product row says where the item was
+           made, a brand row says where its owner sits — so a shared table
+           had to label that column loosely enough to cover both, and the
+           filter that matters most (site) applies to only one of them.
+           Splitting lets each column be named exactly. -->
+      <div class="hist-tabs" id="hist-tabs" role="tablist" hidden>
+        <button type="button" class="hist-tab is-on" role="tab" aria-selected="true" data-kind="product">
+          <span data-i18n="hist_products">Products</span> <span class="tab-n"></span>
+        </button>
+        <button type="button" class="hist-tab" role="tab" aria-selected="false" data-kind="brand">
+          <span data-i18n="hist_brands">Brands</span> <span class="tab-n"></span>
+        </button>
+      </div>
+
+      <!-- Built from the rows this account actually has, so a dropdown can
+           never offer a value that returns nothing. -->
+      <div class="hist-filters" id="hist-filters" hidden>
+        <input type="search" id="f-q" class="f-ctl f-q" placeholder="Search title or brand">
+        <select id="f-site" class="f-ctl" aria-label="Site"></select>
+        <select id="f-country" class="f-ctl" aria-label="Country"></select>
+        <label class="f-date">From <input type="date" id="f-since" class="f-ctl"></label>
+        <label class="f-date">To <input type="date" id="f-until" class="f-ctl"></label>
+        <button type="button" id="f-clear" class="f-clear" hidden>Clear filters</button>
       </div>
 
       <div class="hist-bulk" id="hist-bulk" hidden>
@@ -289,7 +369,12 @@
       </div>
 
       <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
-      <div id="hist-list"></div>
+      <div class="hist-tablewrap">
+        <table class="hist-table" id="hist-table">
+          <thead id="hist-thead"></thead>
+          <tbody id="hist-list"></tbody>
+        </table>
+      </div>
 
       <div class="hist-pager" id="hist-pager" hidden>
         <button type="button" id="hist-prev" data-i18n="hist_newer">‹ Newer</button>
@@ -390,7 +475,16 @@ var main = document.getElementById("hist-main");
 var list = document.getElementById("hist-list");
 var empty = document.getElementById("hist-empty");
 var danger = document.getElementById("hist-danger");
-var filter = document.getElementById("hist-filter");
+var tabs      = document.getElementById("hist-tabs");
+var filterBar = document.getElementById("hist-filters");
+var thead     = document.getElementById("hist-thead");
+var table     = document.getElementById("hist-table");
+var fQ        = document.getElementById("f-q");
+var fSite     = document.getElementById("f-site");
+var fCountry  = document.getElementById("f-country");
+var fSince    = document.getElementById("f-since");
+var fUntil    = document.getElementById("f-until");
+var fClear    = document.getElementById("f-clear");
 var toggle = document.getElementById("hist-enabled");
 
 /* Shorthand. Falls back to the English already in the markup if i18n.js
@@ -438,30 +532,104 @@ function headline(it) {
     + esc(it.made_in_country || it.made_in_country_code) + "</span>";
 }
 
-function rowHtml(it) {
-  var isBrand = it.kind === "brand";
-  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
-  // Brand identity rendered the SAME way on both kinds. On a product row it
-  // is the maker; on a brand row it is the subject; either way it is the
-  // company, and it used to be buried in a run-on dot-separated line.
-  var tag = '<span class="hist-tag ' + (isBrand ? "brand" : "product") + '">'
-    + T(isBrand ? "hist_brand" : "hist_product") + "</span>";
-  var bits = [];
-  if (it.brand) bits.push('<span class="hist-brand">' + esc(it.brand) + "</span>");
-  if (it.retailer) bits.push(esc(it.retailer));
-  bits.push(when);
-  // One row per subject, so say how often rather than repeating the row.
-  if (it.times > 1) bits.push(T("hist_checks", it.times));
+/* ── Columns ────────────────────────────────────────────────────────────
+ * Defined per tab, because the two kinds answer different questions. A
+ * product row says where the item was MADE; a brand row says where its
+ * OWNER sits. The old shared list had to label that column loosely enough
+ * to cover both, which is what made it hard to read.
+ *
+ * `sort` is the server-side key. A column without one is not sortable —
+ * there is nothing in the database to order it by, and a header that
+ * sorted only the visible page would be a lie.
+ *
+ * `hide` drops the column on narrow screens: eight columns do not fit on a
+ * phone, and a table that scrolls sideways is worse than one showing less.
+ */
+var COLUMNS = {
+  product: [
+    { key: "title",      label: "hist_colProduct",    sort: "title" },
+    { key: "brand",      label: "hist_colBrand",      sort: "brand",      hide: "sm" },
+    { key: "retailer",   label: "hist_colSite",       sort: "retailer" },
+    { key: "made_in",    label: "hist_madeIn",        sort: "made_in" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence", hide: "sm" },
+    { key: "times",      label: "hist_colChecks",     sort: "times",      hide: "md" },
+    { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
+  ],
+  brand: [
+    { key: "title",      label: "hist_colBrand",      sort: "title" },
+    { key: "made_in",    label: "hist_owner",         sort: "made_in" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence", hide: "sm" },
+    { key: "times",      label: "hist_colChecks",     sort: "times",      hide: "md" },
+    { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
+  ]
+};
 
-  return '<div class="hist-row" data-id="' + it.id + '">'
-    + '<input type="checkbox" class="hist-pick" aria-label="Select this row">'
-    + '<button class="hist-head" type="button">'
-    + '<span class="hist-main"><p class="hist-title">' + tag
-    + esc(it.title || it.subject_key) + "</p>"
-    + '<p class="hist-sub">' + bits.join(" · ") + "</p></span>"
-    + '<span class="hist-right">' + headline(it)
-    + '<span class="hist-chev">›</span></span>'
-    + "</button></div>";
+function theadHtml() {
+  var cols = COLUMNS[activeKind] || COLUMNS.product;
+  var out = '<tr><th class="c-pick"></th>';
+  cols.forEach(function (c) {
+    var cls = "c-" + c.key + (c.hide ? " hide-" + c.hide : "");
+    if (!c.sort) { out += '<th class="' + cls + '">' + T(c.label) + "</th>"; return; }
+    var on = sortKey === c.sort;
+    // Clicking the active column flips it; a new column starts descending,
+    // because "most recent / highest / most" is what people want first on
+    // every one of these.
+    var next = on && sortDir === "desc" ? "asc" : "desc";
+    out += '<th class="' + cls + ' is-sortable' + (on ? " is-active" : "") + '"'
+      + (on ? ' aria-sort="' + (sortDir === "desc" ? "descending" : "ascending") + '"' : "")
+      + '><button type="button" class="th-sort" data-sort="' + c.sort
+      + '" data-dir="' + next + '">' + T(c.label)
+      + '<span class="th-caret">'
+      + (on ? (sortDir === "desc" ? "\u25be" : "\u25b4") : "\u200b")
+      + "</span></button></th>";
+  });
+  return out + '<th class="c-open"></th></tr>';
+}
+
+// An em dash rather than an empty cell: a blank reads as a rendering
+// fault, this reads as "we have nothing here" — which is the true thing.
+function dash() { return '<span class="t-none">\u2014</span>'; }
+
+function cellHtml(it, key) {
+  switch (key) {
+    case "title":
+      return '<span class="t-title">' + esc(it.title || it.subject_key) + "</span>";
+    case "brand":
+      return it.brand ? esc(it.brand) : dash();
+    case "retailer":
+      return it.retailer ? esc(it.retailer) : dash();
+    case "made_in":
+      if (!it.made_in_country_code && !it.made_in_country) {
+        return '<span class="t-none">' + T("hist_notEstablished") + "</span>";
+      }
+      return '<span class="t-country">' + flag(it.made_in_country_code) + " "
+        + esc(it.made_in_country || it.made_in_country_code) + "</span>";
+    case "confidence":
+      return typeof it.made_in_confidence === "number"
+        ? conf(it.made_in_confidence) : dash();
+    case "times":
+      return String(it.times || 1);
+    case "scanned_at":
+      return it.scanned_at
+        ? '<span class="t-when">'
+            + new Date(it.scanned_at).toLocaleDateString() + "</span>"
+        : dash();
+  }
+  return "";
+}
+
+function rowHtml(it) {
+  var cols = COLUMNS[activeKind] || COLUMNS.product;
+  var cells = cols.map(function (c) {
+    return '<td class="c-' + c.key + (c.hide ? " hide-" + c.hide : "") + '">'
+      + cellHtml(it, c.key) + "</td>";
+  }).join("");
+  return '<tr class="hist-row" data-id="' + it.id + '">'
+    + '<td class="c-pick"><input type="checkbox" class="hist-pick"'
+    + ' aria-label="Select this row"></td>'
+    + cells
+    + '<td class="c-open"><button class="hist-head" type="button"'
+    + ' aria-label="Open details">\u203a</button></td></tr>';
 }
 
 /* ── The modal ──────────────────────────────────────────────────────────
@@ -687,7 +855,14 @@ modalBody.addEventListener("click", async function (e) {
 
 
 // ── List, filter, paging, selection ──────────────────────────────────────
-var activeKind = "";     // "" | "product" | "brand"
+// Products is the default tab: nearly every row lands there, because
+// brand checks are capped at 5-10 a month and product checks are not.
+var activeKind = "product";
+var sortKey = "scanned_at";
+var sortDir = "desc";
+var filters = { q: "", retailer: "", country: "", since: "", until: "" };
+var facets = { retailers: [], countries: [] };
+var totalKind = 0;
 var allItems = [];       // the rows on THIS page only
 var pageOffset = 0;
 var total = 0;
@@ -720,6 +895,7 @@ function paintSelection() {
 }
 
 function paint() {
+  thead.innerHTML = theadHtml();
   list.innerHTML = allItems.map(rowHtml).join("");
   Array.prototype.forEach.call(list.querySelectorAll(".hist-row"), function (row) {
     var on = !!selected[row.dataset.id];
@@ -727,11 +903,14 @@ function paint() {
     row.querySelector(".hist-pick").checked = on;
   });
 
-  filter.hidden = counts[""] === 0;
-  Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
+  var any = counts[""] > 0;
+  tabs.hidden = !any;
+  filterBar.hidden = !any;
+  Array.prototype.forEach.call(tabs.querySelectorAll(".hist-tab"), function (b) {
     var k = b.getAttribute("data-kind");
     b.classList.toggle("is-on", k === activeKind);
-    b.querySelector(".chip-n").textContent = counts[k];
+    b.setAttribute("aria-selected", k === activeKind ? "true" : "false");
+    b.querySelector(".tab-n").textContent = counts[k];
   });
 
   var pages = Math.max(1, Math.ceil(total / PER_PAGE));
@@ -742,27 +921,127 @@ function paint() {
   nextBtn.disabled = pageOffset + PER_PAGE >= total;
 
   bulk.hidden = allItems.length === 0;
-  empty.textContent = T(counts[""] === 0 ? "hist_nothingYet" : "hist_nothingHere");
+  table.hidden = allItems.length === 0;
+  // Three empty states, because they need different words — and only the
+  // last one has its fix on screen.
+  empty.textContent = !any ? T("hist_nothingYet")
+    : (totalKind === 0 ? T("hist_nothingHere") : T("hist_noMatches"));
   empty.hidden = allItems.length > 0;
-  danger.hidden = counts[""] === 0;
+  danger.hidden = !any;
   paintSelection();
 }
 
-Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
-  b.addEventListener("click", function () {
-    activeKind = b.getAttribute("data-kind");
-    pageOffset = 0;   // a filter change starts at the top of the new list
+/* Filter controls, rebuilt from the facets the server returned.
+ *
+ * The options are NOT narrowed by the other active filters: a menu that
+ * removes its own entries as you use it cannot be walked back without
+ * clearing everything and starting again. */
+function paintFilters() {
+  function fill(sel, opts, current, allLabel) {
+    sel.innerHTML = "";
+    var o0 = document.createElement("option");
+    o0.value = ""; o0.textContent = allLabel;
+    sel.appendChild(o0);
+    opts.forEach(function (o) {
+      var el = document.createElement("option");
+      el.value = o.value; el.textContent = o.text;
+      if (o.value === current) el.selected = true;
+      sel.appendChild(el);
+    });
+    // A dropdown with one real choice is noise, not a filter.
+    sel.hidden = opts.length < 2;
+  }
+
+  // Brand rows have no retailer, so the site filter belongs to one tab.
+  fill(fSite, (facets.retailers || []).map(function (r) {
+    return { value: r, text: r };
+  }), filters.retailer, T("hist_allSites"));
+  if (activeKind !== "product") fSite.hidden = true;
+
+  fill(fCountry, (facets.countries || []).map(function (c) {
+    return { value: c.code, text: flagText(c.code) + " " + c.name };
+  }), filters.country,
+    T(activeKind === "brand" ? "hist_allOwners" : "hist_allCountries"));
+
+  fQ.value = filters.q;
+  fSince.value = filters.since;
+  fUntil.value = filters.until;
+  // Stop the date pickers offering ranges that contain no rows.
+  if (facets.earliest) {
+    fSince.min = facets.earliest.slice(0, 10);
+    fUntil.min = facets.earliest.slice(0, 10);
+  }
+  if (facets.latest) {
+    fSince.max = facets.latest.slice(0, 10);
+    fUntil.max = facets.latest.slice(0, 10);
+  }
+
+  fClear.hidden = !(filters.q || filters.retailer || filters.country
+                    || filters.since || filters.until);
+}
+
+// flag() returns markup; an <option> can only hold text, so the flag for a
+// dropdown has to be built as a plain string.
+function flagText(cc) {
+  if (!cc || cc.length !== 2) return "";
+  return String.fromCodePoint.apply(null, cc.toUpperCase().split("").map(
+    function (c) { return 0x1F1E6 + c.charCodeAt(0) - 65; }));
+}
+
+/* ── Sorting ────────────────────────────────────────────────────────────
+ * Delegated, because the header is rebuilt on every paint. Sorting returns
+ * to page 1: staying on page 7 of a newly-ordered set shows rows with no
+ * relationship to what you were just looking at. */
+thead.addEventListener("click", function (e) {
+  var b = e.target.closest(".th-sort");
+  if (!b) return;
+  sortKey = b.getAttribute("data-sort");
+  sortDir = b.getAttribute("data-dir");
+  pageOffset = 0;
+  load();
+});
+
+/* ── Filters ─── each resets paging, for the same reason. ────────────── */
+var qTimer = null;
+fQ.addEventListener("input", function () {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(function () {
+    filters.q = fQ.value.trim();
+    pageOffset = 0;
+    load();
+  }, 300);
+});
+
+[[fSite, "retailer"], [fCountry, "country"],
+ [fSince, "since"], [fUntil, "until"]].forEach(function (pair) {
+  pair[0].addEventListener("change", function () {
+    filters[pair[1]] = pair[0].value;
+    pageOffset = 0;
     load();
   });
 });
 
-prevBtn.addEventListener("click", function () {
-  pageOffset = Math.max(0, pageOffset - PER_PAGE);
+fClear.addEventListener("click", function () {
+  filters = { q: "", retailer: "", country: "", since: "", until: "" };
+  pageOffset = 0;
   load();
 });
-nextBtn.addEventListener("click", function () {
-  pageOffset = pageOffset + PER_PAGE;
-  load();
+
+Array.prototype.forEach.call(tabs.querySelectorAll(".hist-tab"), function (b) {
+  b.addEventListener("click", function () {
+    var k = b.getAttribute("data-kind");
+    if (k === activeKind) return;
+    activeKind = k;
+    // Filters do not carry across tabs. "Site" does not exist for brands,
+    // and silently keeping a country filter would make the other tab look
+    // empty for a reason nothing on screen explains.
+    filters = { q: "", retailer: "", country: "", since: "", until: "" };
+    sortKey = "scanned_at";
+    sortDir = "desc";
+    pageOffset = 0;
+    selected = {};
+    load();
+  });
 });
 
 selAll.addEventListener("change", function () {
@@ -804,10 +1083,19 @@ list.addEventListener("click", function (e) {
 });
 
 async function load() {
-  // One page at a time, and the counts for the chips come from the server
-  // rather than from whatever happens to be on this page.
+  // Filtering, sorting and counting all happen on the SERVER. Doing any of
+  // them in the browser would only ever see the 25 rows on this page, and
+  // would look exactly like doing them to all of them.
   var q = "/account/history?limit=" + PER_PAGE + "&offset=" + pageOffset
-    + (activeKind ? "&kind=" + activeKind : "");
+    + "&kind=" + activeKind
+    + "&sort=" + encodeURIComponent(sortKey)
+    + "&direction=" + sortDir;
+  if (filters.q)        q += "&q=" + encodeURIComponent(filters.q);
+  if (filters.retailer) q += "&retailer=" + encodeURIComponent(filters.retailer);
+  if (filters.country)  q += "&country=" + encodeURIComponent(filters.country);
+  if (filters.since)    q += "&since=" + filters.since;
+  if (filters.until)    q += "&until=" + filters.until;
+
   var r = await RPOAuth.authedFetch(q);
   if (r === null) { gate.hidden = false; main.hidden = true; return; }
   if (!r.ok) return;
@@ -816,24 +1104,17 @@ async function load() {
   main.hidden = false;
   toggle.checked = !!d.enabled;
   allItems = d.items || [];
-  total = d.total || 0;
+  total = d.total || 0;              // matches the active filters
+  totalKind = d.total_kind || 0;     // this tab, unfiltered
   counts[""] = d.total_all || 0;
-  counts[activeKind || ""] = d.total || 0;
-
-  // The chips need all three numbers, and the request only carried one.
-  if (activeKind) {
-    counts[activeKind === "brand" ? "product" : "brand"] =
-      Math.max(0, counts[""] - d.total);
-  } else {
-    var rb = await RPOAuth.authedFetch("/account/history?limit=1&kind=brand");
-    if (rb && rb.ok) {
-      var db = await rb.json();
-      counts.brand = db.total || 0;
-      counts.product = Math.max(0, counts[""] - counts.brand);
-    }
-  }
+  counts[activeKind] = totalKind;
+  counts[activeKind === "brand" ? "product" : "brand"] =
+    Math.max(0, counts[""] - totalKind);
+  facets = d.facets || { retailers: [], countries: [] };
+  paintFilters();
   paint();
 }
+
 
 // The switch itself is shared with /brands.html and the account page. This
 // page's own version sent auto_check_preference: null, which the settings
