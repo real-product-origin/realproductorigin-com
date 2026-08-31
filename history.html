@@ -253,7 +253,7 @@
   /* The flexible column. Without this the slack lands in whichever
      column the browser picks first — which was the checkbox. */
   .c-title { width:100%; }
-  .c-open { width:34px; text-align:right; }
+  .c-open { width:1%; text-align:right; white-space:nowrap; }
 
   .t-title {
     display:block; font-weight:600; color:var(--ink-deep);
@@ -264,15 +264,34 @@
   .t-when { white-space:nowrap; color:var(--ink-3); }
   .t-none { color:var(--muted); }
   .c-confidence, .c-times { text-align:right; font-variant-numeric:tabular-nums; }
-  .hist-table .hist-head {
-    appearance:none; background:none; border:0; font:inherit; font-size:18px;
-    color:var(--muted); cursor:pointer; padding:0 4px; line-height:1;
+  /* The row is the click target, so it has to say so. */
+  .hist-table tbody tr { cursor:pointer; }
+  .hist-table tbody tr:hover .t-title { color:var(--accent); }
+  .hist-table tbody tr:hover .hist-open {
+    background:var(--accent); border-color:var(--accent); color:#fff;
   }
-  .hist-table .hist-head:hover { color:var(--ink-deep); }
+  /* Present in every row rather than appearing on hover: an affordance
+     you have to discover by hovering is not an affordance on a touch
+     screen, where there is no hover at all. */
+  .hist-open {
+    appearance:none; display:inline-flex; align-items:center; gap:5px;
+    background:#fff; border:1px solid var(--border); border-radius:999px;
+    padding:6px 13px; font:inherit; font-size:13px; font-weight:600;
+    color:var(--ink-3); cursor:pointer; white-space:nowrap;
+    transition:background 100ms ease, color 100ms ease, border-color 100ms ease;
+  }
+  .hist-open:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .ho-chev { font-size:15px; line-height:1; }
 
   /* Eight columns do not fit a phone, and a sideways-scrolling table is
      worse than one that shows less. Drop the least load-bearing first. */
   @media (max-width: 900px) { .hide-md { display:none; } }
+  @media (max-width: 460px) {
+    /* Narrowest phones: the word costs more than it earns, but the target
+       stays 40px so it is still hittable with a thumb. */
+    .hist-open { font-size:0; padding:9px 12px; }
+    .ho-chev { font-size:17px; }
+  }
   @media (max-width: 640px) {
     .hide-sm { display:none; }
     .t-title { max-width:min(52vw, 200px); }
@@ -624,12 +643,18 @@ function rowHtml(it) {
     return '<td class="c-' + c.key + (c.hide ? " hide-" + c.hide : "") + '">'
       + cellHtml(it, c.key) + "</td>";
   }).join("");
+  var label = esc(it.title || it.subject_key);
   return '<tr class="hist-row" data-id="' + it.id + '">'
     + '<td class="c-pick"><input type="checkbox" class="hist-pick"'
     + ' aria-label="Select this row"></td>'
     + cells
-    + '<td class="c-open"><button class="hist-head" type="button"'
-    + ' aria-label="Open details">\u203a</button></td></tr>';
+    // A named button, not a bare chevron. It is also the row's keyboard
+    // entry point: a <tr> cannot take focus, so the whole-row click below
+    // is a convenience layered on top of this, never the only way in.
+    + '<td class="c-open"><button class="hist-open" type="button"'
+    + ' aria-label="' + T("hist_detailsFor", label) + '">'
+    + T("hist_details") + '<span class="ho-chev">\u203a</span>'
+    + "</button></td></tr>";
 }
 
 /* ── The modal ──────────────────────────────────────────────────────────
@@ -1077,9 +1102,14 @@ list.addEventListener("click", function (e) {
     paintSelection();
     return;
   }
-  var head = e.target.closest(".hist-head");
-  if (!head) return;
-  openModal(head.closest(".hist-row").dataset.id, head);
+  // Anywhere on the row opens it. The row is the thing you are looking
+  // at, so the row should be the target — hunting a 12px chevron on the
+  // far right was the problem with the first version of this table.
+  var row = e.target.closest(".hist-row");
+  if (!row) return;
+  // Except a real link inside a cell, which should do its own job.
+  if (e.target.closest("a")) return;
+  openModal(row.dataset.id, row.querySelector(".hist-open"));
 });
 
 async function load() {
