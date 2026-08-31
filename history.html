@@ -226,7 +226,16 @@
   /* Horizontal scroll is contained here rather than on the page body, so
      a wide table never makes the whole document scroll sideways. */
   .hist-tablewrap { overflow-x:auto; }
-  .hist-table { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .hist-table {
+    width:100%; border-collapse:collapse; font-size:14.5px;
+    table-layout:fixed;
+  }
+  /* Text cells truncate rather than widening the table. The checkbox
+     and button cells are excluded: they hold controls, not text, and
+     the rule made them render a stray ellipsis. */
+  .hist-table td:not(.c-pick):not(.c-open) {
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
   .hist-table th, .hist-table td {
     text-align:left; padding:11px 12px; border-bottom:1px solid var(--border);
     vertical-align:middle;
@@ -249,16 +258,24 @@
 
   .hist-table tbody tr:hover { background:var(--bg-cream); }
   .hist-table tr.is-sel { background:#eff6ff; }
-  .c-pick { width:34px; }
-  /* The flexible column. Without this the slack lands in whichever
-     column the browser picks first — which was the checkbox. */
-  .c-title { width:100%; }
-  .c-open { width:1%; text-align:right; white-space:nowrap; }
+  .c-pick { width:36px; }
+  /* Proportioned explicitly, largest share to the title — it is what the
+     row is actually about, and leaving it unsized handed it the leftovers
+     and made the most important column the narrowest. Under fixed layout
+     these are relative shares of the space left after the two px columns,
+     so they need not total exactly 100. */
+  .c-title      { width:34%; }
+  .c-brand      { width:15%; }
+  .c-retailer   { width:12%; }
+  .c-made_in    { width:16%; }
+  .c-confidence { width:8%; }
+  .c-times      { width:6%; }
+  .c-scanned_at { width:11%; }
+  .c-open { width:96px; text-align:right; }
 
   .t-title {
     display:block; font-weight:600; color:var(--ink-deep);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    max-width:min(42vw, 360px);
   }
   .t-country { white-space:nowrap; }
   .t-when { white-space:nowrap; color:var(--ink-3); }
@@ -285,16 +302,44 @@
 
   /* Eight columns do not fit a phone, and a sideways-scrolling table is
      worse than one that shows less. Drop the least load-bearing first. */
-  @media (max-width: 900px) { .hide-md { display:none; } }
-  @media (max-width: 460px) {
-    /* Narrowest phones: the word costs more than it earns, but the target
-       stays 40px so it is still hittable with a thumb. */
-    .hist-open { font-size:0; padding:9px 12px; }
-    .ho-chev { font-size:17px; }
+  /* Columns are shed one at a time as space runs out, widening what
+     survives at each step. The alternative — keeping them all and letting
+     the table overflow — is what clipped the Details button off the right
+     edge, because the button is the last column.
+     
+     Each column is dropped BEFORE it gets cramped rather than at the
+     moment it stops fitting: a date rendering as "3/1/2…" or a confidence
+     as "6…" is worse than not showing the column at all. */
+  @media (max-width: 1000px) {
+    .c-times { display:none; }
+    .c-title { width:34%; } .c-brand { width:16%; }
+    .c-made_in { width:18%; } .c-confidence { width:10%; } .c-scanned_at { width:13%; }
   }
-  @media (max-width: 640px) {
-    .hide-sm { display:none; }
-    .t-title { max-width:min(52vw, 200px); }
+  @media (max-width: 880px) {
+    .c-confidence { display:none; }
+    .c-title { width:36%; } .c-brand { width:17%; }
+    .c-retailer { width:14%; } .c-made_in { width:19%; } .c-scanned_at { width:14%; }
+  }
+  @media (max-width: 740px) {
+    .c-brand { display:none; }
+    .c-title { width:40%; } .c-retailer { width:16%; }
+    .c-made_in { width:24%; } .c-scanned_at { width:16%; }
+  }
+  @media (max-width: 600px) {
+    .c-retailer { display:none; }
+    /* The word goes here, not at 470. Below this the button's column has
+       to shrink to leave room for the date, and an 82px button in a 76px
+       column is what clipped it. The target stays ~40px either way. */
+    .c-open { width:52px; }
+    .hist-open { font-size:0; padding:9px 11px; }
+    .ho-chev { font-size:17px; }
+    .c-title { width:40%; } .c-made_in { width:30%; } .c-scanned_at { width:26%; }
+  }
+  @media (max-width: 470px) {
+    /* Product and where it came from — the two things the page exists to
+       tell you — plus the way in. Everything else has gone. */
+    .c-scanned_at { display:none; }
+    .c-title { width:56%; } .c-made_in { width:34%; }
     .f-q { min-width:100%; }
   }
 </style>
@@ -567,18 +612,18 @@ function headline(it) {
 var COLUMNS = {
   product: [
     { key: "title",      label: "hist_colProduct",    sort: "title" },
-    { key: "brand",      label: "hist_colBrand",      sort: "brand",      hide: "sm" },
+    { key: "brand",      label: "hist_colBrand",      sort: "brand" },
     { key: "retailer",   label: "hist_colSite",       sort: "retailer" },
     { key: "made_in",    label: "hist_madeIn",        sort: "made_in" },
-    { key: "confidence", label: "hist_colConfidence", sort: "confidence", hide: "sm" },
-    { key: "times",      label: "hist_colChecks",     sort: "times",      hide: "md" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence" },
+    { key: "times",      label: "hist_colChecks",     sort: "times" },
     { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
   ],
   brand: [
     { key: "title",      label: "hist_colBrand",      sort: "title" },
     { key: "made_in",    label: "hist_owner",         sort: "made_in" },
-    { key: "confidence", label: "hist_colConfidence", sort: "confidence", hide: "sm" },
-    { key: "times",      label: "hist_colChecks",     sort: "times",      hide: "md" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence" },
+    { key: "times",      label: "hist_colChecks",     sort: "times" },
     { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
   ]
 };
@@ -587,7 +632,7 @@ function theadHtml() {
   var cols = COLUMNS[activeKind] || COLUMNS.product;
   var out = '<tr><th class="c-pick"></th>';
   cols.forEach(function (c) {
-    var cls = "c-" + c.key + (c.hide ? " hide-" + c.hide : "");
+    var cls = "c-" + c.key;
     if (!c.sort) { out += '<th class="' + cls + '">' + T(c.label) + "</th>"; return; }
     var on = sortKey === c.sort;
     // Clicking the active column flips it; a new column starts descending,
@@ -640,8 +685,7 @@ function cellHtml(it, key) {
 function rowHtml(it) {
   var cols = COLUMNS[activeKind] || COLUMNS.product;
   var cells = cols.map(function (c) {
-    return '<td class="c-' + c.key + (c.hide ? " hide-" + c.hide : "") + '">'
-      + cellHtml(it, c.key) + "</td>";
+    return '<td class="c-' + c.key + '">' + cellHtml(it, c.key) + "</td>";
   }).join("");
   var label = esc(it.title || it.subject_key);
   return '<tr class="hist-row" data-id="' + it.id + '">'
