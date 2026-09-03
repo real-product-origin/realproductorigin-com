@@ -11,6 +11,27 @@ both are reachable.
 
 ---
 
+## FIRST COMMAND OF EVERY SESSION, BEFORE READING OR EDITING ANYTHING
+
+    git fetch origin && git status -sb
+
+Several threads work on these repos at once, and this checkout in
+particular is easy to leave behind — sessions spend most of their time in
+`origin-app` and touch this repo occasionally, so it can sit days stale
+while feeling current. Nothing in `git status` warns you.
+
+**Fetching before you PUSH does not cover you.** It surfaces the collision
+only after the work is done. On 2026-09-02 a full set of changes was written
+against a `history.html` that was three days behind `origin` — the page had
+been rewritten with tabs and a sortable table in the meantime — and the work
+had to be discarded and redone against the real version.
+
+If `origin/main` moved and touched a file you are about to edit, RE-READ that
+file before editing it. An edit computed against a stale copy silently
+reverts someone else, and a clean merge will not tell you.
+
+---
+
 ## Standing product decisions (do not relitigate)
 
 - **No affiliate links, ever.** Outbound links are plain: no tag, no
