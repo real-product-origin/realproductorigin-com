@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your scoring history — Real Product Origin</title>
+<title>Your scan history — Real Product Origin</title>
 <meta name="description" content="An opt-in record of the products and brands you have checked. Off by default, deletable at any time.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://realproductorigin.com/history">
@@ -67,17 +67,11 @@
   .bq-withheld { background: var(--bg-soft); color: var(--ink-3); border: 1px solid var(--border); }
   .bq-notfound { font-size: 13px; color: var(--muted); margin-top: 16px; }
 
-  /* Clickable the way the admin tables are: the whole row tints on hover
-     and the cursor says so, rather than a chevron being the only hint. */
-  .hist-row {
-    display: flex; align-items: flex-start; gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-left: 10px; margin: 0 -10px; border-radius: 8px;
-    transition: background 100ms ease;
-  }
-  .hist-row:hover { background: var(--bg-cream); }
-  .hist-row.is-sel { background: var(--gold-soft); }
-  .hist-pick { margin: 20px 0 0; flex: none; }
+  /* Row styling lives with the table rules further down. The list-era
+     flex layout was removed when the rows became <tr>: `display:flex` on
+     a table row opts it out of table layout, so the column widths stopped
+     meaning anything. */
+  .hist-pick { margin: 0; }
 
   .hist-bulk {
     display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
@@ -156,16 +150,7 @@
   .m-gap { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; line-height: 1.6; }
 
 
-  .hist-head {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    gap: 16px; padding: 13px 0; width: 100%; text-align: left;
-    background: none; border: 0; font: inherit; cursor: pointer;
-  }
-  .hist-head:hover .hist-title { color: var(--accent); }
   .hist-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .hist-main { min-width: 0; }
-  .hist-title { font-size: 15px; color: var(--ink-2); font-weight: 600; margin: 0; overflow-wrap: anywhere; }
-  .hist-sub { font-size: 12.5px; color: var(--muted); margin: 3px 0 0; }
 
   /* Kind and brand render identically on both row types, because "what is
      this row about" is the same question whichever it is. */
@@ -176,16 +161,11 @@
   }
   .hist-tag.product { background: #eef2ff; color: #3730a3; }
   .hist-tag.brand { background: #ecfdf5; color: #065f46; }
-  .hist-brand { font-weight: 600; color: var(--ink-3); }
 
-  .hist-right { text-align: right; white-space: nowrap; flex: none; }
   /* Labelled, always. An unlabelled flag on a product row could be any of
      four different answers, and on a brand row it was simply blank. */
-  .hist-label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
   .hist-country { font-size: 15px; font-weight: 700; color: var(--ink-deep); }
   .hist-none { font-size: 13px; font-weight: 500; color: var(--muted); }
-  .hist-chev { display: inline-block; margin-left: 9px; color: var(--muted); transition: transform 120ms ease; }
-  .hist-row.is-open .hist-chev { transform: rotate(90deg); }
 
   .hist-detail { padding: 2px 0 18px; }
   .hist-facts { display: grid; gap: 10px 18px; grid-template-columns: 1fr; margin: 0 0 14px; }
@@ -212,30 +192,156 @@
   .hist-danger button { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-  .hist-lists { margin-top: 8px; }
-  .chip-ghost { border-style: dashed; }
-  .hist-manage-panel {
-    margin: 12px 0 4px; padding: 14px; border: 1px solid var(--rule);
-    border-radius: 12px; background: var(--paper-2, #faf9f6);
+
+  /* ── Tabs ─────────────────────────────────────────────────────────── */
+  .hist-tabs { display:flex; gap:4px; border-bottom:1px solid var(--border); margin:0 0 16px; }
+  .hist-tab {
+    appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+    padding:10px 16px; margin-bottom:-1px; cursor:pointer;
+    font:inherit; font-size:15px; font-weight:600; color:var(--ink-3);
   }
-  .hist-manage-row {
-    display: flex; gap: 10px; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid var(--rule);
+  .hist-tab:hover { color:var(--ink-deep); }
+  .hist-tab.is-on { color:var(--ink-deep); border-bottom-color:var(--accent); }
+  .hist-tab .tab-n {
+    display:inline-block; margin-left:6px; padding:1px 7px; border-radius:999px;
+    background:var(--bg-cream); font-size:12px; font-weight:700; color:var(--ink-3);
   }
-  .hist-manage-row:last-of-type { border-bottom: 0; }
-  .hist-manage-row input {
-    flex: 1; padding: 7px 10px; border: 1px solid var(--rule);
-    border-radius: 8px; font: inherit; font-size: 14px;
+  .hist-tab.is-on .tab-n { background:var(--accent); color:#fff; }
+
+  /* ── Filters ──────────────────────────────────────────────────────── */
+  .hist-filters { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 14px; }
+  .f-ctl {
+    font:inherit; font-size:14px; padding:7px 10px; border:1px solid var(--border);
+    border-radius:8px; background:#fff; color:var(--ink-2); max-width:100%;
   }
-  .hist-manage-row .n { font-size: 13px; color: var(--ink-3); min-width: 2em; }
-  .hist-manage-new { display: flex; gap: 10px; margin-top: 12px; }
-  .hist-manage-new input {
-    flex: 1; padding: 8px 10px; border: 1px solid var(--rule);
-    border-radius: 8px; font: inherit; font-size: 14px;
+  .f-q { min-width:220px; flex:1 1 220px; }
+  .f-date { font-size:13px; color:var(--ink-3); display:flex; align-items:center; gap:6px; }
+  .f-date .f-ctl { font-size:13px; padding:6px 8px; }
+  .f-clear {
+    appearance:none; background:none; border:0; font:inherit; font-size:13px;
+    color:var(--accent); cursor:pointer; text-decoration:underline; padding:6px 2px;
   }
-  .m-lists { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .m-lists button { font-size: 13px; }
-  .m-lists button.is-in { background: var(--ink-1, #111827); color: #fff; }
+
+  /* ── Table ────────────────────────────────────────────────────────── */
+  /* Horizontal scroll is contained here rather than on the page body, so
+     a wide table never makes the whole document scroll sideways. */
+  .hist-tablewrap { overflow-x:auto; }
+  .hist-table {
+    width:100%; border-collapse:collapse; font-size:14.5px;
+    table-layout:fixed;
+  }
+  /* Text cells truncate rather than widening the table. The checkbox
+     and button cells are excluded: they hold controls, not text, and
+     the rule made them render a stray ellipsis. */
+  .hist-table td:not(.c-pick):not(.c-open) {
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .hist-table th, .hist-table td {
+    text-align:left; padding:11px 12px; border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+  .hist-table th {
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--muted); white-space:nowrap; padding:0;
+  }
+  .hist-table th:not(.is-sortable) { padding:11px 12px; }
+  .th-sort {
+    appearance:none; background:none; border:0; font:inherit; color:inherit;
+    display:block; width:100%; text-align:left; padding:11px 12px; cursor:pointer;
+    white-space:nowrap;
+  }
+  .th-sort:hover { background:rgba(0,0,0,.03); color:var(--ink-2); }
+  .hist-table th.is-active .th-sort { color:var(--ink-deep); }
+  /* The caret slot is always present (zero-width space when inactive) so
+     the header does not shift by a few pixels as you sort. */
+  .th-caret { display:inline-block; min-width:10px; margin-left:5px; font-size:10px; }
+
+  .hist-table tbody tr:hover { background:var(--bg-cream); }
+  .hist-table tr.is-sel { background:#eff6ff; }
+  .c-pick { width:36px; }
+  /* Proportioned explicitly, largest share to the title — it is what the
+     row is actually about, and leaving it unsized handed it the leftovers
+     and made the most important column the narrowest. Under fixed layout
+     these are relative shares of the space left after the two px columns,
+     so they need not total exactly 100. */
+  .c-title      { width:34%; }
+  .c-brand      { width:15%; }
+  .c-retailer   { width:12%; }
+  .c-made_in    { width:16%; }
+  .c-confidence { width:8%; }
+  .c-times      { width:6%; }
+  .c-scanned_at { width:11%; }
+  .c-open { width:96px; text-align:right; }
+
+  .t-title {
+    display:block; font-weight:600; color:var(--ink-deep);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .t-country { white-space:nowrap; }
+  .t-when { white-space:nowrap; color:var(--ink-3); }
+  .t-none { color:var(--muted); }
+  .c-confidence, .c-times { text-align:right; font-variant-numeric:tabular-nums; }
+  /* The row is the click target, so it has to say so. */
+  .hist-table tbody tr { cursor:pointer; }
+  .hist-table tbody tr:hover .t-title { color:var(--accent); }
+  .hist-table tbody tr:hover .hist-open {
+    background:var(--accent); border-color:var(--accent); color:#fff;
+  }
+  /* Present in every row rather than appearing on hover: an affordance
+     you have to discover by hovering is not an affordance on a touch
+     screen, where there is no hover at all. */
+  .hist-open {
+    appearance:none; display:inline-flex; align-items:center; gap:5px;
+    background:#fff; border:1px solid var(--border); border-radius:999px;
+    padding:6px 13px; font:inherit; font-size:13px; font-weight:600;
+    color:var(--ink-3); cursor:pointer; white-space:nowrap;
+    transition:background 100ms ease, color 100ms ease, border-color 100ms ease;
+  }
+  .hist-open:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .ho-chev { font-size:15px; line-height:1; }
+
+  /* Eight columns do not fit a phone, and a sideways-scrolling table is
+     worse than one that shows less. Drop the least load-bearing first. */
+  /* Columns are shed one at a time as space runs out, widening what
+     survives at each step. The alternative — keeping them all and letting
+     the table overflow — is what clipped the Details button off the right
+     edge, because the button is the last column.
+     
+     Each column is dropped BEFORE it gets cramped rather than at the
+     moment it stops fitting: a date rendering as "3/1/2…" or a confidence
+     as "6…" is worse than not showing the column at all. */
+  @media (max-width: 1000px) {
+    .c-times { display:none; }
+    .c-title { width:34%; } .c-brand { width:16%; }
+    .c-made_in { width:18%; } .c-confidence { width:10%; } .c-scanned_at { width:13%; }
+  }
+  @media (max-width: 880px) {
+    .c-confidence { display:none; }
+    .c-title { width:36%; } .c-brand { width:17%; }
+    .c-retailer { width:14%; } .c-made_in { width:19%; } .c-scanned_at { width:14%; }
+  }
+  @media (max-width: 740px) {
+    .c-brand { display:none; }
+    .c-title { width:40%; } .c-retailer { width:16%; }
+    .c-made_in { width:24%; } .c-scanned_at { width:16%; }
+  }
+  @media (max-width: 600px) {
+    .c-retailer { display:none; }
+    /* The word goes here, not at 470. Below this the button's column has
+       to shrink to leave room for the date, and an 82px button in a 76px
+       column is what clipped it. The target stays ~40px either way. */
+    .c-open { width:52px; }
+    .hist-open { font-size:0; padding:9px 11px; }
+    .ho-chev { font-size:17px; }
+    .c-title { width:40%; } .c-made_in { width:30%; } .c-scanned_at { width:26%; }
+  }
+  @media (max-width: 470px) {
+    /* Product and where it came from — the two things the page exists to
+       tell you — plus the way in. Everything else has gone. */
+    .c-scanned_at { display:none; }
+    .c-title { width:56%; } .c-made_in { width:34%; }
+    .f-q { min-width:100%; }
+  }
 </style>
 </head>
 <body>
@@ -268,13 +374,13 @@
 <section class="acct-hero">
   <div class="wrap">
     <p style="display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;">Your account</p>
-    <h1>Your scoring history</h1>
+    <h1>Your scan history</h1>
     <p>Off unless you turn it on. We do not keep a record of what you check unless you ask us to — and you can delete it, all of it, at any moment.</p>
   </div>
 </section>
 
 <section class="acct-body">
-  <div class="wrap">
+  <div class="wrap-wide">
     <div id="hist-gate" class="acct-gate" hidden>
       <p data-i18n="hist_gateSignIn">Sign in to manage your history.</p>
       <a class="nav-cta" href="/subscribe/signin.html?return_to=%2Fhistory.html" data-i18n="hist_signIn">Sign in</a>
@@ -285,45 +391,37 @@
         <input type="checkbox" id="hist-enabled">
         <label for="hist-enabled">
           Keep a history of what I check
-          <span class="fine">Products and brands, in one list. Turning this off stops new entries; what is already saved stays until you delete it.</span>
+          <span class="fine">Products and brands, on separate tabs. Turning this off stops new entries; what is already saved stays until you delete it.</span>
         </label>
       </div>
 
-      <!-- One list, filtered — not two lists.
-           You remember "the thing I looked at on Tuesday", not which of
-           our two features you used, so the default is everything, newest
-           first. The filter exists because the two accumulate at very
-           different rates: brand checks are capped at 5-10 a month while
-           products are not, so somebody hunting a brand should not have to
-           scroll past forty products to find it. Counts are on the chips
-           so an empty filter is obviously empty rather than looking
-           broken. -->
-      <div class="hist-filter" id="hist-filter" hidden>
-        <button type="button" class="chip is-on" data-kind=""><span data-i18n="hist_all">All</span> <span class="chip-n"></span></button>
-        <button type="button" class="chip" data-kind="product"><span data-i18n="hist_products">Products</span> <span class="chip-n"></span></button>
-        <button type="button" class="chip" data-kind="brand"><span data-i18n="hist_brands">Brands</span> <span class="chip-n"></span></button>
+      <!-- Two tabs, not one list.
+           This was deliberately ONE list, and the reasoning was good: you
+           remember "the thing I looked at on Tuesday", not which of our
+           features you used. What changed is that the two kinds answer
+           DIFFERENT QUESTIONS — a product row says where the item was
+           made, a brand row says where its owner sits — so a shared table
+           had to label that column loosely enough to cover both, and the
+           filter that matters most (site) applies to only one of them.
+           Splitting lets each column be named exactly. -->
+      <div class="hist-tabs" id="hist-tabs" role="tablist" hidden>
+        <button type="button" class="hist-tab is-on" role="tab" aria-selected="true" data-kind="product">
+          <span data-i18n="hist_products">Products</span> <span class="tab-n"></span>
+        </button>
+        <button type="button" class="hist-tab" role="tab" aria-selected="false" data-kind="brand">
+          <span data-i18n="hist_brands">Brands</span> <span class="tab-n"></span>
+        </button>
       </div>
 
-      <!-- Lists. A second row rather than more chips in the first, because
-           they answer a different question: the row above is "what kind of
-           thing", this one is "which of my lists". Mixing them would imply
-           you could hold both at once, and you cannot — picking a list
-           replaces the view rather than narrowing it. -->
-      <div class="hist-filter hist-lists" id="hist-lists" hidden>
-        <button type="button" class="chip is-on" data-list=""><span data-i18n="hist_everything">Everything</span></button>
-        <span id="hist-list-chips"></span>
-        <button type="button" class="chip chip-ghost" id="hist-manage" data-i18n="hist_manageLists">Manage lists</button>
-      </div>
-
-      <!-- Manage lists. Inline rather than a modal: it is a short list of
-           short rows, and a dialog for renaming three things is heavier than
-           the thing it is renaming. -->
-      <div class="hist-manage-panel" id="hist-manage-panel" hidden>
-        <div id="hist-manage-rows"></div>
-        <div class="hist-manage-new">
-          <input type="text" id="hist-new-list" maxlength="80" placeholder="New list name" data-i18n-placeholder="hist_newListName">
-          <button type="button" id="hist-create-list" data-i18n="hist_createList">Create</button>
-        </div>
+      <!-- Built from the rows this account actually has, so a dropdown can
+           never offer a value that returns nothing. -->
+      <div class="hist-filters" id="hist-filters" hidden>
+        <input type="search" id="f-q" class="f-ctl f-q" placeholder="Search title or brand">
+        <select id="f-site" class="f-ctl" aria-label="Site"></select>
+        <select id="f-country" class="f-ctl" aria-label="Country"></select>
+        <label class="f-date">From <input type="date" id="f-since" class="f-ctl"></label>
+        <label class="f-date">To <input type="date" id="f-until" class="f-ctl"></label>
+        <button type="button" id="f-clear" class="f-clear" hidden>Clear filters</button>
       </div>
 
       <div class="hist-bulk" id="hist-bulk" hidden>
@@ -335,7 +433,12 @@
       </div>
 
       <div id="hist-empty" hidden style="font-size:15px;color:var(--ink-3);">Nothing saved yet.</div>
-      <div id="hist-list"></div>
+      <div class="hist-tablewrap">
+        <table class="hist-table" id="hist-table">
+          <thead id="hist-thead"></thead>
+          <tbody id="hist-list"></tbody>
+        </table>
+      </div>
 
       <div class="hist-pager" id="hist-pager" hidden>
         <button type="button" id="hist-prev" data-i18n="hist_newer">‹ Newer</button>
@@ -391,7 +494,7 @@
       <a href="/why.html">Why It Matters</a>
       <a href="/pricing.html#retailers">Supported sites</a>
       <a href="/brands.html">Brand report</a>
-      <a href="/history.html">Your scoring history</a>
+      <a href="/history.html">Your history</a>
       <a href="/coverage.html">Request a retailer</a>
     </div>
     <div class="col">
@@ -436,7 +539,16 @@ var main = document.getElementById("hist-main");
 var list = document.getElementById("hist-list");
 var empty = document.getElementById("hist-empty");
 var danger = document.getElementById("hist-danger");
-var filter = document.getElementById("hist-filter");
+var tabs      = document.getElementById("hist-tabs");
+var filterBar = document.getElementById("hist-filters");
+var thead     = document.getElementById("hist-thead");
+var table     = document.getElementById("hist-table");
+var fQ        = document.getElementById("f-q");
+var fSite     = document.getElementById("f-site");
+var fCountry  = document.getElementById("f-country");
+var fSince    = document.getElementById("f-since");
+var fUntil    = document.getElementById("f-until");
+var fClear    = document.getElementById("f-clear");
 var toggle = document.getElementById("hist-enabled");
 
 /* Shorthand. Falls back to the English already in the markup if i18n.js
@@ -455,14 +567,6 @@ function T(key) {
   for (var i = 0; i < nodes.length; i++) {
     var v = RPOi18n.t(nodes[i].getAttribute("data-i18n"));
     if (v) nodes[i].textContent = v;
-  }
-  // Placeholders too. An input's prompt is copy like any other, and the
-  // list-name field was the first one on this page to have any — without
-  // this it would sit in English inside an otherwise translated panel.
-  var ph = document.querySelectorAll("[data-i18n-placeholder]");
-  for (var j = 0; j < ph.length; j++) {
-    var pv = RPOi18n.t(ph[j].getAttribute("data-i18n-placeholder"));
-    if (pv) ph[j].setAttribute("placeholder", pv);
   }
 })();
 
@@ -492,30 +596,109 @@ function headline(it) {
     + esc(it.made_in_country || it.made_in_country_code) + "</span>";
 }
 
-function rowHtml(it) {
-  var isBrand = it.kind === "brand";
-  var when = it.scanned_at ? new Date(it.scanned_at).toLocaleDateString() : "";
-  // Brand identity rendered the SAME way on both kinds. On a product row it
-  // is the maker; on a brand row it is the subject; either way it is the
-  // company, and it used to be buried in a run-on dot-separated line.
-  var tag = '<span class="hist-tag ' + (isBrand ? "brand" : "product") + '">'
-    + T(isBrand ? "hist_brand" : "hist_product") + "</span>";
-  var bits = [];
-  if (it.brand) bits.push('<span class="hist-brand">' + esc(it.brand) + "</span>");
-  if (it.retailer) bits.push(esc(it.retailer));
-  bits.push(when);
-  // One row per subject, so say how often rather than repeating the row.
-  if (it.times > 1) bits.push(T("hist_checks", it.times));
+/* ── Columns ────────────────────────────────────────────────────────────
+ * Defined per tab, because the two kinds answer different questions. A
+ * product row says where the item was MADE; a brand row says where its
+ * OWNER sits. The old shared list had to label that column loosely enough
+ * to cover both, which is what made it hard to read.
+ *
+ * `sort` is the server-side key. A column without one is not sortable —
+ * there is nothing in the database to order it by, and a header that
+ * sorted only the visible page would be a lie.
+ *
+ * `hide` drops the column on narrow screens: eight columns do not fit on a
+ * phone, and a table that scrolls sideways is worse than one showing less.
+ */
+var COLUMNS = {
+  product: [
+    { key: "title",      label: "hist_colProduct",    sort: "title" },
+    { key: "brand",      label: "hist_colBrand",      sort: "brand" },
+    { key: "retailer",   label: "hist_colSite",       sort: "retailer" },
+    { key: "made_in",    label: "hist_madeIn",        sort: "made_in" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence" },
+    { key: "times",      label: "hist_colChecks",     sort: "times" },
+    { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
+  ],
+  brand: [
+    { key: "title",      label: "hist_colBrand",      sort: "title" },
+    { key: "made_in",    label: "hist_owner",         sort: "made_in" },
+    { key: "confidence", label: "hist_colConfidence", sort: "confidence" },
+    { key: "times",      label: "hist_colChecks",     sort: "times" },
+    { key: "scanned_at", label: "hist_colLast",       sort: "scanned_at" }
+  ]
+};
 
-  return '<div class="hist-row" data-id="' + it.id + '">'
-    + '<input type="checkbox" class="hist-pick" aria-label="Select this row">'
-    + '<button class="hist-head" type="button">'
-    + '<span class="hist-main"><p class="hist-title">' + tag
-    + esc(it.title || it.subject_key) + "</p>"
-    + '<p class="hist-sub">' + bits.join(" · ") + "</p></span>"
-    + '<span class="hist-right">' + headline(it)
-    + '<span class="hist-chev">›</span></span>'
-    + "</button></div>";
+function theadHtml() {
+  var cols = COLUMNS[activeKind] || COLUMNS.product;
+  var out = '<tr><th class="c-pick"></th>';
+  cols.forEach(function (c) {
+    var cls = "c-" + c.key;
+    if (!c.sort) { out += '<th class="' + cls + '">' + T(c.label) + "</th>"; return; }
+    var on = sortKey === c.sort;
+    // Clicking the active column flips it; a new column starts descending,
+    // because "most recent / highest / most" is what people want first on
+    // every one of these.
+    var next = on && sortDir === "desc" ? "asc" : "desc";
+    out += '<th class="' + cls + ' is-sortable' + (on ? " is-active" : "") + '"'
+      + (on ? ' aria-sort="' + (sortDir === "desc" ? "descending" : "ascending") + '"' : "")
+      + '><button type="button" class="th-sort" data-sort="' + c.sort
+      + '" data-dir="' + next + '">' + T(c.label)
+      + '<span class="th-caret">'
+      + (on ? (sortDir === "desc" ? "\u25be" : "\u25b4") : "\u200b")
+      + "</span></button></th>";
+  });
+  return out + '<th class="c-open"></th></tr>';
+}
+
+// An em dash rather than an empty cell: a blank reads as a rendering
+// fault, this reads as "we have nothing here" — which is the true thing.
+function dash() { return '<span class="t-none">\u2014</span>'; }
+
+function cellHtml(it, key) {
+  switch (key) {
+    case "title":
+      return '<span class="t-title">' + esc(it.title || it.subject_key) + "</span>";
+    case "brand":
+      return it.brand ? esc(it.brand) : dash();
+    case "retailer":
+      return it.retailer ? esc(it.retailer) : dash();
+    case "made_in":
+      if (!it.made_in_country_code && !it.made_in_country) {
+        return '<span class="t-none">' + T("hist_notEstablished") + "</span>";
+      }
+      return '<span class="t-country">' + flag(it.made_in_country_code) + " "
+        + esc(it.made_in_country || it.made_in_country_code) + "</span>";
+    case "confidence":
+      return typeof it.made_in_confidence === "number"
+        ? conf(it.made_in_confidence) : dash();
+    case "times":
+      return String(it.times || 1);
+    case "scanned_at":
+      return it.scanned_at
+        ? '<span class="t-when">'
+            + new Date(it.scanned_at).toLocaleDateString() + "</span>"
+        : dash();
+  }
+  return "";
+}
+
+function rowHtml(it) {
+  var cols = COLUMNS[activeKind] || COLUMNS.product;
+  var cells = cols.map(function (c) {
+    return '<td class="c-' + c.key + '">' + cellHtml(it, c.key) + "</td>";
+  }).join("");
+  var label = esc(it.title || it.subject_key);
+  return '<tr class="hist-row" data-id="' + it.id + '">'
+    + '<td class="c-pick"><input type="checkbox" class="hist-pick"'
+    + ' aria-label="Select this row"></td>'
+    + cells
+    // A named button, not a bare chevron. It is also the row's keyboard
+    // entry point: a <tr> cannot take focus, so the whole-row click below
+    // is a convenience layered on top of this, never the only way in.
+    + '<td class="c-open"><button class="hist-open" type="button"'
+    + ' aria-label="' + T("hist_detailsFor", label) + '">'
+    + T("hist_details") + '<span class="ho-chev">\u203a</span>'
+    + "</button></td></tr>";
 }
 
 /* ── The modal ──────────────────────────────────────────────────────────
@@ -697,28 +880,9 @@ function modalHtml(it) {
   if (it.debug_session_code) {
     actions.push('<span class="m-gap">' + T("hist_diagnostic", esc(it.debug_session_code)) + "</span>");
   }
-  // A list row has nothing to delete from the history — it was never a
-  // history row — so the delete only appears for the real thing.
-  if (!it.list_item) {
-    actions.push('<button type="button" class="danger" id="m-del" data-id="'
-      + it.id + '">' + T("hist_deleteRow") + "</button>");
-  }
+  actions.push('<button type="button" class="danger" id="m-del" data-id="'
+    + it.id + '">' + T("hist_deleteRow") + "</button>");
   body += '<div class="m-actions">' + actions.join("") + "</div>";
-
-  // Which lists hold this, as toggles. Same idea as the phone's sheet:
-  // the state is the answer to "where does this live", and tapping one
-  // writes immediately.
-  if (myLists.length) {
-    body += '<p class="m-h">' + T("hist_inLists") + "</p>"
-      + '<div class="m-lists" data-kind="' + esc(it.kind || "product") + '"'
-      + ' data-key="' + esc(it.subject_key || "") + '"'
-      + ' data-title="' + esc(it.title || "") + '"'
-      + ' data-brand="' + esc(it.brand || "") + '">'
-      + myLists.map(function (l) {
-          return '<button type="button" data-list-id="' + l.id + '">' + esc(l.name) + "</button>";
-        }).join("")
-      + "</div>";
-  }
   return body;
 }
 
@@ -742,21 +906,6 @@ async function openModal(id, trigger) {
     return;
   }
   modalBody.innerHTML = modalHtml(await r.json());
-  paintModalLists();
-}
-
-/** Tick the lists this thing is already in. One request, after render, so a
- *  slow answer does not hold up the report the person opened. */
-async function paintModalLists() {
-  var box = modalBody.querySelector(".m-lists");
-  if (!box) return;
-  var r = await RPOAuth.authedFetch(
-    "/account/lists/containing/" + box.dataset.kind + "/" + encodeURIComponent(box.dataset.key));
-  if (!r || !r.ok) return;
-  var ids = (await r.json()).list_ids || [];
-  Array.prototype.forEach.call(box.querySelectorAll("[data-list-id]"), function (b) {
-    b.classList.toggle("is-in", ids.indexOf(Number(b.dataset.listId)) !== -1);
-  });
 }
 
 document.getElementById("hist-modal-x").addEventListener("click", closeModal);
@@ -765,25 +914,6 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && !modal.hidden) closeModal();
 });
 modalBody.addEventListener("click", async function (e) {
-  var chip = e.target.closest("[data-list-id]");
-  if (chip) {
-    var box = chip.closest(".m-lists");
-    var into = chip.classList.contains("is-in");
-    var payload = {
-      kind: box.dataset.kind,
-      subject_key: box.dataset.key,
-      title: box.dataset.title || null,
-      brand: box.dataset.brand || null,
-    };
-    chip.classList.toggle("is-in", !into);
-    var res = await RPOAuth.authedFetch(
-      "/account/lists/" + chip.dataset.listId + "/items" + (into ? "/remove" : ""),
-      { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload) });
-    if (!res || !res.ok) chip.classList.toggle("is-in", into);
-    else loadLists();
-    return;
-  }
   var del = e.target.closest("#m-del");
   if (!del) return;
   if (!confirm(T("hist_confirmOne"))) return;
@@ -794,7 +924,14 @@ modalBody.addEventListener("click", async function (e) {
 
 
 // ── List, filter, paging, selection ──────────────────────────────────────
-var activeKind = "";     // "" | "product" | "brand"
+// Products is the default tab: nearly every row lands there, because
+// brand checks are capped at 5-10 a month and product checks are not.
+var activeKind = "product";
+var sortKey = "scanned_at";
+var sortDir = "desc";
+var filters = { q: "", retailer: "", country: "", since: "", until: "" };
+var facets = { retailers: [], countries: [] };
+var totalKind = 0;
 var allItems = [];       // the rows on THIS page only
 var pageOffset = 0;
 var total = 0;
@@ -827,6 +964,7 @@ function paintSelection() {
 }
 
 function paint() {
+  thead.innerHTML = theadHtml();
   list.innerHTML = allItems.map(rowHtml).join("");
   Array.prototype.forEach.call(list.querySelectorAll(".hist-row"), function (row) {
     var on = !!selected[row.dataset.id];
@@ -834,11 +972,14 @@ function paint() {
     row.querySelector(".hist-pick").checked = on;
   });
 
-  filter.hidden = counts[""] === 0;
-  Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
+  var any = counts[""] > 0;
+  tabs.hidden = !any;
+  filterBar.hidden = !any;
+  Array.prototype.forEach.call(tabs.querySelectorAll(".hist-tab"), function (b) {
     var k = b.getAttribute("data-kind");
     b.classList.toggle("is-on", k === activeKind);
-    b.querySelector(".chip-n").textContent = counts[k];
+    b.setAttribute("aria-selected", k === activeKind ? "true" : "false");
+    b.querySelector(".tab-n").textContent = counts[k];
   });
 
   var pages = Math.max(1, Math.ceil(total / PER_PAGE));
@@ -849,27 +990,127 @@ function paint() {
   nextBtn.disabled = pageOffset + PER_PAGE >= total;
 
   bulk.hidden = allItems.length === 0;
-  empty.textContent = T(counts[""] === 0 ? "hist_nothingYet" : "hist_nothingHere");
+  table.hidden = allItems.length === 0;
+  // Three empty states, because they need different words — and only the
+  // last one has its fix on screen.
+  empty.textContent = !any ? T("hist_nothingYet")
+    : (totalKind === 0 ? T("hist_nothingHere") : T("hist_noMatches"));
   empty.hidden = allItems.length > 0;
-  danger.hidden = counts[""] === 0;
+  danger.hidden = !any;
   paintSelection();
 }
 
-Array.prototype.forEach.call(filter.querySelectorAll(".chip"), function (b) {
-  b.addEventListener("click", function () {
-    activeKind = b.getAttribute("data-kind");
-    pageOffset = 0;   // a filter change starts at the top of the new list
+/* Filter controls, rebuilt from the facets the server returned.
+ *
+ * The options are NOT narrowed by the other active filters: a menu that
+ * removes its own entries as you use it cannot be walked back without
+ * clearing everything and starting again. */
+function paintFilters() {
+  function fill(sel, opts, current, allLabel) {
+    sel.innerHTML = "";
+    var o0 = document.createElement("option");
+    o0.value = ""; o0.textContent = allLabel;
+    sel.appendChild(o0);
+    opts.forEach(function (o) {
+      var el = document.createElement("option");
+      el.value = o.value; el.textContent = o.text;
+      if (o.value === current) el.selected = true;
+      sel.appendChild(el);
+    });
+    // A dropdown with one real choice is noise, not a filter.
+    sel.hidden = opts.length < 2;
+  }
+
+  // Brand rows have no retailer, so the site filter belongs to one tab.
+  fill(fSite, (facets.retailers || []).map(function (r) {
+    return { value: r, text: r };
+  }), filters.retailer, T("hist_allSites"));
+  if (activeKind !== "product") fSite.hidden = true;
+
+  fill(fCountry, (facets.countries || []).map(function (c) {
+    return { value: c.code, text: flagText(c.code) + " " + c.name };
+  }), filters.country,
+    T(activeKind === "brand" ? "hist_allOwners" : "hist_allCountries"));
+
+  fQ.value = filters.q;
+  fSince.value = filters.since;
+  fUntil.value = filters.until;
+  // Stop the date pickers offering ranges that contain no rows.
+  if (facets.earliest) {
+    fSince.min = facets.earliest.slice(0, 10);
+    fUntil.min = facets.earliest.slice(0, 10);
+  }
+  if (facets.latest) {
+    fSince.max = facets.latest.slice(0, 10);
+    fUntil.max = facets.latest.slice(0, 10);
+  }
+
+  fClear.hidden = !(filters.q || filters.retailer || filters.country
+                    || filters.since || filters.until);
+}
+
+// flag() returns markup; an <option> can only hold text, so the flag for a
+// dropdown has to be built as a plain string.
+function flagText(cc) {
+  if (!cc || cc.length !== 2) return "";
+  return String.fromCodePoint.apply(null, cc.toUpperCase().split("").map(
+    function (c) { return 0x1F1E6 + c.charCodeAt(0) - 65; }));
+}
+
+/* ── Sorting ────────────────────────────────────────────────────────────
+ * Delegated, because the header is rebuilt on every paint. Sorting returns
+ * to page 1: staying on page 7 of a newly-ordered set shows rows with no
+ * relationship to what you were just looking at. */
+thead.addEventListener("click", function (e) {
+  var b = e.target.closest(".th-sort");
+  if (!b) return;
+  sortKey = b.getAttribute("data-sort");
+  sortDir = b.getAttribute("data-dir");
+  pageOffset = 0;
+  load();
+});
+
+/* ── Filters ─── each resets paging, for the same reason. ────────────── */
+var qTimer = null;
+fQ.addEventListener("input", function () {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(function () {
+    filters.q = fQ.value.trim();
+    pageOffset = 0;
+    load();
+  }, 300);
+});
+
+[[fSite, "retailer"], [fCountry, "country"],
+ [fSince, "since"], [fUntil, "until"]].forEach(function (pair) {
+  pair[0].addEventListener("change", function () {
+    filters[pair[1]] = pair[0].value;
+    pageOffset = 0;
     load();
   });
 });
 
-prevBtn.addEventListener("click", function () {
-  pageOffset = Math.max(0, pageOffset - PER_PAGE);
+fClear.addEventListener("click", function () {
+  filters = { q: "", retailer: "", country: "", since: "", until: "" };
+  pageOffset = 0;
   load();
 });
-nextBtn.addEventListener("click", function () {
-  pageOffset = pageOffset + PER_PAGE;
-  load();
+
+Array.prototype.forEach.call(tabs.querySelectorAll(".hist-tab"), function (b) {
+  b.addEventListener("click", function () {
+    var k = b.getAttribute("data-kind");
+    if (k === activeKind) return;
+    activeKind = k;
+    // Filters do not carry across tabs. "Site" does not exist for brands,
+    // and silently keeping a country filter would make the other tab look
+    // empty for a reason nothing on screen explains.
+    filters = { q: "", retailer: "", country: "", since: "", until: "" };
+    sortKey = "scanned_at";
+    sortDir = "desc";
+    pageOffset = 0;
+    selected = {};
+    load();
+  });
 });
 
 selAll.addEventListener("change", function () {
@@ -905,23 +1146,30 @@ list.addEventListener("click", function (e) {
     paintSelection();
     return;
   }
-  var head = e.target.closest(".hist-head");
-  if (!head) return;
-  openModal(head.closest(".hist-row").dataset.id, head);
+  // Anywhere on the row opens it. The row is the thing you are looking
+  // at, so the row should be the target — hunting a 12px chevron on the
+  // far right was the problem with the first version of this table.
+  var row = e.target.closest(".hist-row");
+  if (!row) return;
+  // Except a real link inside a cell, which should do its own job.
+  if (e.target.closest("a")) return;
+  openModal(row.dataset.id, row.querySelector(".hist-open"));
 });
 
 async function load() {
-  // A list replaces the view rather than narrowing it — picking one is a
-  // different question from filtering the log by kind.
-  if (activeList) {
-    gate.hidden = true;
-    main.hidden = false;
-    return loadList(activeList);
-  }
-  // One page at a time, and the counts for the chips come from the server
-  // rather than from whatever happens to be on this page.
+  // Filtering, sorting and counting all happen on the SERVER. Doing any of
+  // them in the browser would only ever see the 25 rows on this page, and
+  // would look exactly like doing them to all of them.
   var q = "/account/history?limit=" + PER_PAGE + "&offset=" + pageOffset
-    + (activeKind ? "&kind=" + activeKind : "");
+    + "&kind=" + activeKind
+    + "&sort=" + encodeURIComponent(sortKey)
+    + "&direction=" + sortDir;
+  if (filters.q)        q += "&q=" + encodeURIComponent(filters.q);
+  if (filters.retailer) q += "&retailer=" + encodeURIComponent(filters.retailer);
+  if (filters.country)  q += "&country=" + encodeURIComponent(filters.country);
+  if (filters.since)    q += "&since=" + filters.since;
+  if (filters.until)    q += "&until=" + filters.until;
+
   var r = await RPOAuth.authedFetch(q);
   if (r === null) { gate.hidden = false; main.hidden = true; return; }
   if (!r.ok) return;
@@ -930,24 +1178,17 @@ async function load() {
   main.hidden = false;
   toggle.checked = !!d.enabled;
   allItems = d.items || [];
-  total = d.total || 0;
+  total = d.total || 0;              // matches the active filters
+  totalKind = d.total_kind || 0;     // this tab, unfiltered
   counts[""] = d.total_all || 0;
-  counts[activeKind || ""] = d.total || 0;
-
-  // The chips need all three numbers, and the request only carried one.
-  if (activeKind) {
-    counts[activeKind === "brand" ? "product" : "brand"] =
-      Math.max(0, counts[""] - d.total);
-  } else {
-    var rb = await RPOAuth.authedFetch("/account/history?limit=1&kind=brand");
-    if (rb && rb.ok) {
-      var db = await rb.json();
-      counts.brand = db.total || 0;
-      counts.product = Math.max(0, counts[""] - counts.brand);
-    }
-  }
+  counts[activeKind] = totalKind;
+  counts[activeKind === "brand" ? "product" : "brand"] =
+    Math.max(0, counts[""] - totalKind);
+  facets = d.facets || { retailers: [], countries: [] };
+  paintFilters();
   paint();
 }
+
 
 // The switch itself is shared with /brands.html and the account page. This
 // page's own version sent auto_check_preference: null, which the settings
@@ -962,131 +1203,7 @@ document.getElementById("hist-clear").addEventListener("click", async function (
   load();
 });
 
-// ── Lists ──────────────────────────────────────────────────────────────
-// The same lists as the phone, off the same endpoints. A list is an
-// explicit act of keeping and the history is a passive log, so the two are
-// separate: lists work whether or not the history switch is on, and this
-// panel stays usable when the log above it is empty.
-
-var myLists = [];
-var activeList = null;          // list id, or null for the history view
-var listChips = document.getElementById("hist-list-chips");
-var listsBar = document.getElementById("hist-lists");
-var managePanel = document.getElementById("hist-manage-panel");
-var manageRows = document.getElementById("hist-manage-rows");
-
-async function loadLists() {
-  var r = await RPOAuth.authedFetch("/account/lists");
-  if (!r || !r.ok) return;
-  myLists = (await r.json()).lists || [];
-  paintListChips();
-  paintManage();
-}
-
-function paintListChips() {
-  listsBar.hidden = false;
-  listChips.innerHTML = myLists.map(function (l) {
-    return '<button type="button" class="chip' + (activeList === l.id ? " is-on" : "")
-      + '" data-list="' + l.id + '">' + esc(l.name)
-      + ' <span class="chip-n">' + (l.count || 0) + "</span></button>";
-  }).join("");
-  var all = listsBar.querySelector('[data-list=""]');
-  if (all) all.classList.toggle("is-on", activeList === null);
-}
-
-function paintManage() {
-  manageRows.innerHTML = myLists.length
-    ? myLists.map(function (l) {
-        return '<div class="hist-manage-row" data-id="' + l.id + '">'
-          + '<input type="text" value="' + esc(l.name) + '" maxlength="80" data-name>'
-          + '<span class="n">' + (l.count || 0) + "</span>"
-          + '<button type="button" data-save>' + T("hist_save") + "</button>"
-          + '<button type="button" class="danger" data-del>' + T("hist_delete") + "</button>"
-          + "</div>";
-      }).join("")
-    : '<p style="font-size:14px;color:var(--ink-3);margin:0;">' + T("hist_noLists") + "</p>";
-}
-
-document.getElementById("hist-manage").addEventListener("click", function () {
-  managePanel.hidden = !managePanel.hidden;
-});
-
-manageRows.addEventListener("click", async function (e) {
-  var row = e.target.closest(".hist-manage-row");
-  if (!row) return;
-  var id = row.dataset.id;
-  if (e.target.matches("[data-save]")) {
-    var name = row.querySelector("[data-name]").value.trim();
-    if (!name) return;
-    await RPOAuth.authedFetch("/account/lists/" + id, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: name }),
-    });
-    await loadLists();
-    return;
-  }
-  if (e.target.matches("[data-del]")) {
-    // Deleting a list deletes what is in it, and saying so is the whole
-    // point of the confirm — "are you sure" without the consequence is a
-    // speed bump, not a warning.
-    if (!confirm(T("hist_confirmDeleteList"))) return;
-    await RPOAuth.authedFetch("/account/lists/" + id, { method: "DELETE" });
-    if (String(activeList) === String(id)) { activeList = null; load(); }
-    await loadLists();
-  }
-});
-
-document.getElementById("hist-create-list").addEventListener("click", async function () {
-  var input = document.getElementById("hist-new-list");
-  var name = input.value.trim();
-  if (!name) return;
-  await RPOAuth.authedFetch("/account/lists", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name: name }),
-  });
-  input.value = "";
-  await loadLists();
-});
-
-listsBar.addEventListener("click", function (e) {
-  var chip = e.target.closest("[data-list]");
-  if (!chip) return;
-  var v = chip.dataset.list;
-  activeList = v ? Number(v) : null;
-  paintListChips();
-  load();
-});
-
-/** Render one list's contents through the same row renderer as the history.
- *
- *  The item shapes differ — a list item carries only what it needs to be
- *  found again — so it is mapped into the history row's shape rather than
- *  given a second renderer to drift away from the first. */
-async function loadList(id) {
-  var r = await RPOAuth.authedFetch("/account/lists/" + id + "/items");
-  if (!r || !r.ok) return;
-  var items = (await r.json()).items || [];
-  allItems = items.map(function (i) {
-    return {
-      id: "L" + i.id,
-      list_item: true,
-      kind: i.kind,
-      subject_key: i.subject_key,
-      title: i.title,
-      brand: i.brand,
-      made_in_country: i.made_in_country,
-      made_in_country_code: i.made_in_country_code,
-      scanned_at: i.added_at,
-      times: 1,
-    };
-  });
-  total = allItems.length;
-  paint();
-}
-
-if (!RPOAuth.isSignedIn()) { gate.hidden = false; } else { load(); loadLists(); }
+if (!RPOAuth.isSignedIn()) { gate.hidden = false; } else { load(); }
 
 </script>
 </body>
