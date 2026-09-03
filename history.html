@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your scan history — Real Product Origin</title>
+<title>Your scoring history — Real Product Origin</title>
 <meta name="description" content="An opt-in record of the products and brands you have checked. Off by default, deletable at any time.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://realproductorigin.com/history">
@@ -342,6 +342,29 @@
     .c-title { width:56%; } .c-made_in { width:34%; }
     .f-q { min-width:100%; }
   }
+
+  /* ── Lists ────────────────────────────────────────────────────────── */
+  .hist-lists { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:0 0 14px; }
+  .hist-lists .chip { font:inherit; font-size:14px; padding:6px 12px; border:1px solid var(--border);
+    border-radius:999px; background:#fff; color:var(--ink-2); cursor:pointer; }
+  .hist-lists .chip.is-on { background:var(--ink-deep); color:#fff; border-color:var(--ink-deep); }
+  .hist-lists .chip-ghost { border-style:dashed; }
+  .hist-lists .chip-n { opacity:.65; margin-left:4px; }
+  .hist-manage-panel { margin:0 0 16px; padding:14px; border:1px solid var(--border);
+    border-radius:12px; background:var(--bg-cream); }
+  .hist-manage-row { display:flex; gap:10px; align-items:center; padding:8px 0;
+    border-bottom:1px solid var(--border); }
+  .hist-manage-row:last-of-type { border-bottom:0; }
+  .hist-manage-row input { flex:1; padding:7px 10px; border:1px solid var(--border);
+    border-radius:8px; font:inherit; font-size:14px; }
+  .hist-manage-row .n { font-size:13px; color:var(--ink-3); min-width:2em; }
+  .hist-manage-new { display:flex; gap:10px; margin-top:12px; }
+  .hist-manage-new input { flex:1; padding:8px 10px; border:1px solid var(--border);
+    border-radius:8px; font:inherit; font-size:14px; }
+  .m-lists { margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+  .m-lists button { font:inherit; font-size:13px; padding:5px 11px; border:1px solid var(--border);
+    border-radius:999px; background:#fff; cursor:pointer; }
+  .m-lists button.is-in { background:var(--ink-deep); color:#fff; border-color:var(--ink-deep); }
 </style>
 </head>
 <body>
@@ -374,7 +397,7 @@
 <section class="acct-hero">
   <div class="wrap">
     <p style="display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;">Your account</p>
-    <h1>Your scan history</h1>
+    <h1>Your scoring history</h1>
     <p>Off unless you turn it on. We do not keep a record of what you check unless you ask us to — and you can delete it, all of it, at any moment.</p>
   </div>
 </section>
@@ -404,6 +427,27 @@
            had to label that column loosely enough to cover both, and the
            filter that matters most (site) applies to only one of them.
            Splitting lets each column be named exactly. -->
+      <!-- Lists. Above the tabs, because this chooses WHAT you are looking
+           at — your log, or one of your lists — and the tabs then split
+           whatever that is into products and brands. Putting it below would
+           imply the tabs contain it, which is backwards. -->
+      <div class="hist-lists" id="hist-lists" hidden>
+        <button type="button" class="chip is-on" data-list=""><span data-i18n="hist_everything">Everything</span></button>
+        <span id="hist-list-chips"></span>
+        <button type="button" class="chip chip-ghost" id="hist-manage" data-i18n="hist_manageLists">Manage lists</button>
+      </div>
+
+      <!-- Inline rather than a modal: a short list of short rows, and a
+           dialog for renaming three things is heavier than the thing it is
+           renaming. -->
+      <div class="hist-manage-panel" id="hist-manage-panel" hidden>
+        <div id="hist-manage-rows"></div>
+        <div class="hist-manage-new">
+          <input type="text" id="hist-new-list" maxlength="80" placeholder="New list name" data-i18n-placeholder="hist_newListName">
+          <button type="button" id="hist-create-list" data-i18n="hist_createList">Create</button>
+        </div>
+      </div>
+
       <div class="hist-tabs" id="hist-tabs" role="tablist" hidden>
         <button type="button" class="hist-tab is-on" role="tab" aria-selected="true" data-kind="product">
           <span data-i18n="hist_products">Products</span> <span class="tab-n"></span>
@@ -567,6 +611,14 @@ function T(key) {
   for (var i = 0; i < nodes.length; i++) {
     var v = RPOi18n.t(nodes[i].getAttribute("data-i18n"));
     if (v) nodes[i].textContent = v;
+  }
+  // Placeholders too. An input's prompt is copy like any other, and the
+  // list-name field is the first one here with a translatable one — without
+  // this it would sit in English inside an otherwise translated panel.
+  var ph = document.querySelectorAll("[data-i18n-placeholder]");
+  for (var j = 0; j < ph.length; j++) {
+    var pv = RPOi18n.t(ph[j].getAttribute("data-i18n-placeholder"));
+    if (pv) ph[j].setAttribute("placeholder", pv);
   }
 })();
 
@@ -880,9 +932,27 @@ function modalHtml(it) {
   if (it.debug_session_code) {
     actions.push('<span class="m-gap">' + T("hist_diagnostic", esc(it.debug_session_code)) + "</span>");
   }
-  actions.push('<button type="button" class="danger" id="m-del" data-id="'
-    + it.id + '">' + T("hist_deleteRow") + "</button>");
+  // A list item was never a history row, so there is nothing there to
+  // delete and the button would lie about what it does.
+  if (!it.list_item) {
+    actions.push('<button type="button" class="danger" id="m-del" data-id="'
+      + it.id + '">' + T("hist_deleteRow") + "</button>");
+  }
   body += '<div class="m-actions">' + actions.join("") + "</div>";
+
+  // Which lists hold this, as toggles. The state answers "where does this
+  // live"; tapping one writes immediately.
+  if (myLists.length) {
+    body += '<p class="m-h">' + T("hist_inLists") + "</p>"
+      + '<div class="m-lists" data-kind="' + esc(it.kind || "product") + '"'
+      + ' data-key="' + esc(it.subject_key || "") + '"'
+      + ' data-title="' + esc(it.title || "") + '"'
+      + ' data-brand="' + esc(it.brand || "") + '">'
+      + myLists.map(function (l) {
+          return '<button type="button" data-list-id="' + l.id + '">' + esc(l.name) + "</button>";
+        }).join("")
+      + "</div>";
+  }
   return body;
 }
 
@@ -906,6 +976,21 @@ async function openModal(id, trigger) {
     return;
   }
   modalBody.innerHTML = modalHtml(await r.json());
+  paintModalLists();
+}
+
+/** Tick the lists this thing is already in. Fired after render so a slow
+ *  answer never holds up the report the person opened. */
+async function paintModalLists() {
+  var box = modalBody.querySelector(".m-lists");
+  if (!box) return;
+  var r = await RPOAuth.authedFetch(
+    "/account/lists/containing/" + box.dataset.kind + "/" + encodeURIComponent(box.dataset.key));
+  if (!r || !r.ok) return;
+  var ids = (await r.json()).list_ids || [];
+  Array.prototype.forEach.call(box.querySelectorAll("[data-list-id]"), function (b) {
+    b.classList.toggle("is-in", ids.indexOf(Number(b.dataset.listId)) !== -1);
+  });
 }
 
 document.getElementById("hist-modal-x").addEventListener("click", closeModal);
@@ -914,6 +999,25 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && !modal.hidden) closeModal();
 });
 modalBody.addEventListener("click", async function (e) {
+  var chip = e.target.closest("[data-list-id]");
+  if (chip) {
+    var box = chip.closest(".m-lists");
+    var into = chip.classList.contains("is-in");
+    var payload = {
+      kind: box.dataset.kind,
+      subject_key: box.dataset.key,
+      title: box.dataset.title || null,
+      brand: box.dataset.brand || null,
+    };
+    chip.classList.toggle("is-in", !into);
+    var wrote = await RPOAuth.authedFetch(
+      "/account/lists/" + chip.dataset.listId + "/items" + (into ? "/remove" : ""),
+      { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload) });
+    if (!wrote || !wrote.ok) chip.classList.toggle("is-in", into);
+    else loadLists();
+    return;
+  }
   var del = e.target.closest("#m-del");
   if (!del) return;
   if (!confirm(T("hist_confirmOne"))) return;
@@ -1157,6 +1261,14 @@ list.addEventListener("click", function (e) {
 });
 
 async function load() {
+  // A list REPLACES the log rather than filtering it — "which of my lists"
+  // is a different question from "narrow my log", and the tabs still split
+  // whichever of the two you are looking at.
+  if (activeList) {
+    gate.hidden = true;
+    main.hidden = false;
+    return loadList(activeList);
+  }
   // Filtering, sorting and counting all happen on the SERVER. Doing any of
   // them in the browser would only ever see the 25 rows on this page, and
   // would look exactly like doing them to all of them.
@@ -1203,7 +1315,142 @@ document.getElementById("hist-clear").addEventListener("click", async function (
   load();
 });
 
-if (!RPOAuth.isSignedIn()) { gate.hidden = false; } else { load(); }
+// ── Lists ──────────────────────────────────────────────────────────────
+// The same lists as the phone, off the same endpoints. A list is an explicit
+// act of keeping and the history is a passive log, so the two are separate:
+// lists work whether or not the history switch above is on.
+
+var myLists = [];
+var activeList = null;          // list id, or null for the log
+var listChips = document.getElementById("hist-list-chips");
+var listsBar = document.getElementById("hist-lists");
+var managePanel = document.getElementById("hist-manage-panel");
+var manageRows = document.getElementById("hist-manage-rows");
+
+async function loadLists() {
+  var r = await RPOAuth.authedFetch("/account/lists");
+  if (!r || !r.ok) return;
+  myLists = (await r.json()).lists || [];
+  listsBar.hidden = false;
+  paintListChips();
+  paintManage();
+}
+
+function paintListChips() {
+  listChips.innerHTML = myLists.map(function (l) {
+    return '<button type="button" class="chip' + (activeList === l.id ? " is-on" : "")
+      + '" data-list="' + l.id + '">' + esc(l.name)
+      + ' <span class="chip-n">' + (l.count || 0) + "</span></button>";
+  }).join("");
+  var all = listsBar.querySelector('[data-list=""]');
+  if (all) all.classList.toggle("is-on", activeList === null);
+}
+
+function paintManage() {
+  manageRows.innerHTML = myLists.length
+    ? myLists.map(function (l) {
+        return '<div class="hist-manage-row" data-id="' + l.id + '">'
+          + '<input type="text" value="' + esc(l.name) + '" maxlength="80" data-name>'
+          + '<span class="n">' + (l.count || 0) + "</span>"
+          + '<button type="button" data-save>' + T("hist_save") + "</button>"
+          + '<button type="button" class="danger" data-del>' + T("hist_delete") + "</button>"
+          + "</div>";
+      }).join("")
+    : '<p style="font-size:14px;color:var(--ink-3);margin:0;">' + T("hist_noLists") + "</p>";
+}
+
+document.getElementById("hist-manage").addEventListener("click", function () {
+  managePanel.hidden = !managePanel.hidden;
+});
+
+manageRows.addEventListener("click", async function (e) {
+  var row = e.target.closest(".hist-manage-row");
+  if (!row) return;
+  var id = row.dataset.id;
+  if (e.target.matches("[data-save]")) {
+    var name = row.querySelector("[data-name]").value.trim();
+    if (!name) return;
+    await RPOAuth.authedFetch("/account/lists/" + id, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: name }),
+    });
+    await loadLists();
+    return;
+  }
+  if (e.target.matches("[data-del]")) {
+    // The confirm says the items go too. "Are you sure" without the
+    // consequence is a speed bump, not a warning.
+    if (!confirm(T("hist_confirmDeleteList"))) return;
+    await RPOAuth.authedFetch("/account/lists/" + id, { method: "DELETE" });
+    if (String(activeList) === String(id)) { activeList = null; }
+    await loadLists();
+    load();
+  }
+});
+
+document.getElementById("hist-create-list").addEventListener("click", async function () {
+  var input = document.getElementById("hist-new-list");
+  var name = input.value.trim();
+  if (!name) return;
+  await RPOAuth.authedFetch("/account/lists", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: name }),
+  });
+  input.value = "";
+  await loadLists();
+});
+
+listsBar.addEventListener("click", function (e) {
+  var chip = e.target.closest("[data-list]");
+  if (!chip) return;
+  var v = chip.dataset.list;
+  activeList = v ? Number(v) : null;
+  pageOffset = 0;
+  paintListChips();
+  load();
+});
+
+/** One list's contents, mapped into the shape the table already renders.
+ *
+ *  Mapped rather than given its own renderer: a list row and a history row
+ *  are the same object to the person looking at them, so a second renderer
+ *  would only be a way for the two to drift apart.
+ *
+ *  Filtering and sorting are server-side for the log and would have to be
+ *  re-implemented here; a list is capped at 500 and is the person's own
+ *  short selection, so it shows whole, newest first. */
+async function loadList(id) {
+  var r = await RPOAuth.authedFetch("/account/lists/" + id + "/items");
+  if (!r || !r.ok) return;
+  var raw = (await r.json()).items || [];
+  var mine = raw.filter(function (i) { return i.kind === activeKind; });
+  allItems = mine.map(function (i) {
+    return {
+      id: "L" + i.id,
+      list_item: true,
+      kind: i.kind,
+      subject_key: i.subject_key,
+      title: i.title,
+      brand: i.brand,
+      made_in_country: i.made_in_country,
+      made_in_country_code: i.made_in_country_code,
+      scanned_at: i.added_at,
+      times: 1,
+    };
+  });
+  total = allItems.length;
+  totalKind = allItems.length;
+  counts[""] = raw.length;
+  counts.product = raw.filter(function (i) { return i.kind === "product"; }).length;
+  counts.brand = raw.filter(function (i) { return i.kind === "brand"; }).length;
+  facets = { retailers: [], countries: [] };
+  paintFilters();
+  paint();
+}
+
+if (!RPOAuth.isSignedIn()) { gate.hidden = false; } else { load(); loadLists(); }
 
 </script>
 </body>
